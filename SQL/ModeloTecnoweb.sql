@@ -42,10 +42,10 @@ DROP TABLE IF EXISTS `tecnoweb`.`Estudios` ;
 CREATE TABLE IF NOT EXISTS `tecnoweb`.`Estudios` (
   `IdUsuario` INT NOT NULL,
   `Fecha_Comienzo` DATETIME NOT NULL,
-  `Fecha_Finalizacion` DATETIME NOT NULL,
+  `Fecha_Finalizacion` DATETIME,
   `Descripcion` VARCHAR(255) NULL,
   `Ubicacion` VARCHAR(455) NULL,
-  PRIMARY KEY (`IdUsuario`),
+  PRIMARY KEY (`IdUsuario`, `Fecha_Comienzo`),
   CONSTRAINT `EstudiosUsuario`
     FOREIGN KEY (`IdUsuario`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
@@ -62,7 +62,6 @@ DROP TABLE IF EXISTS `tecnoweb`.`Aficiones` ;
 CREATE TABLE IF NOT EXISTS `tecnoweb`.`Aficiones` (
   `idUsuario` INT NOT NULL,
   `Nombre` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`idUsuario`),
   CONSTRAINT `AficionesUsuario`
     FOREIGN KEY (`idUsuario`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
@@ -100,7 +99,7 @@ DROP TABLE IF EXISTS `tecnoweb`.`Contactos` ;
 CREATE TABLE IF NOT EXISTS `tecnoweb`.`Contactos` (
   `idUsuario` INT NOT NULL,
   `Amigo` INT NOT NULL,
-  PRIMARY KEY (`idUsuario`),
+  PRIMARY KEY (`idUsuario`, `Amigo`),
   INDEX `UsuarioAmigo_idx` (`Amigo` ASC),
   CONSTRAINT `ContactosUsuarioPK`
     FOREIGN KEY (`idUsuario`)
