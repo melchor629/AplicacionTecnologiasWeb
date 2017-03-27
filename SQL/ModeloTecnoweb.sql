@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `tecnoweb`.`Usuario` (
   `Web` VARCHAR(45) NULL,
   `Foto` VARCHAR(255) NULL,
   `NombreUsuario` VARCHAR(45) NOT NULL,
-  `Contraseña` VARCHAR(45) NOT NULL,
+  `Contraseña` VARCHAR(200) NOT NULL,
   `Correo` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
