@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `tecnoweb`.`Estudios` (
   `Descripcion` VARCHAR(255) NULL,
   `Ubicacion` VARCHAR(455) NULL,
   PRIMARY KEY (`IdUsuario`),
-  CONSTRAINT `Usuario`
+  CONSTRAINT `EstudiosUsuario`
     FOREIGN KEY (`IdUsuario`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
     ON DELETE NO ACTION
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `tecnoweb`.`Aficiones` (
   `idUsuario` INT NOT NULL,
   `Nombre` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`idUsuario`),
-  CONSTRAINT `Usuario`
+  CONSTRAINT `AficionesUsuario`
     FOREIGN KEY (`idUsuario`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
     ON DELETE NO ACTION
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `tecnoweb`.`ExperienciaLaboral` (
   `Puesto` VARCHAR(45) NOT NULL,
   `Web_Empresa` VARCHAR(45) NULL,
   PRIMARY KEY (`idUsuario`),
-  CONSTRAINT `Usuario`
+  CONSTRAINT `ExperienciaLaboralUsuario`
     FOREIGN KEY (`idUsuario`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
     ON DELETE NO ACTION
@@ -102,12 +102,12 @@ CREATE TABLE IF NOT EXISTS `tecnoweb`.`Contactos` (
   `Amigo` INT NOT NULL,
   PRIMARY KEY (`idUsuario`),
   INDEX `UsuarioAmigo_idx` (`Amigo` ASC),
-  CONSTRAINT `UsuarioPK`
+  CONSTRAINT `ContactosUsuarioPK`
     FOREIGN KEY (`idUsuario`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `UsuarioAmigo`
+  CONSTRAINT `ContactosUsuarioAmigo`
     FOREIGN KEY (`Amigo`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
     ON DELETE NO ACTION
@@ -126,12 +126,12 @@ CREATE TABLE IF NOT EXISTS `tecnoweb`.`PeticionAmistad` (
   `Mensaje` VARCHAR(499) NULL,
   PRIMARY KEY (`idEmisor`, `idReceptor`),
   INDEX `UsuarioReceptor_idx` (`idReceptor` ASC),
-  CONSTRAINT `Usuario`
+  CONSTRAINT `PeticionAmistadUsuario`
     FOREIGN KEY (`idEmisor`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `UsuarioReceptor`
+  CONSTRAINT `PeticionAmistadUsuarioReceptor`
     FOREIGN KEY (`idReceptor`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
     ON DELETE NO ACTION
@@ -152,12 +152,12 @@ CREATE TABLE IF NOT EXISTS `tecnoweb`.`Mensaje` (
   `Titulo` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`idEmisor`, `idReceptor`),
   INDEX `UsuarioReceptor_idx` (`idReceptor` ASC),
-  CONSTRAINT `Usuario`
+  CONSTRAINT `MensajeUsuario`
     FOREIGN KEY (`idEmisor`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `UsuarioReceptor`
+  CONSTRAINT `MensajeUsuarioReceptor`
     FOREIGN KEY (`idReceptor`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
     ON DELETE NO ACTION
