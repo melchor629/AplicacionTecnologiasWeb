@@ -38,6 +38,10 @@ VALUES
     (6, '2014-11-13 00:00:00', NULL, 'Universidad', 'Málaga'),
     (7, '2014-11-13 00:00:00', NULL, 'Universidad', 'Málaga');
 
+INSERT INTO `ExperienciaLaboral` (`idUsuario`, `Fecha_Comienzo`, `Fecha_Finalizacion`, `Empresa`, `Puesto`, `Web_Empresa`)
+VALUES
+    (3, '2017-03-28 00:00:00', '2017-03-31 00:00:00', 'JPA', 'Cacharreando', NULL);
+
 INSERT INTO `Mensaje` (`idEmisor`, `idReceptor`, `Texto`, `Leido`, `Titulo`)
 VALUES
     (2, 3, '**Cacharreo** _intensifies_', 0, 'El'),
