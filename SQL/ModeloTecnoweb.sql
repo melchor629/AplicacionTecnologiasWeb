@@ -11,7 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema tecnoweb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `tecnoweb` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `tecnoweb` DEFAULT CHARACTER SET utf8mb4 ;
 USE `tecnoweb` ;
 
 -- -----------------------------------------------------
@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS `tecnoweb`.`Estudios` ;
 CREATE TABLE IF NOT EXISTS `tecnoweb`.`Estudios` (
   `IdUsuario` INT NOT NULL,
   `Fecha_Comienzo` DATETIME NOT NULL,
-  `Fecha_Finalizacion` DATETIME,
+  `Fecha_Finalizacion` DATETIME NULL,
   `Descripcion` VARCHAR(255) NULL,
   `Ubicacion` VARCHAR(455) NULL,
   PRIMARY KEY (`IdUsuario`, `Fecha_Comienzo`),
@@ -62,6 +62,7 @@ DROP TABLE IF EXISTS `tecnoweb`.`Aficiones` ;
 CREATE TABLE IF NOT EXISTS `tecnoweb`.`Aficiones` (
   `idUsuario` INT NOT NULL,
   `Nombre` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`idUsuario`, `Nombre`),
   CONSTRAINT `AficionesUsuario`
     FOREIGN KEY (`idUsuario`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
@@ -82,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `tecnoweb`.`ExperienciaLaboral` (
   `Empresa` VARCHAR(45) NOT NULL,
   `Puesto` VARCHAR(45) NOT NULL,
   `Web_Empresa` VARCHAR(45) NULL,
-  PRIMARY KEY (`idUsuario`),
+  PRIMARY KEY (`idUsuario`, `Fecha_Comienzo`),
   CONSTRAINT `ExperienciaLaboralUsuario`
     FOREIGN KEY (`idUsuario`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
@@ -122,7 +123,7 @@ DROP TABLE IF EXISTS `tecnoweb`.`PeticionAmistad` ;
 CREATE TABLE IF NOT EXISTS `tecnoweb`.`PeticionAmistad` (
   `idEmisor` INT NOT NULL,
   `idReceptor` INT NOT NULL,
-  `Mensaje` VARCHAR(499) NULL,
+  `Mensaje` VARCHAR(499) CHARACTER SET 'utf8mb4' NULL,
   PRIMARY KEY (`idEmisor`, `idReceptor`),
   INDEX `UsuarioReceptor_idx` (`idReceptor` ASC),
   CONSTRAINT `PeticionAmistadUsuario`
@@ -146,9 +147,9 @@ DROP TABLE IF EXISTS `tecnoweb`.`Mensaje` ;
 CREATE TABLE IF NOT EXISTS `tecnoweb`.`Mensaje` (
   `idEmisor` INT NOT NULL,
   `idReceptor` INT NOT NULL,
-  `Texto` VARCHAR(999) NOT NULL,
+  `Texto` VARCHAR(999) CHARACTER SET 'utf8mb4' NOT NULL,
   `Leido` TINYINT(1) NOT NULL,
-  `Titulo` VARCHAR(100) NOT NULL,
+  `Titulo` VARCHAR(100) CHARACTER SET 'utf8mb4' NOT NULL,
   PRIMARY KEY (`idEmisor`, `idReceptor`),
   INDEX `UsuarioReceptor_idx` (`idReceptor` ASC),
   CONSTRAINT `MensajeUsuario`

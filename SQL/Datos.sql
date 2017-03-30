@@ -40,7 +40,15 @@ VALUES
 
 INSERT INTO `Mensaje` (`idEmisor`, `idReceptor`, `Texto`, `Leido`, `Titulo`)
 VALUES
-    (5, 7, 'Vas a suspender **jeje**', 0, 'Holis');
+    (2, 3, '**Cacharreo** _intensifies_', 0, 'El'),
+    (2, 5, 'Afétitate la barba que estas mu feo', 0, 'Casual'),
+    (3, 7, '🖕🏼', 0, '¡Eh Francis!, mira'),
+    (4, 6, 'Holis', 1, 'Holis'),
+    (5, 3, 'Céntrate copón', 0, 'sos'),
+    (5, 4, 'Toques molt bé sa guitarreta :)', 0, 'Sa guitarreta'),
+    (5, 6, 'Que tal está usted del vraso??????', 1, 'El vraso'),
+    (5, 7, 'Vas a suspender **jeje**', 0, 'Holis'),
+    (7, 6, 'Illo que ase?', 1, 'Illo');
 
 INSERT INTO `PeticionAmistad` (`idEmisor`, `idReceptor`, `Mensaje`)
 VALUES
