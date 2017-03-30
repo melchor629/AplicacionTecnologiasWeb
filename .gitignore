@@ -17,3 +17,11 @@ Thumbs.db
 .DS_Store
 *~
 *.bak
+
+#Carpetas y archivos de los IDEs
+.idea
+build/
+*.iml
+lib/
+nbproject
+build.xml
