@@ -1,3 +1,5 @@
+SET NAMES 'utf8mb4';
+
 INSERT INTO `Usuario` (`id`, `Nombre`, `Apellidos`, `Twitter`, `Instagram`, `Web`, `Foto`, `NombreUsuario`, `Contraseña`, `Correo`)
 VALUES
     (1, 'Manolito', 'Casual', 'ManuelNotV', 'manuelnotv', NULL, 'https://scontent-mad1-1.cdninstagram.com/t51.2885-19/s320x320/14592033_1468653206484196_4673932653030801408_a.jpg', 'manuelnotv', 'd8c61debc1ce96f6cfcc809c366eb844510f976b3353913f51e0aca0d8afc833', 'veredasmanuel@gmail.com'),
