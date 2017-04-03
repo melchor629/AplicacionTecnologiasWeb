@@ -35,12 +35,12 @@
           <a class="navbar-brand" href="#">Linquedin</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" method="POST" action="">
+          <form class="navbar-form navbar-right" method="POST" action="/Main">
             <div class="form-group">
-              <input type="text" name="correo" placeholder="Correo" class="form-control">
+              <input type="text" placeholder="Usuario" class="form-control" name="usuario">
             </div>
             <div class="form-group">
-              <input type="password" name="pass" placeholder="Contraseña" class="form-control">
+              <input type="password" placeholder="Contraseña" class="form-control" name="password">
             </div>
             <button type="submit" class="btn btn-success">Entrar</button>
           </form>
