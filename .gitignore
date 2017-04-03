@@ -25,3 +25,6 @@ build/
 lib/
 nbproject
 build.xml
+/dist/
+/ejb/dist/
+/web/dist/
