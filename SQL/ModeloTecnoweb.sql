@@ -145,13 +145,15 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `tecnoweb`.`Mensaje` ;
 
 CREATE TABLE IF NOT EXISTS `tecnoweb`.`Mensaje` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `idEmisor` INT NOT NULL,
   `idReceptor` INT NOT NULL,
   `Texto` VARCHAR(999) CHARACTER SET 'utf8mb4' NOT NULL,
   `Leido` TINYINT(1) NOT NULL,
   `Titulo` VARCHAR(100) CHARACTER SET 'utf8mb4' NOT NULL,
-  PRIMARY KEY (`idEmisor`, `idReceptor`),
+  PRIMARY KEY (`id`),
   INDEX `UsuarioReceptor_idx` (`idReceptor` ASC),
+  UNIQUE INDEX `EmisorReceptorUnique` (`idEmisor` ASC, `idReceptor` ASC),
   CONSTRAINT `MensajeUsuario`
     FOREIGN KEY (`idEmisor`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
