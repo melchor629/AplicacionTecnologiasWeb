@@ -1,8 +1,6 @@
 package app.cosas;
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class Hash {
     
