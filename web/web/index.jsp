@@ -1,4 +1,7 @@
-
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%
+    String cpath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -8,7 +11,6 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="Descripcion de la pagina">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
     <title>Titulo de pagina</title>
 
@@ -27,7 +29,7 @@
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Desplegar menú</span>
+            <span class="sr-only">Desplegar menÃº</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -35,12 +37,12 @@
           <a class="navbar-brand" href="#">Linquedin</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" method="POST" action="/Main">
+          <form class="navbar-form navbar-right" method="POST" action="<%=cpath%>/Main">
             <div class="form-group">
               <input type="text" placeholder="Usuario" class="form-control" name="usuario">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Contraseña" class="form-control" name="password">
+              <input type="password" placeholder="ContraseÃ±a" class="form-control" name="password">
             </div>
             <button type="submit" class="btn btn-success">Entrar</button>
           </form>
@@ -51,23 +53,21 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Hoy puedes tomar una buena decisión</h1>
+        <h1>Hoy puedes tomar una buena decisiÃ³n</h1>
         <p>Tienes la oportunidad de unirte a una gram red social profesional</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Regístrate ahora</a></p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">RegÃ­strate ahora</a></p>
       </div>
     </div>
 
       <footer>
           <p>Linquedin - 2017</p>
       </footer>
-    </div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="<%=cpath%>/assets/js/jquery-2.2.4.min.js"></script>
+    <script src="<%=cpath%>/assets/js/bootstrap.min.js"></script>
   </body>
 </html>

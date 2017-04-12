@@ -28,3 +28,4 @@ build.xml
 /dist/
 /ejb/dist/
 /web/dist/
+out/
