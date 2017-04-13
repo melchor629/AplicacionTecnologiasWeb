@@ -10,5 +10,5 @@
         <property name="URL" value="jdbc:mysql://localhost:3306/tecnoweb?zeroDateTimeBehavior=convertToNull"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="java:module/tecnoweb" object-type="user" pool-name="mysql_tecnoweb_tecnowebPool"/>
+    <jdbc-resource enabled="true" jndi-name="jdbc/tecnoweb" object-type="user" pool-name="mysql_tecnoweb_tecnowebPool"/>
 </resources>
