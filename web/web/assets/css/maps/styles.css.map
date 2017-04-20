@@ -1,0 +1,1 @@
+{"version":3,"file":"../styles.css","sources":["styles.scss","_common.scss"],"sourcesContent":["@import '_common';\n\n","$primary_color: rgb(171, 47, 49);\n"],"names":[],"mappings":""}
