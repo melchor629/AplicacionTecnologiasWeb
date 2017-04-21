@@ -11,7 +11,23 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="Descripcion de la pagina">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="<%=cpath%>/assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="<%=cpath%>/assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="<%=cpath%>/assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="<%=cpath%>/assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="<%=cpath%>/assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="<%=cpath%>/assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="<%=cpath%>/assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="<%=cpath%>/assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="<%=cpath%>/assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="<%=cpath%>/assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<%=cpath%>/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="<%=cpath%>/assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%=cpath%>/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="<%=cpath%>/assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#AB2F31">
+    <meta name="msapplication-TileImage" content="<%=cpath%>/assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#AB2F31">
 
     <title>Titulo de pagina</title>
 
@@ -22,11 +38,14 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- Nuestro CSS -->
+    <link rel="stylesheet" href="<%=cpath%>/assets/css/styles.css">
   </head>
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -35,7 +54,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Linkedout</a>
+          <a class="navbar-brand" href="#">LinkedOut</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
@@ -51,7 +70,6 @@
       </div>
     </nav>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
         <h1>ola k ase</h1>
@@ -61,7 +79,6 @@
     </div>
 
     <div class="container">
-      <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
           <h2>Heading</h2>
@@ -85,12 +102,8 @@
       <footer>
         <p>test</p>
       </footer>
-    </div> <!-- /container -->
+    </div>
 
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="<%=cpath%>/assets/js/jquery-2.2.4.min.js"></script>
     <script src="<%=cpath%>/assets/js/bootstrap.min.js"></script>
   </body>

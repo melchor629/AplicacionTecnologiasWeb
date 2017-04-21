@@ -1,1 +1,24 @@
-$primary_color: rgb(171, 47, 49);
+@import 'vars';
+
+html, body {
+    height: 100%;
+    position: relative;
+}
+
+a {
+    color: $secondary_color;
+    transition: color .2s ease-in-out;
+
+    &:hover {
+        color: darken($secondary_color, 20);
+    }
+}
+
+h1, h2, h3, h4, h5, h6, div, span, p {
+    font-family: -apple-system, system-ui, BlinkMacSystem, "Segoe UI", "Noto", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    color: $text_color;
+}
+
+p.lead {
+    color: $description_text_color;
+}
