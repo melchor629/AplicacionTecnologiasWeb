@@ -1,0 +1,62 @@
+@import 'vars';
+
+.navbar {
+    background-color: $primary_color;
+
+    .navbar-header {
+        a {
+            color: white;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: 500;
+
+            &:hover {
+                color: darken(white, 15);
+            }
+        }
+
+        .icon-bar {
+            background: white;
+        }
+    }
+
+    a {
+        color: $secondary_color;
+
+        &:hover {
+            color: darken($secondary_color, 5);
+        }
+    }
+
+    .navbar-form {
+        box-shadow: none;
+        -webkit-box-shadow: none;
+
+        button {
+            color: $text_color;
+            background-color: $secondary_color;
+            border-color: darken($secondary_color, 10);
+
+            @media(max-width: 767px) {
+                width: 100%
+            }
+        }
+
+        input {
+            background-color: lighten($primary_color, 20);
+            border-color: lighten($primary_color, 20);
+            transition: border-color .25s ease-in-out;
+            color: white;
+
+            &:focus {
+                box-shadow: none;
+                border-color: lighten($accent_color, 10);
+            }
+
+            $color: #ddd;
+            &::-webkit-input-placeholder { color: $color }
+            &::-moz-placeholder { color: $color }
+            &:-ms-input-placeholder { color: $color }
+            //&[placeholder] { color: $color }
+        }
+    }
+}

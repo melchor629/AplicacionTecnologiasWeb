@@ -1,0 +1,24 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "Desarrollo automatizado para la web del proyecto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melchor629/AplicacionTecnologiasWeb.git"
+  },
+  "author": "melchor9000",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/melchor629/AplicacionTecnologiasWeb/issues"
+  },
+  "homepage": "https://github.com/melchor629/AplicacionTecnologiasWeb#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.0"
+  }
+}

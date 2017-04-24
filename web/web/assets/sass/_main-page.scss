@@ -1,0 +1,40 @@
+.navbar {
+    margin-bottom: 0;
+}
+
+.full-height {
+    min-height: 100%;
+    //margin-bottom: -50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    /*&:nth-last-child(3n+1)::after {
+        content: ' ';
+        top: 100%;
+        margin-top: -20px;
+        width: 100%;
+        position: relative;
+        display: block;
+        height: 50px;
+        background-color: white;
+    }*/
+
+    & ::selection {
+        background-color: transparent;
+    }
+}
+
+.jumbotron {
+    margin-bottom: 0;
+    margin-top: -51px;
+
+    @media(min-width: 768px) {
+        padding-top: 101px;
+    }
+}
+
+body > .container {
+    background-color: white;
+    margin-top: 30px;//50px;
+    padding-bottom: 20px;
+}
