@@ -46,7 +46,7 @@ public class MainServlet extends HttpServlet {
         
                 HttpSession session = request.getSession();
         
-                    session.setAttribute("nombreUsuario", uLogged);
+                    session.setAttribute("usuario", uLogged);
                     response.sendRedirect(request.getContextPath() + "/perfil.jsp");
         }
         
