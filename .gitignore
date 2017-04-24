@@ -32,3 +32,8 @@ out/
 
 #npm
 node_modules
+
+web/web/assets/css/*
+!web/web/assets/css/maps/
+!web/web/assets/css/*.min.css
+!web/web/assets/styles.css
