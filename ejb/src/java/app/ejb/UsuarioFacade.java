@@ -28,11 +28,12 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     
     public Usuario ObtenerUsuario (String usuario, String pass) {
         Query q;
-        q = this.em.createQuery("select * from usuario where NombreUsuario = :usuario and Contraseña = :password ");
+        q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.nombreUsuario = :usuario AND u.contraseña = :password ");
         String hashPasado = app.cosas.Hash.hash(usuario+":"+pass);
         q.setParameter("usuario", usuario);
         q.setParameter("password",hashPasado);
         List<Usuario> lista = (List)q.getResultList();
+        System.out.println(pass + " " + hashPasado);
         
         if (lista.size()>0){
             return lista.get(0);
