@@ -55,12 +55,18 @@
             </div>
         </nav>
 
-        <% Usuario u= (Usuario)session.getAttribute("usuario"); %>
+        <% 
+        Usuario u = (Usuario)session.getAttribute("usuario");
+        
+        if(request.getAttribute("otroUsuario") != null){
+            u = (Usuario) request.getAttribute("otroUsuario");
+        }
+        %>
         
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    <h1 class="page-header">Dashboard</h1>
+                    <h1 class="page-header">Perfil de usuario</h1>
 
                     <div class="row placeholders">
                         <div class="col-xs-6 col-sm-3 placeholder">
@@ -70,39 +76,41 @@
                         </div>
                     </div>
 
-                    <h2 class="sub-header">Section title</h2>
+                    
 
-                    <div class="input-group">
-                        <span class="input-group-addon" id="sizing-addon2">@</span>
-                        <input type="text" class="form-control" placeholder="<%=u.getNombre()%>" aria-describedby="sizing-addon2" name="nombre">
+                    <div class="itemPerfil">
+                        Nombre:
+                        <p><%=u.getNombre()%></p>
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="sizing-addon2">@</span>
-                        <input type="text" class="form-control" placeholder="<%=u.getApellidos() %>" aria-describedby="sizing-addon2" name="apellidos" >
+                    
+                    <div class="itemPerfil">
+                        Apellidos
+                        <p><%=u.getApellidos()%></p>
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="sizing-addon2">@</span>
-                        <input type="text" class="form-control" placeholder="<%=u.getTwitter() %>" aria-describedby="sizing-addon2" name="twitter">
+                    
+                    <div class="itemPerfil">
+                        Twitter:
+                        <p><a href="https://twitter.com/<%=u.getTwitter()%>" target="_blank"><%=u.getTwitter()%></a></p>
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="sizing-addon2">@</span>
-                        <input type="text" class="form-control" placeholder="<%=u.getInstagram() %>" aria-describedby="sizing-addon2" name="instagram">
+                    
+                    <div class="itemPerfil">
+                        Instagram:
+                        <p><%=u.getInstagram()%></p>
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="sizing-addon2">@</span>
-                        <input type="text" class="form-control" placeholder="<%=u.getWeb() %>" aria-describedby="sizing-addon2" name="web">
+                    
+                    <div class="itemPerfil">
+                        Página web:
+                        <p><a href="<%=u.getWeb()%>" target="_blank"><%=u.getWeb()%></a></p>
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="sizing-addon2">@</span>
-                        <input type="text" class="form-control" placeholder="<%=u.getNombreUsuario() %>" aria-describedby="sizing-addon2" name="usuario">
+                    
+                    <div class="itemPerfil">
+                        Nombre de usuario:
+                        <p><%=u.getNombreUsuario()%></p>
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="sizing-addon2">@</span>
-                        <input type="text" class="form-control" placeholder="<%=u.getContraseña() %>" aria-describedby="sizing-addon2" name="password">
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="sizing-addon2">@</span>
-                        <input type="text" class="form-control" placeholder="<%=u.getCorreo() %>" aria-describedby="sizing-addon2" name="correo">
+                    
+                    <div class="itemPerfil">
+                        Correo electrónico:
+                        <p><a href="mailto:<%=u.getCorreo()%>"><%=u.getCorreo()%></a></p>
                     </div>
                 </div>
             </div>

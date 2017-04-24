@@ -103,3 +103,11 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.itemPerfil{
+    font-size: 1.5em;
+}
+
+.itemPerfil p{
+    font-weight: bold;
+}

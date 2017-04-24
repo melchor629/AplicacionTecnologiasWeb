@@ -26,7 +26,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         super(Usuario.class);
     }
     
-    public Usuario ObtenerUsuario (String usuario, String pass) {
+    public Usuario obtenerUsuario (String usuario, String pass) {
         Query q;
         q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.nombreUsuario = :usuario AND u.contraseña = :password ");
         String hashPasado = app.cosas.Hash.hash(usuario+":"+pass);
@@ -41,6 +41,19 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
             return null;
         }   
                
+    }
+    
+    public Usuario obtenerUsuarioPorId(int idUsuario){
+        EntityManager gestorEntidades = getEntityManager();
+        
+       Usuario usuario = gestorEntidades.find(Usuario.class, idUsuario);
+        
+       /* Query q;
+        q = gestorEntidades.createQuery("SELECT u FROM Usuario u WHERE u.id = :idUsuario");
+        q.setParameter("idUsuario", idUsuario);
+        Usuario usuario = (Usuario) q.getSingleResult(); */
+       
+        return usuario;
     }
     
 }

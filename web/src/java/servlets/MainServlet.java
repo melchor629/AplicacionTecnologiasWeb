@@ -30,7 +30,7 @@ public class MainServlet extends HttpServlet {
         String password = request.getParameter("password");
         Usuario uLogged = null;
         try {
-           uLogged = u.ObtenerUsuario(usuario, password);
+           uLogged = u.obtenerUsuario(usuario, password);
         } catch (Exception e) {
             response.getOutputStream().println("ERROR AL OBTENER  USUARIO");
             e.printStackTrace();
