@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "PerfilServlet", urlPatterns = {"/PerfilServlet"})
+@WebServlet(name = "PerfilServlet", urlPatterns = {"/Perfil"})
 public class PerfilServlet extends HttpServlet {
 
     /**
