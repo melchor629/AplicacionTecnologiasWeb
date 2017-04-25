@@ -45,12 +45,17 @@ public class PerfilServlet extends HttpServlet {
           
          RequestDispatcher rd;
         
+         if(usuario != null){
         rd = this.getServletContext().getRequestDispatcher("/perfil.jsp");
         rd.forward(request, response);
-        }
+        } else{
+        request.setAttribute("error","El usuario solicitado no existe");
+        rd = this.getServletContext().getRequestDispatcher("/error.jsp");
+        rd.forward(request, response);   
+         }
         
     }
-
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
