@@ -44,5 +44,6 @@ input.form-control {
     &:focus {
         border-bottom: 3px solid $secondary_color;
         padding-bottom: 3px;
+        box-shadow: none;
     }
 }
