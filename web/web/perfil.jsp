@@ -23,16 +23,16 @@
 
         <%@include file="snippets/nav-logged.jsp"%>
         
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="container">
+            
+                
                     <h1 class="page-header">Perfil de usuario</h1>
 
                     <div class="row placeholders">
                         <div class="col-xs-6 col-sm-3 placeholder">
                             <% if(u.getFoto() == null){ %>
                             <img src="<%@include file="snippets/fotoPerfil.txt"%>" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                            <% }else{%>
+                            <% }else{ %>
                             <img src="<%=u.getFoto()%>" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
                             <% } %>
                             <h4><%=u.getNombre()%></h4>
@@ -52,21 +52,21 @@
                         <p><%=u.getApellidos()%></p>
                     </div>
                     
-                    <% if(u.getTwitter() == null){ %>
+                    <% if(u.getTwitter() != null){ %>
                     <div class="itemPerfil">
                         Twitter:
                         <p><a href="https://twitter.com/<%=u.getTwitter()%>" target="_blank"><%=u.getTwitter()%></a></p>
                     </div>
                     <%} %>
                     
-                    <% if(u.getInstagram()== null){ %>
+                    <% if(u.getInstagram() != null){ %>
                     <div class="itemPerfil">
                         Instagram:
                         <p><%=u.getInstagram()%></p>
                     </div>
                     <%} %>
                     
-                    <% if(u.getWeb()== null){ %>
+                    <% if(u.getWeb() != null){ %>
                     <div class="itemPerfil">
                         Página web:
                         <p><a href="<%=u.getWeb()%>" target="_blank"><%=u.getWeb()%></a></p>
@@ -81,8 +81,8 @@
                         Correo electrónico:
                         <p><a href="mailto:<%=u.getCorreo()%>"><%=u.getCorreo()%></a></p>
                     </div>
-                </div>
-            </div>
+                
+            
             <%@include file="snippets/footer.jsp"%>
         </div>
 
