@@ -42,9 +42,18 @@
             color: $text_color;
             background-color: $secondary_color;
             border-color: darken($secondary_color, 10);
+            padding: 6px 12px;
 
             @media(max-width: 767px) {
                 width: 100%
+            }
+
+            &#buscar {
+                padding: 8px 12px;
+                background-color: transparent;
+                color: white;
+                left: -26px;
+                z-index: 10;
             }
         }
 

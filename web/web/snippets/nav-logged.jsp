@@ -31,7 +31,7 @@
                 <div class="input-group">
                     <input type="text" placeholder="Buscar a..." class="form-control" name="buscar">
                     <span class="input-group-btn">
-                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        <button type="submit" id="buscar" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </span>
                 </div>
             </form>
