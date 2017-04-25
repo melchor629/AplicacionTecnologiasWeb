@@ -1,6 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
     String cpath = request.getContextPath();
+    
+if(session.getAttribute("usuario") != null){
+    response.sendRedirect(cpath+"/perfil.jsp");
+}
+else{
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -41,7 +46,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-4">
-            <img src="assets/favicon/Logotipo%20melsho%20reducido.png" style="width:100%">
+            <img src="<%=cpath%>/assets/favicon/Logotipo%20melsho%20reducido.png" style="width:100%">
           </div>
           <div class="col-sm-8">
             <h1>Hoy puedes tomar una buena decisión</h1>
@@ -72,3 +77,4 @@
     <%@include file="snippets/body-end.jsp"%>
   </body>
 </html>
+<% } %>
