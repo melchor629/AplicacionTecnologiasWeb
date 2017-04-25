@@ -27,62 +27,44 @@
         <div class="container">
 
 
-            <h1 class="page-header">Perfil de <%= u.getNombre() %></h1>
-
+            <h1 class="page-header">Perfil de <%= u.getNombre()%></h1>
 
             <% if (u.getFoto() == null) { %>
             <img src="<%@include file="snippets/fotoPerfil.txt"%>" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
             <% } else {%>
             <img src="<%=u.getFoto()%>" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
             <% }%>
-            <h4><%=u.getNombre()%></h4>
-            <span class="text-muted"><%=u.getApellidos()%></span>
 
+            <h2>Nombre</h2>
+            <p><%=u.getNombre()%></p>
 
-            <div class="itemPerfil">
-                Nombre:
-                <p><%=u.getNombre()%></p>
-            </div>
-
-            <div class="itemPerfil">
-                Apellidos
-                <p><%=u.getApellidos()%></p>
-            </div>
+            <h2>Apellidos</h2>
+            <p><%=u.getApellidos()%></p>
 
             <% if (u.getTwitter() != null) {%>
-            <div class="itemPerfil">
-                Twitter:
-                <p><a href="https://twitter.com/<%=u.getTwitter()%>" target="_blank"><%=u.getTwitter()%></a></p>
-            </div>
-            <%} %>
+            <h2>Twitter</h2>
+            <p><a href="https://twitter.com/<%=u.getTwitter()%>" target="_blank"><%=u.getTwitter()%></a></p>
+                <%} %>
 
             <% if (u.getInstagram() != null) {%>
-            <div class="itemPerfil">
-                Instagram:
-                <p><%=u.getInstagram()%></p>
-            </div>
+            <h2>Instagram</h2>
+            <p><a href="https://www.instagram.com/<%=u.getInstagram()%>" target="_blank"><%=u.getInstagram()%></a></p>
             <%} %>
 
             <% if (u.getWeb() != null) {%>
-            <div class="itemPerfil">
-                Página web:
-                <p><a href="<%=u.getWeb()%>" target="_blank"><%=u.getWeb()%></a></p>
-            </div>
-            <% }%>
-            <div class="itemPerfil">
-                Nombre de usuario:
-                <p><%=u.getNombreUsuario()%></p>
-            </div>
+            <h2>Página web</h2>
+            <p><a href="<%=u.getWeb()%>" target="_blank"><%=u.getWeb()%></a></p>
+                <% }%>
 
-            <div class="itemPerfil">
-                Correo electrónico:
-                <p><a href="mailto:<%=u.getCorreo()%>"><%=u.getCorreo()%></a></p>
-            </div>
+            <h2>Nombre de usuario</h2>
+            <p><%=u.getNombreUsuario()%></p>
 
+            <h2>Correo electrónico</h2>
+            <p><a href="mailto:<%=u.getCorreo()%>"><%=u.getCorreo()%></a></p>
 
             <%@include file="snippets/footer.jsp"%>
-        </div>
 
+        </div>
 
         <%@include file="snippets/body-end.jsp"%>
     </body>
