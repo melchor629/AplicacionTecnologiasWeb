@@ -21,12 +21,19 @@
     </head>
 
     <body>
-
         <%@include file="snippets/nav-logged.jsp"%>
 
         <div class="container">
 
-
+            <% 
+            if(request.getAttribute("otroUsuario") == null){
+            %>
+            <button>Editar perfil</button>
+            <% } else{%>
+            <% // Comprobar si el usuario actual tiene amistad con el usuario %>
+            <button>Opciones de amistad</button>
+            <% } %>
+            
             <h1 class="page-header">Perfil de <%= u.getNombre()%></h1>
 
             <% if (u.getFoto() == null) { %>
@@ -49,7 +56,7 @@
             <% if (u.getInstagram() != null) {%>
             <h2>Instagram</h2>
             <p><a href="https://www.instagram.com/<%=u.getInstagram()%>" target="_blank"><%=u.getInstagram()%></a></p>
-            <%} %>
+                <%} %>
 
             <% if (u.getWeb() != null) {%>
             <h2>Página web</h2>
