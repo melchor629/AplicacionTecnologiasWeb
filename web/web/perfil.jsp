@@ -7,6 +7,9 @@
     if(request.getAttribute("otroUsuario") != null){
         u = (Usuario) request.getAttribute("otroUsuario");
     }
+    else{
+        if(u == null) response.sendRedirect("/");
+    }
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -27,7 +30,11 @@
 
                     <div class="row placeholders">
                         <div class="col-xs-6 col-sm-3 placeholder">
+                            <% if(u.getFoto() == null){ %>
+                            <img src="<%@include file="snippets/fotoPerfil.txt"%>" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                            <% }else{%>
                             <img src="<%=u.getFoto()%>" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+                            <% } %>
                             <h4><%=u.getNombre()%></h4>
                             <span class="text-muted"><%=u.getApellidos() %></span>
                         </div>
@@ -45,21 +52,26 @@
                         <p><%=u.getApellidos()%></p>
                     </div>
                     
+                    <% if(u.getTwitter() == null){ %>
                     <div class="itemPerfil">
                         Twitter:
                         <p><a href="https://twitter.com/<%=u.getTwitter()%>" target="_blank"><%=u.getTwitter()%></a></p>
                     </div>
+                    <%} %>
                     
+                    <% if(u.getInstagram()== null){ %>
                     <div class="itemPerfil">
                         Instagram:
                         <p><%=u.getInstagram()%></p>
                     </div>
+                    <%} %>
                     
+                    <% if(u.getWeb()== null){ %>
                     <div class="itemPerfil">
                         Página web:
                         <p><a href="<%=u.getWeb()%>" target="_blank"><%=u.getWeb()%></a></p>
                     </div>
-                    
+                    <% } %>
                     <div class="itemPerfil">
                         Nombre de usuario:
                         <p><%=u.getNombreUsuario()%></p>
