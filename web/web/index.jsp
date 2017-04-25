@@ -46,7 +46,7 @@
           <div class="col-sm-8">
             <h1>Hoy puedes tomar una buena decisión</h1>
             <p class="lead">Tienes la oportunidad de unirte a una gran red social profesional</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Regístrate ahora</a></p>
+            <p><a class="btn btn-primary btn-lg" href="<%=cpath%>/registro.jsp" role="button">Regístrate ahora</a></p>
           </div>
         </div>
       </div>
