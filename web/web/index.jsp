@@ -41,7 +41,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-4">
-            <img src="assets/favicon/Logotipo%20melsho%20reducido.png" style="width:100%">
+            <img src="<%=cpath%>assets/favicon/Logotipo%20melsho%20reducido.png" style="width:100%">
           </div>
           <div class="col-sm-8">
             <h1>Hoy puedes tomar una buena decisión</h1>
