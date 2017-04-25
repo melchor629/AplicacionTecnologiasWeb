@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@page import="app.entity.Usuario"%>
 <%
     String cpath = request.getContextPath();
     Usuario u = (Usuario)session.getAttribute("usuario");
@@ -7,7 +8,6 @@
         u = (Usuario) request.getAttribute("otroUsuario");
     }
 %>
-<%@page import="app.entity.Usuario"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>

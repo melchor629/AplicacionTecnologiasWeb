@@ -1,4 +1,5 @@
 <!-- TODO -->
+<%@ page contentType="text/html; charset=UTF-8" %>
 <nav class="navbar navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -9,16 +10,30 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">LinkedOut</a>
+
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="<%=cpath%>/perfil.jsp"><i class="fa fa-user"></i> <span class="hidden-xs">Mi perfil</span></a>
+                </li>
+                <li>
+                    <a href="<%=cpath%>/perfil.jsp"><i class="fa fa-bell-o"></i> <span class="hidden-xs">Notificaciones</span></a>
+                </li>
+            </ul>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <form class="navbar-form navbar-right">
-                <div class="form-group">
-                    <input type="text" placeholder="Email" class="form-control">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="<%=cpath%>/CerrarSesionServlet"><i class="glyphicon glyphicon-log-out"></i> Cerrar sesión</a>
+                </li>
+            </ul>
+
+            <form class="navbar-form navbar-right" action="<%=""%>/BusquedaServlet" method="POST">
+                <div class="input-group">
+                    <input type="text" placeholder="Buscar a..." class="form-control" name="buscar">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    </span>
                 </div>
-                <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control">
-                </div>
-                <button type="submit" class="btn btn-success">Entrar</button>
             </form>
         </div><!--/.navbar-collapse -->
     </div>
