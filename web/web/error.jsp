@@ -22,8 +22,11 @@
             error = (String) request.getAttribute("error");
         }
         %>
-        <h1>Ha habido un error...:</h1>
-        <div class="bg-danger"><%= error %></div>
+        <h1>Ha habido un error...</h1>
+        <div class="alert alert-danger">
+            <b>Error:</b><br>
+            <%= error %>
+        </div>
         
       <%@include file="snippets/footer.jsp"%>
     </div>

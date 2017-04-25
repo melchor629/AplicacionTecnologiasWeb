@@ -27,7 +27,7 @@
         <div class="container">
 
 
-            <h1 class="page-header">Perfil de usuario</h1>
+            <h1 class="page-header">Perfil de <%= u.getNombre() %></h1>
 
 
             <% if (u.getFoto() == null) { %>
