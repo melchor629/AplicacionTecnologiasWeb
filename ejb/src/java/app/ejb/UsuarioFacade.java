@@ -39,10 +39,15 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
             return lista.get(0);
         } else{
             return null;
-        }   
-               
+        }             
     }
     
+     public void insertarUsuario (Usuario usuario) {
+       EntityManager gestorEntidades = getEntityManager();
+       gestorEntidades.persist(usuario);
+    }
+    
+     
     public Usuario obtenerUsuarioPorId(int idUsuario){
         EntityManager gestorEntidades = getEntityManager();
         
