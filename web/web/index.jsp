@@ -12,7 +12,7 @@
 
   <body>
 
-    <nav class="navbar navbar-static-top navbar-fixed-topp">
+    <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -64,7 +64,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container main-page">
 
       <%@include file="snippets/footer.jsp"%>
     </div>

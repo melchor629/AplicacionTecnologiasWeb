@@ -2,6 +2,7 @@
 
 .navbar {
     background-color: $primary_color;
+    border: none;
 
     .navbar-header {
         a {
@@ -16,6 +17,12 @@
 
         .icon-bar {
             background: white;
+        }
+
+        @media(max-width: 767px) {
+            .navbar-nav li {
+                float: left;
+            }
         }
     }
 
@@ -42,14 +49,12 @@
         }
 
         input {
-            background-color: lighten($primary_color, 20);
-            border-color: lighten($primary_color, 20);
-            transition: border-color .25s ease-in-out;
             color: white;
+            border-bottom-color: #ddd;
 
             &:focus {
                 box-shadow: none;
-                border-color: lighten($accent_color, 10);
+                border-bottom-color: $secondary_color;
             }
 
             $color: #ddd;
@@ -57,6 +62,38 @@
             &::-moz-placeholder { color: $color }
             &:-ms-input-placeholder { color: $color }
             //&[placeholder] { color: $color }
+        }
+    }
+
+    .navbar-nav {
+        li {
+            color: white;
+            border-bottom: 0 solid $secondary_color;
+            transition: border .25s ease-in-out;
+
+            a {
+                color: white;
+                transition: padding-bottom .25s ease-in-out, color .25s ease-in-out;
+                span {
+                    color: white;
+                    transition: color .25s ease-in-out;
+                }
+            }
+
+            &:hover {
+                border-bottom: 5px solid $secondary_color;
+                a, a:hover {
+                    padding-bottom: 10px;
+                    color: $secondary_color;
+                    span { color: $secondary_color }
+                    background-color: transparent;
+                }
+
+                @media(max-width: 767px) {
+                    border-bottom: 0 solid;
+                    a, a:hover { padding-bottom: 10px }
+                }
+            }
         }
     }
 }
