@@ -4,11 +4,13 @@
     String cpath = request.getContextPath();
     Usuario u = (Usuario)session.getAttribute("usuario");
 
-    if(request.getAttribute("otroUsuario") != null){
-        u = (Usuario) request.getAttribute("otroUsuario");
+    if(u == null){
+       response.sendRedirect(cpath);
     }
     else{
-        if(u == null) response.sendRedirect("/");
+    
+    if(request.getAttribute("otroUsuario") != null){
+        u = (Usuario) request.getAttribute("otroUsuario");
     }
 %>
 <!DOCTYPE html>
@@ -89,4 +91,7 @@
 
     <%@include file="snippets/body-end.jsp"%>
 </body>
-</html>
+</html>            
+<%
+}
+%>
