@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "PerfilServlet", urlPatterns = {"/Perfil"})
 public class PerfilServlet extends HttpServlet {
@@ -23,32 +24,43 @@ public class PerfilServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * 
+     *
      */
-    
     @EJB
     private UsuarioFacade fachadaUsuario;
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-       
-        String idUsuario = request.getParameter("id");
-        
-        if(idUsuario == null || idUsuario.isEmpty()){
-            response.sendRedirect(request.getContextPath() + "/perfil.jsp");
+        HttpSession session = request.getSession();
+
+        Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
+
+        if(usuarioLogueado == null){
+            response.sendRedirect(request.getContextPath() + "/");
         }
         else{
-          int id = Integer.parseInt(idUsuario);
-          Usuario usuario = fachadaUsuario.obtenerUsuarioPorId(id);
-          request.setAttribute("otroUsuario", usuario);
-          
-         RequestDispatcher rd;
-        
-        rd = this.getServletContext().getRequestDispatcher("/perfil.jsp");
-        rd.forward(request, response);
+        String idUsuario = request.getParameter("id");
+
+        if (idUsuario == null || idUsuario.isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/perfil.jsp");
+        } else {
+            int id = Integer.parseInt(idUsuario);
+            Usuario usuario = fachadaUsuario.obtenerUsuarioPorId(id);
+            request.setAttribute("otroUsuario", usuario);
+            RequestDispatcher rd;
+
+            if (usuario != null) {
+                request.setAttribute("amigos", fachadaUsuario.sonAmigos(usuario.getId(), usuarioLogueado.getId()));
+                rd = this.getServletContext().getRequestDispatcher("/perfil.jsp");
+                rd.forward(request, response);
+            } else {
+                request.setAttribute("error", "El usuario solicitado no existe");
+                rd = this.getServletContext().getRequestDispatcher("/error.jsp");
+                rd.forward(request, response);
+            }
+
         }
-        
+    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

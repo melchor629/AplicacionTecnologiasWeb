@@ -22,3 +22,28 @@ h1, h2, h3, h4, h5, h6, div, span, p {
 p.lead {
     color: $description_text_color;
 }
+
+body > .container {
+    margin-top: 50px;
+}
+
+input.form-control {
+    background-color: transparent;
+    border: none;
+    color: $text_color;
+    border-bottom: 1px solid $text_color;
+    padding-bottom: 5px;
+    transition: border-bottom .2s ease-in-out, padding-bottom .2s ease-in-out;
+    border-radius: 0;
+    box-shadow: none;
+
+    &::-webkit-input-placeholder { color: $description_text_color }
+    &::-moz-placeholder { color: $description_text_color }
+    &:-ms-input-placeholder { color: $description_text_color }
+
+    &:focus {
+        border-bottom: 3px solid $secondary_color;
+        padding-bottom: 3px;
+        box-shadow: none;
+    }
+}

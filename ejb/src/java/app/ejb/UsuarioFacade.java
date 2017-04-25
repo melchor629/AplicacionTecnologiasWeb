@@ -1,6 +1,7 @@
 package app.ejb;
 
 import app.entity.Usuario;
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -54,6 +55,20 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         Usuario usuario = (Usuario) q.getSingleResult(); */
        
         return usuario;
+    }
+    
+    public boolean sonAmigos(int id1, int id2){
+       /* Query consulta = getEntityManager().createQuery("SELECT amistad FROM Contactos amistad WHERE (amistad.idUsuario = :id1 AND amistad.Amigo = :id2) OR (amistad.idUsuario = :id2 AND amistad.Amigo = :id1)");
+        consulta.setParameter("id1", id1);
+        consulta.setParameter("id2", id2);
+        int resultados = consulta.getResultList().size(); */
+       Usuario usuario1 = getEntityManager().find(Usuario.class, id1);
+       Usuario usuario2 = getEntityManager().find(Usuario.class, id2);
+       
+       Collection<Usuario> coleccion1 = usuario1.getUsuarioCollection();
+       Collection<Usuario> coleccion2 = usuario1.getUsuarioCollection1();
+       
+        return coleccion1.contains(usuario2) || coleccion2.contains(usuario2);
     }
     
 }

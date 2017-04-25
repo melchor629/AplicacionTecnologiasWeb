@@ -30,7 +30,9 @@ CREATE TABLE IF NOT EXISTS `tecnoweb`.`Usuario` (
   `NombreUsuario` VARCHAR(45) NOT NULL,
   `Contraseña` VARCHAR(200) NOT NULL,
   `Correo` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `Correo_UNIQUE` (`Correo` ASC),
+  UNIQUE INDEX `NombreUsuario_UNIQUE` (`NombreUsuario` ASC))
 ENGINE = InnoDB;
 
 
@@ -153,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `tecnoweb`.`Mensaje` (
   `Titulo` VARCHAR(100) CHARACTER SET 'utf8mb4' NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `UsuarioReceptor_idx` (`idReceptor` ASC),
-  UNIQUE INDEX `EmisorReceptorUnique` (`idEmisor` ASC, `idReceptor` ASC),
+  UNIQUE INDEX `Mensaje` (`id` ASC, `idEmisor` ASC, `idReceptor` ASC),
   CONSTRAINT `MensajeUsuario`
     FOREIGN KEY (`idEmisor`)
     REFERENCES `tecnoweb`.`Usuario` (`id`)
