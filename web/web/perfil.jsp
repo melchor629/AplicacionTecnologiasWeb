@@ -1,6 +1,9 @@
+<%@page import="app.ejb.UsuarioFacade"%>
+<%@page import="javax.ejb.EJB"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@page import="app.entity.Usuario"%>
 <%
+    
     String cpath = request.getContextPath();
     Usuario u = (Usuario) session.getAttribute("usuario");
 
@@ -31,9 +34,16 @@
             <button>Editar perfil</button>
             <% } else{%>
             <% // Comprobar si el usuario actual tiene amistad con el usuario %>
-            <button>Opciones de amistad</button>
-            <% } %>
-            
+            <% 
+             Boolean amigos = (Boolean) request.getAttribute("amigos");
+             %>
+             
+             <% if(amigos){%>
+             <h1>Esto se muestra cuando el usuario es amigo del que ha iniciado sesion</h1>
+             <% } else{%>
+             <h1>Esto se muestra cuando el usuario <b>NO</b> amigo del que ha iniciado sesion</h1>
+             <% }} %>
+             
             <h1 class="page-header">Perfil de <%= u.getNombre()%></h1>
 
             <% if (u.getFoto() == null) { %>
