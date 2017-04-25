@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="nombreDeUsuario" class="col-sm-3 control-label">Nombre de Usuario</label>
+                    <label for="nombreUsuario" class="col-sm-3 control-label">Nombre de Usuario</label>
                     <div class="col-sm-9">
                         <input type="usuario" id="firstName" placeholder="Nombre de Usuario" class="form-control" autofocus>
                         <span class="help-block">Usuario ej.: TecnoWebWins666</span>
