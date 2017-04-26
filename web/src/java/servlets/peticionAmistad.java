@@ -47,14 +47,17 @@ public class peticionAmistad extends HttpServlet {
             //Usuario usuarioCreado = new Usuario(Integer.SIZE, "nngn", "anngn", "nnnga", "nngan", "nnngna");
            // usuario.create(usuarioCreado);
            // usuario.borrarAmistad(7, 2);
-           peticion.mandarPeticionAmistad(7, 6, "Hola que hace");
+           // peticion.mandarPeticionAmistad(7, 6, "Hola que hace");
+           // peticion.eliminarPeticion(7, 6);
+           // usuario.aceptarPeticionAmistad(7, 6);
+           usuario.borrarAmistad(6, 7);
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet peticionAmistad</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet peticionAmistad at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet peticionAmistad at " + peticion.peticionMandada(7, 6) + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

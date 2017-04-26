@@ -41,7 +41,7 @@ public class PerfilServlet extends HttpServlet {
         else{
         String idUsuario = request.getParameter("id");
 
-        if (idUsuario == null || idUsuario.isEmpty()) {
+        if (idUsuario == null || idUsuario.isEmpty() || Integer.parseInt(idUsuario) == usuarioLogueado.getId()) {
             response.sendRedirect(request.getContextPath() + "/perfil.jsp");
         } else {
             int id = Integer.parseInt(idUsuario);

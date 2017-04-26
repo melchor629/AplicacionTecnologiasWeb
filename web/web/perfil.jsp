@@ -4,6 +4,7 @@
 
     String cpath = request.getContextPath();
     Usuario u = (Usuario) session.getAttribute("usuario");
+    boolean mostrarPerfil = true; // variable que determina si debe mostrarse el perfil del usuario
 
     if (u == null) {
         response.sendRedirect(cpath);
@@ -37,7 +38,9 @@
 
         <% if (amigos) {%>
         <i class="fa fa-user-times fa-2x">Eliminar amistad</i>
-        <% } else {%>
+        <% } else {
+        mostrarPerfil = false;
+        %>
         <i class="fa fa-user-plus fa-2x">Enviar solicitud de amistad</i>
         <% }
         } %>
@@ -56,6 +59,7 @@
                     <%=u.getNombre()%> <%=u.getApellidos()%>
                 </h5>
 
+                <% if(mostrarPerfil){ %>
                 <p id="nombreUsuario">
                     <%=u.getNombreUsuario()%>
                 </p>
@@ -85,11 +89,13 @@
                     <a href="<%=u.getWeb()%>" target="_blank"><%=u.getWeb()%></a>
                 </p>
                 <% }%>
+                <% } %>
             </div>
-
+            <% if(mostrarPerfil){ %>
             <div class="col-sm-8 col-md-9">
                 <!-- TRABAJOS Y MENSAJES AQUI -->
             </div>
+            <% } %>
         </div>
 
         <%@include file="snippets/footer.jsp" %>
