@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="nombreDeUsuario" class="col-sm-3 control-label">Nombre de Usuario</label>
+                        <label for="usuario" class="col-sm-3 control-label">Nombre de Usuario</label>
                         <div class="col-sm-9">
                             <input type="usuario" name="nombreUsuario" id="usuario" placeholder="Nombre de Usuario" class="form-control">
                             <span class="help-block">Usuario ej.: TecnoWebWins666</span>
@@ -91,12 +91,12 @@
 
             <div class="text-center center-block row">
                 <label class="checkbox-inline">
-                    <input type="checkbox" nombre="almacheck" id="almaCheckbox" value="OFF"> Entiendo que mis datos ya no me
+                    <input type="checkbox" name="almacheck" id="almaCheckbox" value="OFF"> Entiendo que mis datos ya no me
                     pertenecen (>:D)
                 </label>
                 <br/>
                 <label class="checkbox-inline">
-                    <input type="checkbox" nombre="datoscheck" id="datosCheckbox" value="OFF"> Acepto vender mi alma al diablo
+                    <input type="checkbox" name="datoscheck" id="datosCheckbox" value="OFF"> Acepto vender mi alma al diablo
                 </label>
             </div>
 
