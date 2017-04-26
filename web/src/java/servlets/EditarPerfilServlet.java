@@ -57,16 +57,40 @@ public class EditarPerfilServlet extends HttpServlet {
         String correo = request.getParameter("correo");
       
         //Comprobar que ambas password son iguales.
-        usuarioActualizado.setNombre(nombre);
-        usuarioActualizado.setApellidos(apellidos);
-        usuarioActualizado.setTwitter(twitter);
-        usuarioActualizado.setInstagram(instagram);
-        usuarioActualizado.setWeb(web);
-        usuarioActualizado.setFoto(foto);
-        usuarioActualizado.setNombreUsuario(nombreUsuario);
-        usuarioActualizado.setContraseña(password1);
-        usuarioActualizado.setCorreo(correo);
+        if(!nombre.equals("")){
+            usuarioActualizado.setNombre(nombre);
+        }
+        if(!apellidos.equals("")){
+             usuarioActualizado.setApellidos(apellidos);
+        }
+        if(!twitter.equals("")){
+            usuarioActualizado.setTwitter(twitter);
+        }
+        if(!instagram.equals("")){
+            usuarioActualizado.setInstagram(instagram);
+        }
+        if(!web.equals("")){
+            usuarioActualizado.setWeb(web);
+        }
+        if(!foto.equals("")){
+            usuarioActualizado.setFoto(foto);
+        }
+        if(!nombreUsuario.equals("")){
+            usuarioActualizado.setNombreUsuario(nombreUsuario);
+        }
+        if(!password1.equals("") & !password2.equals("") & password1.equals(password2)){
+            usuarioActualizado.setContraseña(password1);
+        }else{
+            //los campos de contraseña estan vacios o las contraseñas son incorrectas.
+            
+            response.sendRedirect(request.getContextPath() + "/editarPerfil.jsp?error=1");
+            
+        }
+        if(!correo.equals("")){
+            usuarioActualizado.setCorreo(correo);
+        }
         
+    
        u.edit(usuarioActualizado);
         
        session.setAttribute("usuario", usuarioActualizado);
