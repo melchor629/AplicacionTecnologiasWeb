@@ -25,23 +25,6 @@
     <%@include file="snippets/nav-logged.jsp" %>
 
     <div class="container">
-
-        <%
-            if (request.getAttribute("otroUsuario") == null) {
-        %>
-        <a href="<%= cpath %>/editarPerfil.jsp"><i class="fa fa-pencil fa-2x">Editar perfil</i></a>
-        <% } else {
-            // Comprobar si el usuario actual tiene amistad con el usuario
-            Boolean amigos = (Boolean) request.getAttribute("amigos");
-        %>
-
-        <% if (amigos) {%>
-        <i class="fa fa-user-times fa-2x">Eliminar amistad</i>
-        <% } else {%>
-        <i class="fa fa-user-plus fa-2x">Enviar solicitud de amistad</i>
-        <% }
-        } %>
-
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <% if (u.getFoto() == null) { %>
@@ -85,6 +68,37 @@
                     <a href="<%=u.getWeb()%>" target="_blank"><%=u.getWeb()%></a>
                 </p>
                 <% }%>
+
+
+                <div class="profile-options">
+                    <%
+                        if (request.getAttribute("otroUsuario") == null) {
+                    %>
+                    <a href="<%= cpath %>/editarPerfil.jsp" class="btn btn-primary btn-raised">
+                        <i class="fa fa-pencil"></i> Editar perfil
+                    </a>
+                    <% } else {
+                        // Comprobar si el usuario actual tiene amistad con el usuario
+                        Boolean amigos = (Boolean) request.getAttribute("amigos");
+                        if (amigos) {%>
+                        <form action="<%=cpath%>/EliminarAmistad" method="POST">
+                            <!-- Este input le envia al Servlet el ID del amigo al que quitarle la amistad -->
+                            <input type="hidden" name="amigo" value="<%=u.getId()%>">
+                            <button class="btn btn-primary btn-raised">
+                                <i class="fa fa-user-times"></i> Eliminar amistad
+                            </button>
+                        </form>
+                        <% } else {%>
+                        <form action="<%=cpath%>/peticionAmistad" method="POST">
+                            <!-- Este input le envia al Servlet el ID del amigo al que enviarle la petición de amistad -->
+                            <input type="hidden" name="amigo" value="<%=u.getId()%>">
+                            <button class="btn btn-primary btn-raised">
+                                <i class="fa fa-user-plus"></i> Enviar solicitud de amistad
+                            </button>
+                        </form>
+                    <%  }
+                    } %>
+                </div>
             </div>
 
             <div class="col-sm-8 col-md-9">
