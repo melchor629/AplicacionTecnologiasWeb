@@ -9,6 +9,7 @@ import app.ejb.UsuarioFacade;
 import app.entity.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +25,10 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "EditarPerfilServlet", urlPatterns = {"/EditarPerfil"})
 public class EditarPerfilServlet extends HttpServlet {
 
+    
+     @EJB
+    private UsuarioFacade u;
+     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,12 +41,10 @@ public class EditarPerfilServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-         HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
 
-        UsuarioFacade fachada;
-        fachada = (UsuarioFacade)session.getAttribute("FachadaUsuario");
-
-    
+        Usuario usuarioActualizado = (Usuario) session.getAttribute("usuario");
+        
         String nombre = request.getParameter("nombre");
         String apellidos = request.getParameter("apellidos");
         String twitter = request.getParameter("twitter");
@@ -49,12 +52,25 @@ public class EditarPerfilServlet extends HttpServlet {
         String web = request.getParameter("web");
         String foto = request.getParameter("foto");
         String nombreUsuario = request.getParameter("nombreUsuario");
-        String contraseña = request.getParameter("contraseña");
+        String password1 = request.getParameter("password1");
+        String password2 = request.getParameter("password2");
         String correo = request.getParameter("correo");
-       
-        //falta actualizar los cambios en la base de datos.
-
-        response.sendRedirect(request.getContextPath() + "/BookList");
+      
+        //Comprobar que ambas password son iguales.
+        usuarioActualizado.setNombre(nombre);
+        usuarioActualizado.setApellidos(apellidos);
+        usuarioActualizado.setTwitter(twitter);
+        usuarioActualizado.setInstagram(instagram);
+        usuarioActualizado.setWeb(web);
+        usuarioActualizado.setFoto(foto);
+        usuarioActualizado.setNombreUsuario(nombreUsuario);
+        usuarioActualizado.setContraseña(password1);
+        usuarioActualizado.setCorreo(correo);
+        
+       u.edit(usuarioActualizado);
+        
+       session.setAttribute("usuario", usuarioActualizado);
+       response.sendRedirect(request.getContextPath() + "/Perfil");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
