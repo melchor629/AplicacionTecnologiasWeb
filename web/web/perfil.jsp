@@ -29,16 +29,16 @@
         <%
             if (request.getAttribute("otroUsuario") == null) {
         %>
-        <button>Editar perfil</button>
+        <a href="<%= cpath %>/editarPerfil.jsp"><i class="fa fa-pencil fa-2x">Editar perfil</i></a>
         <% } else {
             // Comprobar si el usuario actual tiene amistad con el usuario
             Boolean amigos = (Boolean) request.getAttribute("amigos");
         %>
 
         <% if (amigos) {%>
-        <h1>Esto se muestra cuando el usuario es amigo del que ha iniciado sesion</h1>
+        <i class="fa fa-user-times fa-2x">Eliminar amistad</i>
         <% } else {%>
-        <h1>Esto se muestra cuando el usuario <b>NO</b> amigo del que ha iniciado sesion</h1>
+        <i class="fa fa-user-plus fa-2x">Enviar solicitud de amistad</i>
         <% }
         } %>
 
