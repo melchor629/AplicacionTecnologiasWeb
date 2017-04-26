@@ -52,10 +52,11 @@ public class EditarPerfilServlet extends HttpServlet {
         String web = request.getParameter("web");
         String foto = request.getParameter("foto");
         String nombreUsuario = request.getParameter("nombreUsuario");
-        String contraseña = request.getParameter("contraseña");
+        String password1 = request.getParameter("password1");
+        String password2 = request.getParameter("password2");
         String correo = request.getParameter("correo");
-       
-        
+      
+        //Comprobar que ambas password son iguales.
         usuarioActualizado.setNombre(nombre);
         usuarioActualizado.setApellidos(apellidos);
         usuarioActualizado.setTwitter(twitter);
@@ -63,7 +64,7 @@ public class EditarPerfilServlet extends HttpServlet {
         usuarioActualizado.setWeb(web);
         usuarioActualizado.setFoto(foto);
         usuarioActualizado.setNombreUsuario(nombreUsuario);
-        usuarioActualizado.setContraseña(contraseña);
+        usuarioActualizado.setContraseña(password1);
         usuarioActualizado.setCorreo(correo);
         
        u.edit(usuarioActualizado);

@@ -33,7 +33,7 @@
       <!-- imput text -->
         <h1>Datos:</h1>
         
-        <form name="edit" action=”EditarPerfil" method=”post">
+        <form name="edit" action="<%=cpath%>/EditarPerfil" method=”post">
         <%
             if(u.getNombre()==null){
                 %>
@@ -132,15 +132,34 @@
             
          %>
          
+         <!--Al editar el perfil, la contraseña aparece sin ofuscar (gran palabra) y cualquiera la puede ver. Además que debería aparecer dos veces la contraseña 
+         (esta ultima en blanco), así si se edita la contraseña primera, habrá que comprobar que la segunda es igual.; si no se edita la primera,
+         no hay que comprobar la segunda ya que no la has cambiado. Como en todas las webs -->
+         
+         <!-- mostrar contraseña siempre en blanco y comprobar que son iguales-->
              <%
             if(u.getContraseña()==null){
                 %>
-                Contraseña: <input type="text" name="contraseña" value="" size="200" ><br/>
+                Contraseña: <input type="text" name="password1" value="" size="200" ><br/>
                 <%
             }else{
                 
                 %>
-                Contraseña: <input type="text" name="contraseña" value="<%= u.getContraseña() %>" size="200" ><br/>
+                Contraseña: <input type="text" name="password1" value="<%= u.getContraseña() %>" size="200" ><br/>
+                <%
+            }
+            
+         %>
+         
+         <%
+            if(u.getContraseña()==null){
+                %>
+                Contraseña: <input type="text" name="password2" value="" size="200" ><br/>
+                <%
+            }else{
+                
+                %>
+                Contraseña: <input type="text" name="password2" value="<%= u.getContraseña() %>" size="200" ><br/>
                 <%
             }
             
@@ -159,7 +178,7 @@
             }
             
          %>
-         <input type="submit" value="Submit">
+         <input type="submit" value="Guardar">
         </form>
          
     
