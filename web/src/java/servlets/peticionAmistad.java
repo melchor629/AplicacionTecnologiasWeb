@@ -11,11 +11,13 @@ import app.entity.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -26,9 +28,7 @@ public class peticionAmistad extends HttpServlet {
 
     @EJB
     PeticionAmistadFacade peticion;
-    
-    @EJB
-    UsuarioFacade usuario;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,26 +40,37 @@ public class peticionAmistad extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            // peticion.mandarPeticionAmistad(1, 2, "Hola que hace");
-            //Usuario usuarioCreado = new Usuario(Integer.SIZE, "nngn", "anngn", "nnnga", "nngan", "nnngna");
-           // usuario.create(usuarioCreado);
-           // usuario.borrarAmistad(7, 2);
-           // peticion.mandarPeticionAmistad(7, 6, "Hola que hace");
-           // peticion.eliminarPeticion(7, 6);
-           // usuario.aceptarPeticionAmistad(7, 6);
-           usuario.borrarAmistad(6, 7);
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet peticionAmistad</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet peticionAmistad at " + peticion.peticionMandada(7, 6) + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String cpath = request.getContextPath();
+        boolean error = false; // Controla si ha habido un error para hacer la correspondiente redireccion
+        String cadenaError = "Ha habido un error inesperado... has modificado los parametros de la url a mano?";
+        
+         HttpSession session = request.getSession();
+
+        Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
+        
+        if(usuarioLogueado == null){
+           error = true;
+           cadenaError = "Sesion no iniciada";
+        }
+        else{
+        try{
+        Integer accion = Integer.parseInt(request.getParameter("accion"));
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        
+        if(accion == 1){
+            // Enviar solicitud de amistad a usuario
+        } else if(accion == 2){
+            // Eliminar amistad de usuario
+        }
+        }
+        catch(Exception E){
+            error = true;
+        }
+        }
+        if (error) {
+            request.setAttribute("error", cadenaError);
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/error.jsp");
+            rd.forward(request, response);
         }
     }
 

@@ -37,11 +37,11 @@
         %>
 
         <% if (amigos) {%>
-        <i class="fa fa-user-times fa-2x">Eliminar amistad</i>
+        <a href="<%= cpath %>/peticionAmistad?accion=2&id=<%= u.getId() %>"><i class="fa fa-user-times fa-2x">Eliminar amistad</i></a>
         <% } else {
         mostrarPerfil = false;
         %>
-        <i class="fa fa-user-plus fa-2x">Enviar solicitud de amistad</i>
+        <a href="<%= cpath %>/peticionAmistad?accion=1&id=<%= u.getId() %>"><i class="fa fa-user-plus fa-2x">Enviar solicitud de amistad</i></a>
         <% }
         } %>
 
