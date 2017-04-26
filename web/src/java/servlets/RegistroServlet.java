@@ -48,7 +48,8 @@ public class RegistroServlet extends HttpServlet {
      String contraseña2 = request.getParameter("password2");
      String correo = request.getParameter("correo");
      String almacheck = request.getParameter("almacheck");
-     String datoscheck = request.getParameter("datoschek");
+     String datoscheck = request.getParameter("datoscheck");
+     //String datoscheck = request.getParameter("datoschek");
      String error = "";
      
      if(nombre.isEmpty()){
@@ -69,18 +70,14 @@ public class RegistroServlet extends HttpServlet {
      }else if(correo.isEmpty()){
          error = "Campo Correo obligatorio";
          lanzarError(error, request, response);
-     }else if(almacheck.equals("OFF") || datoscheck.equals("OFF")){
-         error = "Debe aceptar los términos";
-         lanzarError(error, request, response);
+     }else if(almacheck == null || datoscheck == null ){
+        error = "Debe aceptar los términos";
+        lanzarError(error, request, response);
      }else{
-         
-        
-
-        if(contraseña1.equals(contraseña2)){
+         if(contraseña1.equals(contraseña2)){
             try{
                 Usuario user = new Usuario(Integer.SIZE, nombre, apellidos, nombreUsuario, contraseña2, correo);
-                 u.create(user);
-
+                u.create(user);
                 HttpSession session = request.getSession();
                 session.setAttribute("usuario", user);
                 response.sendRedirect(request.getContextPath() + "/perfil.jsp");
@@ -89,7 +86,6 @@ public class RegistroServlet extends HttpServlet {
             }
 
         }else{
-
             String contraseñasDiferentes = "Los valores de contraseña no coinciden"; 
             lanzarError(contraseñasDiferentes, request, response);
         }
