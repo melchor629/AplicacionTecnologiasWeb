@@ -33,16 +33,30 @@
       <!-- imput text -->
         <h1>Datos:</h1>
         
-        <form name="edit" action="<%=cpath%>/EditarPerfil" method=”post">
+        <form class="form-horizontal" name="edit" action="<%=cpath%>/EditarPerfil" method=”post">
         <%
             if(u.getNombre()==null){
                 %>
-                 Nombre: <input type="text" name="nombre" value="" size="50" ><br/>
+                
+                <div class="form-group">
+                    <label for="nombre" class="col-sm-2 control-label">Nombre</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="nombre" placeholder="">
+                        </div>
+                </div>
+                
                 <%
             }else{
                 
                 %>
-                Nombre: <input type="text" name="nombre" value="<%= u.getNombre() %>" size="50" ><br/>
+                
+                <div class="form-group">
+                    <label for="nombre" class="col-sm-2 control-label">Nombre</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="nombre" placeholder="<%= u.getNombre() %>">
+                        </div>
+                </div>
+                        
                 <%
             }
             
@@ -51,12 +65,26 @@
              <%
             if(u.getApellidos()==null){
                 %>
-                Apellidos: <input type="text" name="apellidos" value="" size="100" ><br/>
+                
+                <div class="form-group">
+                    <label for="apellidos" class="col-sm-2 control-label">Apellidos</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="apellidos" placeholder="">
+                        </div>
+                </div>
+  
                 <%
             }else{
                 
                 %>
-                 Apellidos: <input type="text" name="apellidos" value="<%= u.getApellidos() %>" size="100" ><br/>
+                
+                <div class="form-group">
+                    <label for="apellidos" class="col-sm-2 control-label">Apellidos</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="apellidos" placeholder="<%= u.getApellidos() %>">
+                        </div>
+                </div>
+                 
                 <%
             }
             
@@ -65,12 +93,26 @@
              <%
             if(u.getTwitter()==null){
                 %>
-                Twitter: <input type="text" name="twitter" value="" size="45" ><br/>
+                
+                <div class="form-group">
+                    <label for="twitter" class="col-sm-2 control-label">Twitter</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="twitter" placeholder="">
+                        </div>
+                </div>
+                        
                 <%
             }else{
                 
                 %>
-                Twitter: <input type="text" name="twitter" value="<%= u.getTwitter() %>" size="45" ><br/>
+                
+                <div class="form-group">
+                    <label for="twitter" class="col-sm-2 control-label">Twitter</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="twitter" placeholder="<%= u.getTwitter() %>">
+                        </div>
+                </div>
+                
                 <%
             }
             
@@ -79,12 +121,25 @@
              <%
             if(u.getInstagram()==null){
                 %>
-                Instagram: <input type="text" name="instagram" value="" size="45" ><br/>
+                
+                <div class="form-group">
+                    <label for="instagram" class="col-sm-2 control-label">Instagram</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="instagram" placeholder="">
+                        </div>
+                </div>
+      
                 <%
             }else{
                 
                 %>
-                Instagram: <input type="text" name="instagram" value="<%= u.getInstagram() %>" size="45" ><br/>
+                <div class="form-group">
+                    <label for="instagram" class="col-sm-2 control-label">Instagram</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="instagram" placeholder="<%= u.getInstagram() %>">
+                        </div>
+                </div>
+                
                 <%
             }
             
@@ -93,12 +148,24 @@
              <%
             if(u.getWeb()==null){
                 %>
-                 Web: <input type="text" name="web" value="" size="45" ><br/>
+                 <div class="form-group">
+                    <label for="web" class="col-sm-2 control-label">Web</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="web" placeholder="">
+                        </div>
+                </div>
+                 
                 <%
             }else{
                 
                 %>
-                 Web: <input type="text" name="web" value="<%= u.getWeb() %>" size="45" ><br/>
+                 <div class="form-group">
+                    <label for="web" class="col-sm-2 control-label">Web</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="web" placeholder="<%= u.getWeb() %>">
+                        </div>
+                </div>
+                 
                 <%
             }
             
@@ -107,12 +174,26 @@
              <%
             if(u.getFoto()==null){
                 %>
-                 Foto: <input type="text" name="foto" value="" size="255" ><br/>
+                
+                   <div class="form-group">
+                    <label for="foto" class="col-sm-2 control-label">Foto</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="foto" placeholder="">
+                        </div>
+                </div>
+                        
+                 
                 <%
             }else{
                 
                 %>
-                 Foto: <input type="text" name="foto" value="<%= u.getFoto() %>" size="255" ><br/>
+                <div class="form-group">
+                    <label for="foto" class="col-sm-2 control-label">Foto</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="foto" placeholder="<%= u.getFoto() %>">
+                        </div>
+                </div>
+                
                 <%
             }
             
@@ -121,12 +202,24 @@
              <%
             if(u.getNombreUsuario()==null){
                 %>
-                Nombre Usuario: <input type="text" name="nombreUsuario" value="" size="45" ><br/>
+                  <div class="form-group">
+                    <label for="nombreUsuario" class="col-sm-2 control-label">Nombre Usuario</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="nombreUsuario" placeholder="">
+                        </div>
+                </div>
+                
                 <%
             }else{
                 
                 %>
-                 Nombre Usuario: <input type="text" name="nombreUsuario" value="<%= u.getNombreUsuario() %>" size="45" ><br/>
+                 <div class="form-group">
+                    <label for="nombreUsuario" class="col-sm-2 control-label">Nombre Usuario</label>
+                        <div class="col-sm-10">
+                        <input type="text" class="form-control" name="nombreUsuario" placeholder="<%= u.getNombreUsuario() %>">
+                        </div>
+                </div>
+               
                 <%
             }
             
@@ -140,12 +233,24 @@
              <%
             if(u.getContraseña()==null){
                 %>
-                Contraseña: <input type="text" name="password1" value="" size="200" ><br/>
+                <div class="form-group">
+                    <label for="password1" class="col-sm-2 control-label">Contraseña</label>
+                        <div class="col-sm-10">
+                        <input type="password" class="form-control" name="password1" placeholder="">
+                        </div>
+                </div>
+                
                 <%
             }else{
                 
                 %>
-                Contraseña: <input type="text" name="password1" value="<%= u.getContraseña() %>" size="200" ><br/>
+                <div class="form-group">
+                    <label for="password1" class="col-sm-2 control-label">Contraseña</label>
+                        <div class="col-sm-10">
+                        <input type="password" class="form-control" name="password1" placeholder="">
+                        </div>
+                </div>
+                
                 <%
             }
             
@@ -154,12 +259,22 @@
          <%
             if(u.getContraseña()==null){
                 %>
-                Contraseña: <input type="text" name="password2" value="" size="200" ><br/>
+                <div class="form-group">
+                    <label for="password2" class="col-sm-2 control-label">Repetir contraseña</label>
+                        <div class="col-sm-10">
+                        <input type="password" class="form-control" name="password2" placeholder="">
+                        </div>
+                </div>
                 <%
             }else{
                 
                 %>
-                Contraseña: <input type="text" name="password2" value="<%= u.getContraseña() %>" size="200" ><br/>
+                <div class="form-group">
+                    <label for="password2" class="col-sm-2 control-label">Repetir contraseña</label>
+                        <div class="col-sm-10">
+                        <input type="password" class="form-control" name="password2" placeholder="">
+                        </div>
+                </div>
                 <%
             }
             
@@ -168,17 +283,31 @@
              <%
             if(u.getCorreo()==null){
                 %>
-                Correo: <input type="text" name="correo" value="" size="255" ><br/>
+                <div class="form-group">
+                    <label for="correo" class="col-sm-2 control-label">Correo</label>
+                        <div class="col-sm-10">
+                        <input type="email" class="form-control" name="correo" placeholder="">
+                        </div>
+                </div>
                 <%
             }else{
                 
                 %>
-                 Correo: <input type="text" name="correo" value="<%= u.getCorreo() %>" size="255" ><br/>
+                <div class="form-group">
+                    <label for="correo" class="col-sm-2 control-label">Correo</label>
+                        <div class="col-sm-10">
+                        <input type="email" class="form-control" name="correo" placeholder="<%= u.getCorreo() %>">
+                        </div>
+                </div>
                 <%
             }
             
          %>
-         <input type="submit" value="Guardar">
+         <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Guardar</button>
+             </div>
+         </div>
         </form>
          
     
