@@ -57,7 +57,7 @@
                 </h5>
 
                 <p id="nombreUsuario">
-                    <%=u.getNombreUsuario()%>
+                    <i class="fa fa-at"></i> <%=u.getNombreUsuario()%>
                 </p>
 
                 <p id="email">
