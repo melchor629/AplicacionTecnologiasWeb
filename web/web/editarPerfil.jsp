@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label for="nombre" class="col-sm-2 control-label">Nombre</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="nombre" placeholder="">
+                        <input type="text" class="form-control" name="nombre" value="">
                         </div>
                 </div>
                 
@@ -53,7 +53,7 @@
                 <div class="form-group">
                     <label for="nombre" class="col-sm-2 control-label">Nombre</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="nombre" placeholder="<%= u.getNombre() %>">
+                        <input type="text" class="form-control" name="nombre" value="<%= u.getNombre() %>">
                         </div>
                 </div>
                         
@@ -69,7 +69,7 @@
                 <div class="form-group">
                     <label for="apellidos" class="col-sm-2 control-label">Apellidos</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="apellidos" placeholder="">
+                        <input type="text" class="form-control" name="apellidos" value="">
                         </div>
                 </div>
   
@@ -81,7 +81,7 @@
                 <div class="form-group">
                     <label for="apellidos" class="col-sm-2 control-label">Apellidos</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="apellidos" placeholder="<%= u.getApellidos() %>">
+                        <input type="text" class="form-control" name="apellidos" value="<%= u.getApellidos() %>">
                         </div>
                 </div>
                  
@@ -97,7 +97,7 @@
                 <div class="form-group">
                     <label for="twitter" class="col-sm-2 control-label">Twitter</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="twitter" placeholder="">
+                        <input type="text" class="form-control" name="twitter" value="">
                         </div>
                 </div>
                         
@@ -109,7 +109,7 @@
                 <div class="form-group">
                     <label for="twitter" class="col-sm-2 control-label">Twitter</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="twitter" placeholder="<%= u.getTwitter() %>">
+                        <input type="text" class="form-control" name="twitter" value="<%= u.getTwitter() %>">
                         </div>
                 </div>
                 
@@ -125,7 +125,7 @@
                 <div class="form-group">
                     <label for="instagram" class="col-sm-2 control-label">Instagram</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="instagram" placeholder="">
+                        <input type="text" class="form-control" name="instagram" value="">
                         </div>
                 </div>
       
@@ -136,7 +136,7 @@
                 <div class="form-group">
                     <label for="instagram" class="col-sm-2 control-label">Instagram</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="instagram" placeholder="<%= u.getInstagram() %>">
+                        <input type="text" class="form-control" name="instagram" value="<%= u.getInstagram() %>">
                         </div>
                 </div>
                 
@@ -151,7 +151,7 @@
                  <div class="form-group">
                     <label for="web" class="col-sm-2 control-label">Web</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="web" placeholder="">
+                        <input type="text" class="form-control" name="web" value="">
                         </div>
                 </div>
                  
@@ -162,7 +162,7 @@
                  <div class="form-group">
                     <label for="web" class="col-sm-2 control-label">Web</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="web" placeholder="<%= u.getWeb() %>">
+                        <input type="text" class="form-control" name="web" value="<%= u.getWeb() %>">
                         </div>
                 </div>
                  
@@ -178,7 +178,7 @@
                    <div class="form-group">
                     <label for="foto" class="col-sm-2 control-label">Foto</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="foto" placeholder="">
+                        <input type="text" class="form-control" name="foto" value="">
                         </div>
                 </div>
                         
@@ -190,7 +190,7 @@
                 <div class="form-group">
                     <label for="foto" class="col-sm-2 control-label">Foto</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="foto" placeholder="<%= u.getFoto() %>">
+                        <input type="text" class="form-control" name="foto" value="<%= u.getFoto() %>">
                         </div>
                 </div>
                 
@@ -205,7 +205,7 @@
                   <div class="form-group">
                     <label for="nombreUsuario" class="col-sm-2 control-label">Nombre Usuario</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="nombreUsuario" placeholder="">
+                        <input type="text" class="form-control" name="nombreUsuario" value="">
                         </div>
                 </div>
                 
@@ -216,7 +216,7 @@
                  <div class="form-group">
                     <label for="nombreUsuario" class="col-sm-2 control-label">Nombre Usuario</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="nombreUsuario" placeholder="<%= u.getNombreUsuario() %>">
+                        <input type="text" class="form-control" name="nombreUsuario" value="<%= u.getNombreUsuario() %>">
                         </div>
                 </div>
                
@@ -236,7 +236,7 @@
                 <div class="form-group">
                     <label for="password1" class="col-sm-2 control-label">Contraseña</label>
                         <div class="col-sm-10">
-                        <input type="password" class="form-control" name="password1" placeholder="">
+                        <input type="password" class="form-control" name="password1" value="">
                         </div>
                 </div>
                 
@@ -247,7 +247,7 @@
                 <div class="form-group">
                     <label for="password1" class="col-sm-2 control-label">Contraseña</label>
                         <div class="col-sm-10">
-                        <input type="password" class="form-control" name="password1" placeholder="">
+                        <input type="password" class="form-control" name="password1" value="">
                         </div>
                 </div>
                 
@@ -262,7 +262,7 @@
                 <div class="form-group">
                     <label for="password2" class="col-sm-2 control-label">Repetir contraseña</label>
                         <div class="col-sm-10">
-                        <input type="password" class="form-control" name="password2" placeholder="">
+                        <input type="password" class="form-control" name="password2" value="">
                         </div>
                 </div>
                 <%
@@ -272,7 +272,7 @@
                 <div class="form-group">
                     <label for="password2" class="col-sm-2 control-label">Repetir contraseña</label>
                         <div class="col-sm-10">
-                        <input type="password" class="form-control" name="password2" placeholder="">
+                        <input type="password" class="form-control" name="password2" value="">
                         </div>
                 </div>
                 <%
@@ -286,7 +286,7 @@
                 <div class="form-group">
                     <label for="correo" class="col-sm-2 control-label">Correo</label>
                         <div class="col-sm-10">
-                        <input type="email" class="form-control" name="correo" placeholder="">
+                        <input type="email" class="form-control" name="correo" value="">
                         </div>
                 </div>
                 <%
@@ -296,7 +296,7 @@
                 <div class="form-group">
                     <label for="correo" class="col-sm-2 control-label">Correo</label>
                         <div class="col-sm-10">
-                        <input type="email" class="form-control" name="correo" placeholder="<%= u.getCorreo() %>">
+                        <input type="email" class="form-control" name="correo" value="<%= u.getCorreo() %>">
                         </div>
                 </div>
                 <%

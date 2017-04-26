@@ -83,4 +83,37 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         // Se actualiza la entidad
         this.edit(usuario);
     }
+    
+    
+    // Permite borrar una amistad entre dos usuarios
+    public void borrarAmistad(int idDesde, int idHacia) {
+
+        // El usuario que menda la peticion
+        Usuario usuario1 = getEntityManager().find(Usuario.class, idDesde);
+        Usuario usuario2 = getEntityManager().find(Usuario.class, idHacia);
+        
+        Collection<Usuario> coleccion1 = usuario1.getUsuarioCollection();
+        Collection<Usuario> coleccion2 = usuario1.getUsuarioCollection1();
+        
+        Collection<Usuario> coleccion3 = usuario2.getUsuarioCollection();
+        Collection<Usuario> coleccion4 = usuario2.getUsuarioCollection1();
+        
+        if(coleccion1.contains(usuario2)){
+            coleccion1.remove(usuario2);
+        }
+        else{
+            coleccion2.remove(usuario2);
+        }
+        
+        if(coleccion3.contains(usuario1)){
+            coleccion3.remove(usuario1);
+        }
+        else{
+            coleccion4.remove(usuario1);
+        }
+        
+        // Actualizar entidad
+        this.edit(usuario1);
+        this.edit(usuario2);
+    }
 }
