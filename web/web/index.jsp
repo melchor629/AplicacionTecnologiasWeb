@@ -31,12 +31,12 @@ else{
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" method="POST" action="<%=cpath%>/Main">
             <div class="form-group">
-              <input type="text" placeholder="Usuario" class="form-control" name="usuario" value="melchor9000">
+              <input type="text" placeholder="Usuario" class="form-control" name="usuario">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Contraseña" class="form-control" name="password" value="casual">
+              <input type="password" placeholder="Contraseña" class="form-control" name="password">
             </div>
-            <button type="submit" class="btn">Entrar</button><script>document.querySelector('.navbar form button').dispatchEvent(new Event('click'))</script>
+            <button type="submit" class="btn">Entrar</button>
           </form>
         </div>
       </div>
