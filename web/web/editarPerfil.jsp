@@ -6,15 +6,6 @@
     Usuario u = (Usuario)session.getAttribute("usuario");
 %>
 
-<% 
-    Integer error = Integer.parseInt((String) request.getParameter("error"));
-    
-    if(error==1){
-%>
-    
-    Las contraseñas no coinciden!
-
-<%} %>
 
 <% if (u == null) {
         response.sendRedirect(cpath);
@@ -39,6 +30,26 @@
       <!-- Contenido -->
       
       <!-- imput text -->
+      
+      <% 
+   
+    
+    if(request.getParameter("error")!=null){
+         
+        Integer error=Integer.parseInt((String) request.getParameter("error"));
+    
+        
+    if(error==1){
+%>
+    
+    Las contraseñas no coinciden!
+
+    <% 
+        }
+      }
+    %>
+
+
         <h1>Datos:</h1>
         
         <form class="form-horizontal" name="edit" action="<%=cpath%>/EditarPerfil" method=”post">
