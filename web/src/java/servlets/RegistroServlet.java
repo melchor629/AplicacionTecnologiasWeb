@@ -42,50 +42,57 @@ public class RegistroServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
      String nombre = request.getParameter("nombre");
      String apellidos = request.getParameter("apellidos");
-     String twitter = request.getParameter("twitter");
-     String instagram = request.getParameter("instagram");
-     String web = request.getParameter("web");
-     String nombreUsuario = request.getParameter("usuario");
+     String nombreUsuario = request.getParameter("nombreUsuario");
      String contraseña1 = request.getParameter("password1");
      String contraseña2 = request.getParameter("password2");
-     String foto = request.getParameter("foto");
      String correo = request.getParameter("correo");
+     String error = "";
      
-     
-     
-     Usuario user = new Usuario();
-     
-     if(contraseña1.equals(contraseña2)){
-        
-        //try{
-        user.setNombre(nombre);
-        user.setApellidos(apellidos);
-        user.setTwitter(twitter);
-        user.setInstagram(instagram);
-        user.setCorreo(correo);
-        user.setWeb(web);
-        user.setFoto(foto);
-        user.setContraseña(contraseña1);
-        user.setNombre(nombreUsuario);
-        
-        
-       // catch()
-     //}
-     
-         u.insertarUsuario(user);
-     
-         HttpSession session = request.getSession();
-         session.setAttribute("usuario", user);
-         response.sendRedirect(request.getContextPath() + "/perfil.jsp");
-         
+     if(nombre.isEmpty()){
+         error = "Campo Nombre obligatorio";
+         lanzarError(error, request, response);
+     }else if(apellidos.isEmpty()){
+         error = "Campo Apellidos obligatorio";
+         lanzarError(error, request, response);
+     }else if( nombreUsuario.isEmpty()){
+         error = "Campo Nombre de Usuario obligatorio";
+         lanzarError(error, request, response);
+     }else if(contraseña1.isEmpty()){
+         error = "Campo Contraseña obligatorio";
+         lanzarError(error, request, response);
+     }else if(contraseña2.isEmpty()){
+         error = "Debe volver a escribir la contraseña";
+         lanzarError(error, request, response);
+     }else if(correo.isEmpty()){
+         error = "Campo Correo obligatorio";
+         lanzarError(error, request, response);
      }else{
+         
         
-        String contraseñasDiferentes = "Los valores de contraseña no coinciden"; 
-        request.setAttribute("contraseñaDiferentes", contraseñasDiferentes );
-        RequestDispatcher rd;
-        rd = (RequestDispatcher) this.getServletContext().getRequestDispatcher("/registro.jsp");
-        rd.forward(request, response);
-        return;
+
+        if(contraseña1.equals(contraseña2)){
+            //try{
+                Usuario user = new Usuario(Integer.SIZE, nombre, apellidos, nombreUsuario, contraseña2, correo);
+              //  }catch(MySQLIntegrityConstraintViolationException e){
+                //   lanzarError(e, request, response);
+                  // }
+           
+
+
+          // catch()
+        //}
+
+            u.create(user);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("usuario", user);
+            response.sendRedirect(request.getContextPath() + "/perfil.jsp");
+
+        }else{
+
+            String contraseñasDiferentes = "Los valores de contraseña no coinciden"; 
+            lanzarError(contraseñasDiferentes, request, response);
+        }
      }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -126,5 +133,17 @@ public class RegistroServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+
+
+private void lanzarError(String error,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        request.setAttribute("error", error );
+        RequestDispatcher rd;
+        rd = (RequestDispatcher) this.getServletContext().getRequestDispatcher("/registro.jsp");
+        rd.forward(request, response);
+        
+        System.out.println("=================)(/&%$&//%$&/&RTYYGFGHHGFV");
+        System.out.println(error);
+}
 
 }

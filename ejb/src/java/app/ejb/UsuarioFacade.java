@@ -44,6 +44,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     }
     
      public void insertarUsuario (Usuario usuario) {
+
+         
        EntityManager gestorEntidades = getEntityManager();
        gestorEntidades.persist(usuario);
     }
