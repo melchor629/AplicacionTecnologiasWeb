@@ -16,95 +16,101 @@
 %>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <title>Perfil de <%=u.getNombre()%> - LinkedOut</title>
-    <meta name="description" content="Descripcion de la pagina"> <!-- TODO -->
-    <%@include file="snippets/head.jsp" %>
-</head>
+    <head>
+        <title>Perfil de <%=u.getNombre()%> - LinkedOut</title>
+        <meta name="description" content="Descripcion de la pagina"> <!-- TODO -->
+        <%@include file="snippets/head.jsp" %>
+    </head>
 
-<body>
-    <%@include file="snippets/nav-logged.jsp" %>
+    <body>
+        <%@include file="snippets/nav-logged.jsp" %>
 
-    <div class="container">
+        <div class="container">
 
-        <%
-            if (request.getAttribute("otroUsuario") == null) {
-        %>
-        <a href="<%= cpath %>/editarPerfil.jsp"><i class="fa fa-pencil fa-2x">Editar perfil</i></a>
-        <% } else {
-            // Comprobar si el usuario actual tiene amistad con el usuario
-            Boolean amigos = (Boolean) request.getAttribute("amigos");
-        %>
+            <%
+                if (request.getAttribute("otroUsuario") == null) {
+            %>
+            <a href="<%= cpath%>/editarPerfil.jsp"><i class="fa fa-pencil fa-2x">Editar perfil</i></a>
+            <% } else {
+                // Comprobar si el usuario actual tiene amistad con el usuario
+                Boolean amigos = (Boolean) request.getAttribute("amigos");
+            %>
 
-        <% if (amigos) {%>
-        <a href="<%= cpath %>/peticionAmistad?accion=2&id=<%= u.getId() %>"><i class="fa fa-user-times fa-2x">Eliminar amistad</i></a>
-        <% } else {
-        mostrarPerfil = false;
-        %>
-        <a href="<%= cpath %>/peticionAmistad?accion=1&id=<%= u.getId() %>"><i class="fa fa-user-plus fa-2x">Enviar solicitud de amistad</i></a>
-        <% }
-        } %>
+            <% if (amigos) {%>
+            <a href="<%= cpath%>/peticionAmistad?accion=2&id=<%= u.getId()%>"><i class="fa fa-user-times fa-2x">Eliminar amistad</i></a>
+            <% } else {
+                mostrarPerfil = false;
+                Boolean peticionEnviada = (Boolean) request.getAttribute("peticionEnviada");
+                if (peticionEnviada) { %>
+                <div class="alert alert-info">
+                    Ya le has mandado una peticion a este usuario o el te la ha mandado a ti,
+                    si se la has mandado espera a que la acepte o cancele. Si te la ha mandado a ti acéptala
+                    o cancélala desde tu panel de notificaciones.
+                </div>
+               <% } else {
+            %>
+            <a href="<%= cpath%>/peticionAmistad?accion=1&id=<%= u.getId()%>"><i class="fa fa-user-plus fa-2x">Enviar solicitud de amistad</i></a>
+            <% }
+            }} %>
 
-        <div class="row">
-            <div class="col-sm-4 col-md-3">
-                <% if (u.getFoto() == null) { %>
-                <img src="<%@include file="snippets/fotoPerfil.txt"%>" class="img-responsive profile-photo"
-                     alt="Foto de perfil genérico">
-                <% } else {%>
-                <img src="<%=u.getFoto()%>" class="img-responsive profile-photo" alt="Foto de perfil de <%=u.getNombre()%>">
-                <% }%>
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    <% if (u.getFoto() == null) { %>
+                    <img src="<%@include file="snippets/fotoPerfil.txt"%>" class="img-responsive profile-photo"
+                         alt="Foto de perfil genérico">
+                    <% } else {%>
+                    <img src="<%=u.getFoto()%>" class="img-responsive profile-photo" alt="Foto de perfil de <%=u.getNombre()%>">
+                    <% }%>
 
 
-                <h5 id="nombreApellidos">
-                    <%=u.getNombre()%> <%=u.getApellidos()%>
-                </h5>
+                    <h5 id="nombreApellidos">
+                        <%=u.getNombre()%> <%=u.getApellidos()%>
+                    </h5>
 
-                <% if(mostrarPerfil){ %>
-                <p id="nombreUsuario">
-                    <%=u.getNombreUsuario()%>
-                </p>
+                    <% if (mostrarPerfil) {%>
+                    <p id="nombreUsuario">
+                        <%=u.getNombreUsuario()%>
+                    </p>
 
-                <p id="email">
-                    <i class="fa fa-envelope-o"></i>
-                    <a href="mailto:<%=u.getCorreo()%>"><%=u.getCorreo()%></a>
-                </p>
+                    <p id="email">
+                        <i class="fa fa-envelope-o"></i>
+                        <a href="mailto:<%=u.getCorreo()%>"><%=u.getCorreo()%></a>
+                    </p>
 
-                <% if (u.getTwitter() != null) {%>
-                <p id="twitter">
-                    <i class="fa fa-twitter"></i>
-                    <a href="https://twitter.com/<%=u.getTwitter()%>" target="_blank">@<%=u.getTwitter()%></a>
-                </p>
-                <%} %>
+                    <% if (u.getTwitter() != null) {%>
+                    <p id="twitter">
+                        <i class="fa fa-twitter"></i>
+                        <a href="https://twitter.com/<%=u.getTwitter()%>" target="_blank">@<%=u.getTwitter()%></a>
+                    </p>
+                    <%} %>
 
-                <% if (u.getInstagram() != null) {%>
-                <p id="instagram">
-                    <i class="fa fa-instagram"></i>
-                    <a href="https://www.instagram.com/<%=u.getInstagram()%>" target="_blank"><%=u.getInstagram()%></a>
-                </p>
-                <%} %>
+                    <% if (u.getInstagram() != null) {%>
+                    <p id="instagram">
+                        <i class="fa fa-instagram"></i>
+                        <a href="https://www.instagram.com/<%=u.getInstagram()%>" target="_blank"><%=u.getInstagram()%></a>
+                    </p>
+                    <%} %>
 
-                <% if (u.getWeb() != null) {%>
-                <p id="web">
-                    <i class="fa fa-globe"></i>
-                    <a href="<%=u.getWeb()%>" target="_blank"><%=u.getWeb()%></a>
-                </p>
-                <% }%>
+                    <% if (u.getWeb() != null) {%>
+                    <p id="web">
+                        <i class="fa fa-globe"></i>
+                        <a href="<%=u.getWeb()%>" target="_blank"><%=u.getWeb()%></a>
+                    </p>
+                    <% }%>
+                    <% } %>
+                </div>
+                <% if (mostrarPerfil) { %>
+                <div class="col-sm-8 col-md-9">
+                    <!-- TRABAJOS Y MENSAJES AQUI -->
+                </div>
                 <% } %>
             </div>
-            <% if(mostrarPerfil){ %>
-            <div class="col-sm-8 col-md-9">
-                <!-- TRABAJOS Y MENSAJES AQUI -->
-            </div>
-            <% } %>
+
+            <%@include file="snippets/footer.jsp" %>
+
         </div>
 
-        <%@include file="snippets/footer.jsp" %>
-
-    </div>
-
-    <%@include file="snippets/body-end.jsp" %>
-</body>
+        <%@include file="snippets/body-end.jsp" %>
+    </body>
 </html>
-<%
-    }
-%>
+<% } %>

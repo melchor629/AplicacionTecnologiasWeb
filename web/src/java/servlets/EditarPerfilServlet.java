@@ -42,7 +42,6 @@ public class EditarPerfilServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-
         Usuario usuarioActualizado = (Usuario) session.getAttribute("usuario");
         
         String nombre = request.getParameter("nombre");
@@ -78,7 +77,7 @@ public class EditarPerfilServlet extends HttpServlet {
         if(!nombreUsuario.equals("")){
             usuarioActualizado.setNombreUsuario(nombreUsuario);
         }
-        if(!password1.equals("") & !password2.equals("") & password1.equals(password2)){
+        if(!password1.equals("") && !password2.equals("") && password1.equals(password2)){
             usuarioActualizado.setContraseña(password1);
         }else{
             //los campos de contraseña estan vacios o las contraseñas son incorrectas.

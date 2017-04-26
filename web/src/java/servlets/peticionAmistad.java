@@ -27,7 +27,10 @@ import javax.servlet.http.HttpSession;
 public class peticionAmistad extends HttpServlet {
 
     @EJB
-    PeticionAmistadFacade peticion;
+    PeticionAmistadFacade fachadaPeticionAmistad;
+    
+    @EJB
+    UsuarioFacade fachadaUsuario;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,9 +62,28 @@ public class peticionAmistad extends HttpServlet {
         
         if(accion == 1){
             // Enviar solicitud de amistad a usuario
+            // comprobar que el usuario al que la envias no es ya tu amigo ni tu mismo ni le has mandado la peticion ya
+            if(id == usuarioLogueado.getId() || fachadaUsuario.sonAmigos(usuarioLogueado.getId(), id) || fachadaPeticionAmistad.peticionMandada(usuarioLogueado.getId(), id)){
+                error = true;
+                cadenaError = "Has intentado mandarte peticion a ti mismo, a un amigo tuyo o alguien que se la has mandado";
+            }
+            else{
+                fachadaPeticionAmistad.mandarPeticionAmistad(usuarioLogueado.getId(), id, "El usuario "+usuarioLogueado.getNombre()+" "+usuarioLogueado.getApellidos()+" te quiere stalkear");
+            }
+            
         } else if(accion == 2){
             // Eliminar amistad de usuario
+            // Para eliminar a un usuario debes ser amigo suyo y no puedes ser tu mismo
+            if(id != usuarioLogueado.getId() && fachadaUsuario.sonAmigos(usuarioLogueado.getId(), id)){
+                fachadaUsuario.borrarAmistad(usuarioLogueado.getId(), id);
+            }
+            else{
+                error = true;
+                cadenaError = "Error al borrar amistad: No puedes borrarte a ti mismo ni a alguien que no es tu amigo";
+            }
         }
+        
+        response.sendRedirect(cpath+"/Perfil?id="+id);
         }
         catch(Exception E){
             error = true;
