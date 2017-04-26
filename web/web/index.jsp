@@ -31,12 +31,12 @@ else{
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" method="POST" action="<%=cpath%>/Main">
             <div class="form-group">
-              <input type="text" placeholder="Usuario" class="form-control" name="usuario">
+              <input type="text" placeholder="Usuario" class="form-control" name="usuario" value="melchor9000">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Contraseña" class="form-control" name="password">
+              <input type="password" placeholder="Contraseña" class="form-control" name="password" value="casual">
             </div>
-            <button type="submit" class="btn">Entrar</button>
+            <button type="submit" class="btn">Entrar</button><script>document.querySelector('.navbar form button').dispatchEvent(new Event('click'))</script>
           </form>
         </div>
       </div>
@@ -51,7 +51,7 @@ else{
           <div class="col-sm-8">
             <h1>Hoy puedes tomar una buena decisión</h1>
             <p class="lead">Tienes la oportunidad de unirte a una gran red social profesional</p>
-            <p><a class="btn btn-primary btn-lg" href="<%=cpath%>/registro.jsp" role="button">Regístrate ahora</a></p>
+            <p><a class="btn btn-primary btn-lg btn-raised" href="<%=cpath%>/registro.jsp" role="button">Regístrate ahora</a></p>
           </div>
         </div>
       </div>

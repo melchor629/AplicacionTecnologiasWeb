@@ -1,9 +1,7 @@
-<%@page import="app.ejb.UsuarioFacade"%>
-<%@page import="javax.ejb.EJB"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@page import="app.entity.Usuario"%>
+<%@page import="app.entity.Usuario" %>
 <%
-    
+
     String cpath = request.getContextPath();
     Usuario u = (Usuario) session.getAttribute("usuario");
 
@@ -17,75 +15,90 @@
 %>
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <title>Perfil de <%=u.getNombre()%> - LinkedOut</title>
-        <meta name="description" content="Descripcion de la pagina"> <!-- TODO -->
-        <%@include file="snippets/head.jsp"%>
-    </head>
+<head>
+    <title>Perfil de <%=u.getNombre()%> - LinkedOut</title>
+    <meta name="description" content="Descripcion de la pagina"> <!-- TODO -->
+    <%@include file="snippets/head.jsp" %>
+</head>
 
-    <body>
-        <%@include file="snippets/nav-logged.jsp"%>
+<body>
+    <%@include file="snippets/nav-logged.jsp" %>
 
-        <div class="container">
+    <div class="container">
 
-            <% 
-            if(request.getAttribute("otroUsuario") == null){
-            %>
-            <button>Editar perfil</button>
-            <% } else{%>
-            <% // Comprobar si el usuario actual tiene amistad con el usuario %>
-            <% 
-             Boolean amigos = (Boolean) request.getAttribute("amigos");
-             %>
-             
-             <% if(amigos){%>
-             <h1>Esto se muestra cuando el usuario es amigo del que ha iniciado sesion</h1>
-             <% } else{%>
-             <h1>Esto se muestra cuando el usuario <b>NO</b> amigo del que ha iniciado sesion</h1>
-             <% }} %>
-             
-            <h1 class="page-header">Perfil de <%= u.getNombre()%></h1>
+        <%
+            if (request.getAttribute("otroUsuario") == null) {
+        %>
+        <a href="<%= cpath %>/editarPerfil.jsp"><i class="fa fa-pencil fa-2x">Editar perfil</i></a>
+        <% } else {
+            // Comprobar si el usuario actual tiene amistad con el usuario
+            Boolean amigos = (Boolean) request.getAttribute("amigos");
+        %>
 
-            <% if (u.getFoto() == null) { %>
-            <img src="<%@include file="snippets/fotoPerfil.txt"%>" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-            <% } else {%>
-            <img src="<%=u.getFoto()%>" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-            <% }%>
+        <% if (amigos) {%>
+        <i class="fa fa-user-times fa-2x">Eliminar amistad</i>
+        <% } else {%>
+        <i class="fa fa-user-plus fa-2x">Enviar solicitud de amistad</i>
+        <% }
+        } %>
 
-            <h2>Nombre</h2>
-            <p><%=u.getNombre()%></p>
-
-            <h2>Apellidos</h2>
-            <p><%=u.getApellidos()%></p>
-
-            <% if (u.getTwitter() != null) {%>
-            <h2>Twitter</h2>
-            <p><a href="https://twitter.com/<%=u.getTwitter()%>" target="_blank"><%=u.getTwitter()%></a></p>
-                <%} %>
-
-            <% if (u.getInstagram() != null) {%>
-            <h2>Instagram</h2>
-            <p><a href="https://www.instagram.com/<%=u.getInstagram()%>" target="_blank"><%=u.getInstagram()%></a></p>
-                <%} %>
-
-            <% if (u.getWeb() != null) {%>
-            <h2>Página web</h2>
-            <p><a href="<%=u.getWeb()%>" target="_blank"><%=u.getWeb()%></a></p>
+        <div class="row">
+            <div class="col-sm-4 col-md-3">
+                <% if (u.getFoto() == null) { %>
+                <img src="<%@include file="snippets/fotoPerfil.txt"%>" class="img-responsive profile-photo"
+                     alt="Foto de perfil genérico">
+                <% } else {%>
+                <img src="<%=u.getFoto()%>" class="img-responsive profile-photo" alt="Foto de perfil de <%=u.getNombre()%>">
                 <% }%>
 
-            <h2>Nombre de usuario</h2>
-            <p><%=u.getNombreUsuario()%></p>
 
-            <h2>Correo electrónico</h2>
-            <p><a href="mailto:<%=u.getCorreo()%>"><%=u.getCorreo()%></a></p>
+                <h5 id="nombreApellidos">
+                    <%=u.getNombre()%> <%=u.getApellidos()%>
+                </h5>
 
-            <%@include file="snippets/footer.jsp"%>
+                <p id="nombreUsuario">
+                    <%=u.getNombreUsuario()%>
+                </p>
 
+                <p id="email">
+                    <i class="fa fa-envelope-o"></i>
+                    <a href="mailto:<%=u.getCorreo()%>"><%=u.getCorreo()%></a>
+                </p>
+
+                <% if (u.getTwitter() != null) {%>
+                <p id="twitter">
+                    <i class="fa fa-twitter"></i>
+                    <a href="https://twitter.com/<%=u.getTwitter()%>" target="_blank">@<%=u.getTwitter()%></a>
+                </p>
+                <%} %>
+
+                <% if (u.getInstagram() != null) {%>
+                <p id="instagram">
+                    <i class="fa fa-instagram"></i>
+                    <a href="https://www.instagram.com/<%=u.getInstagram()%>" target="_blank"><%=u.getInstagram()%></a>
+                </p>
+                <%} %>
+
+                <% if (u.getWeb() != null) {%>
+                <p id="web">
+                    <i class="fa fa-globe"></i>
+                    <a href="<%=u.getWeb()%>" target="_blank"><%=u.getWeb()%></a>
+                </p>
+                <% }%>
+            </div>
+
+            <div class="col-sm-8 col-md-9">
+                <!-- TRABAJOS Y MENSAJES AQUI -->
+            </div>
         </div>
 
-        <%@include file="snippets/body-end.jsp"%>
-    </body>
-</html>            
+        <%@include file="snippets/footer.jsp" %>
+
+    </div>
+
+    <%@include file="snippets/body-end.jsp" %>
+</body>
+</html>
 <%
     }
 %>
