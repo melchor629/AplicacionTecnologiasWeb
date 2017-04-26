@@ -1,9 +1,3 @@
-<%-- 
-    Document   : editarPerfil.jsp
-    Created on : 25-abr-2017, 16:56:36
-    Author     : Lucia y Francis
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="app.entity.Usuario"%>
 
@@ -23,8 +17,8 @@
 <html lang="es">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Formulario cambiar datos perfil</title>
-    <meta name="description" content="Descripcion de la pagina"> <!-- TODO -->
+    <title>Modificar perfil</title>
+    <meta name="description" content="Modificar perfil de usuario">
     <%@include file="snippets/head.jsp"%>
   </head>
 
