@@ -1,6 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
     String cpath = request.getContextPath();
+
+if(session.getAttribute("usuario") != null){
+    response.sendRedirect(cpath+"/perfil.jsp");
+}
+else{
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,7 +17,7 @@
 
   <body>
 
-    <nav class="navbar navbar-static-top navbar-fixed-topp">
+    <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -41,12 +46,12 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-4">
-            <img src="<%=cpath%>assets/favicon/Logotipo%20melsho%20reducido.png" style="width:100%">
+            <img src="<%=cpath%>/assets/favicon/Logotipo%20melsho%20reducido.png" style="width:100%">
           </div>
           <div class="col-sm-8">
             <h1>Hoy puedes tomar una buena decisión</h1>
             <p class="lead">Tienes la oportunidad de unirte a una gran red social profesional</p>
-            <p><a class="btn btn-primary btn-lg" href="<%=cpath%>/registro.jsp" role="button">Regístrate ahora</a></p>
+            <p><a class="btn btn-primary btn-lg btn-raised" href="<%=cpath%>/registro.jsp" role="button">Regístrate ahora</a></p>
           </div>
         </div>
       </div>
@@ -64,7 +69,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container main-page">
 
       <%@include file="snippets/footer.jsp"%>
     </div>
@@ -72,3 +77,4 @@
     <%@include file="snippets/body-end.jsp"%>
   </body>
 </html>
+<% } %>

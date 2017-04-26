@@ -1,20 +1,28 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package servlets;
 
 import app.ejb.UsuarioFacade;
 import app.entity.Usuario;
-
-import javax.ejb.EJB;
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "PerfilServlet", urlPatterns = {"/Perfil"})
-public class PerfilServlet extends HttpServlet {
+/**
+ *
+ * @author Lucia y Francis
+ */
+@WebServlet(name = "EditarPerfilServlet", urlPatterns = {"/EditarPerfil"})
+public class EditarPerfilServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -24,43 +32,29 @@ public class PerfilServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     *
      */
-    @EJB
-    private UsuarioFacade fachadaUsuario;
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        
+         HttpSession session = request.getSession();
 
-        Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
+        UsuarioFacade fachada;
+        fachada = (UsuarioFacade)session.getAttribute("FachadaUsuario");
 
-        if(usuarioLogueado == null){
-            response.sendRedirect(request.getContextPath() + "/");
-        }
-        else{
-        String idUsuario = request.getParameter("id");
+    
+        String nombre = request.getParameter("nombre");
+        String apellidos = request.getParameter("apellidos");
+        String twitter = request.getParameter("twitter");
+        String instagram = request.getParameter("instagram");
+        String web = request.getParameter("web");
+        String foto = request.getParameter("foto");
+        String nombreUsuario = request.getParameter("nombreUsuario");
+        String contraseña = request.getParameter("contraseña");
+        String correo = request.getParameter("correo");
+       
+        //falta actualizar los cambios en la base de datos.
 
-        if (idUsuario == null || idUsuario.isEmpty()) {
-            response.sendRedirect(request.getContextPath() + "/perfil.jsp");
-        } else {
-            int id = Integer.parseInt(idUsuario);
-            Usuario usuario = fachadaUsuario.obtenerUsuarioPorId(id);
-            request.setAttribute("otroUsuario", usuario);
-            RequestDispatcher rd;
-
-            if (usuario != null) {
-                request.setAttribute("amigos", fachadaUsuario.sonAmigos(usuario.getId(), usuarioLogueado.getId()));
-                rd = this.getServletContext().getRequestDispatcher("/perfil.jsp");
-                rd.forward(request, response);
-            } else {
-                request.setAttribute("error", "El usuario solicitado no existe");
-                rd = this.getServletContext().getRequestDispatcher("/error.jsp");
-                rd.forward(request, response);
-            }
-
-        }
-    }
+        response.sendRedirect(request.getContextPath() + "/BookList");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

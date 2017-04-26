@@ -56,15 +56,8 @@ public class RegistroServlet extends HttpServlet {
      Usuario user = new Usuario();
      
      if(contraseña1.equals(contraseña2)){
-        String contraseñasDiferentes = "Los valores de contraseña no coinciden"; 
-        request.setAttribute("contraseñaDiferentes", contraseñasDiferentes );
-        RequestDispatcher rd;
-        rd = (RequestDispatcher) this.getServletContext().getRequestDispatcher("/registro.jsp");
-        rd.forward(request, response);
-        return;
-     }
-     
-     //try{
+        
+        //try{
         user.setNombre(nombre);
         user.setApellidos(apellidos);
         user.setTwitter(twitter);
@@ -79,14 +72,22 @@ public class RegistroServlet extends HttpServlet {
        // catch()
      //}
      
-     u.insertarUsuario(user);
+         u.insertarUsuario(user);
      
-     HttpSession session = request.getSession();
-     session.setAttribute("usuario", user);
-     response.sendRedirect(request.getContextPath() + "/perfil.jsp");
-     
+         HttpSession session = request.getSession();
+         session.setAttribute("usuario", user);
+         response.sendRedirect(request.getContextPath() + "/perfil.jsp");
+         
+     }else{
+        
+        String contraseñasDiferentes = "Los valores de contraseña no coinciden"; 
+        request.setAttribute("contraseñaDiferentes", contraseñasDiferentes );
+        RequestDispatcher rd;
+        rd = (RequestDispatcher) this.getServletContext().getRequestDispatcher("/registro.jsp");
+        rd.forward(request, response);
+        return;
+     }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
