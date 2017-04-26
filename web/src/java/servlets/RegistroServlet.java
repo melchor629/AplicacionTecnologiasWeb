@@ -10,6 +10,7 @@ import app.entity.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -46,6 +47,8 @@ public class RegistroServlet extends HttpServlet {
      String contraseña1 = request.getParameter("password1");
      String contraseña2 = request.getParameter("password2");
      String correo = request.getParameter("correo");
+     String almacheck = request.getParameter("almacheck");
+     String datoscheck = request.getParameter("datoschek");
      String error = "";
      
      if(nombre.isEmpty()){
@@ -66,27 +69,24 @@ public class RegistroServlet extends HttpServlet {
      }else if(correo.isEmpty()){
          error = "Campo Correo obligatorio";
          lanzarError(error, request, response);
+     }else if(almacheck.equals("OFF") || datoscheck.equals("OFF")){
+         error = "Debe aceptar los términos";
+         lanzarError(error, request, response);
      }else{
          
         
 
         if(contraseña1.equals(contraseña2)){
-            //try{
+            try{
                 Usuario user = new Usuario(Integer.SIZE, nombre, apellidos, nombreUsuario, contraseña2, correo);
-              //  }catch(MySQLIntegrityConstraintViolationException e){
-                //   lanzarError(e, request, response);
-                  // }
-           
+                 u.create(user);
 
-
-          // catch()
-        //}
-
-            u.create(user);
-
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", user);
-            response.sendRedirect(request.getContextPath() + "/perfil.jsp");
+                HttpSession session = request.getSession();
+                session.setAttribute("usuario", user);
+                response.sendRedirect(request.getContextPath() + "/perfil.jsp");
+            }catch(EJBException e){
+                lanzarError("Usuario o correo en uso", request, response);
+            }
 
         }else{
 
