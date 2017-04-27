@@ -61,7 +61,7 @@
                     <div class="form-group">
                         <label for="correo" class="col-sm-3 control-label">Correo</label>
                         <div class="col-sm-9">
-                            <input type="correo" name="email" id="correo" placeholder="Correo" class="form-control">
+                            <input type="correo" name="correo" id="correo" placeholder="Correo" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -91,12 +91,12 @@
 
             <div class="text-center center-block row">
                 <label class="checkbox-inline">
-                    <input type="checkbox" name="almacheck" id="almaCheckbox" value="OFF"> Entiendo que mis datos ya no me
+                    <input type="checkbox" name="almacheck" id="almaCheckbox" value="ON"> Entiendo que mis datos ya no me
                     pertenecen (>:D)
                 </label>
                 <br/>
                 <label class="checkbox-inline">
-                    <input type="checkbox" name="datoscheck" id="datosCheckbox" value="OFF"> Acepto vender mi alma al diablo
+                    <input type="checkbox" name="datoscheck" id="datosCheckbox" value="ON"> Acepto vender mi alma al diablo
                 </label>
             </div>
 
@@ -104,7 +104,6 @@
             <button type="submit" class="btn btn-primary btn-raised pull-right">REGISTRARME</button>
             <div class="clearfix"></div>
         </form>
-
         <%@include file="snippets/footer.jsp" %>
     </div>
 

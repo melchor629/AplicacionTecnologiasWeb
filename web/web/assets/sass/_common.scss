@@ -24,7 +24,7 @@ p.lead {
 }
 
 body > .container {
-    margin-top: 50px;
+    padding-top: 50px;
 }
 
 input.form-control {
@@ -32,7 +32,7 @@ input.form-control {
     border: none;
     color: $text_color;
     border-bottom: 1px solid $text_color;
-    padding-bottom: 5px;
+    padding: 8px 0 7px 0;
     transition: border-bottom .2s ease-in-out, padding-bottom .2s ease-in-out;
     border-radius: 0;
     box-shadow: none;
@@ -43,8 +43,19 @@ input.form-control {
 
     &:focus {
         border-bottom: 3px solid $secondary_color;
-        padding-bottom: 3px;
+        padding-bottom: 5px;
         box-shadow: none;
+    }
+}
+
+.input-group {
+    .input-group-addon {
+        border-right: 0;
+        border: none;
+        background: transparent;
+        position: relative;
+        border-radius: 0;
+        padding-right: 16px;
     }
 }
 

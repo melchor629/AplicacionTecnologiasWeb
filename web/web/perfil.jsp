@@ -5,13 +5,18 @@
     String cpath = request.getContextPath();
     Usuario u = (Usuario) session.getAttribute("usuario");
     boolean mostrarPerfil = true; // variable que determina si debe mostrarse el perfil del usuario
-
+    Boolean amigos = true; // Si procede almacena si los usuarios son amigos
     if (u == null) {
         response.sendRedirect(cpath);
     } else {
 
         if (request.getAttribute("otroUsuario") != null) {
+            amigos = (Boolean) request.getAttribute("amigos");
             u = (Usuario) request.getAttribute("otroUsuario");
+
+            if (!amigos) {
+                mostrarPerfil = false;
+            }
         }
 %>
 <!DOCTYPE html>
@@ -24,35 +29,10 @@
 
     <body>
         <%@include file="snippets/nav-logged.jsp" %>
-
         <div class="container">
-
-            <%
-                if (request.getAttribute("otroUsuario") == null) {
-            %>
-            <a href="<%= cpath%>/editarPerfil.jsp"><i class="fa fa-pencil fa-2x">Editar perfil</i></a>
-            <% } else {
-                // Comprobar si el usuario actual tiene amistad con el usuario
-                Boolean amigos = (Boolean) request.getAttribute("amigos");
-            %>
-
-            <% if (amigos) {%>
-            <a href="<%= cpath%>/peticionAmistad?accion=2&id=<%= u.getId()%>"><i class="fa fa-user-times fa-2x">Eliminar amistad</i></a>
-            <% } else {
-                mostrarPerfil = false;
-                Boolean peticionEnviada = (Boolean) request.getAttribute("peticionEnviada");
-                if (peticionEnviada) { %>
-                <div class="alert alert-info">
-                    Ya le has mandado una peticion a este usuario o el te la ha mandado a ti,
-                    si se la has mandado espera a que la acepte o cancele. Si te la ha mandado a ti acéptala
-                    o cancélala desde tu panel de notificaciones.
-                </div>
-               <% } else {
-            %>
-            <a href="<%= cpath%>/peticionAmistad?accion=1&id=<%= u.getId()%>"><i class="fa fa-user-plus fa-2x">Enviar solicitud de amistad</i></a>
-            <% }
-            }} %>
-
+            <% if (amigos) {
+            Boolean peticionEnviada = (Boolean) request.getAttribute("peticionEnviada");
+            } %>
             <div class="row">
                 <div class="col-sm-4 col-md-3">
                     <% if (u.getFoto() == null) { %>
@@ -67,9 +47,8 @@
                         <%=u.getNombre()%> <%=u.getApellidos()%>
                     </h5>
 
-                    <% if (mostrarPerfil) {%>
                     <p id="nombreUsuario">
-                        <%=u.getNombreUsuario()%>
+                        <i class="fa fa-at"></i> <%=u.getNombreUsuario()%>
                     </p>
 
                     <p id="email">
@@ -97,20 +76,42 @@
                         <a href="<%=u.getWeb()%>" target="_blank"><%=u.getWeb()%></a>
                     </p>
                     <% }%>
-                    <% } %>
+
+                    <div class="profile-options">
+                        <%
+                            if (request.getAttribute("otroUsuario") == null) {
+                        %>
+                        <a href="<%= cpath%>/editarPerfil.jsp" class="btn btn-primary btn-raised">
+                            <i class="fa fa-pencil"></i> Editar perfil
+                        </a>
+                        <% } else {
+                            Boolean peticionEnviada = (Boolean) request.getAttribute("peticionEnviada");
+
+                            // Comprobar si el usuario actual tiene amistad con el usuario
+                            if (amigos) {%>
+                        <a href="<%= cpath%>/peticionAmistad?accion=2&id=<%= u.getId()%>" class="btn btn-primary btn-raised">
+                            <i class="fa fa-user-times"></i> Eliminar amistad
+                        </a>
+                        <% } else {%>
+
+                        <% if (!peticionEnviada) {%>
+                        <a href="<%= cpath%>/peticionAmistad?accion=1&id=<%= u.getId()%>" class="btn btn-primary btn-raised">
+                            <i class="fa fa-user-plus"></i> Enviar solicitud de amistad
+                        </a>
+                        <% } else {%>
+                        <div class="alert alert-info">
+                            Ya le has mandado una peticion a este usuario o el te la ha mandado a ti,
+                            si se la has mandado espera a que la acepte o cancele. Si te la ha mandado a ti acéptala
+                            o cancélala desde tu panel de notificaciones.
+                        </div>
+                        <% }
+                            }
+                        } %>
+                    </div>
                 </div>
-                <% if (mostrarPerfil) { %>
-                <div class="col-sm-8 col-md-9">
-                    <!-- TRABAJOS Y MENSAJES AQUI -->
-                </div>
-                <% } %>
+                <%@include file="snippets/footer.jsp" %>
             </div>
-
-            <%@include file="snippets/footer.jsp" %>
-
-        </div>
-
-        <%@include file="snippets/body-end.jsp" %>
+            <%@include file="snippets/body-end.jsp" %>
     </body>
 </html>
-<% } %>
+<% }%>
