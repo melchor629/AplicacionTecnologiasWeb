@@ -22,7 +22,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">LinkedOut</a>
+                <a class="navbar-brand" href="<%=cpath%>">LinkedOut</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <form class="navbar-form navbar-right" method="POST" action="<%=cpath%>/Main">
@@ -101,7 +101,10 @@
             </div>
 
 
-            <button type="submit" class="btn btn-primary btn-raised pull-right">REGISTRARME</button>
+            <div class="pull-right">
+                <button type="submit" class="btn btn-primary btn-raised">REGISTRARME</button>
+                <a href="javascript:history.back()" class="btn btn-default btn-raised">CANCELAR</a>
+            </div>
             <div class="clearfix"></div>
         </form>
         <%@include file="snippets/footer.jsp" %>
