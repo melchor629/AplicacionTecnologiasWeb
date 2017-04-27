@@ -1,8 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Rodrigo Represa Represa
  */
+
 package servlets;
 
 import app.ejb.UsuarioFacade;
@@ -19,10 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- *
- * @author Rodrii
- */
+
 @WebServlet(name = "RegistroServlet", urlPatterns = {"/RegistroServlet"})
 public class RegistroServlet extends HttpServlet {
 
@@ -136,8 +133,6 @@ private void lanzarError(String error,HttpServletRequest request, HttpServletRes
         rd = (RequestDispatcher) this.getServletContext().getRequestDispatcher("/registro.jsp");
         rd.forward(request, response);
         
-        System.out.println("=================)(/&%$&//%$&/&RTYYGFGHHGFV");
-        System.out.println(error);
 }
 
 }
