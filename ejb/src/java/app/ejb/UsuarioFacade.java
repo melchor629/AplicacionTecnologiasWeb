@@ -35,7 +35,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         q.setParameter("usuario", usuario);
         q.setParameter("password", hashPasado);
         List<Usuario> lista = (List) q.getResultList();
-        System.out.println(pass + " " + hashPasado);
+        //System.out.println(pass + " " + hashPasado);
 
         if (lista.size() > 0) {
             return lista.get(0);
@@ -116,4 +116,16 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         this.edit(usuario1);
         this.edit(usuario2);
     }
+    
+     public List <Usuario> buscarUsuarios(String datos) {
+        //EntityManager gestorEntidades = getEntityManager();
+        Query q;
+   
+        q = this.em.createQuery("SELECT * FROM Usuario u WHERE u.Nombre LIKE '%datos%' OR u.Apellidos LIKE '%datos%' "
+                + "OR u.Twitter LIKE '%datos%' OR u.Instagram LIKE '%datos%' OR u.Web LIKE '%datos%' OR u.Correo LIKE '%datos%' "
+                + "OR u.NombreUsuario LIKE '%datos%';");
+        
+        List<Usuario> lista = (List) q.getResultList();
+        return lista;
+     }
 }

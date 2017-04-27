@@ -1,3 +1,6 @@
+<%@page import="app.ejb.AficionesFacade"%>
+<%@page import="java.util.List"%>
+<%@page import="app.entity.Aficiones"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@page import="app.entity.Usuario" %>
 
@@ -35,6 +38,54 @@
         </div>
         <%
                 }
+
+        %>
+        
+        <%
+
+                if(error==2){
+        %>
+         <div class="alert alert-danger">
+            El campo nombre no puede estar vacio!
+        </div>
+        <% 
+            }
+            %>
+            
+             <%
+
+                if(error==3){
+        %>
+         <div class="alert alert-danger">
+            El campo apellidos no puede estar vacio!
+        </div>
+        <% 
+            }
+            %>
+            
+             <%
+
+                if(error==4){
+        %>
+         <div class="alert alert-danger">
+            El campo correo no puede estar vacio!
+        </div>
+        <% 
+            }
+            %>
+            
+             <%
+
+                if(error==5){
+        %>
+         <div class="alert alert-danger">
+            El campo nombre usuario no puede estar vacio!
+        </div>
+        <% 
+            }
+            %>
+
+        <%
             }
         %>
 
@@ -306,6 +357,109 @@
                         }
 
                     %>
+                    
+                    <!-- Falta mostrar aficiones, experiencia laboral y estudios-->
+                    
+                    <!--Trabajos -->
+                     <%
+                        if (u.getWeb() == null) {
+                    %>
+                    <div class="form-group">
+                        <label for="web" class="col-sm-3 control-label">Web</label>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-globe"></i></div>
+                            <input type="text" id="web" class="form-control" name="web" value="" placeholder="Web">
+                        </div>
+                    </div>
+
+                    <%
+                    } else {
+
+                    %>
+                    <div class="form-group">
+                        <label for="web" class="col-sm-3 control-label">Web</label>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-globe"></i></div>
+                            <input type="text" id="web" class="form-control" name="web" value="<%= u.getWeb() %>" placeholder="Web">
+                        </div>
+                    </div>
+
+                    <%
+                        }
+
+                    %>
+                    
+                    <!--Estudios -->
+                     <%
+                        if (u.getWeb() == null) {
+                    %>
+                    <div class="form-group">
+                        <label for="web" class="col-sm-3 control-label">Web</label>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-globe"></i></div>
+                            <input type="text" id="web" class="form-control" name="web" value="" placeholder="Web">
+                        </div>
+                    </div>
+
+                    <%
+                    } else {
+
+                    %>
+                    <div class="form-group">
+                        <label for="web" class="col-sm-3 control-label">Web</label>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-globe"></i></div>
+                            <input type="text" id="web" class="form-control" name="web" value="<%= u.getWeb() %>" placeholder="Web">
+                        </div>
+                    </div>
+
+                    <%
+                        }
+
+                    %>
+                    
+                    <!--Aficiones -->
+                     <%
+                        
+                        AficionesFacade fachadaAficiones= (AficionesFacade) session.getAttribute("listaAficiones");
+                        List<Aficiones> aficiones = null;
+                        aficiones = fachadaAficiones.obtenerAficiones(u);
+                        
+                        if (aficiones == null) {
+                    %>
+                    <div class="form-group">
+                        <label for="web" class="col-sm-3 control-label">Aficiones</label>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-globe"></i></div>
+                            <input type="text" id="aficiones" class="form-control" name="aficiones" value="" placeholder="Aficiones">
+                        </div>
+                    </div>
+
+                    <%
+                    } else {
+
+                    %>
+                    
+                    <%for(Aficiones a: aficiones){
+                    %>
+               
+                    <div class="form-group">
+                        <label for="web" class="col-sm-3 control-label">Aficiones</label>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-globe"></i></div>
+                            <input type="text" id="aficiones" class="form-control" name="aficiones" value="<%= a.getAficionesPK().getNombre() %>" placeholder="Aficiones">
+                        </div>
+                    </div>
+                        
+                            <%
+                                }
+                                %>
+
+                    <%
+                        }
+
+                    %>
+                    
                 </div>
 
                 <div class="col-sm-6 col-xs-12">
