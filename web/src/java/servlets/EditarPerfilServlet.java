@@ -41,6 +41,8 @@ public class EditarPerfilServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        
+        int error= 0; //1 si hay algun error, 0 si no hay errores
         HttpSession session = request.getSession();
 
         Usuario usuarioActualizado = (Usuario) session.getAttribute("usuario");
@@ -63,39 +65,45 @@ public class EditarPerfilServlet extends HttpServlet {
         if(!apellidos.equals("")){
              usuarioActualizado.setApellidos(apellidos);
         }
-        if(!twitter.equals("")){
-            usuarioActualizado.setTwitter(twitter);
-        }
-        if(!instagram.equals("")){
-            usuarioActualizado.setInstagram(instagram);
-        }
-        if(!web.equals("")){
-            usuarioActualizado.setWeb(web);
-        }
-        if(!foto.equals("")){
-            usuarioActualizado.setFoto(foto);
-        }
+        
+        usuarioActualizado.setTwitter(twitter);
+        
+        
+        usuarioActualizado.setInstagram(instagram);
+        
+        
+        usuarioActualizado.setWeb(web);
+        
+        
+        usuarioActualizado.setFoto(foto);
+        
+        usuarioActualizado.setCorreo(correo);
+        
         if(!nombreUsuario.equals("")){
             usuarioActualizado.setNombreUsuario(nombreUsuario);
         }
-        if(!password1.equals("") & !password2.equals("") & password1.equals(password2)){
+        if(!password1.equals("") && !password2.equals("") && password1.equals(password2)){
             usuarioActualizado.setContraseña(password1);
-        }else{
+        }else if(!password1.equals(password2)){
             //los campos de contraseña estan vacios o las contraseñas son incorrectas.
-            
-            response.sendRedirect(request.getContextPath() + "/editarPerfil.jsp?error=1");
-            
-        }
-        if(!correo.equals("")){
-            usuarioActualizado.setCorreo(correo);
+            error=1;
+      
         }
         
-    
+       
+        if(error==1){ //error las contraseñas no coinciden
+            session.setAttribute("usuario", usuarioActualizado);
+             response.sendRedirect(request.getContextPath() + "/editarPerfil.jsp?error=1");
+        }else{
+            
+            session.setAttribute("usuario", usuarioActualizado);
+            response.sendRedirect(request.getContextPath() + "/Perfil");
+
+        }
+        
        u.edit(usuarioActualizado);
         
-       session.setAttribute("usuario", usuarioActualizado);
-       response.sendRedirect(request.getContextPath() + "/Perfil");
-    }
+           }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
