@@ -360,63 +360,6 @@
                     
                     <!-- Falta mostrar aficiones, experiencia laboral y estudios-->
                     
-                    <!--Trabajos -->
-                     <%
-                        if (u.getWeb() == null) {
-                    %>
-                    <div class="form-group">
-                        <label for="web" class="col-sm-3 control-label">Web</label>
-                        <div class="col-sm-9 input-group">
-                            <div class="input-group-addon"><i class="fa fa-globe"></i></div>
-                            <input type="text" id="web" class="form-control" name="web" value="" placeholder="Web">
-                        </div>
-                    </div>
-
-                    <%
-                    } else {
-
-                    %>
-                    <div class="form-group">
-                        <label for="web" class="col-sm-3 control-label">Web</label>
-                        <div class="col-sm-9 input-group">
-                            <div class="input-group-addon"><i class="fa fa-globe"></i></div>
-                            <input type="text" id="web" class="form-control" name="web" value="<%= u.getWeb() %>" placeholder="Web">
-                        </div>
-                    </div>
-
-                    <%
-                        }
-
-                    %>
-                    
-                    <!--Estudios -->
-                     <%
-                        if (u.getWeb() == null) {
-                    %>
-                    <div class="form-group">
-                        <label for="web" class="col-sm-3 control-label">Web</label>
-                        <div class="col-sm-9 input-group">
-                            <div class="input-group-addon"><i class="fa fa-globe"></i></div>
-                            <input type="text" id="web" class="form-control" name="web" value="" placeholder="Web">
-                        </div>
-                    </div>
-
-                    <%
-                    } else {
-
-                    %>
-                    <div class="form-group">
-                        <label for="web" class="col-sm-3 control-label">Web</label>
-                        <div class="col-sm-9 input-group">
-                            <div class="input-group-addon"><i class="fa fa-globe"></i></div>
-                            <input type="text" id="web" class="form-control" name="web" value="<%= u.getWeb() %>" placeholder="Web">
-                        </div>
-                    </div>
-
-                    <%
-                        }
-
-                    %>
                     
                     <!--Aficiones -->
                      <%
@@ -428,7 +371,7 @@
                         if (aficiones == null) {
                     %>
                     <div class="form-group">
-                        <label for="web" class="col-sm-3 control-label">Aficiones</label>
+                        <label for="aficiones" class="col-sm-3 control-label">Aficiones</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-globe"></i></div>
                             <input type="text" id="aficiones" class="form-control" name="aficiones" value="" placeholder="Aficiones">
@@ -439,22 +382,18 @@
                     } else {
 
                     %>
-                    
+                    <ul>
                     <%for(Aficiones a: aficiones){
                     %>
                
-                    <div class="form-group">
-                        <label for="web" class="col-sm-3 control-label">Aficiones</label>
-                        <div class="col-sm-9 input-group">
-                            <div class="input-group-addon"><i class="fa fa-globe"></i></div>
-                            <input type="text" id="aficiones" class="form-control" name="aficiones" value="<%= a.getAficionesPK().getNombre() %>" placeholder="Aficiones">
-                        </div>
-                    </div>
+
+                            <li><%= a.getAficionesPK().getNombre() %> <input class="btn btn-default" type="submit" value="Editar">  </li>
                         
                             <%
                                 }
                                 %>
-
+                    </ul>
+                    <input class="btn btn-default" type="submit" value="añadir">
                     <%
                         }
 
