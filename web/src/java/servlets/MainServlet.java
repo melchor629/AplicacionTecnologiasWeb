@@ -1,5 +1,8 @@
 package servlets;
 
+import app.ejb.AficionesFacade;
+import app.ejb.EstudiosFacade;
+import app.ejb.ExperienciaLaboralFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Usuario;
 import javax.servlet.ServletException;
@@ -17,7 +20,12 @@ public class MainServlet extends HttpServlet {
 
     @EJB
     private UsuarioFacade u;
-    
+    @EJB
+    private AficionesFacade fachadaAficiones;
+    @EJB
+    private EstudiosFacade fachadaEstudios;
+    @EJB
+    private ExperienciaLaboralFacade fachadaTrabajos;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,6 +55,9 @@ public class MainServlet extends HttpServlet {
                 HttpSession session = request.getSession();
         
                     session.setAttribute("usuario", uLogged);
+                    session.setAttribute("listaAficiones", fachadaAficiones);
+                    session.setAttribute("listaEstudios", fachadaEstudios);
+                    session.setAttribute("listaTrabajos", fachadaTrabajos);
                     response.sendRedirect(request.getContextPath() + "/perfil.jsp");
         }
         
