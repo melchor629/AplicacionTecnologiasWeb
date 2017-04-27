@@ -27,7 +27,7 @@
                 </li>
             </ul>
 
-            <form class="navbar-form navbar-right" action="<%=cpath%>/BusquedaServlet" method="POST">
+            <form class="navbar-form navbar-right" action="<%=cpath%>/BuscarServlet" method="POST">
                 <div class="input-group">
                     <input type="text" placeholder="Buscar a..." class="form-control" name="buscar">
                     <span class="input-group-btn">
