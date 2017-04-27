@@ -4,9 +4,13 @@
     Author     : Rodrii
 --%>
 
+<%@page import="app.entity.Usuario"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
   String cpath = request.getContextPath();
+  List<Usuario> usuarios = (List) request.getAttribute("resultados");
+  
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,4 +33,8 @@
   
     <%@include file="snippets/body-end.jsp"%>
   </body>
+  <% for(Usuario u : usuarios){ %>
+  <p><%=u.getNombre()%></p><br>
+  <br/>
+  <%}%>
 </html>
