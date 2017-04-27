@@ -421,7 +421,7 @@
                     <!--Aficiones -->
                      <%
                         
-                        AficionesFacade fachadaAficiones=null;
+                        AficionesFacade fachadaAficiones= (AficionesFacade) session.getAttribute("listaAficiones");
                         List<Aficiones> aficiones = null;
                         aficiones = fachadaAficiones.obtenerAficiones(u);
                         
@@ -447,7 +447,7 @@
                         <label for="web" class="col-sm-3 control-label">Aficiones</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-globe"></i></div>
-                            <input type="text" id="aficiones" class="form-control" name="aficiones" value="<%= a.toString() %>" placeholder="Aficiones">
+                            <input type="text" id="aficiones" class="form-control" name="aficiones" value="<%= a.getAficionesPK().getNombre() %>" placeholder="Aficiones">
                         </div>
                     </div>
                         
