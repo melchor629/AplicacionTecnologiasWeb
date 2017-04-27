@@ -40,6 +40,7 @@
 
         button {
             padding: 6px 12px !important;
+            min-height: 34px !important;
 
             @media(max-width: 767px) {
                 width: 100%
