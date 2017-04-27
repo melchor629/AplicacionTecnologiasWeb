@@ -60,9 +60,14 @@ public class EditarPerfilServlet extends HttpServlet {
         //Comprobar que ambas password son iguales.
         if(!nombre.equals("")){
             usuarioActualizado.setNombre(nombre);
+        }else{
+            //no puede estar vacio
+            error=2;
         }
         if(!apellidos.equals("")){
              usuarioActualizado.setApellidos(apellidos);
+        }else{
+            error=3;
         }
         
         usuarioActualizado.setTwitter(twitter);
@@ -76,10 +81,17 @@ public class EditarPerfilServlet extends HttpServlet {
         
         usuarioActualizado.setFoto(foto);
         
-        usuarioActualizado.setCorreo(correo);
+        if(!correo.equals("")){
+            usuarioActualizado.setCorreo(correo);
+        }else{
+            error=4;
+        }
+        
         
         if(!nombreUsuario.equals("")){
             usuarioActualizado.setNombreUsuario(nombreUsuario);
+        }else{
+            error=5;
         }
         if(!password1.equals("") && !password2.equals("") && password1.equals(password2)){
             usuarioActualizado.setContraseña(password1);
@@ -90,9 +102,9 @@ public class EditarPerfilServlet extends HttpServlet {
         }
         
        
-        if(error==1){ //error las contraseñas no coinciden
+        if(error!=0){ //error las contraseñas no coinciden
             session.setAttribute("usuario", usuarioActualizado);
-             response.sendRedirect(request.getContextPath() + "/editarPerfil.jsp?error=1");
+             response.sendRedirect(request.getContextPath() + "/editarPerfil.jsp?error="+error);
         }else{
             
             session.setAttribute("usuario", usuarioActualizado);

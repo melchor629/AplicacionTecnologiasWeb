@@ -6,6 +6,14 @@ Insertar en el siguiente orden los SQL
 2. Luego añadir [Usuario.sql][2]
 3. Por ultimo, añadir [Datos.sql][3]
 
+# ¿Como conecto la aplicación empresarial a la base de datos?
+
+- **Base de datos**: `tecnoweb`
+- **Usuario**: `tecnoweb`
+- **Contraseña**: `reflexiona`
+
+Para arreglar el problema que hay en Windows con la codificación de la base de datos, _(soon)_ ...
+
 # ¿Que hacen los SQL?
 ## ModeloTecnoweb.sql
 

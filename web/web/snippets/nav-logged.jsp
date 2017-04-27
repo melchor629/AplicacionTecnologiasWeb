@@ -12,10 +12,10 @@
             <a class="navbar-brand" href="#">LinkedOut</a>
 
             <ul class="nav navbar-nav">
-                <li>
+                <li <%="perfil".equals(request.getAttribute("pagina")) ? "class=\"active\"" : ""%> >
                     <a href="<%=cpath%>/perfil.jsp"><i class="fa fa-user"></i> <span class="hidden-xs">Mi perfil</span></a>
                 </li>
-                <li>
+                <li <%="notificaciones".equals(request.getAttribute("pagina")) ? "class=\"active\"" : ""%>>
                     <a href="<%=cpath%>/notificaciones.jsp"><i class="fa fa-bell-o"></i> <span class="hidden-xs">Notificaciones</span></a>
                 </li>
             </ul>
@@ -27,7 +27,7 @@
                 </li>
             </ul>
 
-            <form class="navbar-form navbar-right" action="<%=cpath%>/BusquedaServlet" method="POST">
+            <form class="navbar-form navbar-right" action="<%=cpath%>/BuscarServlet" method="POST">
                 <div class="input-group">
                     <input type="text" placeholder="Buscar a..." class="form-control" name="buscar">
                     <span class="input-group-btn">
