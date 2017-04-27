@@ -358,16 +358,21 @@
 
                     %>
                     
+                </div>
+
+                <div class="col-sm-6 col-xs-12">
+                    <!-- Editar trabajos y eso -->
+
                     <!-- Falta mostrar aficiones, experiencia laboral y estudios-->
-                    
-                    
+
+
                     <!--Aficiones -->
-                     <%
-                        
+                    <%
+
                         AficionesFacade fachadaAficiones= (AficionesFacade) session.getAttribute("listaAficiones");
                         List<Aficiones> aficiones = null;
                         aficiones = fachadaAficiones.obtenerAficiones(u);
-                        
+
                         if (aficiones == null) {
                     %>
                     <div class="form-group">
@@ -383,26 +388,21 @@
 
                     %>
                     <ul>
-                    <%for(Aficiones a: aficiones){
-                    %>
-               
+                        <%for(Aficiones a: aficiones){
+                        %>
 
-                            <li><%= a.getAficionesPK().getNombre() %> <input class="btn btn-default" type="submit" value="Editar">  </li>
-                        
-                            <%
-                                }
-                                %>
+
+                        <li><%= a.getAficionesPK().getNombre() %> <input class="btn btn-default" type="submit" value="Editar">  </li>
+
+                        <%
+                            }
+                        %>
                     </ul>
                     <input class="btn btn-default" type="submit" value="añadir">
                     <%
                         }
 
                     %>
-                    
-                </div>
-
-                <div class="col-sm-6 col-xs-12">
-                    <!-- Editar trabajos y eso -->
                 </div>
             </div>
 
