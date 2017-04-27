@@ -121,7 +121,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         //EntityManager gestorEntidades = getEntityManager();
         Query q;
    
-        q = this.em.createQuery("SELECT * FROM Usuario u WHERE u.Nombre LIKE '%datos%' OR u.Apellidos LIKE '%datos%' "
+        q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.Nombre LIKE '%datos%' OR u.Apellidos LIKE '%datos%' "
                 + "OR u.Twitter LIKE '%datos%' OR u.Instagram LIKE '%datos%' OR u.Web LIKE '%datos%' OR u.Correo LIKE '%datos%' "
                 + "OR u.NombreUsuario LIKE '%datos%';");
         
