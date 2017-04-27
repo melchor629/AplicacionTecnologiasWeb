@@ -43,11 +43,11 @@
 
         <form class="form-horizontal" name="edit" action="<%=cpath%>/EditarPerfil" method="POST">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-6 col-xs-12">
                     <%
                         if (u.getNombreUsuario() == null) {
                     %>
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="nombreUsuario" class="col-sm-3 control-label">Nombre Usuario</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-user-o"></i></div>
@@ -59,7 +59,7 @@
                     } else {
 
                     %>
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="nombreUsuario" class="col-sm-3 control-label">Nombre Usuario</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-user-o"></i></div>
@@ -77,7 +77,7 @@
                         if (u.getNombre() == null) {
                     %>
 
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="nombre" class="col-sm-3 control-label">Nombre</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
@@ -90,7 +90,7 @@
 
                     %>
 
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="nombre" class="col-sm-3 control-label">Nombre</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
@@ -107,7 +107,7 @@
                         if (u.getApellidos() == null) {
                     %>
 
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="apellidos" class="col-sm-3 control-label">Apellidos</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
@@ -120,7 +120,7 @@
 
                     %>
 
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="apellidos" class="col-sm-3 control-label">Apellidos</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
@@ -138,7 +138,7 @@
                         if (u.getFoto() == null) {
                     %>
 
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="foto" class="col-sm-3 control-label">Foto</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-picture-o"></i></div>
@@ -151,7 +151,7 @@
                     } else {
 
                     %>
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="foto" class="col-sm-3 control-label">Foto</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-picture-o"></i></div>
@@ -169,24 +169,24 @@
                     no hay que comprobar la segunda ya que no la has cambiado. Como en todas las webs -->
 
                     <!-- mostrar contraseña siempre en blanco y comprobar que son iguales-->
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="password1" class="col-sm-3 control-label">Contraseña</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-key"></i></div>
                             <input type="password" id="password1" class="form-control" name="password1" value="" placeholder="Contraseña">
                         </div>
-                        <div class="col-sm-9 col-sm-offset-3">
+                        <div class="col-sm-9 col-sm-offset-3 pad">
                             <span class="help-block">Para cambiar la contraseña, solo tienes que escribir la nueva contraseña aquí</span>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="password2" class="col-sm-3 control-label">Repetir contraseña</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-key"></i></div>
                             <input type="password" id="password2" class="form-control" name="password2" value="" placeholder="Repetir contraseña">
                         </div>
-                        <div class="col-sm-9 col-sm-offset-3">
+                        <div class="col-sm-9 col-sm-offset-3 pad">
                             <span class="help-block">No olvides repetir la contraseña para asegurarnos de que la has escrito bien</span>
                         </div>
                     </div>
@@ -194,7 +194,7 @@
                     <%
                         if (u.getCorreo() == null) {
                     %>
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="correo" class="col-sm-3 control-label">Correo</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
@@ -205,7 +205,7 @@
                     } else {
 
                     %>
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="correo" class="col-sm-3 control-label">Correo</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
@@ -222,7 +222,7 @@
                         if (u.getTwitter() == null) {
                     %>
 
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="twitter" class="col-sm-3 control-label">Twitter</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-twitter"></i></div>
@@ -235,7 +235,7 @@
 
                     %>
 
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="twitter" class="col-sm-3 control-label">Twitter</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-twitter"></i></div>
@@ -253,7 +253,7 @@
                         if (u.getInstagram() == null) {
                     %>
 
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="instagram" class="col-sm-3 control-label">Instagram</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-instagram"></i></div>
@@ -265,7 +265,7 @@
                     } else {
 
                     %>
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="instagram" class="col-sm-3 control-label">Instagram</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-instagram"></i></div>
@@ -282,7 +282,7 @@
                     <%
                         if (u.getWeb() == null) {
                     %>
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="web" class="col-sm-3 control-label">Web</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-globe"></i></div>
@@ -294,7 +294,7 @@
                     } else {
 
                     %>
-                    <div class="form-group">
+                    <div class="form-group edit-profile-form-group">
                         <label for="web" class="col-sm-3 control-label">Web</label>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-globe"></i></div>
@@ -308,12 +308,12 @@
                     %>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-sm-6 col-xs-12">
                     <!-- Editar trabajos y eso -->
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group edit-profile-form-group">
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-raised">GUARDAR</button>
                     <a href="javascript:history.back()" class="btn btn-default btn-raised">CANCELAR</a>

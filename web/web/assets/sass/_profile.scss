@@ -6,8 +6,7 @@
     padding: 5px;
     border-radius: 200px;
     border: 2px solid $primary_color;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin: 20px auto;
     transform: scale(1);
     transition: transform .25s ease-in-out, border .2s ease-in-out, padding .2s ease-in-out;
 
@@ -22,6 +21,10 @@
         padding: 6px;
         transform: scale(0.9);
     }
+}
+
+h5#nombreApellidos {
+    text-align: center;
 }
 
 p#nombreUsuario {
@@ -39,5 +42,17 @@ div.profile-options {
     
     form {
         text-align: center;
+    }
+}
+
+.pad {
+    padding-left: 15px + 26px;
+}
+
+.form-group.edit-profile-form-group {
+    @media(max-width: 767px) {
+        margin-bottom: 5px;
+        margin-left: 0;
+        margin-right: 0;
     }
 }
