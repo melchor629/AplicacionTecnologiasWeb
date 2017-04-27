@@ -44,7 +44,6 @@ public class EditarPerfilServlet extends HttpServlet {
         
         int error= 0; //1 si hay algun error, 0 si no hay errores
         HttpSession session = request.getSession();
-
         Usuario usuarioActualizado = (Usuario) session.getAttribute("usuario");
         
         String nombre = request.getParameter("nombre");

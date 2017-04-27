@@ -1,5 +1,6 @@
 package servlets;
 
+import app.ejb.PeticionAmistadFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Usuario;
 
@@ -28,6 +29,9 @@ public class PerfilServlet extends HttpServlet {
      */
     @EJB
     private UsuarioFacade fachadaUsuario;
+    
+    @EJB
+    private PeticionAmistadFacade fachadaPeticionAmistad;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,7 +45,7 @@ public class PerfilServlet extends HttpServlet {
         else{
         String idUsuario = request.getParameter("id");
 
-        if (idUsuario == null || idUsuario.isEmpty()) {
+        if (idUsuario == null || idUsuario.isEmpty() || Integer.parseInt(idUsuario) == usuarioLogueado.getId()) {
             response.sendRedirect(request.getContextPath() + "/perfil.jsp");
         } else {
             int id = Integer.parseInt(idUsuario);
@@ -51,6 +55,7 @@ public class PerfilServlet extends HttpServlet {
 
             if (usuario != null) {
                 request.setAttribute("amigos", fachadaUsuario.sonAmigos(usuario.getId(), usuarioLogueado.getId()));
+                request.setAttribute("peticionEnviada", fachadaPeticionAmistad.peticionMandada(id, usuarioLogueado.getId()) || fachadaPeticionAmistad.peticionMandada(usuarioLogueado.getId(), id));
                 rd = this.getServletContext().getRequestDispatcher("/perfil.jsp");
                 rd.forward(request, response);
             } else {
