@@ -47,7 +47,7 @@ public class BuscarServlet extends HttpServlet {
         
         } catch (Exception e) {
             response.getOutputStream().println("ERROR AL BUSCAR '" + buscar + "' en la base de datos");
-            e.printStackTrace();
+                e.printStackTrace();
             return;
         }
               
