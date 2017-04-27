@@ -89,7 +89,7 @@
                 }
             }
 
-            &:hover {
+            &:hover, &.active {
                 border-bottom: 5px solid $secondary_color;
                 a, a:hover {
                     padding-bottom: 10px;

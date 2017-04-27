@@ -3,13 +3,11 @@
 <%
   String cpath = request.getContextPath();
   Usuario u = (Usuario)session.getAttribute("usuario");
-%>
-
-
-
-<% if (u == null) {
+  if (u == null) {
         response.sendRedirect(cpath);
-    } else { %>
+    } else {
+      request.setAttribute("pagina", "notificaciones");
+%>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -26,9 +24,9 @@
 
       <h1 class="page-header">Panel de notificaciones</h1>
 
-      <h2 class="page-header">Peticiones de amistad</h1>
+      <h2 class="page-header">Peticiones de amistad</h2>
       
-      <h2 class="page-header">Mensajes</h1>
+      <h2 class="page-header">Mensajes</h2>
       
       
       <%@include file="snippets/footer.jsp"%>

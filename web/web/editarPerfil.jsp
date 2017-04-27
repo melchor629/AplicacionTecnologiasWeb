@@ -9,7 +9,9 @@
     Usuario u = (Usuario) session.getAttribute("usuario");
     if (u == null) {
         response.sendRedirect(cpath);
-    } else { %>
+    } else {
+        request.setAttribute("pagina", "perfil");
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>

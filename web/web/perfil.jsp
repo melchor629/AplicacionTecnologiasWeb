@@ -12,6 +12,7 @@
         if (request.getAttribute("otroUsuario") != null) {
             u = (Usuario) request.getAttribute("otroUsuario");
         }
+        request.setAttribute("pagina", "perfil");
 %>
 <!DOCTYPE html>
 <html lang="es">
