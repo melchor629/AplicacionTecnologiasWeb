@@ -38,7 +38,6 @@ public class MainServlet extends HttpServlet {
         String usuario = request.getParameter("usuario");
         String password = request.getParameter("password");
         Usuario uLogged = u.obtenerUsuario(usuario, password);
-        request.getParameter("paco").getBytes();
         
         if (uLogged == null) {
             RequestDispatcher rd;

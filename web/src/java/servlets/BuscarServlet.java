@@ -7,9 +7,7 @@ package servlets;
 
 import app.ejb.UsuarioFacade;
 import app.entity.Usuario;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
+
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +15,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -41,15 +40,7 @@ public class BuscarServlet extends HttpServlet {
         
         List <Usuario> lista;
         
-        try {
-        
             lista = u.buscarUsuarios(buscar);
-        
-        } catch (Exception e) {
-            response.getOutputStream().println("ERROR AL BUSCAR '" + buscar + "' en la base de datos");
-            e.printStackTrace();
-            return;
-        }
               
                // HttpSession session = request.getSession();
                 request.setAttribute("resultados",lista);
