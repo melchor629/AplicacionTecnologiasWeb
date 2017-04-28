@@ -35,6 +35,9 @@
                         Comprueba que vienes de un enlace de la propia web o si vienes de fuera, lo mismo
                         este recurso ya no existe.
                     </p>
+                    <p>
+                        <a href="javascript:history.back()" class="btn btn-raised btn-primary">VOLVER ATRAS</a>
+                    </p>
                     <p><small><%=requestUri%></small></p>
                 </div>
             </div>

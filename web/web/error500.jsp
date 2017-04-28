@@ -41,8 +41,9 @@
                         Si el problema persiste, contáctenos.
                     </p>
                     <p>
+                        <a href="javascript:history.back()" class="btn btn-raised btn-primary">VOLVER ATRÁS</a>
                         <a href="#collapseWithError" class="btn btn-raised btn-default" role="button" data-toggle="collapse">
-                            Mostrar error
+                            MOSTRAR ERROR
                         </a>
                     </p>
                 </div>
