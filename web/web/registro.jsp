@@ -117,7 +117,7 @@
             </div>
 
 
-            <div class="pull-right">
+            <div class="pull-right registro-botones">
                 <button type="submit" class="btn btn-primary btn-raised">REGISTRARME</button>
                 <a href="javascript:history.back()" class="btn btn-default btn-raised">CANCELAR</a>
             </div>

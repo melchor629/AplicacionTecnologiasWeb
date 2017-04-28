@@ -110,9 +110,13 @@
                         } %>
                     </div>
                 </div>
-                <%@include file="snippets/footer.jsp" %>
+                <div class="col-sm-8 col-md-9">
+                    <!-- Poner aqui las aficiones, trabajos y tal -->
+                </div>
             </div>
-            <%@include file="snippets/body-end.jsp" %>
+            <%@include file="snippets/footer.jsp" %>
+        </div>
+        <%@include file="snippets/body-end.jsp" %>
     </body>
 </html>
 <% }%>
