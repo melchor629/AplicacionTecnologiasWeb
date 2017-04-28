@@ -121,11 +121,27 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         //EntityManager gestorEntidades = getEntityManager();
         Query q;
    
-        q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.nombre LIKE '%datos%' OR u.apellidos LIKE '%datos%' "
+        q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.nombre LIKE :datos OR u.apellidos LIKE :datos "
+                + "OR u.twitter LIKE :datos OR u.instagram LIKE :datos OR u.web LIKE :datos OR u.correo LIKE :datos "
+                + "OR u.nombreUsuario LIKE :datos");
+       /* q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.nombre LIKE '%datos%' OR u.apellidos LIKE '%datos%' "
                 + "OR u.twitter LIKE '%datos%' OR u.instagram LIKE '%datos%' OR u.web LIKE '%datos%' OR u.correo LIKE '%datos%' "
-                + "OR u.nombreUsuario LIKE '%datos%';");
+                + "OR u.nombreUsuario LIKE '%datos%'");*/
+        //List<User> userList = query.setParameter("userId", userId + "%").list();
+        
+       //query = sessionFactory.getCurrentSession().createQuery("from User u where str(u.id) like :userId");
+        q.setParameter("datos", datos + "%");
+                
+        //q.setParameter("buscar", datos);
         
         List<Usuario> lista = (List) q.getResultList();
+        
+       /* if (!lista.isEmpty()){
+            for (Usuario aux : lista) {
+                System.out.println("HOLA SOY UN USER: " + aux.getNombreUsuario()); 
+            
+            }
+        }*/
         return lista;
      }
 }

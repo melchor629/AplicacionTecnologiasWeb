@@ -51,9 +51,21 @@ public class BuscarServlet extends HttpServlet {
             return;
         }
               
-                HttpSession session = request.getSession();
-                session.setAttribute("resultados",lista);
-                response.sendRedirect(request.getContextPath() + "/busqueda.jsp");
+               // HttpSession session = request.getSession();
+                request.setAttribute("resultados",lista);
+                
+                RequestDispatcher rd;
+        
+                rd = this.getServletContext().getRequestDispatcher("/busqueda.jsp");
+                rd.forward(request, response);
+                
+        /*  if (!lista.isEmpty()){
+            for (Usuario aux : lista) {
+                System.out.println("HOLA SOY UN USER Y ESTOY EN EL SERVLET: " + aux.getNombreUsuario()); 
+            
+            }
+        }*/
+               // response.sendRedirect(request.getContextPath() + "/busqueda.jsp");
     
         
     }

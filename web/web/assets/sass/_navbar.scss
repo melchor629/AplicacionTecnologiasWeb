@@ -39,10 +39,8 @@
         -webkit-box-shadow: none;
 
         button {
-            color: $text_color;
-            background-color: $secondary_color;
-            border-color: darken($secondary_color, 10);
-            padding: 6px 12px;
+            padding: 6px 12px !important;
+            min-height: 34px !important;
 
             @media(max-width: 767px) {
                 width: 100%
@@ -89,7 +87,7 @@
                 }
             }
 
-            &:hover {
+            &:hover, &.active {
                 border-bottom: 5px solid $secondary_color;
                 a, a:hover {
                     padding-bottom: 10px;

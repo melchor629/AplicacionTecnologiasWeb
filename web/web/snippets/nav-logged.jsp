@@ -12,11 +12,11 @@
             <a class="navbar-brand" href="#">LinkedOut</a>
 
             <ul class="nav navbar-nav">
-                <li>
+                <li <%="perfil".equals(request.getAttribute("pagina")) ? "class=\"active\"" : ""%> >
                     <a href="<%=cpath%>/perfil.jsp"><i class="fa fa-user"></i> <span class="hidden-xs">Mi perfil</span></a>
                 </li>
-                <li>
-                    <a href="<%=cpath%>/perfil.jsp"><i class="fa fa-bell-o"></i> <span class="hidden-xs">Notificaciones</span></a>
+                <li <%="notificaciones".equals(request.getAttribute("pagina")) ? "class=\"active\"" : ""%>>
+                    <a href="<%=cpath%>/notificaciones.jsp"><i class="fa fa-bell-o"></i> <span class="hidden-xs">Notificaciones</span></a>
                 </li>
             </ul>
         </div>
