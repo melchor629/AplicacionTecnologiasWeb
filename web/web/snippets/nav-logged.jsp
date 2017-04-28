@@ -1,4 +1,3 @@
-<!-- TODO -->
 <%@ page contentType="text/html; charset=UTF-8" %>
 <nav class="navbar navbar-fixed-top">
     <div class="container">

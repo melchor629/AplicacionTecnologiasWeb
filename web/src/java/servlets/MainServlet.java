@@ -37,15 +37,8 @@ public class MainServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String usuario = request.getParameter("usuario");
         String password = request.getParameter("password");
-        Usuario uLogged;
-        try {
-           uLogged = u.obtenerUsuario(usuario, password);
-        } catch (Exception e) {
-            //TODO Rederigir a una página de error 500
-            response.getOutputStream().println("ERROR AL OBTENER  USUARIO");
-            e.printStackTrace();
-            return;
-        }
+        Usuario uLogged = u.obtenerUsuario(usuario, password);
+        request.getParameter("paco").getBytes();
         
         if (uLogged == null) {
             RequestDispatcher rd;
