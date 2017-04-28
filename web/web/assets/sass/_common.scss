@@ -46,6 +46,24 @@ input.form-control {
         padding-bottom: 5px;
         box-shadow: none;
     }
+
+    .has-error &, .has-warning &, .has-success & {
+        box-shadow: none;
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+
+.has-warning, .has-warning .control-label, .has-warning .form-control, .has-warning .form-control:focus {
+    color: #c69d55;
+    border-color: #c69d55;
+}
+
+.has-success, .has-success .control-label, .has-success .form-control, .has-success .form-control:focus {
+    color: #5fbc61;
+    border-color: #5fbc61;
 }
 
 .input-group {

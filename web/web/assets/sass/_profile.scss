@@ -21,6 +21,12 @@
         padding: 6px;
         transform: scale(0.9);
     }
+
+    &.profile-photo-small {
+        width: 100px + 7px;
+        height: 100px + 7px;
+        margin: 0;
+    }
 }
 
 h5#nombreApellidos {
