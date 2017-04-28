@@ -1,10 +1,5 @@
 @import 'vars';
 
-html, body {
-    height: 100%;
-    position: relative;
-}
-
 a {
     color: $secondary_color;
     transition: color .2s ease-in-out;
@@ -24,7 +19,7 @@ p.lead {
 }
 
 body > .container {
-    padding-top: 50px;
+    padding-top: 60px;
 }
 
 input.form-control {
@@ -75,10 +70,6 @@ input.form-control {
         border-radius: 0;
         padding-right: 16px;
     }
-}
-
-.help-block {
-
 }
 
 .btn {
@@ -170,5 +161,28 @@ input.form-control {
             &:active { background-color: rgba($secondary_color, 0.3) }
             &.disabled, &[disabled] { color: rgba($secondary_color, 0.26) }
         }
+    }
+}
+
+$alturaFooter: 60px;
+$paddingFooter: 30px;
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: $alturaFooter + $paddingFooter;
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: $alturaFooter;
+
+    .text-muted {
+        font-size: 12px;
     }
 }

@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<!-- TODO -->
+
 <footer>
-    <p>LinkedOut - 2017</p>
+    <div class="container text-center">
+        <p>LinkedOut - 2017</p>
+        <p class="text-muted">Hecho con ❤️ por Antonio, Melchor, Edu, Rodri y Francis</p>
+    </div>
 </footer>
