@@ -75,6 +75,20 @@ else{
     </div>
 
     <%@include file="snippets/body-end.jsp"%>
+    <% if(request.getAttribute("error") != null) { %>
+    <script>
+      $(function() {
+          if($(window).width() < 768) $('.navbar-header').find('button').click();
+          setTimeout(function() {
+              $('.navbar-form').popover({
+                  content: 'El usuario o la contraseña son incorrectas',
+                  placement: 'bottom',
+                  trigger: 'manual'
+              }).popover('show');
+          }, 0);
+      });
+    </script>
+    <% } %>
   </body>
 </html>
 <% } %>
