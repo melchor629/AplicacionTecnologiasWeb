@@ -11,7 +11,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author antonio
+ * @author Antonio, Edu
  */
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> {
@@ -120,28 +120,27 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
      public List <Usuario> buscarUsuarios(String datos) {
         //EntityManager gestorEntidades = getEntityManager();
         Query q;
-   
-        q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.nombre LIKE :datos OR u.apellidos LIKE :datos "
-                + "OR u.twitter LIKE :datos OR u.instagram LIKE :datos OR u.web LIKE :datos OR u.correo LIKE :datos "
-                + "OR u.nombreUsuario LIKE :datos");
-       /* q = this.em.createQuery("SELECT u FROM Usuario u WHERE u.nombre LIKE '%datos%' OR u.apellidos LIKE '%datos%' "
-                + "OR u.twitter LIKE '%datos%' OR u.instagram LIKE '%datos%' OR u.web LIKE '%datos%' OR u.correo LIKE '%datos%' "
-                + "OR u.nombreUsuario LIKE '%datos%'");*/
-        //List<User> userList = query.setParameter("userId", userId + "%").list();
+        Usuario u;
         
-       //query = sessionFactory.getCurrentSession().createQuery("from User u where str(u.id) like :userId");
+        Query qaux;
+        
+        
+    
+        //Esta Query funciona si habéis ejecutado el SQL de Update Exp.sql 
+          q = this.em.createQuery("SELECT DISTINCT u FROM Usuario u, ExperienciaLaboral e, Estudios s WHERE (u.id = e.usuario.id) AND (e.usuario.id = s.usuario.id) "
+                + "AND (u.nombre LIKE :datos OR u.apellidos LIKE :datos "
+                + "OR u.twitter LIKE :datos OR u.instagram LIKE :datos OR u.web LIKE :datos OR u.correo LIKE :datos "
+                + "OR u.nombreUsuario LIKE :datos OR e.empresa LIKE :datos OR e.puesto LIKE :datos OR s.ubicacion LIKE :datos "
+                + "OR s.descripcion LIKE :datos)");
+        
+        
+        
         q.setParameter("datos", datos + "%");
                 
         //q.setParameter("buscar", datos);
         
         List<Usuario> lista = (List) q.getResultList();
-        
-       /* if (!lista.isEmpty()){
-            for (Usuario aux : lista) {
-                System.out.println("HOLA SOY UN USER: " + aux.getNombreUsuario()); 
-            
-            }
-        }*/
+     
         return lista;
      }
 }
