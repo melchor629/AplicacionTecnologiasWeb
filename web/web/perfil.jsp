@@ -159,73 +159,79 @@
                     %>
                     <div class="page-header"><h3>Experiencia laboral</h3></div>
                     <ul class="list-group">
-                        <% for (ExperienciaLaboral experiencia : listaExperienciaLaboral) { %>
+                        <% for (ExperienciaLaboral experiencia : listaExperienciaLaboral) {%>
                         <li class="list-group-item">
                             <ul class="list-group">
-                                <li class="list-group-item"><h4><%= experiencia.getPuesto() %></h4></li>
+                                <li class="list-group-item">
+                                    <a href="<%= cpath%>/editarPerfil.jsp" class="btn btn-primary btn-raised">
+                                        <i class="fa fa-pencil"></i> Editar
+                                    </a>
+                                    <a href="<%= cpath%>/editarPerfil.jsp" class="btn btn-primary btn-raised">
+                                        <i class="fa fa-pencil"></i> Borrar
+                                    </a>
+                                    <h4><%= experiencia.getPuesto()%></h4>
+                                </li>
                                 <li class="list-group-item"><%= experiencia.getEmpresa()%></li>
-                                <% if(experiencia.getWebEmpresa() != null){ %>
+                                    <% if (experiencia.getWebEmpresa() != null) {%>
                                 <li class="list-group-item"><a href="<%= experiencia.getWebEmpresa()%>"><%= experiencia.getWebEmpresa()%></a></li>
-                                <% } %>
-                                <%
-                                    String fechaInicio = new SimpleDateFormat("yyyy-MM-dd").format(experiencia.getExperienciaLaboralPK().getFechaComienzo());
-                                    String fechaFin;
-                                    if(experiencia.getFechaFinalizacion() == null){
-                                        fechaFin = "actualidad";
-                                    }
-                                    else{
-                                     fechaFin = new SimpleDateFormat("yyyy-MM-dd").format(experiencia.getFechaFinalizacion());
-                                    }
+                                    <% } %>
+                                    <%
+                                        String fechaInicio = new SimpleDateFormat("yyyy-MM-dd").format(experiencia.getExperienciaLaboralPK().getFechaComienzo());
+                                        String fechaFin;
+                                        if (experiencia.getFechaFinalizacion() == null) {
+                                            fechaFin = "actualidad";
+                                        } else {
+                                            fechaFin = new SimpleDateFormat("yyyy-MM-dd").format(experiencia.getFechaFinalizacion());
+                                        }
                                     %>
-                                <li class="list-group-item"><%= fechaInicio %> | <%= fechaFin %></li>
+                                <li class="list-group-item"><%= fechaInicio%> | <%= fechaFin%></li>
                             </ul>
                         </li>
                         <% } %>
                     </ul>
                     <div class="page-header"><h3>Formación</h3></div>
                     <ul class="list-group">
-                        <% for (Estudios estudio : listaEstudios) { %>
+                        <% for (Estudios estudio : listaEstudios) {%>
                         <li class="list-group-item">
                             <ul class="list-group">
-                                <li class="list-group-item"><h4><%= estudio.getDescripcion() %></h4></li>
+                                <li class="list-group-item"><h4><%= estudio.getDescripcion()%></h4></li>
                                 <li class="list-group-item"><%= estudio.getUbicacion()%></li>
-                                <%
-                                    String fechaInicio = new SimpleDateFormat("yyyy-MM-dd").format(estudio.getEstudiosPK().getFechaComienzo());
-                                    String fechaFin;
-                                    if(estudio.getFechaFinalizacion() == null){
-                                        fechaFin = "actualidad";
-                                    }
-                                    else{
-                                     fechaFin = new SimpleDateFormat("yyyy-MM-dd").format(estudio.getFechaFinalizacion());
-                                    }
+                                    <%
+                                        String fechaInicio = new SimpleDateFormat("yyyy-MM-dd").format(estudio.getEstudiosPK().getFechaComienzo());
+                                        String fechaFin;
+                                        if (estudio.getFechaFinalizacion() == null) {
+                                            fechaFin = "actualidad";
+                                        } else {
+                                            fechaFin = new SimpleDateFormat("yyyy-MM-dd").format(estudio.getFechaFinalizacion());
+                                        }
                                     %>
-                                <li class="list-group-item"><%= fechaInicio %> | <%= fechaFin %></li>
+                                <li class="list-group-item"><%= fechaInicio%> | <%= fechaFin%></li>
                             </ul>
                         </li>
                         <% } %>
                     </ul>
                     <div class="page-header"><h3>Aficiones</h3></div>
                     <ul class="list-group">
-                        <% for (Aficiones experiencia : listaAficiones) { %>
-                                <li class="list-group-item"><%= experiencia.getAficionesPK().getNombre() %></li>  
-                        <% } %>
+                        <% for (Aficiones experiencia : listaAficiones) {%>
+                        <li class="list-group-item"><%= experiencia.getAficionesPK().getNombre()%></li>  
+                            <% } %>
                     </ul>
-                    
+
                     <div class="page-header"><h3>Contactos</h3></div>
                     <ul class="list-group">
                         <% for (Usuario contacto : listaContactos) { %>
                         <li class="list-group-item">
-                            <% if (contacto.getFoto() == null) { %>
-                    <img src="<%@include file="snippets/fotoPerfil.txt"%>" class="img-responsive profile-photo"
-                         alt="Foto de perfil genérico"> <a href="<%= cpath %>/Perfil?id=<%= contacto.getId() %>"><%= contacto.getNombre() + " " + contacto.getApellidos() %></a>
-                    <% } else {%>
-                    <img src="<%=contacto.getFoto()%>" style="width: 10%; height: auto; display: inline-block;"class="img-responsive profile-photo" alt="Foto de perfil de <%=u.getNombre()%>"> <a href="<%= cpath %>/Perfil?id=<%= contacto.getId() %>"><%= contacto.getNombre() + " " + contacto.getApellidos() %></a>
-                    <% }%></li>
-                        <% } %>
+                            <% if (contacto.getFoto() == null) {%>
+                            <img src="<%@include file="snippets/fotoPerfil.txt"%>" class="img-responsive profile-photo"
+                                 alt="Foto de perfil genérico"> <a href="<%= cpath%>/Perfil?id=<%= contacto.getId()%>"><%= contacto.getNombre() + " " + contacto.getApellidos()%></a>
+                            <% } else {%>
+                            <img src="<%=contacto.getFoto()%>" style="width: 10%; height: auto; display: inline-block;"class="img-responsive profile-photo" alt="Foto de perfil de <%=u.getNombre()%>"> <a href="<%= cpath%>/Perfil?id=<%= contacto.getId()%>"><%= contacto.getNombre() + " " + contacto.getApellidos()%></a>
+                            <% }%></li>
+                            <% } %>
                     </ul>
                     <% } %>
-                    
-                    
+
+
                 </div>
             </div>
             <% if (request.getAttribute("otroUsuario") != null && amigos) {%>
