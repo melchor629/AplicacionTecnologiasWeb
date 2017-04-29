@@ -90,13 +90,13 @@
 
                             // Comprobar si el usuario actual tiene amistad con el usuario
                             if (amigos) {%>
-                        <a href="<%= cpath%>/peticionAmistad?accion=2&id=<%= u.getId()%>" class="btn btn-primary btn-raised">
+                        <a href="<%= cpath%>/PeticionAmistad?accion=2&id=<%= u.getId()%>" class="btn btn-primary btn-raised">
                             <i class="fa fa-user-times"></i> Eliminar amistad
                         </a>
                         <% } else {%>
 
                         <% if (!peticionEnviada) {%>
-                        <a href="<%= cpath%>/peticionAmistad?accion=1&id=<%= u.getId()%>" class="btn btn-primary btn-raised">
+                        <a href="<%= cpath%>/PeticionAmistad?accion=1&id=<%= u.getId()%>" class="btn btn-primary btn-raised">
                             <i class="fa fa-user-plus"></i> Enviar solicitud de amistad
                         </a>
                         <% } else {
