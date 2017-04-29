@@ -7,16 +7,15 @@ package servlets;
 
 import app.ejb.UsuarioFacade;
 import app.entity.Usuario;
-import java.io.IOException;
-import java.io.PrintWriter;
+
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  *
@@ -70,16 +69,16 @@ public class EditarPerfilServlet extends HttpServlet {
             error=3;
         }
         
-        usuarioActualizado.setTwitter(twitter);
+        usuarioActualizado.setTwitter(twitter.isEmpty() ? null : twitter);
         
         
-        usuarioActualizado.setInstagram(instagram);
+        usuarioActualizado.setInstagram(instagram.isEmpty() ? null : instagram);
         
         
-        usuarioActualizado.setWeb(web);
+        usuarioActualizado.setWeb(web.isEmpty() ? null : web);
         
         
-        usuarioActualizado.setFoto(foto);
+        usuarioActualizado.setFoto(foto.isEmpty() ? null : foto);
         
         if(!correo.equals("")){
             usuarioActualizado.setCorreo(correo);

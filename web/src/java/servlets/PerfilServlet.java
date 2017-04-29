@@ -56,6 +56,7 @@ public class PerfilServlet extends HttpServlet {
             if (usuario != null) {
                 request.setAttribute("amigos", fachadaUsuario.sonAmigos(usuario.getId(), usuarioLogueado.getId()));
                 request.setAttribute("peticionEnviada", fachadaPeticionAmistad.peticionMandada(id, usuarioLogueado.getId()) || fachadaPeticionAmistad.peticionMandada(usuarioLogueado.getId(), id));
+                request.setAttribute("peticionMandadaPorMi", fachadaPeticionAmistad.peticionMandada(usuarioLogueado.getId(), id));
                 rd = this.getServletContext().getRequestDispatcher("/perfil.jsp");
                 rd.forward(request, response);
             } else {

@@ -5,6 +5,7 @@
 
 package servlets;
 
+import app.cosas.Hash;
 import app.ejb.UsuarioFacade;
 import app.entity.Usuario;
 
@@ -36,7 +37,7 @@ public class RegistroServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-     String nombre = request.getParameter("nombre");
+     String nombre =  request.getParameter("nombre");
      String apellidos = request.getParameter("apellidos");
      String nombreUsuario = request.getParameter("nombreUsuario");
      String contraseña1 = request.getParameter("password1");
@@ -44,6 +45,7 @@ public class RegistroServlet extends HttpServlet {
      String correo = request.getParameter("correo");
      String almacheck = request.getParameter("almacheck");
      String datoscheck = request.getParameter("datoscheck");
+     String hash = app.cosas.Hash.hash(nombreUsuario + ":" + contraseña1);
      //String datoscheck = request.getParameter("datoschek");
      String error = "";
      
@@ -71,7 +73,7 @@ public class RegistroServlet extends HttpServlet {
      }else{
          if(contraseña1.equals(contraseña2)){
             try{
-                Usuario user = new Usuario(Integer.SIZE, nombre, apellidos, nombreUsuario, contraseña2, correo);
+                Usuario user = new Usuario(Integer.SIZE, nombre, apellidos, nombreUsuario, hash, correo);
                 u.create(user);
                 HttpSession session = request.getSession();
                 session.setAttribute("usuario", user);
