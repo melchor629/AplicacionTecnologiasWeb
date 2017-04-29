@@ -2,10 +2,10 @@ package app.ejb;
 
 import app.entity.PeticionAmistad;
 import app.entity.PeticionAmistadPK;
-import app.entity.Usuario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -22,6 +22,7 @@ public class PeticionAmistadFacade extends AbstractFacade<PeticionAmistad> {
         return em;
     }
 
+    
     public PeticionAmistadFacade() {
         super(PeticionAmistad.class);
     }
@@ -50,4 +51,12 @@ public class PeticionAmistadFacade extends AbstractFacade<PeticionAmistad> {
         getEntityManager().remove(peticion);
     }
     
-}
+    // Cantidad de peticiones que el usuario tiene pendiente de aceptar o rechazar
+    public int peticionesRecibidas(int idUsuario){
+        Query consulta = getEntityManager().createNamedQuery("PeticionAmistad.findByIdReceptor");
+        consulta.setParameter("idReceptor", idUsuario);
+        int cantidadPeticiones = consulta.getResultList().size();
+        
+        return cantidadPeticiones;  
+    }
+    }

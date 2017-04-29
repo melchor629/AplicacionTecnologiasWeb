@@ -3,6 +3,8 @@ package servlets;
 import app.ejb.AficionesFacade;
 import app.ejb.EstudiosFacade;
 import app.ejb.ExperienciaLaboralFacade;
+import app.ejb.MensajeFacade;
+import app.ejb.PeticionAmistadFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Usuario;
 

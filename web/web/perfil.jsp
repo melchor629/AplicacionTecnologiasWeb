@@ -31,7 +31,6 @@
     <body>
         <%@include file="snippets/nav-logged.jsp" %>
         <div class="container">
-            
             <% if(request.getParameter("error") != null && !request.getParameter("error").isEmpty()){ %>
             <div class="panel panel-danger">
                 <div class="panel-heading">Error:</div>
