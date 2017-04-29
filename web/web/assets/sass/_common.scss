@@ -1,11 +1,12 @@
 @import 'vars';
 
 a {
-    color: $secondary_color;
+    color: darken($secondary_color, 20);
     transition: color .2s ease-in-out;
 
     &:hover {
-        color: darken($secondary_color, 20);
+        color: darken($secondary_color, 40);
+        text-decoration: none;
     }
 }
 
@@ -51,18 +52,49 @@ input.form-control {
     }
 }
 
-.has-warning, .has-warning .control-label, .has-warning .form-control, .has-warning .form-control:focus {
+textarea.form-control {
+    box-shadow: none;
+    border-radius: 3px !important;
+    border: 1px solid $text_color;
+    transition: border .2s ease-in-out, padding .2s ease-in-out;
+
+    &:active, &:focus {
+        padding: 5px 11px;
+        border: 2px solid $secondary_color;
+        box-shadow: none;
+    }
+
+    .has-error &, .has-warning &, .has-success & {
+        box-shadow: none;
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    &[disabled], &.disabled {
+        background-color: rgba(230, 230, 230, 0.7);
+        border-color: rgba(210, 210, 210, 0.8);
+        &:active, &:focus {
+            padding: 6px 12px;
+            border: 1px solid rgba(210, 210, 210, 0.8);
+        }
+    }
+}
+
+.has-warning, .has-warning .control-label, .has-warning .form-control, .has-warning .form-control:focus, .has-warning .input-group-addon {
     color: #c69d55;
     border-color: #c69d55;
 }
 
-.has-success, .has-success .control-label, .has-success .form-control, .has-success .form-control:focus {
+.has-success, .has-success .control-label, .has-success .form-control, .has-success .form-control:focus, .has-success .input-group-addon {
     color: #5fbc61;
     border-color: #5fbc61;
 }
 
 .input-group {
     .input-group-addon {
+        color: $description_text_color;
         border-right: 0;
         border: none;
         background: transparent;
@@ -161,6 +193,12 @@ input.form-control {
             &:active { background-color: rgba($secondary_color, 0.3) }
             &.disabled, &[disabled] { color: rgba($secondary_color, 0.26) }
         }
+    }
+
+    &.btn-sm {
+        min-width: 54px;
+        min-height: 24px;
+        padding: 6px 10px;
     }
 }
 

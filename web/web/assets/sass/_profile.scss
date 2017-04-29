@@ -62,3 +62,83 @@ div.profile-options {
         margin-right: 0;
     }
 }
+
+.edit-profile-jobs {
+    text-align: right;
+
+    &.pull-right {
+        position: relative;
+        top: -5px;
+
+        @media(max-width: 767px) {
+            float: none !important;
+            top: 0;
+        }
+    }
+}
+
+
+@media(min-width: 768px) {
+    .profile-info-section {
+        position: sticky;
+        position: -webkit-sticky;
+        top: -180px;
+    }
+    /* El problema de esta idea es que en una tablet no se podria editar o borrar nada
+    .edit-profile-jobs {
+        position: relative;
+        top: -40px;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity .2s ease-in-out, visibility .2s ease-in-out;
+
+        .list-group-item:hover & {
+            visibility: visible;
+            opacity: 1;
+        }
+    }*/
+}
+
+.profile-contacts {
+    @media(min-width: 768px) {
+        &:hover .profile-contact {
+            filter: saturate(70%) brightness(0.7);
+        }
+    }
+
+    .profile-contact {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        transition: filter .25s ease-in-out;
+
+        @media(min-width: 768px) {
+            &:hover {
+                filter: saturate(100%) brightness(1);
+            }
+        }
+
+        .profile-contact-photo {
+            padding: 5px;
+
+            img {
+                border-radius: 80px;
+            }
+        }
+
+        .profile-contact-name {
+            font-size: 16px;
+
+            div {
+                align-self: center;
+            }
+        }
+    }
+}
+
+.profile-send-info {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 10px;
+    z-index: 2
+}

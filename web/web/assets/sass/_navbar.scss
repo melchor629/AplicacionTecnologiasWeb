@@ -73,6 +73,10 @@
     }
 
     .navbar-nav {
+        @media(max-width: 767px) {
+            margin-bottom: 0;
+        }
+
         li {
             color: white;
             border-bottom: 0 solid $secondary_color;
@@ -84,6 +88,11 @@
                 span {
                     color: white;
                     transition: color .25s ease-in-out;
+                }
+
+                @media(max-width: 767px) {
+                    padding-bottom: 7px;
+                    padding-top: 7px;
                 }
             }
 
@@ -98,7 +107,10 @@
 
                 @media(max-width: 767px) {
                     border-bottom: 0 solid;
-                    a, a:hover { padding-bottom: 10px }
+                    a, a:hover {
+                        padding-bottom: 7px;
+                        padding-top: 7px;
+                    }
                 }
             }
         }
