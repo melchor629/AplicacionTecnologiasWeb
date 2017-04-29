@@ -31,6 +31,22 @@
     <body>
         <%@include file="snippets/nav-logged.jsp" %>
         <div class="container">
+            
+            <% if(request.getParameter("error") != null && !request.getParameter("error").isEmpty()){ %>
+            <div class="panel panel-danger">
+                <div class="panel-heading">Error:</div>
+                <div class="panel-body">
+                    Has intentado mandar un mensaje sin título o cuerpo...
+                </div>
+            </div>
+            <% } %>
+            
+            <% if(request.getParameter("exito") != null && !request.getParameter("exito").isEmpty()){ %>
+            <div class="alert alert-success">
+                Mensaje mandado con éxito a <%= u.getNombre() %>
+            </div>
+            <% } %>
+            
             <% if (amigos) {
                     Boolean peticionEnviada = (Boolean) request.getAttribute("peticionEnviada");
                 } %>
@@ -123,6 +139,30 @@
                     <!-- Poner aqui las aficiones, trabajos y tal -->
                 </div>
             </div>
+    <% if(request.getAttribute("otroUsuario") != null && amigos){ %>
+                    <div class="row">
+                        <h2>Mandar mensaje a <%= u.getNombreUsuario() %></h2>
+                        <form method="POST" action="Mensaje">
+                            <input type="hidden" name="idHacia" value="<%= u.getId() %>">
+<div class="form-group edit-profile-form-group">
+                        <label for="comentario" class="col-sm-3 control-label">Titulo:</label>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                            <input maxlength="100" type="text" class="form-control" name="titulo" placeholder="Titulo del mensaje">
+                        </div>
+                    </div>                            
+                            
+                            <div class="form-group edit-profile-form-group">
+                        <label for="comentario" class="col-sm-3 control-label">Mensaje:</label>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-comment-o"></i></div>
+                            <textarea maxlength="999" class="form-control" name="mensaje" placeholder="Mensaje..."></textarea>
+                        </div>
+                    </div>
+                            <div class="text-right"><button type="submit" class="btn btn-primary btn-raised">Mandar mensaje</button></div>
+                        </form>
+                    </div>
+                        <% } %>
             <%@include file="snippets/footer.jsp" %>
         </div>
         <%@include file="snippets/body-end.jsp" %>
