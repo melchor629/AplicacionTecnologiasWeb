@@ -44,7 +44,7 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
         int cantidad = 0;
         
         Query consulta = getEntityManager().createQuery("SELECT m FROM Mensaje m WHERE m.idReceptor = :id AND m.leido = false");
-        consulta.setParameter("id", idUsuario);
+        consulta.setParameter("id", fachadaUsuario.obtenerUsuarioPorId(idUsuario));
         cantidad = consulta.getResultList().size();
         return cantidad;
     }

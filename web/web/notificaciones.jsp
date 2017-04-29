@@ -22,11 +22,38 @@
 
     <div class="container">
 
+        <%
+            
+            
+            %>
+            <%
+                if(request.getParameter("info") != null && !request.getParameter("info").isEmpty()){
+                    String mensaje = "S";
+                    int numeroInfo = Integer.parseInt(request.getParameter("info"));
+                    
+                    switch(numeroInfo){
+                        case 1:
+                            mensaje = "Peticion de amistad aceptada con exito, ya sois amigos y puedes ver su perfil!";
+                            break;
+                            
+                        case 2:
+                            mensaje = "Peticion de amistad rechazada con exito...";
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                %> 
+                <div class="alert alert-success">
+                    <%= mensaje %>
+                </div>
+        <%}
+                %>
       <h1 class="page-header">Panel de notificaciones</h1>
 
-      <h2 class="page-header">Peticiones de amistad</h2>
+      <h2 class="page-header">Peticiones de amistad <span class="badge">4</span></h2>
       
-      <h2 class="page-header">Mensajes</h2>
+      <h2 class="page-header">Mensajes <span class="badge">4</span></h2>
       
       
       <%@include file="snippets/footer.jsp"%>
