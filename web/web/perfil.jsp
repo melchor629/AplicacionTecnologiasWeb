@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Collection"%>
 <%@page import="app.entity.Estudios"%>
@@ -147,8 +148,14 @@
                             Collection<ExperienciaLaboral> listaExperienciaLaboral = u.getExperienciaLaboralCollection();
                             // Lista de estudios
                             Collection<Estudios> listaEstudios = u.getEstudiosCollection();
-
-
+                            // Lista de contactos
+                            Collection<Usuario> listaContactos1 = u.getUsuarioCollection();
+                            // Lista de contactos para la otra parte
+                            Collection<Usuario> listaContactos2 = u.getUsuarioCollection1();
+                            // Lista con todos los contactos
+                            Collection<Usuario> listaContactos = new ArrayList<Usuario>();
+                            listaContactos.addAll(listaContactos1);
+                            listaContactos.addAll(listaContactos2);
                     %>
                     <div class="page-header"><h3>Experiencia laboral</h3></div>
                     <ul class="list-group">
@@ -200,14 +207,25 @@
                     <div class="page-header"><h3>Aficiones</h3></div>
                     <ul class="list-group">
                         <% for (Aficiones experiencia : listaAficiones) { %>
-                        <li class="list-group-item">
-                            <ul class="list-group">
                                 <li class="list-group-item"><%= experiencia.getAficionesPK().getNombre() %></li>  
-                            </ul>
-                        </li>
+                        <% } %>
+                    </ul>
+                    
+                    <div class="page-header"><h3>Contactos</h3></div>
+                    <ul class="list-group">
+                        <% for (Usuario contacto : listaContactos) { %>
+                        <li class="list-group-item">
+                            <% if (contacto.getFoto() == null) { %>
+                    <img src="<%@include file="snippets/fotoPerfil.txt"%>" class="img-responsive profile-photo"
+                         alt="Foto de perfil genérico"> <a href="<%= cpath %>/Perfil?id=<%= contacto.getId() %>"><%= contacto.getNombre() + " " + contacto.getApellidos() %></a>
+                    <% } else {%>
+                    <img src="<%=contacto.getFoto()%>" style="width: 10%; height: auto; display: inline-block;"class="img-responsive profile-photo" alt="Foto de perfil de <%=u.getNombre()%>"> <a href="<%= cpath %>/Perfil?id=<%= contacto.getId() %>"><%= contacto.getNombre() + " " + contacto.getApellidos() %></a>
+                    <% }%></li>
                         <% } %>
                     </ul>
                     <% } %>
+                    
+                    
                 </div>
             </div>
             <% if (request.getAttribute("otroUsuario") != null && amigos) {%>
