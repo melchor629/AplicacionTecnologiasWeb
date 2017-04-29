@@ -1,5 +1,6 @@
 package app.ejb;
 
+import app.entity.Aficiones;
 import app.entity.Estudios;
 import app.entity.ExperienciaLaboral;
 import app.entity.Usuario;
