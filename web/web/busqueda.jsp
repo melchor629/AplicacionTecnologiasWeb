@@ -38,7 +38,8 @@
             <div class="panel panel-default">
             <div class="panel-body">
             <a href= "<%=cpath%>/Perfil?id=<%= aux.getId() %> "><img src="<%=aux.getFoto()%>" class="img-responsive profile-photo" alt="Foto de perfil de <%=aux.getNombre() %>" ></a>
-            <li> <a href= "<%=cpath%>/Perfil?id=<%= aux.getId() %> "> <%= aux.getNombre()%> </a></li>
+            <li> <a href= "<%=cpath%>/Perfil?id=<%= aux.getId() %> "> <%= aux.getNombreUsuario() %> </a></li>
+            <li><%= aux.getNombre()%></li>
             <li><%= aux.getApellidos() %></li>
             <li><% for( ExperienciaLaboral e : experiencia){ %>
                     Empresa: <%= e.getEmpresa() %>
