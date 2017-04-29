@@ -2,6 +2,7 @@ package app.ejb;
 
 import app.entity.Mensaje;
 import java.util.Collection;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,6 +22,9 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
     protected EntityManager getEntityManager() {
         return em;
     }
+    
+    @EJB
+    UsuarioFacade fachadaUsuario;
 
     public MensajeFacade() {
         super(Mensaje.class);
@@ -39,9 +43,18 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
     public int mensajesSinLeer(int idUsuario){
         int cantidad = 0;
         
-        Query consulta = getEntityManager().createQuery("SELECT m FROM Mensaje m WHERE m.idReceptor = :id");
+        Query consulta = getEntityManager().createQuery("SELECT m FROM Mensaje m WHERE m.idReceptor = :id AND m.leido = false");
         consulta.setParameter("id", idUsuario);
         cantidad = consulta.getResultList().size();
         return cantidad;
+    }
+    
+    public void crearMensaje(int idDesde, int idHacia, String titulo, String textoMensaje){
+        Mensaje mensaje = new Mensaje(Integer.SIZE, textoMensaje, false, titulo);
+        mensaje.setIdEmisor(fachadaUsuario.obtenerUsuarioPorId(idDesde));
+        mensaje.setIdReceptor(fachadaUsuario.obtenerUsuarioPorId(idHacia));
+        
+        // Almacenar mensaje
+        getEntityManager().persist(mensaje);
     }
 }

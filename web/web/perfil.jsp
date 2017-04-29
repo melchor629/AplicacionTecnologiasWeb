@@ -31,9 +31,25 @@
     <body>
         <%@include file="snippets/nav-logged.jsp" %>
         <div class="container">
+            
+            <% if(request.getParameter("error") != null && !request.getParameter("error").isEmpty()){ %>
+            <div class="panel panel-danger">
+                <div class="panel-heading">Error:</div>
+                <div class="panel-body">
+                    Has intentado mandar un mensaje sin título o cuerpo...
+                </div>
+            </div>
+            <% } %>
+            
+            <% if(request.getParameter("exito") != null && !request.getParameter("exito").isEmpty()){ %>
+            <div class="alert alert-success">
+                Mensaje mandado con éxito a <%= u.getNombre() %>
+            </div>
+            <% } %>
+            
             <% if (amigos) {
-            Boolean peticionEnviada = (Boolean) request.getAttribute("peticionEnviada");
-            } %>
+                    Boolean peticionEnviada = (Boolean) request.getAttribute("peticionEnviada");
+                } %>
             <div class="row">
                 <div class="col-sm-4 col-md-3">
                     <% if (u.getFoto() == null) { %>
@@ -90,30 +106,63 @@
 
                             // Comprobar si el usuario actual tiene amistad con el usuario
                             if (amigos) {%>
-                        <a href="<%= cpath%>/peticionAmistad?accion=2&id=<%= u.getId()%>" class="btn btn-primary btn-raised">
+                        <a href="<%= cpath%>/PeticionAmistad?accion=2&id=<%= u.getId()%>" class="btn btn-primary btn-raised">
                             <i class="fa fa-user-times"></i> Eliminar amistad
                         </a>
                         <% } else {%>
 
                         <% if (!peticionEnviada) {%>
-                        <a href="<%= cpath%>/peticionAmistad?accion=1&id=<%= u.getId()%>" class="btn btn-primary btn-raised">
+                        <a href="<%= cpath%>/PeticionAmistad?accion=1&id=<%= u.getId()%>" class="btn btn-primary btn-raised">
                             <i class="fa fa-user-plus"></i> Enviar solicitud de amistad
                         </a>
+                        <% } else {
+
+                            Boolean peticionMandadaPorMi = (Boolean) request.getAttribute("peticionMandadaPorMi");
+
+                            if (peticionMandadaPorMi) { %>
+
+                        <div class="alert alert-info">
+                            Ya has mandado una peticion de amistad a este usuario, espera a que te acepte o rechace
+                        </div>
+
                         <% } else {%>
                         <div class="alert alert-info">
-                            Ya le has mandado una peticion a este usuario o el te la ha mandado a ti,
-                            si se la has mandado espera a que la acepte o cancele. Si te la ha mandado a ti acéptala
-                            o cancélala desde tu panel de notificaciones.
+                            Has recibido una peticion de amistad de este usuario, puedes aceptarla desde el <a href="<%= cpath%>/notificaciones.jsp">panel de notificaciones</a>
                         </div>
-                        <% }
-                            }
-                        } %>
+                        <%}
+            }
+        }
+    } %>
                     </div>
                 </div>
                 <div class="col-sm-8 col-md-9">
                     <!-- Poner aqui las aficiones, trabajos y tal -->
                 </div>
             </div>
+    <% if(request.getAttribute("otroUsuario") != null && amigos){ %>
+                    <div class="row">
+                        <h2>Mandar mensaje a <%= u.getNombreUsuario() %></h2>
+                        <form method="POST" action="Mensaje">
+                            <input type="hidden" name="idHacia" value="<%= u.getId() %>">
+<div class="form-group edit-profile-form-group">
+                        <label for="comentario" class="col-sm-3 control-label">Titulo:</label>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                            <input maxlength="100" type="text" class="form-control" name="titulo" placeholder="Titulo del mensaje">
+                        </div>
+                    </div>                            
+                            
+                            <div class="form-group edit-profile-form-group">
+                        <label for="comentario" class="col-sm-3 control-label">Mensaje:</label>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-comment-o"></i></div>
+                            <textarea maxlength="999" class="form-control" name="mensaje" placeholder="Mensaje..."></textarea>
+                        </div>
+                    </div>
+                            <div class="text-right"><button type="submit" class="btn btn-primary btn-raised">Mandar mensaje</button></div>
+                        </form>
+                    </div>
+                        <% } %>
             <%@include file="snippets/footer.jsp" %>
         </div>
         <%@include file="snippets/body-end.jsp" %>
