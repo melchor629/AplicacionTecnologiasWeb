@@ -23,7 +23,9 @@
             if (!amigos) {
                 mostrarPerfil = false;
             }
-        } else request.setAttribute("pagina", "perfil");
+        } else {
+            request.setAttribute("pagina", "perfil");
+        }
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -162,10 +164,10 @@
                         <li class="list-group-item">
                             <ul class="list-group">
                                 <li class="list-group-item">
-                                    <a href="<%= cpath%>/editarPerfil.jsp" class="btn btn-primary btn-raised">
+                                    <a href="UrlAunJspDeFrancis" class="btn btn-primary btn-raised">
                                         <i class="fa fa-pencil"></i> Editar
                                     </a>
-                                    <a href="<%= cpath%>/editarPerfil.jsp" class="btn btn-primary btn-raised">
+                                    <a href="URLaServletDeBorrar" class="btn btn-primary btn-raised">
                                         <i class="fa fa-pencil"></i> Borrar
                                     </a>
                                     <h4><%= experiencia.getPuesto()%></h4>
@@ -193,7 +195,15 @@
                         <% for (Estudios estudio : listaEstudios) {%>
                         <li class="list-group-item">
                             <ul class="list-group">
-                                <li class="list-group-item"><h4><%= estudio.getDescripcion()%></h4></li>
+                                <li class="list-group-item">
+                                    <a href="UrlAunJspDeFrancis" class="btn btn-primary btn-raised">
+                                        <i class="fa fa-pencil"></i> Editar
+                                    </a>
+                                    <a href="URLaServletDeBorrar" class="btn btn-primary btn-raised">
+                                        <i class="fa fa-pencil"></i> Borrar
+                                    </a>
+                                    <h4><%= estudio.getDescripcion()%></h4>
+                                </li>
                                 <li class="list-group-item"><%= estudio.getUbicacion()%></li>
                                     <%
                                         String fechaInicio = new SimpleDateFormat("yyyy-MM-dd").format(estudio.getEstudiosPK().getFechaComienzo());
@@ -212,8 +222,16 @@
                     <div class="page-header"><h3>Aficiones</h3></div>
                     <ul class="list-group">
                         <% for (Aficiones experiencia : listaAficiones) {%>
-                        <li class="list-group-item"><%= experiencia.getAficionesPK().getNombre()%></li>  
-                            <% } %>
+                        <li class="list-group-item">
+                            <a href="UrlAunJspDeFrancis" class="btn btn-primary btn-raised">
+                                <i class="fa fa-pencil"></i> Editar
+                            </a>
+                            <a href="URLaServletDeBorrar" class="btn btn-primary btn-raised">
+                                <i class="fa fa-pencil"></i> Borrar
+                            </a>
+                            <%= experiencia.getAficionesPK().getNombre()%>
+                        </li>  
+                        <% } %>
                     </ul>
 
                     <div class="page-header"><h3>Contactos</h3></div>

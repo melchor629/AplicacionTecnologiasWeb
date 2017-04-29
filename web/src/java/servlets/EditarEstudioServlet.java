@@ -6,6 +6,7 @@
 package servlets;
 
 import app.ejb.EstudiosFacade;
+import app.entity.Estudios;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -41,11 +42,11 @@ public class EditarEstudioServlet extends HttpServlet {
         String nombre = (String) request.getParameter("nombre");
         String nombreOriginal= (String) request.getParameter("nombreOriginal");
          
-        Estudios a= fachada.obtenerAficionConIdyNombre(id, nombreOriginal);
+        //Estudios a= fachada.obtenerAficionConIdyNombre(id, nombreOriginal);
         
-        a.getAficionesPK().setNombre(nombre);
+        // a.getAficionesPK().setNombre(nombre);
         
-        fachadaAficiones.edit(a);
+        // fachadaAficiones.edit(a);
         
         response.sendRedirect(request.getContextPath() + "/Perfil");
     }
