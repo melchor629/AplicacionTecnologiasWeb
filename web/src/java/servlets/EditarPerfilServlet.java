@@ -93,13 +93,17 @@ public class EditarPerfilServlet extends HttpServlet {
             error=5;
         }
         if(!password1.equals("") && !password2.equals("") && password1.equals(password2)){
-            usuarioActualizado.setContraseña(password1);
+            
+            String hash= app.cosas.Hash.hash(password1);
+            usuarioActualizado.setContraseña(hash);
         }else if(!password1.equals(password2)){
             //los campos de contraseña estan vacios o las contraseñas son incorrectas.
             error=1;
       
         }
         
+         u.edit(usuarioActualizado);
+
        
         if(error!=0){ //error las contraseñas no coinciden
             session.setAttribute("usuario", usuarioActualizado);
@@ -111,7 +115,6 @@ public class EditarPerfilServlet extends HttpServlet {
 
         }
         
-       u.edit(usuarioActualizado);
         
            }
 

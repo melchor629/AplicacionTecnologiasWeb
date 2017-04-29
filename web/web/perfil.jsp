@@ -23,8 +23,7 @@
             if (!amigos) {
                 mostrarPerfil = false;
             }
-        }
-        request.setAttribute("pagina", "perfil");
+        } else request.setAttribute("pagina", "perfil");
 %>
 <!DOCTYPE html>
 <html lang="es">
