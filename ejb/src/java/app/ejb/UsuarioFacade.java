@@ -46,10 +46,22 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     }
 
     public Usuario obtenerUsuarioPorId(int idUsuario) {
-        EntityManager gestorEntidades = getEntityManager();
+        // NO BORRAR NINGUN COMENTARIO, esto sirve a modo de repaso. Se muestran 3
+        // formas alternativas de hacer lo mismo
+        
+        // Otra forma usando el namedQuery de la entidad usuario
+        Query consulta = getEntityManager().createNamedQuery("Usuario.findById", Usuario.class);
+        consulta.setParameter("id", idUsuario);
+        Usuario usuario = (Usuario) consulta.getSingleResult();
+        
+        // O usando find del gestor de entidades
+        
+        /*EntityManager gestorEntidades = getEntityManager();
 
         Usuario usuario = gestorEntidades.find(Usuario.class, idUsuario);
-
+        /*
+        
+        // O creando un query
         /* Query q;
         q = gestorEntidades.createQuery("SELECT u FROM Usuario u WHERE u.id = :idUsuario");
         q.setParameter("idUsuario", idUsuario);
