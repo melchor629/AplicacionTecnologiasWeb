@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import app.ejb.EstudiosFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,13 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Lucia y Francis
  */
 @WebServlet(name = "EditarEstudio", urlPatterns = {"/EditarEstudio"})
-public class EditarEstudio extends HttpServlet {
+public class EditarEstudioServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,19 +33,21 @@ public class EditarEstudio extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EditarEstudio</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EditarEstudio at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+      HttpSession session = request.getSession();
+        
+        EstudiosFacade fachada = (EstudiosFacade) session.getAttribute("listaEstudios");
+        
+        String id= (String)request.getParameter("id");
+        String nombre = (String) request.getParameter("nombre");
+        String nombreOriginal= (String) request.getParameter("nombreOriginal");
+         
+        Estudios a= fachada.obtenerAficionConIdyNombre(id, nombreOriginal);
+        
+        a.getAficionesPK().setNombre(nombre);
+        
+        fachadaAficiones.edit(a);
+        
+        response.sendRedirect(request.getContextPath() + "/Perfil");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -4,14 +4,29 @@
     Author     : Lucia y Francis
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%
+  String cpath = request.getContextPath();
+%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+<html lang="es">
+  <head>
+    <title>? - LinkedOut</title>
+    <meta name="description" content="Descripcion de la pagina"> <!-- TODO -->
+    <%@include file="snippets/head.jsp"%>
+  </head>
+
+  <body>
+
+    <%@include file="snippets/nav-logged.jsp"%>
+
+    <div class="container">
+
+      <!-- Contenido -->
+
+      <%@include file="snippets/footer.jsp"%>
+    </div>
+  
+    <%@include file="snippets/body-end.jsp"%>
+  </body>
 </html>
