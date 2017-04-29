@@ -37,7 +37,7 @@ public class RegistroServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-     String nombre = request.getParameter("nombre");
+     String nombre =  request.getParameter("nombre");
      String apellidos = request.getParameter("apellidos");
      String nombreUsuario = request.getParameter("nombreUsuario");
      String contraseña1 = request.getParameter("password1");
