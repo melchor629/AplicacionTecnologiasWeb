@@ -32,8 +32,8 @@
         <%@include file="snippets/nav-logged.jsp" %>
         <div class="container">
             <% if (amigos) {
-            Boolean peticionEnviada = (Boolean) request.getAttribute("peticionEnviada");
-            } %>
+                    Boolean peticionEnviada = (Boolean) request.getAttribute("peticionEnviada");
+                } %>
             <div class="row">
                 <div class="col-sm-4 col-md-3">
                     <% if (u.getFoto() == null) { %>
@@ -99,15 +99,24 @@
                         <a href="<%= cpath%>/peticionAmistad?accion=1&id=<%= u.getId()%>" class="btn btn-primary btn-raised">
                             <i class="fa fa-user-plus"></i> Enviar solicitud de amistad
                         </a>
+                        <% } else {
+
+                            Boolean peticionMandadaPorMi = (Boolean) request.getAttribute("peticionMandadaPorMi");
+
+                            if (peticionMandadaPorMi) { %>
+
+                        <div class="alert alert-info">
+                            Ya has mandado una peticion de amistad a este usuario, espera a que te acepte o rechace
+                        </div>
+
                         <% } else {%>
                         <div class="alert alert-info">
-                            Ya le has mandado una peticion a este usuario o el te la ha mandado a ti,
-                            si se la has mandado espera a que la acepte o cancele. Si te la ha mandado a ti acéptala
-                            o cancélala desde tu panel de notificaciones.
+                            Has recibido una peticion de amistad de este usuario, puedes aceptarla desde el <a href="<%= cpath%>/notificaciones.jsp">panel de notificaciones</a>
                         </div>
-                        <% }
-                            }
-                        } %>
+                        <%}
+            }
+        }
+    } %>
                     </div>
                 </div>
                 <div class="col-sm-8 col-md-9">
