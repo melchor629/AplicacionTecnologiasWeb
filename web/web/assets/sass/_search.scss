@@ -1,0 +1,55 @@
+.result-card-container {
+    @media(min-width: 768px) {
+        height: 144px;
+    }
+
+    .result-card {
+        height: 124px;
+        padding: 0 16px;
+        box-shadow: 0 1px 3px 0 rgba(10, 10, 10, 0.4);
+        border: 0;
+        transition: box-shadow .25s ease-in-out;
+
+        &:hover {
+            box-shadow: 0 2px 4px rgba(10, 10, 10, 0.45);
+            transition: box-shadow .2s ease-in-out;
+        }
+
+
+        .panel-body {
+            padding: 0;
+        }
+
+        .result-photo-container {
+            padding: 16px 0 0;
+
+            a {
+                float: right;
+                max-height: 80px;
+                overflow: hidden;
+            }
+
+            .result-photo {
+                border-radius: 4px;
+                width: 80px;
+            }
+        }
+
+        .result-info-container {
+            padding: 24px 0 15px;
+
+            h4 {
+                margin: 0
+            }
+
+            .result-info-jobs {
+                font-size: 12px;
+                margin-bottom: 0;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
