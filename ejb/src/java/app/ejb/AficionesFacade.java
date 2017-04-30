@@ -1,6 +1,7 @@
 package app.ejb;
 
 import app.entity.Aficiones;
+import app.entity.AficionesPK;
 import app.entity.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -48,4 +49,10 @@ public class AficionesFacade extends AbstractFacade<Aficiones> {
        
        return a;
    }
+   
+   public void borrarAficion(int idUsuario, String textoAficion){
+           AficionesPK clave = new AficionesPK(idUsuario, textoAficion);
+           Aficiones aficion = getEntityManager().find(Aficiones.class, clave);
+           getEntityManager().remove(aficion);
+       }
 }

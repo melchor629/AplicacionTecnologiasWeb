@@ -2,7 +2,9 @@ package app.ejb;
 
 import app.entity.Aficiones;
 import app.entity.Estudios;
+import app.entity.EstudiosPK;
 import app.entity.Usuario;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -50,4 +52,10 @@ public class EstudiosFacade extends AbstractFacade<Estudios> {
        
        return a;
    }
+      
+     public void borrarEstudio(int idUsuario, Date fecha){
+           EstudiosPK clave = new EstudiosPK(idUsuario, fecha);
+           Estudios estudio = getEntityManager().find(Estudios.class, clave);
+           getEntityManager().remove(estudio);
+       } 
 }

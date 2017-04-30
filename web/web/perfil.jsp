@@ -47,8 +47,18 @@
             <% } %>
 
             <% if (request.getParameter("exito") != null && !request.getParameter("exito").isEmpty()) {%>
+            <%
+            // Posibles mensajes de exito
+            String[] mensajes = {"Mensaje mandado con éxito a "+u.getNombre(),"Experiencia laboral borrada con éxito",
+                "Formación borrada con éxito","Afición borrada con éxito","Experiencia laboral editada con éxito",
+                "Formación editada con éxito","Afición editada con éxito","Experiencia laboral añadida con éxito",
+                "Formación añadida con éxito","Afición añdida con éxito"};
+            // Determinar tipo de exito
+            int numeroExito = Integer.parseInt(request.getParameter("exito"));
+            %>
+            
             <div class="alert alert-success profile-send-info profile-send-info" style="top:50px">
-                Mensaje mandado con éxito a <%= u.getNombre()%>
+                <%= mensajes[numeroExito] %>
             </div>
             <% } %>
 
@@ -197,9 +207,8 @@
                             %>
                             <p class="text-muted"><small>
                                 <%= fechaInicio%> - <%= fechaFin%>
-                                (<%=dias%> dia<%=dias==1 ? "" : "s"%><% if(meses != 0) {%>,
-                                <%=meses%> mes<%=meses==1 ? "" : "es"%><% } if(años != 0) {%>,
-                                <%=años%> año<%=años==1 ? "" : "s"%><%}%>)
+                                (<% if(años != 0) {%><%=años%> año<%=años==1 ? "" : "s"%><%}%><% if(meses != 0) {%>, 
+                                <%=meses%> mes<%=meses==1 ? "" : "es"%><% } %>, <%=dias%> dia<%=dias==1 ? "" : "s"%>)
                             </small></p>
 
                             <% if(request.getAttribute("otroUsuario") == null) { %>
@@ -207,7 +216,7 @@
                                 <a href="#" class="btn btn-default btn-flat">
                                     <i class="fa fa-pencil"></i> EDITAR
                                 </a>
-                                <a href="#" class="btn btn-primary btn-flat">
+                                <a href="<%= cpath%>/Borrar?accion=1&idUsuario=<%= u.getId() %>&fechaComienzo=<%= fechaInicio %>" class="btn btn-primary btn-flat">
                                     <i class="fa fa-trash-o"></i> BORRAR
                                 </a>
                             </div>
@@ -247,9 +256,8 @@
                             %>
                             <p class="text-muted"><small>
                                 <%= fechaInicio%> - <%= fechaFin%>
-                                (<%=dias%> dia<%=dias==1 ? "" : "s"%><% if(meses != 0) {%>,
-                                <%=meses%> mes<%=meses==1 ? "" : "es"%><% } if(años != 0) {%>,
-                                <%=años%> año<%=años==1 ? "" : "s"%><%}%>)
+                                (<% if(años != 0) {%><%=años%> año<%=años==1 ? "" : "s"%><%}%><% if(meses != 0) {%>, 
+                                <%=meses%> mes<%=meses==1 ? "" : "es"%>, <% } %><%=dias%> dia<%=dias==1 ? "" : "s"%>)
                             </small></p>
 
                             <% if(request.getAttribute("otroUsuario") == null) { %>
@@ -257,7 +265,7 @@
                                 <a href="#" class="btn btn-default btn-flat">
                                     <i class="fa fa-pencil"></i> EDITAR
                                 </a>
-                                <a href="#" class="btn btn-primary btn-flat">
+                                <a href="<%= cpath%>/Borrar?accion=2&idUsuario=<%= u.getId() %>&fechaComienzo=<%= fechaInicio %>" class="btn btn-primary btn-flat">
                                     <i class="fa fa-trash-o"></i> BORRAR
                                 </a>
                             </div>
@@ -282,7 +290,7 @@
                                 <a href="#" class="btn btn-default btn-flat btn-sm">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                                <a href="#" class="btn btn-primary btn-flat btn-sm">
+                                <a href="<%= cpath%>/Borrar?accion=3&idUsuario=<%= u.getId() %>&nombreAficion=<%= experiencia.getAficionesPK().getNombre() %>" class="btn btn-primary btn-flat btn-sm">
                                     <i class="fa fa-trash-o"></i>
                                 </a>
                             </div>

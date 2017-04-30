@@ -3,7 +3,9 @@ package app.ejb;
 import app.entity.Aficiones;
 import app.entity.Estudios;
 import app.entity.ExperienciaLaboral;
+import app.entity.ExperienciaLaboralPK;
 import app.entity.Usuario;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -51,4 +53,10 @@ public class ExperienciaLaboralFacade extends AbstractFacade<ExperienciaLaboral>
        
        return a;
    }
+       
+       public void borrarExperienciaLaboral(int idUsuario, Date fecha){
+           ExperienciaLaboralPK clave = new ExperienciaLaboralPK(idUsuario, fecha);
+           ExperienciaLaboral experiencia = getEntityManager().find(ExperienciaLaboral.class, clave);
+           getEntityManager().remove(experiencia);
+       }
 }
