@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>? - LinkedOut</title>
+        <title>Resultado de búsqueda - LinkedOut</title>
         <meta name="description" content="Descripcion de la pagina"> <!-- TODO -->
         <%@include file="snippets/head.jsp" %>
     </head>
@@ -25,12 +25,14 @@
                     for (Usuario aux : usuarios) {
                         List<ExperienciaLaboral> experiencia = new ArrayList<ExperienciaLaboral>(aux.getExperienciaLaboralCollection());
                         List<Estudios> estudios = new ArrayList<Estudios>(aux.getEstudiosCollection());
+                        //Ordena las Experiencias Laborales de más próximo a más lejano
                         Collections.sort(experiencia, new Comparator<ExperienciaLaboral>() {
                             @Override
                             public int compare(ExperienciaLaboral o1, ExperienciaLaboral o2) {
                                 return o2.getExperienciaLaboralPK().getFechaComienzo().compareTo(o1.getExperienciaLaboralPK().getFechaComienzo());
                             }
                         });
+                        //Ordena los Estudios de más próximo a más lejano
                         Collections.sort(estudios, new Comparator<Estudios>() {
                             @Override
                             public int compare(Estudios o1, Estudios o2) {
@@ -55,14 +57,12 @@
                                     </a>
                                 </p>
                                 <p class="result-info-jobs">
-                                    <% //for (ExperienciaLaboral e : experiencia) { %>
                                     <% if(experiencia.size() > 0) { ExperienciaLaboral e = experiencia.get(0); %>
                                     <%=e.getFechaFinalizacion() == null ? "Trabaja como" : "Trabajó como"%> <%= e.getPuesto() %>
                                     en <%= e.getEmpresa() %>
                                     <br/>
                                     <%}%>
 
-                                    <% //for (Estudios es : estudios) { %>
                                     <% if(estudios.size() > 0) { Estudios e = estudios.get(0); %>
                                     <%=e.getFechaFinalizacion() == null ? "Estudia" : "Estudió"%> <%= e.getDescripcion() %>
                                     en <%= e.getUbicacion() %>
