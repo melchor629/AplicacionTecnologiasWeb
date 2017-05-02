@@ -5,10 +5,18 @@
     border: none;
 
     .navbar-header {
-        a {
+        .navbar-brand {
             color: white;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-weight: 500;
+            cursor: default;
+        }
+
+        a.navbar-brand {
+            color: white;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: 500;
+            cursor: pointer;
 
             &:hover {
                 color: darken(white, 15);

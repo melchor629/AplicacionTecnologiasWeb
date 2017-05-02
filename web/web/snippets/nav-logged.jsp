@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">LinkedOut</a>
+            <span class="navbar-brand" href="#">LinkedOut</span>
 
             <ul class="nav navbar-nav">
                 <li <%="perfil".equals(request.getAttribute("pagina")) ? "class=\"active\"" : ""%> >
