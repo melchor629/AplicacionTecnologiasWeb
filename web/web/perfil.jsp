@@ -207,8 +207,8 @@
                             %>
                             <p class="text-muted"><small>
                                 <%= fechaInicio%> - <%= fechaFin%>
-                                (<% if(años != 0) {%><%=años%> año<%=años==1 ? "" : "s"%><%}%><% if(meses != 0) {%>, 
-                                <%=meses%> mes<%=meses==1 ? "" : "es"%><% } %>, <%=dias%> dia<%=dias==1 ? "" : "s"%>)
+                                (<% if(años != 0) {%><%=años%> año<%=años==1 ? "" : "s"%>, <%}%><% if(meses != 0) {%>
+                                <%=meses%> mes<%=meses==1 ? "" : "es"%>, <% } %><%=dias%> dia<%=dias==1 ? "" : "s"%>)
                             </small></p>
 
                             <% if(request.getAttribute("otroUsuario") == null) { %>
@@ -256,7 +256,7 @@
                             %>
                             <p class="text-muted"><small>
                                 <%= fechaInicio%> - <%= fechaFin%>
-                                (<% if(años != 0) {%><%=años%> año<%=años==1 ? "" : "s"%><%}%><% if(meses != 0) {%>, 
+                                (<% if(años != 0) {%><%=años%> año<%=años==1 ? "" : "s"%>, <%}%><% if(meses != 0) {%>
                                 <%=meses%> mes<%=meses==1 ? "" : "es"%>, <% } %><%=dias%> dia<%=dias==1 ? "" : "s"%>)
                             </small></p>
 
