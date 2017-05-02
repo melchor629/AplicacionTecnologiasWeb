@@ -58,14 +58,21 @@
         margin-top: 50px;
     }
 
-    .perrete {
+    .fotete {
         max-width: 400px;
         max-height: 400px;
         height: 90vw; //Hack para que sea cuadrado sea como sea la foto
                       // http://stackoverflow.com/questions/19068070/how-to-style-a-div-to-be-a-responsive-square
         border-radius: 400px;
         margin: 15px auto;
-        background: url('http://i.imgur.com/3VhVyES.png') 70% center;
         background-size: cover;
+    }
+
+    .perrete {
+        background: url('http://i.imgur.com/3VhVyES.png') 70% center;
+    }
+
+    .solaire {
+        background: url('https://pbs.twimg.com/profile_images/817396686955888640/i-N1s3sl.jpg') center;
     }
 }

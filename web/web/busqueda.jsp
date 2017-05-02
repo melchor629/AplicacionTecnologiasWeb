@@ -87,13 +87,23 @@
                     }
                 } else {%>
 
+                <% if(Math.random() >= 0.05) { %>
                 <div class="col-xs-12">
                     <div class="text-center search-perrete">
-                        <div class="perrete"></div>
+                        <div class="fotete perrete"></div>
                         <h1>¡Lo sentimos!</h1>
                         <h2 class="text-muted">No hemos encontrado ningún resultado :(</h2>
                     </div>
                 </div>
+                <% } else { %>
+                <div class="col-xs-12">
+                    <div class="text-center search-perrete">
+                        <div class="fotete solaire"></div>
+                        <h2 class="text-muted">¿No resultados?</h2>
+                        <h1 style="font-size:6em"><small style="color:black">PRAISE THE</small> SUN</h1>
+                    </div>
+                </div>
+                <% } %>
 
                 <%}
 
