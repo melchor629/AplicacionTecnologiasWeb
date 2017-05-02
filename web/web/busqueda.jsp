@@ -83,7 +83,18 @@
 
             <%
                     }
-                }
+                } else {%>
+
+                              
+                               
+                               <div class="text-center">
+                                    <img src="http://i.imgur.com/3VhVyES.png">
+                                    <h1>¡Lo sentimos!</h1>
+                                    <h2>No hemos encontrado ningún resultado :(<h2>
+                               </div>
+
+                <%}
+
             %>
             </div>
 
