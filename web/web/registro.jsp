@@ -1,8 +1,12 @@
-<%/**
+<%/*
  *
  * @author Eduardo Guidet Jiménez
+ * 
+ * 
  */%>
 
+
+ 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
     String cpath = request.getContextPath();
@@ -29,31 +33,55 @@
         </div>
         <%}%>
       
-       
-        
-        
+               
         <form class="form-horizontal" role="form" action="<%=cpath%>/RegistroServlet" method="POST">
             <h2>Formulario de registro</h2>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="nombre" class="col-sm-3 control-label">Nombre</label>
-                        <div class="col-sm-9">
+                        
+         
+                                                 
+                            <% if(error != null) { %>
+                            <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control" autofocus value="<%= request.getParameter("nombre")%>">
+                            
+                            <% } else { %>
+                            
                             <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control" autofocus>
+                            <% } %>
                             <span class="help-block">Nombre ej.: Evaristo Jos&eacute;</span>
-                        </div>
+                        
                     </div>
                     <div class="form-group">
                         <label for="apellidos" class="col-sm-3 control-label">Apellidos</label>
                         <div class="col-sm-9">
-                            <input type="text" name="apellidos" id="apellidos" placeholder="Apellidos" class="form-control">
+                            
+                            <% if(error != null) { %>
+                                <input type="text" name="apellidos" id="apellidos" placeholder="Apellidos" class="form-control" value="<%= request.getParameter("apellidos")%>">
+                             
+                            <% } else { %>
+                                <input type="text" name="apellidos" id="apellidos" placeholder="Apellidos" class="form-control">
+                            
+                             <% } %>
+                           
                             <span class="help-block">Apellidos ej.: Escobar Kennedy</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="correo" class="col-sm-3 control-label">Correo</label>
                         <div class="col-sm-9">
-                            <input type="text" name="correo" id="correo" placeholder="Correo" class="form-control">
+                            
+                            <% if(error != null) { %>
+                               <input type="text" name="correo" id="correo" placeholder="Correo" class="form-control" value="<%= request.getParameter("correo")%>">
+                             
+                            <% } else { %>
+                              <input type="text" name="correo" id="correo" placeholder="Correo" class="form-control">
+                            
+                            <% } %>
+                            
+                            
+                          
                         </div>
                     </div>
                 </div>
@@ -61,7 +89,16 @@
                     <div class="form-group">
                         <label for="usuario" class="col-sm-3 control-label">Nombre de Usuario</label>
                         <div class="col-sm-9">
-                            <input type="text" name="nombreUsuario" id="usuario" placeholder="Nombre de Usuario" class="form-control">
+                            
+                            <% if(error != null) { %>
+                             <input type="text" name="nombreUsuario" id="usuario" placeholder="Nombre de Usuario" class="form-control" value="<%= request.getParameter("nombreUsuario")%>">
+                             
+                            <% } else { %>
+                                <input type="text" name="nombreUsuario" id="usuario" placeholder="Nombre de Usuario" class="form-control">
+                            
+                            <% } %>
+                            
+                            
                             <span class="help-block">Usuario ej.: TecnoWebWins666</span>
                         </div>
                     </div>
