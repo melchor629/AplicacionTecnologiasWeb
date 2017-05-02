@@ -48,28 +48,35 @@ public class RegistroServlet extends HttpServlet {
      String hash = app.cosas.Hash.hash(nombreUsuario + ":" + contraseña1);
      //String datoscheck = request.getParameter("datoschek");
      String error = "";
+     boolean algoFalla = false;
      
      if(nombre.isEmpty()){
-         error = "Campo Nombre obligatorio";
-         lanzarError(error, request, response);
-     }else if(apellidos.isEmpty()){
-         error = "Campo Apellidos obligatorio";
-         lanzarError(error, request, response);
-     }else if( nombreUsuario.isEmpty()){
-         error = "Campo Nombre de Usuario obligatorio";
-         lanzarError(error, request, response);
-     }else if(contraseña1.isEmpty()){
-         error = "Campo Contraseña obligatorio";
-         lanzarError(error, request, response);
-     }else if(contraseña2.isEmpty()){
-         error = "Debe volver a escribir la contraseña";
-         lanzarError(error, request, response);
-     }else if(correo.isEmpty()){
-         error = "Campo Correo obligatorio";
-         lanzarError(error, request, response);
-     }else if(almacheck == null || datoscheck == null ){
-        error = "Debe aceptar los términos";
-        lanzarError(error, request, response);
+         error = error + "- Campo Nombre obligatorio\n";
+         algoFalla = true;
+     }
+     if(apellidos.isEmpty()){
+         error = error + "- Campo Apellidos obligatorio\n";
+          algoFalla = true;
+     }
+     if( nombreUsuario.isEmpty()){
+         error = error + "- Campo Nombre de Usuario obligatorio\n";
+          algoFalla = true;
+     }
+     if(contraseña1.isEmpty()){
+         error = error + "- Campo Contraseña obligatorio\n";
+          algoFalla = true;
+     }
+     if(contraseña2.isEmpty()){
+         error = error + "- Debe volver a escribir la contraseña\n";
+         algoFalla = true;
+     }
+     if(correo.isEmpty()){
+         error = error + "- Campo Correo obligatorio\n";
+         algoFalla = true;
+     }
+     if(almacheck == null || datoscheck == null ){
+         error = error + "- Debe aceptar los términos\n";
+         algoFalla = true;
      }else{
          if(contraseña1.equals(contraseña2)){
             try{
@@ -79,13 +86,16 @@ public class RegistroServlet extends HttpServlet {
                 session.setAttribute("usuario", user);
                 response.sendRedirect(request.getContextPath() + "/perfil.jsp");
             }catch(EJBException e){
-                lanzarError("Usuario o correo en uso", request, response);
+                lanzarError("- Usuario o correo en uso\n", request, response);
             }
 
         }else{
-            String contraseñasDiferentes = "Los valores de contraseña no coinciden"; 
+            String contraseñasDiferentes = "- Los valores de contraseña no coinciden\n"; 
             lanzarError(contraseñasDiferentes, request, response);
         }
+     } if (algoFalla) {
+         System.out.println("El error es: " + error);
+         lanzarError(error, request, response);
      }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
