@@ -140,7 +140,7 @@ public class RegistroServlet extends HttpServlet {
 
 
 private void lanzarError(String error,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        request.setAttribute("error", error );
+        request.setAttribute("error", error.replace("\n", "<br/>"));
         RequestDispatcher rd;
         rd = (RequestDispatcher) this.getServletContext().getRequestDispatcher("/registro.jsp");
         rd.forward(request, response);
