@@ -48,7 +48,6 @@
                                 <a href="<%=cpath%>/Perfil?id=<%= aux.getId() %>">
                                     <h4 class="result-name">
                                         <%= aux.getNombre()%>
-                                        <!--<%= aux.getApellidos() %>-->
                                     </h4>
                                 </a>
                                 <p class="result-users">
@@ -73,8 +72,11 @@
                             <div class="col-xs-4 result-photo-container">
                                 <a href="<%=cpath%>/Perfil?id=<%= aux.getId() %> ">
                                     <img
-                                            <% if(aux.getFoto() != null) { %> src="<%=aux.getFoto()%>" <% } else { %> src="<%@include file="snippets/fotoPerfil.txt"%>" <% } %>
-                                            class="img-responsive result-photo" alt="Foto de perfil de <%=aux.getNombre() %>">
+                                        <% if(aux.getFoto() != null) { %>
+                                            src="<%=aux.getFoto()%>" <% } else { %>
+                                            src="<%@include file="snippets/fotoPerfil.txt"%>"
+                                        <% } %>
+                                        class="img-responsive result-photo" alt="Foto de perfil de <%=aux.getNombre() %>">
                                 </a>
                             </div>
                         </div>
@@ -85,13 +87,13 @@
                     }
                 } else {%>
 
-                              
-                               
-                               <div class="text-center">
-                                    <img src="http://i.imgur.com/3VhVyES.png">
-                                    <h1>¡Lo sentimos!</h1>
-                                    <h2>No hemos encontrado ningún resultado :(<h2>
-                               </div>
+                <div class="col-xs-12">
+                    <div class="text-center search-perrete">
+                        <div class="perrete"></div>
+                        <h1>¡Lo sentimos!</h1>
+                        <h2 class="text-muted">No hemos encontrado ningún resultado :(</h2>
+                    </div>
+                </div>
 
                 <%}
 
