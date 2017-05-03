@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <title>? - LinkedOut</title>
+    <title>Editando estudio - LinkedOut</title>
     <meta name="description" content="Descripcion de la pagina"> <!-- TODO -->
     <%@include file="snippets/head.jsp"%>
   </head>
