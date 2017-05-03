@@ -26,6 +26,19 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author antonio
+ *
+ * ¡¡ Importante !!
+ *
+ * Los borrados son delicados por le tema de las referencias. Un objeto no se
+ * borra añ no ser que su referencia sea null.
+ *
+ * De forma que cuando empleamos JPA y hacemos remove se nos garantiza que la
+ * entidad se borra de la BD (normalmente la fila correspondiente).
+ *
+ * Pero NO ser borra de la aplicación!! Si seguimos manteniendo la referencia a
+ * la instancia, esta seguirá apareciendo!! Es por ello que desde este servlet
+ * hay que borrarla para que deje de aparecer
+ *
  */
 @WebServlet(name = "Borrar", urlPatterns = {"/Borrar"})
 public class BorrarServlet extends HttpServlet {
@@ -73,6 +86,7 @@ public class BorrarServlet extends HttpServlet {
             if (request.getParameter("accion") != null && !request.getParameter("accion").isEmpty()) {
                 // Obtener la accion demandada
                 Integer accion = Integer.parseInt(request.getParameter("accion"));
+                Integer idUsuario = usuarioLogueado.getId();
 
                 switch (accion) {
                     // Si es 1 se quiere borrar la experiencia laboral
@@ -81,15 +95,17 @@ public class BorrarServlet extends HttpServlet {
                     // FechaComienzo
                     case 1:
                         // comprobar que se reciben los parametros y que la ideDeUsuario coincide con la del que ha iniciado sesion
-                        if (request.getParameter("idUsuario") != null && !request.getParameter("idUsuario").isEmpty() && request.getParameter("fechaComienzo") != null && !request.getParameter("fechaComienzo").isEmpty() && request.getParameter("idUsuario").equals(usuarioLogueado.getId().toString())) {
+                        if (request.getParameter("fechaComienzo") != null && !request.getParameter("fechaComienzo").isEmpty()) {
                             // Se reciben adecuadamente los datos, obtenerlos
-                            Integer idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
                             String fechaURL = request.getParameter("fechaComienzo");
                             DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                             try {
                                 Date fecha = format.parse(fechaURL);
 
                                 // Se procede a borrar la experiencia laboral
+                                // Del objeto de sesion
+                                usuarioLogueado.getExperienciaLaboralCollection().remove(fachadaExperienciaLaboral.obtenerExperienciaLaboral(idUsuario, fecha));
+                                // De la BD
                                 fachadaExperienciaLaboral.borrarExperienciaLaboral(idUsuario, fecha);
                                 numeroParametroPerfil = "1";
                             } catch (ParseException ex) {
@@ -112,15 +128,17 @@ public class BorrarServlet extends HttpServlet {
                      */
                     case 2:
                         // comprobar que se reciben los parametros y que la ideDeUsuario coincide con la del que ha iniciado sesion
-                        if (request.getParameter("idUsuario") != null && !request.getParameter("idUsuario").isEmpty() && request.getParameter("fechaComienzo") != null && !request.getParameter("fechaComienzo").isEmpty() && request.getParameter("idUsuario").equals(usuarioLogueado.getId().toString())) {
+                        if (request.getParameter("fechaComienzo") != null && !request.getParameter("fechaComienzo").isEmpty()) {
                             // Se reciben adecuadamente los datos, obtenerlos
-                            Integer idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
                             String fechaURL = request.getParameter("fechaComienzo");
                             DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                             try {
                                 Date fecha = format.parse(fechaURL);
 
                                 // Se procede a borrar la formacion
+                                // Del objeto de sesion
+                                usuarioLogueado.getEstudiosCollection().remove(fachadaEstudios.obtenerEstudio(idUsuario, fecha));
+                                // De la BD
                                 fachadaEstudios.borrarEstudio(idUsuario, fecha);
                                 numeroParametroPerfil = "2";
                             } catch (ParseException ex) {
@@ -141,12 +159,14 @@ public class BorrarServlet extends HttpServlet {
                     // Nombre aficion
                     case 3:
                         // comprobar que se reciben los parametros y que la ideDeUsuario coincide con la del que ha iniciado sesion
-                        if (request.getParameter("idUsuario") != null && !request.getParameter("idUsuario").isEmpty() && request.getParameter("nombreAficion") != null && !request.getParameter("nombreAficion").isEmpty() && request.getParameter("idUsuario").equals(usuarioLogueado.getId().toString())) {
+                        if (request.getParameter("nombreAficion") != null && !request.getParameter("nombreAficion").isEmpty()) {
                             // Se reciben adecuadamente los datos, obtenerlos
-                            Integer idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
                             String textoAficion = request.getParameter("nombreAficion");
 
                             // Se procede a borrar la aficion
+                            // Del objeto de sesion
+                            usuarioLogueado.getAficionesCollection().remove(fachadaAficiones.obtenerAficionConIdyNombre(idUsuario, textoAficion));
+                            // de la BD
                             fachadaAficiones.borrarAficion(idUsuario, textoAficion);
                             numeroParametroPerfil = "3";
                         } // Faltan datos
