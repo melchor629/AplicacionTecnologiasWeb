@@ -187,9 +187,10 @@ public class BorrarServlet extends HttpServlet {
             }
 
             if (hayError) {
-                request.setAttribute("error", cadenaError);
+                /*request.setAttribute("error", cadenaError);
                 RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/error.jsp");
-                rd.forward(request, response);
+                rd.forward(request, response); */
+                throw new RuntimeException(cadenaError);
             } else {
                 response.sendRedirect(request.getContextPath() + "/perfil.jsp?exito=" + numeroParametroPerfil);
             }
