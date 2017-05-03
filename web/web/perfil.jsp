@@ -1,10 +1,7 @@
-<%@page import="app.entity.Aficiones"%>
-<%@page import="app.entity.Estudios"%>
-<%@page import="app.entity.ExperienciaLaboral"%>
-<%@page import="app.entity.Usuario"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.*" %>
+<%@ page import="app.entity.*" %>
 <%
 
     String cpath = request.getContextPath();
@@ -314,7 +311,7 @@
                                 <% if (contacto.getFoto() == null) {%>
                                 <img src="<%@include file="snippets/fotoPerfil.txt"%>" class="img-responsive" alt="Foto de perfil genérico">
                                 <% } else {%>
-                                <img src="<%=contacto.getFoto()%>" class="img-responsive" alt="Foto de perfil de <%=u.getNombre()%>">
+                                <img src="<%=contacto.getFoto()%>" class="img-responsive" alt="Foto de perfil de <%=contacto.getNombre()%>">
                                 <% }%>
                             </a>
                         </div>
@@ -326,11 +323,40 @@
                     </div>
                     <% } %>
                 </div>
+
+                <% if(request.getAttribute("otroUsuario") == null) { %>
+                <div class="col-xs-12">
+                    <h3>Mensajes recibidos</h3>
+                    <% for(Mensaje mensaje : u.getMensajeCollection1()) { %>
+                    <div class="mensaje row">
+                        <div class="col-xs-3 col-sm-1">
+                            <% if (mensaje.getIdEmisor().getFoto() == null) {%>
+                            <img src="<%@include file="snippets/fotoPerfil.txt"%>" class="img-responsive" alt="Foto de perfil genérico">
+                            <% } else {%>
+                            <img src="<%=mensaje.getIdEmisor().getFoto()%>" class="img-responsive" alt="Foto de perfil de <%=mensaje.getIdEmisor().getNombre()%>">
+                            <% }%>
+                        </div>
+                        <div class="col-xs-9 col-sm-11">
+                            <div>
+                                <h4><%=mensaje.getTitulo()%></h4>
+                                <small>de <a href="<%=cpath%>/Perfil?id=<%=mensaje.getIdEmisor().getId()%>">@<%=mensaje.getIdEmisor().getNombreUsuario()%></a></small>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <p class="lead">
+                                <%=mensaje.getTexto()%>
+                            </p>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+                <% } %>
+
                 <% } %>
             </div>
 
             <% if (request.getAttribute("otroUsuario") != null && amigos) {%>
-            <div class="clearfix">
+            <div class="clearfix casual">
                 <div class="col-sm-offset-4 col-md-offset-3">
                     <h3>Mandar mensaje a <%= u.getNombreUsuario()%></h3>
                     <form method="POST" action="<%=cpath%>/Mensaje">
