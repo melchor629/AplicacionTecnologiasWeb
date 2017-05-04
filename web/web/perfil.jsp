@@ -176,7 +176,7 @@
 
                 <div class="col-lg-8">
                     <h3>Experiencia laboral</h3>
-                    <a href="<%= cpath%>/crearExperienciaLaboral.jsp" class="btn btn-default btn-flat"> <i class="fa fa-plus"></i>Añadir experiencia laboral</a>
+                    <a href="<%= cpath%>/crearExperienciaLaboral.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
                     <ul class="list-group">
                         <% for (ExperienciaLaboral experiencia : listaExperienciaLaboral) {%>
                         <li class="list-group-item">
@@ -229,7 +229,7 @@
                     </ul>
 
                     <h3>Formación</h3>
-                    <a href="<%= cpath%>/crearEstudio.jsp" class="btn btn-default btn-flat"> <i class="fa fa-plus"></i>Añadir estudio</a>
+                    <a href="<%= cpath%>/crearEstudio.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
                     <ul class="list-group">
                         <% for (Estudios estudio : listaEstudios) {%>
                         <li class="list-group-item">
@@ -278,8 +278,10 @@
                         <% } %>
                     </ul>
 
-                    <h3>Aficiones</h3>
-                    <a href="<%= cpath%>/crearAficion.jsp" class="btn btn-default btn-flat"> <i class="fa fa-plus"></i>Añadir afición</a>
+                    <div class="clearfix">
+                        <h3 class="pull-left">Aficiones</h3>
+                        <a href="<%= cpath%>/crearAficion.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
+                    </div>
                     <ul class="list-group">
                         <% for (Aficiones experiencia : listaAficiones) {%>
                         <li class="list-group-item">
