@@ -1,0 +1,14 @@
+.peticion-amigo {
+    @media(max-width: 767px) {
+        margin-bottom: 20px;
+
+        h3 {
+            margin-top: 5px;
+            margin-bottom: 20px;
+        }
+    }
+
+    form:first-child {
+        margin-left: 10px;
+    }
+}

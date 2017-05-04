@@ -24,10 +24,6 @@
 
     <div class="container">
 
-        <%
-            
-            
-            %>
             <%
                 if(request.getParameter("info") != null && !request.getParameter("info").isEmpty()){
                     String mensaje = "S";
@@ -51,9 +47,8 @@
                 </div>
         <%}
                 %>
-      <h1 class="page-header">Panel de notificaciones</h1>
 
-                         
+        <div class="col-sm-6">
       <h2 class="page-header">Peticiones de amistad <span class="badge"> 
               
             
@@ -63,31 +58,45 @@
           
           
       </span></h2>
-              <h3>
-                  <% for (PeticionAmistad p : u.getPeticionAmistadCollection1()) { %>
-                                   <%= p.getUsuario().getNombreUsuario()%> 
-                                   <br> </br>
-                                   <form id="aceptar-<%=p.getUsuario().getId()%>" class="form-horizontal" role="form" action="<%= cpath%>/AmistadHandlerServlet" method="POST">
-                                       <input type="hidden" name="tipo" value="aceptar">
-                                       <input type="hidden" name="iduser" value="<%=p.getUsuario().getId()%>">
-                                       <button type="submit" form="aceptar-<%=p.getUsuario().getId()%>" class="btn btn-primary btn-raised">
-                                            <i class="fa fa-check"></i> Aceptar
-                                       </button>
-                                       
-                                   </form>
-                                   
-                                   <form id="rechazar-<%=p.getUsuario().getId()%>" class="form-horizontal" role="form" action="<%= cpath%>/AmistadHandlerServlet" method="POST">
-                                       <input type="hidden" name="tipo" value="rechazar">
-                                       <input type="hidden" name="iduser" value="<%=p.getUsuario().getId()%>">
-                                       <button type="submit" form="rechazar-<%=p.getUsuario().getId()%>" class="btn btn-secondary btn-raised">
-                                            <i class="fa fa-user-times"></i> Rechazar
-                                       </button>
-                                   </form>
-                                   <br></br>
-                  <% } %>
-                  
-                  
-              </h3>
+
+            <% for (PeticionAmistad p : u.getPeticionAmistadCollection1()) { %>
+            <div class="peticion-amigo row">
+                <div class="col-xs-3 col-sm-2 col-lg-2">
+                    <div class="img-circle img-profile"
+                            <% if(p.getUsuario().getFoto() != null) { %>
+                         style="background-image: url('<%=p.getUsuario().getFoto()%>')"
+                            <% } else { %>
+                         style="background-image: url('<%@include file="snippets/fotoPerfil.txt"%>')"
+                            <% } %>
+                    ></div>
+                </div>
+                <div class="col-xs-9 col-sm-10 col-lg-10">
+                    <h3>@<%= p.getUsuario().getNombreUsuario()%></h3>
+                </div>
+
+                <div class="col-xs-12 forms">
+                    <div class="clearfix">
+                        <form id="rechazar-<%=p.getUsuario().getId()%>" class="pull-right form-horizontal" role="form" action="<%= cpath%>/AmistadHandlerServlet" method="POST">
+                            <input type="hidden" name="tipo" value="rechazar">
+                            <input type="hidden" name="iduser" value="<%=p.getUsuario().getId()%>">
+                            <button type="submit" form="rechazar-<%=p.getUsuario().getId()%>" class="btn btn-default btn-raised">
+                                <i class="fa fa-user-times"></i> Rechazar
+                            </button>
+                        </form>
+
+                        <form id="aceptar-<%=p.getUsuario().getId()%>" class="pull-right form-horizontal" role="form" action="<%= cpath%>/AmistadHandlerServlet" method="POST">
+                            <input type="hidden" name="tipo" value="aceptar">
+                            <input type="hidden" name="iduser" value="<%=p.getUsuario().getId()%>">
+                            <button type="submit" form="aceptar-<%=p.getUsuario().getId()%>" class="btn btn-primary btn-raised">
+                                <i class="fa fa-check"></i> Aceptar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+
+        </div>
       
       
       <h2 class="page-header">Mensajes <span class="badge">4</span></h2>
