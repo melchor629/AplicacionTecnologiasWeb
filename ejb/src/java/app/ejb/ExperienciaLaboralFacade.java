@@ -5,6 +5,9 @@ import app.entity.Estudios;
 import app.entity.ExperienciaLaboral;
 import app.entity.ExperienciaLaboralPK;
 import app.entity.Usuario;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -41,17 +44,18 @@ public class ExperienciaLaboralFacade extends AbstractFacade<ExperienciaLaboral>
         return q.getResultList();
     }
      
-       public Aficiones obtenerAficionConIdyNombre(String id, String nombre){
+        public ExperienciaLaboral obtenerTrabajoConIdyFecha(String id, String fecha) throws ParseException{
        
+       DateFormat format= new SimpleDateFormat("dd/MM/yyyy");
        Query q;
-       q = this.em.createQuery("SELECT a FROM Aficiones a WHERE a.aficionesPK.idUsuario = :idUsuario AND a.aficionesPK.nombre = :nombre");
-       q.setParameter("idUsuario", id);
-       q.setParameter("nombre", nombre);
+       q = this.em.createQuery("SELECT e FROM ExperienciaLaboral e WHERE e.experienciaLaboralPK.idUsuario = :idUsuario AND e.experienciaLaboralPK.fechaComienzo = :fechaComienzo");
+       q.setParameter("idUsuario", Integer.parseInt(id));
+       q.setParameter("fechaComienzo", format.parse(fecha));
        
-       Aficiones a= (Aficiones) q.getSingleResult();
+       ExperienciaLaboral e= (ExperienciaLaboral) q.getSingleResult();
        
        
-       return a;
+       return e;
    }
        
        public void borrarExperienciaLaboral(int idUsuario, Date fecha){

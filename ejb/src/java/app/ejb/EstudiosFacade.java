@@ -4,6 +4,9 @@ import app.entity.Aficiones;
 import app.entity.Estudios;
 import app.entity.EstudiosPK;
 import app.entity.Usuario;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -40,17 +43,18 @@ public class EstudiosFacade extends AbstractFacade<Estudios> {
         return q.getResultList();
     }
     
-      public Aficiones obtenerAficionConIdyNombre(String id, String nombre){
+      public Estudios obtenerEstudioConIdyFecha(String id, String fecha) throws ParseException{
        
+       DateFormat format= new SimpleDateFormat("dd/MM/yyyy");
        Query q;
-       q = this.em.createQuery("SELECT a FROM Aficiones a WHERE a.aficionesPK.idUsuario = :idUsuario AND a.aficionesPK.nombre = :nombre");
-       q.setParameter("idUsuario", id);
-       q.setParameter("nombre", nombre);
+       q = this.em.createQuery("SELECT e FROM Estudios e WHERE e.estudiosPK.idUsuario = :idUsuario AND e.estudiosPK.fechaComienzo = :fechaComienzo");
+       q.setParameter("idUsuario", Integer.parseInt(id));
+       q.setParameter("fechaComienzo", format.parse(fecha));
        
-       Aficiones a= (Aficiones) q.getSingleResult();
+       Estudios e= (Estudios) q.getSingleResult();
        
        
-       return a;
+       return e;
    }
       
      public void borrarEstudio(int idUsuario, Date fecha){
