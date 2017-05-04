@@ -5,6 +5,9 @@ import app.entity.Estudios;
 import app.entity.ExperienciaLaboral;
 import app.entity.ExperienciaLaboralPK;
 import app.entity.Usuario;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -30,33 +33,39 @@ public class ExperienciaLaboralFacade extends AbstractFacade<ExperienciaLaboral>
     public ExperienciaLaboralFacade() {
         super(ExperienciaLaboral.class);
     }
-    
-     public List<Estudios> obtenerTrabajos(Usuario u){
-        
+
+    public List<Estudios> obtenerTrabajos(Usuario u) {
+
         Query q;
-        
+
         q = this.em.createNamedQuery("ExperienciaLaboral.findByIdUsuario");
         q.setParameter("idUsuario", u.getId());
-        
+
         return q.getResultList();
     }
      
-       public Aficiones obtenerAficionConIdyNombre(String id, String nombre){
+        public ExperienciaLaboral obtenerTrabajoConIdyFecha(String id, String fecha) throws ParseException{
        
+       DateFormat format= new SimpleDateFormat("dd/MM/yyyy");
        Query q;
-       q = this.em.createQuery("SELECT a FROM Aficiones a WHERE a.aficionesPK.idUsuario = :idUsuario AND a.aficionesPK.nombre = :nombre");
-       q.setParameter("idUsuario", id);
-       q.setParameter("nombre", nombre);
+       q = this.em.createQuery("SELECT e FROM ExperienciaLaboral e WHERE e.experienciaLaboralPK.idUsuario = :idUsuario AND e.experienciaLaboralPK.fechaComienzo = :fechaComienzo");
+       q.setParameter("idUsuario", Integer.parseInt(id));
+       q.setParameter("fechaComienzo", format.parse(fecha));
        
-       Aficiones a= (Aficiones) q.getSingleResult();
+       ExperienciaLaboral e= (ExperienciaLaboral) q.getSingleResult();
        
        
-       return a;
+       return e;
    }
        
-       public void borrarExperienciaLaboral(int idUsuario, Date fecha){
-           ExperienciaLaboralPK clave = new ExperienciaLaboralPK(idUsuario, fecha);
-           ExperienciaLaboral experiencia = getEntityManager().find(ExperienciaLaboral.class, clave);
-           getEntityManager().remove(experiencia);
-       }
+
+    public ExperienciaLaboral obtenerExperienciaLaboral(int idUsuario, Date fechaComienzo) {
+        ExperienciaLaboralPK clave = new ExperienciaLaboralPK(idUsuario, fechaComienzo);
+        ExperienciaLaboral experiencia = getEntityManager().find(ExperienciaLaboral.class, clave);
+        return experiencia;
+    }
+
+    public void borrarExperienciaLaboral(int idUsuario, Date fecha) {
+        getEntityManager().remove(obtenerExperienciaLaboral(idUsuario, fecha));
+    }
 }

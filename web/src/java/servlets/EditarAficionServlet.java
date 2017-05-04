@@ -25,8 +25,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "EditarAficion", urlPatterns = {"/EditarAficion"})
 public class EditarAficionServlet extends HttpServlet {
- 
-        
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,26 +35,24 @@ public class EditarAficionServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     @EJB
     AficionesFacade fachadaAficiones;
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
-        String id= (String)request.getParameter("id");
+
+        String id = (String) request.getParameter("id");
         String nombre = (String) request.getParameter("nombre");
-        String nombreOriginal= (String) request.getParameter("nombreOriginal");
-         
-        Aficiones a= fachadaAficiones.obtenerAficionConIdyNombre(id, nombreOriginal);
-        
+        String nombreOriginal = (String) request.getParameter("nombreOriginal");
+
+        Aficiones a = fachadaAficiones.obtenerAficionConIdyNombre(Integer.parseInt(id), nombreOriginal);
+
         a.getAficionesPK().setNombre(nombre);
-        
+
         fachadaAficiones.edit(a);
-        
+
         response.sendRedirect(request.getContextPath() + "/Perfil");
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -9,6 +9,12 @@ import app.ejb.EstudiosFacade;
 import app.entity.Estudios;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,24 +37,124 @@ public class EditarEstudioServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.text.ParseException
      */
+    
+    @EJB
+    EstudiosFacade fachada;
+        
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       HttpSession session = request.getSession();
         
-        EstudiosFacade fachada = (EstudiosFacade) session.getAttribute("listaEstudios");
-        
-        String id= (String)request.getParameter("id");
-        String nombre = (String) request.getParameter("nombre");
-        String nombreOriginal= (String) request.getParameter("nombreOriginal");
+     
+        DateFormat format= new SimpleDateFormat("dd/MM/yyyy");
+
          
-        //Estudios a= fachada.obtenerAficionConIdyNombre(id, nombreOriginal);
+        String id= (String)request.getParameter("id");
+        String fechaComienzoPK = (String) request.getParameter("fechaComienzoPK");
+        String fechaComienzo = (String) request.getParameter("fechaComienzo");
+
+        String ubicacion= (String) request.getParameter("ubicacion");
+        String descripcion= (String) request.getParameter("descripcion");
+        String fechaFinalizacion = (String) request.getParameter("fechaFinalizacion");
         
-        // a.getAficionesPK().setNombre(nombre);
+        int error=0;
+
+         
+        Estudios e=null;
+        try {
+            e = (Estudios) fachada.obtenerEstudioConIdyFecha(id,fechaComienzoPK);
+        } catch (ParseException ex) {
+            Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        // fachadaAficiones.edit(a);
+        if(!fechaFinalizacion.equals("")){
+            
+        try {
+            e.setFechaFinalizacion(format.parse(fechaFinalizacion));
+        } catch (ParseException ex) {
+            Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        response.sendRedirect(request.getContextPath() + "/Perfil");
+        }else{
+            e.setFechaFinalizacion(null);
+        }
+        
+        if(!descripcion.equals("")){
+            e.setDescripcion(descripcion);
+        }else{
+            e.setDescripcion(null);
+        }
+        
+          if(!ubicacion.equals("")){
+             e.setUbicacion(ubicacion);
+        }else{
+            e.setUbicacion(null);
+        }
+       
+          fachada.edit(e);
+        
+          //si estoy cambiando la clave primaria elimino y creo un estudio nuevo
+        if(!fechaComienzo.equals("")){
+            
+            if(!fechaComienzoPK.equals(fechaComienzo)){
+            try {
+                
+                fachada.borrarEstudio(Integer.parseInt(id), format.parse(fechaComienzoPK));
+                Estudios estudioNuevo= new Estudios(Integer.parseInt(id), format.parse(fechaComienzo));
+                fachada.create(estudioNuevo);
+                fachada.edit(estudioNuevo);
+                fachada.edit(e);
+               if(!fechaFinalizacion.equals("")){
+            
+        try {
+            estudioNuevo.setFechaFinalizacion(format.parse(fechaFinalizacion));
+        } catch (ParseException ex) {
+            Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        }else{
+            estudioNuevo.setFechaFinalizacion(null);
+        }
+        
+        if(!descripcion.equals("")){
+            estudioNuevo.setDescripcion(descripcion);
+        }else{
+            estudioNuevo.setDescripcion(null);
+        }
+        
+          if(!ubicacion.equals("")){
+             estudioNuevo.setUbicacion(ubicacion);
+        }else{
+            estudioNuevo.setUbicacion(null);
+        }
+          
+          fachada.edit(estudioNuevo);
+        } catch (ParseException ex) {
+            Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            
+            }
+            
+            
+        }else{
+            
+            error=1;
+        }
+        
+      
+        
+        
+        if(error!=0){ //error 
+            
+             response.sendRedirect(request.getContextPath() + "/editarEstudio.jsp?error="+error);
+        }else{
+            
+            response.sendRedirect(request.getContextPath() + "/Perfil");
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -4,18 +4,20 @@
     Author     : Lucia y Francis
 --%>
 
+<%@page import="app.entity.Usuario"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
   String cpath = request.getContextPath();
   
   String nombreAficion = (String) request.getParameter("nombreAficion");
-  String id= (String) request.getParameter("id");
+  Usuario u= (Usuario) session.getAttribute("usuario");
+  String id= u.getId().toString();
   
 %>
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <title>? - LinkedOut</title>
+    <title>Editando afición - LinkedOut</title>
     <meta name="description" content="Descripcion de la pagina"> <!-- TODO -->
     <%@include file="snippets/head.jsp"%>
   </head>

@@ -56,7 +56,7 @@ public class MensajeServlet extends HttpServlet {
         fachadaMensajes.crearMensaje(usuarioLogueado.getId(), idPara, titulo, mensaje);
         
         // Redireccionar con exito al perfil
-        response.sendRedirect(request.getContextPath() + "/Perfil?id="+idPara+"&exito=1");
+        response.sendRedirect(request.getContextPath() + "/Perfil?id="+idPara+"&exito=0");
         }
         }
     }
