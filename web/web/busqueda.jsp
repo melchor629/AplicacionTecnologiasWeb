@@ -5,6 +5,12 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
     String cpath = request.getContextPath();
+    Usuario u = (Usuario) session.getAttribute("usuario");
+    
+if(u == null){
+    response.sendRedirect(request.getContextPath());
+}
+else{
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -116,3 +122,4 @@
         <%@include file="snippets/body-end.jsp" %>
     </body>
 </html>
+<%= } >

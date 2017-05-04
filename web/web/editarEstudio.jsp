@@ -10,6 +10,10 @@
   String fechaComienzo= request.getParameter("fechaComienzo");
   
   Usuario u= (Usuario) session.getAttribute("usuario");
+  
+  if(u == null){
+      response.sendRedirect(request.getContextPath());
+  }else{
   String id= u.getId().toString();
   
     EstudiosFacade fachada =(EstudiosFacade) session.getAttribute("listaEstudios");
@@ -18,10 +22,6 @@
   
   DateFormat format= new SimpleDateFormat("dd/MM/yyyy");
   %>
-  
-
-                
-
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -132,3 +132,4 @@
     <%@include file="snippets/body-end.jsp"%>
   </body>
 </html>
+<% } %>

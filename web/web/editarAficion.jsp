@@ -7,6 +7,9 @@
   Usuario u= (Usuario) session.getAttribute("usuario");
   String id= u.getId().toString();
   
+if(u == null){
+    response.sendRedirect(request.getContextPath());
+}else{
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -45,3 +48,4 @@
     <%@include file="snippets/body-end.jsp"%>
   </body>
 </html>
+<% } %>

@@ -10,6 +10,11 @@
  String fechaComienzo= request.getParameter("fechaComienzo");
   
   Usuario u= (Usuario) session.getAttribute("usuario");
+  
+  if(u == null){
+      response.sendRedirect(request.getContextPath());
+  }else{
+  
   String id= u.getId().toString();
   
     ExperienciaLaboralFacade fachada =(ExperienciaLaboralFacade) session.getAttribute("listaTrabajos");
@@ -150,3 +155,4 @@
     <%@include file="snippets/body-end.jsp"%>
   </body>
 </html>
+<% } %>
