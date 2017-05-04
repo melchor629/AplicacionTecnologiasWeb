@@ -98,15 +98,26 @@ div.profile-options {
         align-items: center;
         justify-content: flex-start;
         transition: filter .25s ease-in-out;
+        margin-bottom: 10px;
 
         @media(min-width: 768px) {
+            margin-bottom: 5px;
             &:hover {
                 filter: saturate(100%) brightness(1);
             }
         }
 
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        .profile-contact-photo {
+            padding-right: 10px;
+        }
+
         .profile-contact-name {
             font-size: 16px;
+            padding-left: 0;
 
             div {
                 align-self: center;
