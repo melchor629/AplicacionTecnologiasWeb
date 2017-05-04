@@ -27,7 +27,10 @@
 <html lang="es">
     <head>
         <title>Perfil de <%=u.getNombre()%> - LinkedOut</title>
-        <meta name="description" content="Descripcion de la pagina"> <!-- TODO -->
+        <meta name="description" content="Muestra el perfil de tu usuario">
+        <% if(request.getParameter("exito") != null && !request.getParameter("exito").isEmpty()) { %>
+        <meta http-equiv="refresh" content="5; url=<%=cpath%>/perfil.jsp" />
+        <%}%>
         <%@include file="snippets/head.jsp" %>
     </head>
 
