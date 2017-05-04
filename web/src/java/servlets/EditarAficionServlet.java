@@ -37,22 +37,28 @@ public class EditarAficionServlet extends HttpServlet {
      */
     @EJB
     AficionesFacade fachadaAficiones;
+    UsuarioFacade fachadaUsuario;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        
         String id = (String) request.getParameter("id");
         String nombre = (String) request.getParameter("nombre");
         String nombreOriginal = (String) request.getParameter("nombreOriginal");
 
+        if(!nombre.equals(nombreOriginal)){
         Aficiones a = fachadaAficiones.obtenerAficionConIdyNombre(Integer.parseInt(id), nombreOriginal);
+        fachadaAficiones.remove(a);
+        
+        Aficiones nuevaAficion= new Aficiones(Integer.parseInt(id), nombre);
+        fachadaAficiones.create(nuevaAficion);
+        fachadaAficiones.edit(nuevaAficion);
 
-        a.getAficionesPK().setNombre(nombre);
-
-        fachadaAficiones.edit(a);
-
+        }
+        
         response.sendRedirect(request.getContextPath() + "/Perfil");
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

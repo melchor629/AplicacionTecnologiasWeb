@@ -210,7 +210,7 @@
 
                             <% if(request.getAttribute("otroUsuario") == null) { %>
                             <div class="edit-profile-jobs">
-                                <a href="#" class="btn btn-default btn-flat">
+                                <a href="<%= cpath%>/editarTrabajo.jsp?fechaComienzo=<%= fechaInicio%>" class="btn btn-default btn-flat">
                                     <i class="fa fa-pencil"></i> EDITAR
                                 </a>
                                 <a href="<%= cpath%>/Borrar?accion=1&idUsuario=<%= u.getId() %>&fechaComienzo=<%= fechaInicio %>" class="btn btn-primary btn-flat">
@@ -259,7 +259,7 @@
 
                             <% if(request.getAttribute("otroUsuario") == null) { %>
                             <div class="edit-profile-jobs">
-                                <a href="#" class="btn btn-default btn-flat">
+                                <a href="<%= cpath%>/editarEstudio.jsp?fechaComienzo=<%= fechaInicio %>" class="btn btn-default btn-flat">
                                     <i class="fa fa-pencil"></i> EDITAR
                                 </a>
                                 <a href="<%= cpath%>/Borrar?accion=2&idUsuario=<%= u.getId() %>&fechaComienzo=<%= fechaInicio %>" class="btn btn-primary btn-flat">
@@ -284,7 +284,7 @@
 
                             <% if(request.getAttribute("otroUsuario") == null) { %>
                             <div class="edit-profile-jobs pull-right">
-                                <a href="#" class="btn btn-default btn-flat btn-sm">
+                                <a href="<%= cpath%>/editarAficion.jsp?nombreAficion=<%= experiencia.getAficionesPK().getNombre() %>" class="btn btn-default btn-flat btn-sm">
                                     <i class="fa fa-pencil"></i>
                                 </a>
                                 <a href="<%= cpath%>/Borrar?accion=3&idUsuario=<%= u.getId() %>&nombreAficion=<%= experiencia.getAficionesPK().getNombre() %>" class="btn btn-primary btn-flat btn-sm">

@@ -29,10 +29,10 @@
     <div class="container">
 
       <!-- Contenido -->
-       <form class="form-horizontal" name="edit" action="<%=cpath%>/EditarAficion" method="POST">
+       <form class="form-horizontal" name="edit" action="<%=cpath%>/EditarAficion" method="POST" id="usrform">
            
            
-           <textarea class="form-control" rows="3" name="nombre" placeholder="Aficion" value="<%= nombreAficion %>"></textarea>
+           <textarea class="form-control" form="usrform" rows="3" name="nombre" placeholder="Aficion"><%= nombreAficion %></textarea>
            
            <input type="hidden" value="<%=id %>" name="id">
            
