@@ -33,14 +33,14 @@ public class ExperienciaLaboralFacade extends AbstractFacade<ExperienciaLaboral>
     public ExperienciaLaboralFacade() {
         super(ExperienciaLaboral.class);
     }
-    
-     public List<Estudios> obtenerTrabajos(Usuario u){
-        
+
+    public List<Estudios> obtenerTrabajos(Usuario u) {
+
         Query q;
-        
+
         q = this.em.createNamedQuery("ExperienciaLaboral.findByIdUsuario");
         q.setParameter("idUsuario", u.getId());
-        
+
         return q.getResultList();
     }
      
@@ -58,9 +58,14 @@ public class ExperienciaLaboralFacade extends AbstractFacade<ExperienciaLaboral>
        return e;
    }
        
-       public void borrarExperienciaLaboral(int idUsuario, Date fecha){
-           ExperienciaLaboralPK clave = new ExperienciaLaboralPK(idUsuario, fecha);
-           ExperienciaLaboral experiencia = getEntityManager().find(ExperienciaLaboral.class, clave);
-           getEntityManager().remove(experiencia);
-       }
+
+    public ExperienciaLaboral obtenerExperienciaLaboral(int idUsuario, Date fechaComienzo) {
+        ExperienciaLaboralPK clave = new ExperienciaLaboralPK(idUsuario, fechaComienzo);
+        ExperienciaLaboral experiencia = getEntityManager().find(ExperienciaLaboral.class, clave);
+        return experiencia;
+    }
+
+    public void borrarExperienciaLaboral(int idUsuario, Date fecha) {
+        getEntityManager().remove(obtenerExperienciaLaboral(idUsuario, fecha));
+    }
 }

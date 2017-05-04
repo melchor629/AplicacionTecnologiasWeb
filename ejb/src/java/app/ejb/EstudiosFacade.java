@@ -32,16 +32,17 @@ public class EstudiosFacade extends AbstractFacade<Estudios> {
     public EstudiosFacade() {
         super(Estudios.class);
     }
-    
-    public List<Estudios> obtenerEstudios(Usuario u){
-        
+
+    public List<Estudios> obtenerEstudios(Usuario u) {
+
         Query q;
-        
+
         q = this.em.createNamedQuery("Estudios.findByIdUsuario");
         q.setParameter("idUsuario", u.getId());
-        
+
         return q.getResultList();
     }
+
     
       public Estudios obtenerEstudioConIdyFecha(String id, String fecha) throws ParseException{
        
@@ -62,4 +63,12 @@ public class EstudiosFacade extends AbstractFacade<Estudios> {
            Estudios estudio = getEntityManager().find(Estudios.class, clave);
            getEntityManager().remove(estudio);
        } 
+
+
+    public Estudios obtenerEstudio(int idUsuario, Date fecha) {
+        EstudiosPK clave = new EstudiosPK(idUsuario, fecha);
+        Estudios estudio = getEntityManager().find(Estudios.class, clave);
+        return estudio;
+    }
+
 }

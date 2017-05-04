@@ -27,38 +27,35 @@ public class BuscarServlet extends HttpServlet {
 
     @EJB
     private UsuarioFacade u;
-    
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String buscar = request.getParameter("buscar");
-        
-        List <Usuario> lista;
-        
-            lista = u.buscarUsuarios(buscar);
-              
-               // HttpSession session = request.getSession();
-                request.setAttribute("resultados",lista);
-                
-                RequestDispatcher rd;
-        
-                rd = this.getServletContext().getRequestDispatcher("/busqueda.jsp");
-                rd.forward(request, response);
-                
+
+        List<Usuario> lista;
+
+        lista = u.buscarUsuarios(buscar);
+
+        // HttpSession session = request.getSession();
+        request.setAttribute("resultados", lista);
+
+        RequestDispatcher rd;
+
+        rd = this.getServletContext().getRequestDispatcher("/busqueda.jsp");
+        rd.forward(request, response);
+
         /*  if (!lista.isEmpty()){
             for (Usuario aux : lista) {
                 System.out.println("HOLA SOY UN USER Y ESTOY EN EL SERVLET: " + aux.getNombreUsuario()); 
             
             }
         }*/
-               // response.sendRedirect(request.getContextPath() + "/busqueda.jsp");
-    
-        
+        // response.sendRedirect(request.getContextPath() + "/busqueda.jsp");
     }
-    
- }
+
+}
