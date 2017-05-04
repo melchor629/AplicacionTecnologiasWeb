@@ -14,14 +14,11 @@
 <%
   String cpath = request.getContextPath();
   
-  String fechaComienzo= request.getParameter("fechaComienzo");
-  
   Usuario u= (Usuario) session.getAttribute("usuario");
   String id= u.getId().toString();
   
     EstudiosFacade fachada =(EstudiosFacade) session.getAttribute("listaEstudios");
   
-  Estudios e= fachada.obtenerEstudioConIdyFecha(id, fechaComienzo);
   
   DateFormat format= new SimpleDateFormat("dd/MM/yyyy");
   %>
@@ -61,70 +58,32 @@
         %>
 
       <!-- Contenido -->
-      <form class="form-horizontal" name="edit" action="<%=cpath%>/EditarEstudio" method="POST">
+      <form class="form-horizontal" name="edit" action="<%=cpath%>/CrearEstudio" method="POST">
           
        <div class="form-group">
          <label for="fechaComienzo">Fecha de comienzo</label>
-         <input type="Date" class="form-control" name="fechaComienzo" placeholder="Fecha de comienzo" value="<%= format.format(e.getEstudiosPK().getFechaComienzo()) %>">
+         <input type="Date" class="form-control" name="fechaComienzo" placeholder="Fecha de comienzo" value="">
        </div>
        
-       <% 
-           if(e.getFechaFinalizacion()!=null){
-           %>
-       <div class="form-group">
-         <label for="fechaFinalizacion">Fecha de finalización</label>
-         <input type="Date" class="form-control" name="fechaFinalizacion" placeholder="Fecha de finalización" value="<%= format.format(e.getFechaFinalizacion()) %>">
-       </div>
-       <% 
- }else{
-           %>
            <div class="form-group">
          <label for="fechaFinalizacion">Fecha de finalización</label>
          <input type="Date" class="form-control" name="fechaFinalizacion" placeholder="Fecha de finalización" value="">
        </div>
-           <%
-               }
-%>
+           
 
-<% 
-           if(e.getDescripcion()!=null){
-           %>
-       <div class="form-group">
-         <label for="descripcion">Descripción</label>
-         <input type="text" class="form-control" name="descripcion" placeholder="Descripción" value="<%= e.getDescripcion() %>">
-       </div>
-       <% 
- }else{
-           %>
           <div class="form-group">
          <label for="descripcion">Descripción</label>
          <input type="text" class="form-control" name="descripcion" placeholder="Descripción" value="">
        </div>
-           <%
-               }
-%>
+      
 
-<% 
-           if(e.getUbicacion()!=null){
-           %>
-       <div class="form-group">
-         <label for="ubicacion">Ubicación</label>
-         <input type="text" class="form-control" name="ubicacion" placeholder="Ubicación" value="<%= e.getUbicacion() %>">
-       </div>
-       <% 
- }else{
-           %>
            <div class="form-group">
          <label for="ubicacion">Ubicación</label>
          <input type="text" class="form-control" name="ubicacion" placeholder="Ubicación" value="">
        </div>
-           <%
-               }
-%>
-
+     
        <input type="hidden" value="<%=id %>" name="id">
-           
-       <input type="hidden" value="<%= fechaComienzo %>" name="fechaComienzoPK">   
+            
        
        <div class="form-group edit-profile-form-group">
                 <div class="text-center">
