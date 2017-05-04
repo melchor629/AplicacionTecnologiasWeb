@@ -203,3 +203,18 @@ div.profile-options {
         max-width: 100%;
     }
 }
+
+.profile-add {
+    position: relative;
+    float: right;
+    bottom: 38px;
+
+    .clearfix > & {
+        bottom: -18px;
+    }
+}
+
+
+.edit-hobby-form-group {
+    margin-top: 15px;
+}

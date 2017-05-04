@@ -1,9 +1,3 @@
-<%-- 
-    Document   : editarAficion
-    Created on : 28-abr-2017, 17:50:11
-    Author     : Lucia y Francis
---%>
-
 <%@page import="app.entity.Usuario"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
@@ -38,7 +32,7 @@
            
            <input type="hidden" value="<%=nombreAficion %>" name="nombreOriginal">
       
-       <div class="form-group edit-profile-form-group">
+       <div class="form-group edit-hobby-form-group">
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary btn-raised">GUARDAR</button>
                     <a href="javascript:history.back()" class="btn btn-default btn-raised">CANCELAR</a>

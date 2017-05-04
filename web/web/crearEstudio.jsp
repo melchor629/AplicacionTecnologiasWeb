@@ -1,14 +1,6 @@
-<%-- 
-    Document   : editarEstudio
-    Created on : 28-abr-2017, 17:49:53
-    Author     : Lucia y Francis
---%>
-
 <%@page import="app.entity.Usuario"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="javafx.scene.input.DataFormat"%>
-<%@page import="app.entity.Estudios"%>
 <%@page import="app.ejb.EstudiosFacade"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
@@ -62,24 +54,24 @@
           
        <div class="form-group">
          <label for="fechaComienzo">Fecha de comienzo</label>
-         <input type="Date" class="form-control" name="fechaComienzo" placeholder="Fecha de comienzo" value="">
+         <input type="Date" class="form-control" id="fechaComienzo" name="fechaComienzo" placeholder="Fecha de comienzo" value="">
        </div>
        
            <div class="form-group">
          <label for="fechaFinalizacion">Fecha de finalización</label>
-         <input type="Date" class="form-control" name="fechaFinalizacion" placeholder="Fecha de finalización" value="">
+         <input type="Date" class="form-control" id="fechaFinalizacion" name="fechaFinalizacion" placeholder="Fecha de finalización" value="">
        </div>
            
 
           <div class="form-group">
          <label for="descripcion">Descripción</label>
-         <input type="text" class="form-control" name="descripcion" placeholder="Descripción" value="">
+         <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripción" value="">
        </div>
       
 
            <div class="form-group">
          <label for="ubicacion">Ubicación</label>
-         <input type="text" class="form-control" name="ubicacion" placeholder="Ubicación" value="">
+         <input type="text" class="form-control" id="ubicacion" name="ubicacion" placeholder="Ubicación" value="">
        </div>
      
        <input type="hidden" value="<%=id %>" name="id">

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : editarTrabajo
-    Created on : 28-abr-2017, 17:50:20
-    Author     : Lucia y Francis
---%>
-
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="app.ejb.ExperienciaLaboralFacade"%>
@@ -63,7 +57,7 @@
           
        <div class="form-group">
          <label for="fechaComienzo">Fecha de comienzo</label>
-         <input type="Date" class="form-control" name="fechaComienzo" placeholder="Fecha de comienzo" value="<%= format.format(e.getExperienciaLaboralPK().getFechaComienzo()) %>">
+         <input type="Date" class="form-control" id="fechaComienzo" name="fechaComienzo" placeholder="Fecha de comienzo" value="<%= format.format(e.getExperienciaLaboralPK().getFechaComienzo()) %>">
        </div>
        
        <% 
@@ -71,14 +65,14 @@
            %>
        <div class="form-group">
          <label for="fechaFinalizacion">Fecha de finalización</label>
-         <input type="Date" class="form-control" name="fechaFinalizacion" placeholder="Fecha de finalización" value="<%= format.format(e.getFechaFinalizacion()) %>">
+         <input type="Date" class="form-control" id="fechaFinalizacion" name="fechaFinalizacion" placeholder="Fecha de finalización" value="<%= format.format(e.getFechaFinalizacion()) %>">
        </div>
        <% 
  }else{
            %>
            <div class="form-group">
          <label for="fechaFinalizacion">Fecha de finalización</label>
-         <input type="Date" class="form-control" name="fechaFinalizacion" placeholder="Fecha de finalización" value="">
+         <input type="Date" class="form-control" id="fechaFinalizacion" name="fechaFinalizacion" placeholder="Fecha de finalización" value="">
        </div>
            <%
                }
@@ -89,14 +83,14 @@
            %>
        <div class="form-group">
          <label for="empresa">Empresa</label>
-         <input type="text" class="form-control" name="empresa" placeholder="Empresa" value="<%= e.getEmpresa()%>">
+         <input type="text" class="form-control" id="empresa" name="empresa" placeholder="Empresa" value="<%= e.getEmpresa()%>">
        </div>
        <% 
  }else{
            %>
           <div class="form-group">
          <label for="empresa">Empresa</label>
-         <input type="text" class="form-control" name="empresa" placeholder="Empresa" value="">
+         <input type="text" class="form-control" id="empresa" name="empresa" placeholder="Empresa" value="">
        </div>
            <%
                }
@@ -107,14 +101,14 @@
            %>
        <div class="form-group">
          <label for="puesto">Puesto</label>
-         <input type="text" class="form-control" name="puesto" placeholder="puesto" value="<%= e.getPuesto()%>">
+         <input type="text" class="form-control" id="puesto" name="puesto" placeholder="puesto" value="<%= e.getPuesto()%>">
        </div>
        <% 
  }else{
            %>
            <div class="form-group">
          <label for="puesto">Puesto</label>
-         <input type="text" class="form-control" name="puesto" placeholder="Puesto" value="">
+         <input type="text" class="form-control" id="puesto" name="puesto" placeholder="Puesto" value="">
        </div>
            <%
                }
@@ -125,14 +119,14 @@
            %>
        <div class="form-group">
          <label for="webEmpresa">Web Empresa</label>
-         <input type="text" class="form-control" name="webEmpresa" placeholder="Web Empresa" value="<%= e.getWebEmpresa()%>">
+         <input type="text" class="form-control" id="webEmpresa" name="webEmpresa" placeholder="Web Empresa" value="<%= e.getWebEmpresa()%>">
        </div>
        <% 
  }else{
            %>
            <div class="form-group">
          <label for="webEmpresa">Web Empresa</label>
-         <input type="text" class="form-control" name="webEmpresa" placeholder="Web Empresa" value="">
+         <input type="text" class="form-control" id="webEmpresa" name="webEmpresa" placeholder="Web Empresa" value="">
        </div>
            <%
                }
