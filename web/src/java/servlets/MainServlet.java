@@ -32,7 +32,9 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        Usuario u = request.getSession().getAttribute("usuario");
+        if(u == null) response.sendRedirect(request.getContextPath());
+        else response.sendRedirect(request.getContextPath() + "/perfil.jsp");
     }
 
     @Override
