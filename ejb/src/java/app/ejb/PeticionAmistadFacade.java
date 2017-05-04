@@ -2,6 +2,8 @@ package app.ejb;
 
 import app.entity.PeticionAmistad;
 import app.entity.PeticionAmistadPK;
+import app.entity.Usuario;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +19,9 @@ public class PeticionAmistadFacade extends AbstractFacade<PeticionAmistad> {
     @PersistenceContext(unitName = "ejbPU")
     private EntityManager em;
 
+    @EJB
+    private UsuarioFacade ufacade;
+    
     @Override
     protected EntityManager getEntityManager() {
         return em;
@@ -46,9 +51,17 @@ public class PeticionAmistadFacade extends AbstractFacade<PeticionAmistad> {
     }
     
     public void eliminarPeticion(int idDesde, int idHacia){
+        
+        Usuario u1 = ufacade.obtenerUsuarioPorId(idDesde);
+        Usuario u2 = ufacade.obtenerUsuarioPorId(idHacia);
+        
+        
         PeticionAmistadPK clavePrimaria = new PeticionAmistadPK(idDesde, idHacia);
         PeticionAmistad peticion = getEntityManager().find(PeticionAmistad.class, clavePrimaria);
         getEntityManager().remove(peticion);
+        
+        u2.getPeticionAmistadCollection1().remove(peticion);
+        u1.getPeticionAmistadCollection().remove(peticion);
     }
     
     // Cantidad de peticiones que el usuario tiene pendiente de aceptar o rechazar

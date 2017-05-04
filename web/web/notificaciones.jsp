@@ -1,3 +1,5 @@
+<%@page import="app.entity.PeticionAmistad"%>
+<%@page import="javax.management.Query"%>
 <%@page import="app.entity.Usuario"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
@@ -51,7 +53,42 @@
                 %>
       <h1 class="page-header">Panel de notificaciones</h1>
 
-      <h2 class="page-header">Peticiones de amistad <span class="badge">4</span></h2>
+                         
+      <h2 class="page-header">Peticiones de amistad <span class="badge"> 
+              
+            
+              <!--Se supone que esto debe retornar el número de peticiones que me han enviado-->
+              <%= u.getPeticionAmistadCollection1().size() %> 
+          
+          
+          
+      </span></h2>
+              <h3>
+                  <% for (PeticionAmistad p : u.getPeticionAmistadCollection1()) { %>
+                                   <%= p.getUsuario().getNombreUsuario()%> 
+                                   <br> </br>
+                                   <form id="aceptar-<%=p.getUsuario().getId()%>" class="form-horizontal" role="form" action="<%= cpath%>/AmistadHandlerServlet" method="POST">
+                                       <input type="hidden" name="tipo" value="aceptar">
+                                       <input type="hidden" name="iduser" value="<%=p.getUsuario().getId()%>">
+                                       <button type="submit" form="aceptar-<%=p.getUsuario().getId()%>" class="btn btn-primary btn-raised">
+                                            <i class="fa fa-check"></i> Aceptar
+                                       </button>
+                                       
+                                   </form>
+                                   
+                                   <form id="rechazar-<%=p.getUsuario().getId()%>" class="form-horizontal" role="form" action="<%= cpath%>/AmistadHandlerServlet" method="POST">
+                                       <input type="hidden" name="tipo" value="rechazar">
+                                       <input type="hidden" name="iduser" value="<%=p.getUsuario().getId()%>">
+                                       <button type="submit" form="rechazar-<%=p.getUsuario().getId()%>" class="btn btn-secondary btn-raised">
+                                            <i class="fa fa-user-times"></i> Rechazar
+                                       </button>
+                                   </form>
+                                   <br></br>
+                  <% } %>
+                  
+                  
+              </h3>
+      
       
       <h2 class="page-header">Mensajes <span class="badge">4</span></h2>
       
