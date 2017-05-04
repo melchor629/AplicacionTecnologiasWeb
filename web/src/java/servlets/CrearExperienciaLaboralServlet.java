@@ -61,13 +61,12 @@ public class CrearExperienciaLaboralServlet extends HttpServlet {
         int error=0;
 
         
-        if(!fechaComienzo.equals("")){
+        if(!fechaComienzo.equals("") && !empresa.equals("") && !puesto.equals("")){
             
             ExperienciaLaboral e=null;
         try {
             e= new ExperienciaLaboral(Integer.parseInt(id), format.parse(fechaComienzo));
-            fachada.create(e);//peta
-            fachada.edit(e);
+            
         } catch (ParseException ex) {
             Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -84,11 +83,11 @@ public class CrearExperienciaLaboralServlet extends HttpServlet {
             e.setFechaFinalizacion(null);
         }
         
-        if(!empresa.equals("")){
-            e.setEmpresa(empresa);
-        }else{
-            e.setEmpresa(null);
-        }
+        
+        e.setEmpresa(empresa);
+        
+           
+        
         
           if(!webEmpresa.equals("")){
              e.setWebEmpresa(webEmpresa);
@@ -96,17 +95,19 @@ public class CrearExperienciaLaboralServlet extends HttpServlet {
             e.setWebEmpresa(null);
         }
           
-            if(!puesto.equals("")){
-            e.setPuesto(puesto);
-        }else{
-            e.setPuesto(null);
-        }
+           
+        e.setPuesto(puesto);
+        
         
             
+           fachada.create(e);//peta
             fachada.edit(e);
         }else{
             
-            error=1;
+                error=1;
+            
+            
+            
         }
         
       

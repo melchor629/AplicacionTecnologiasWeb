@@ -45,7 +45,7 @@
           error = Integer.parseInt(request.getParameter("error"));
           String msgError = "Error desconocido :/";
            if(error == 1) {
-            msgError = "¡La fecha de inicio no puede estar vacia!";
+            msgError = "¡Los campos fecha de inicio, Empresa y/o puesto no pueden estar vacios!";
                 }
    %>
    
