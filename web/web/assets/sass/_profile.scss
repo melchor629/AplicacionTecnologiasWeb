@@ -84,19 +84,6 @@ div.profile-options {
         position: -webkit-sticky;
         top: -180px;
     }
-    /* El problema de esta idea es que en una tablet no se podria editar o borrar nada
-    .edit-profile-jobs {
-        position: relative;
-        top: -40px;
-        visibility: hidden;
-        opacity: 0;
-        transition: opacity .2s ease-in-out, visibility .2s ease-in-out;
-
-        .list-group-item:hover & {
-            visibility: visible;
-            opacity: 1;
-        }
-    }*/
 }
 
 .profile-contacts {
@@ -115,14 +102,6 @@ div.profile-options {
         @media(min-width: 768px) {
             &:hover {
                 filter: saturate(100%) brightness(1);
-            }
-        }
-
-        .profile-contact-photo {
-            padding: 5px;
-
-            img {
-                border-radius: 80px;
             }
         }
 

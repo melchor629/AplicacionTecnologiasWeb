@@ -308,11 +308,13 @@
                     <div class="row profile-contact">
                         <div class="col-lg-3 col-sm-2 col-xs-3 profile-contact-photo">
                             <a href="<%=cpath%>/Perfil?id=<%=contacto.getId()%>">
-                                <% if (contacto.getFoto() == null) {%>
-                                <img src="<%@include file="snippets/fotoPerfil.txt"%>" class="img-responsive" alt="Foto de perfil genérico">
-                                <% } else {%>
-                                <img src="<%=contacto.getFoto()%>" class="img-responsive" alt="Foto de perfil de <%=contacto.getNombre()%>">
-                                <% }%>
+                                <div class="img-circle img-profile"
+                                    <% if(contacto.getFoto() != null) { %>
+                                     style="background-image: url('<%=contacto.getFoto()%>')"
+                                    <% } else { %>
+                                     style="background-image: url('<%@include file="snippets/fotoPerfil.txt"%>')"
+                                    <% } %>
+                                ></div>
                             </a>
                         </div>
                         <div class="col-lg-9 col-sm-10 col-xs-9 profile-contact-name">
@@ -330,11 +332,13 @@
                     <% for(Mensaje mensaje : u.getMensajeCollection1()) { %>
                     <div class="mensaje row">
                         <div class="col-xs-3 col-sm-1">
-                            <% if (mensaje.getIdEmisor().getFoto() == null) {%>
-                            <img src="<%@include file="snippets/fotoPerfil.txt"%>" class="img-responsive" alt="Foto de perfil genérico">
-                            <% } else {%>
-                            <img src="<%=mensaje.getIdEmisor().getFoto()%>" class="img-responsive" alt="Foto de perfil de <%=mensaje.getIdEmisor().getNombre()%>">
-                            <% }%>
+                            <div class="img-circle img-profile"
+                                <% if(mensaje.getIdEmisor().getFoto() != null) { %>
+                                 style="background-image: url('<%=mensaje.getIdEmisor().getFoto()%>')"
+                                <% } else { %>
+                                 style="background-image: url('<%@include file="snippets/fotoPerfil.txt"%>')"
+                                <% } %>
+                            ></div>
                         </div>
                         <div class="col-xs-9 col-sm-11">
                             <div>
