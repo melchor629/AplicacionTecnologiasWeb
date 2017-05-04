@@ -28,36 +28,33 @@ public class MensajeServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     @EJB
     MensajeFacade fachadaMensajes;
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         HttpSession session = request.getSession();
+
+        HttpSession session = request.getSession();
 
         Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
 
-        if(usuarioLogueado == null){
-            response.sendRedirect(request.getContextPath() + "/");
-        }
-        else{
-        Integer idPara = Integer.parseInt(request.getParameter("idHacia"));
-        String titulo = request.getParameter("titulo");
-        String mensaje = request.getParameter("mensaje");
-        
-        if(titulo.isEmpty() || mensaje.isEmpty()){
-            // Redireccion con error
-            response.sendRedirect(request.getContextPath() + "/Perfil?id="+idPara+"&error=1");
-        }
-        else{
-        // Insertar mensaje en la base de datos
-        fachadaMensajes.crearMensaje(usuarioLogueado.getId(), idPara, titulo, mensaje);
-        
-        // Redireccionar con exito al perfil
-        response.sendRedirect(request.getContextPath() + "/Perfil?id="+idPara+"&exito=0");
-        }
+        if (usuarioLogueado == null) {
+            response.sendRedirect(request.getContextPath());
+        } else {
+            Integer idPara = Integer.parseInt(request.getParameter("idHacia"));
+            String titulo = request.getParameter("titulo");
+            String mensaje = request.getParameter("mensaje");
+
+            if (titulo.isEmpty() || mensaje.isEmpty()) {
+                // Redireccion con error
+                response.sendRedirect(request.getContextPath() + "/Perfil?id=" + idPara + "&error=1");
+            } else {
+                // Insertar mensaje en la base de datos
+                fachadaMensajes.crearMensaje(usuarioLogueado.getId(), idPara, titulo, mensaje);
+
+                // Redireccionar con exito al perfil
+                response.sendRedirect(request.getContextPath() + "/Perfil?id=" + idPara + "&exito=0");
+            }
         }
     }
 

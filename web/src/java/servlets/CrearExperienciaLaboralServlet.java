@@ -7,6 +7,7 @@ package servlets;
 
 import app.ejb.ExperienciaLaboralFacade;
 import app.entity.ExperienciaLaboral;
+import app.entity.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -38,88 +39,79 @@ public class CrearExperienciaLaboralServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     @EJB
-     ExperienciaLaboralFacade fachada;
-     
+    @EJB
+    ExperienciaLaboralFacade fachada;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
-        
-     
-        DateFormat format= new SimpleDateFormat("dd/MM/yyyy");
+        Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
 
-         
-        String id= (String)request.getParameter("id");
-        String fechaComienzo = (String) request.getParameter("fechaComienzo");
+        if (usuarioLogueado != null) {
 
-        String puesto= (String) request.getParameter("puesto");
-        String webEmpresa= (String) request.getParameter("webEmpresa");
-         String empresa= (String) request.getParameter("empresa");
-        String fechaFinalizacion = (String) request.getParameter("fechaFinalizacion");
-        
-        int error=0;
+            DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-        
-        if(!fechaComienzo.equals("") && !empresa.equals("") && !puesto.equals("")){
-            
-            ExperienciaLaboral e=null;
-        try {
-            e= new ExperienciaLaboral(Integer.parseInt(id), format.parse(fechaComienzo));
-            
-        } catch (ParseException ex) {
-            Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        if(!fechaFinalizacion.equals("")){
-            
-        try {
-            e.setFechaFinalizacion(format.parse(fechaFinalizacion));
-        } catch (ParseException ex) {
-            Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        }else{
-            e.setFechaFinalizacion(null);
-        }
-        
-        
-        e.setEmpresa(empresa);
-        
-           
-        
-        
-          if(!webEmpresa.equals("")){
-             e.setWebEmpresa(webEmpresa);
-        }else{
-            e.setWebEmpresa(null);
-        }
-          
-           
-        e.setPuesto(puesto);
-        
-        
-            
-           fachada.create(e);//peta
-            fachada.edit(e);
-        }else{
-            
-                error=1;
-            
-            
-            
-        }
-        
-      
-        
-        
-        if(error!=0){ //error 
-            
-             response.sendRedirect(request.getContextPath() + "/crearExperienciaLaboral.jsp?error="+error);
-        }else{
-            
-            response.sendRedirect(request.getContextPath() + "/Perfil");
+            String id = (String) request.getParameter("id");
+            String fechaComienzo = (String) request.getParameter("fechaComienzo");
 
+            String puesto = (String) request.getParameter("puesto");
+            String webEmpresa = (String) request.getParameter("webEmpresa");
+            String empresa = (String) request.getParameter("empresa");
+            String fechaFinalizacion = (String) request.getParameter("fechaFinalizacion");
+
+            int error = 0;
+
+            if (!fechaComienzo.equals("") && !empresa.equals("") && !puesto.equals("")) {
+
+                ExperienciaLaboral e = null;
+                try {
+                    e = new ExperienciaLaboral(Integer.parseInt(id), format.parse(fechaComienzo));
+
+                } catch (ParseException ex) {
+                    Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                if (!fechaFinalizacion.equals("")) {
+
+                    try {
+                        e.setFechaFinalizacion(format.parse(fechaFinalizacion));
+                    } catch (ParseException ex) {
+                        Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                } else {
+                    e.setFechaFinalizacion(null);
+                }
+
+                e.setEmpresa(empresa);
+
+                if (!webEmpresa.equals("")) {
+                    e.setWebEmpresa(webEmpresa);
+                } else {
+                    e.setWebEmpresa(null);
+                }
+
+                e.setPuesto(puesto);
+
+                fachada.create(e);//peta
+                fachada.edit(e);
+            } else {
+
+                error = 1;
+
+            }
+
+            if (error != 0) { //error 
+
+                response.sendRedirect(request.getContextPath() + "/crearExperienciaLaboral.jsp?error=" + error);
+            } else {
+
+                response.sendRedirect(request.getContextPath() + "/Perfil");
+
+            }
+        } else {
+            response.sendRedirect(request.getContextPath());
         }
     }
 

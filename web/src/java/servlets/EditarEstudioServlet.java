@@ -7,6 +7,7 @@ package servlets;
 
 import app.ejb.EstudiosFacade;
 import app.entity.Estudios;
+import app.entity.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -39,121 +40,118 @@ public class EditarEstudioServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      * @throws java.text.ParseException
      */
-    
     @EJB
     EstudiosFacade fachada;
-        
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      HttpSession session = request.getSession();
-        
-     
-        DateFormat format= new SimpleDateFormat("dd/MM/yyyy");
+        HttpSession session = request.getSession();
+        Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
 
-         
-        String id= (String)request.getParameter("id");
-        String fechaComienzoPK = (String) request.getParameter("fechaComienzoPK");
-        String fechaComienzo = (String) request.getParameter("fechaComienzo");
+        if (usuarioLogueado != null) {
 
-        String ubicacion= (String) request.getParameter("ubicacion");
-        String descripcion= (String) request.getParameter("descripcion");
-        String fechaFinalizacion = (String) request.getParameter("fechaFinalizacion");
-        
-        int error=0;
+            DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-         
-        Estudios e=null;
-        try {
-            e = (Estudios) fachada.obtenerEstudioConIdyFecha(id,fechaComienzoPK);
-        } catch (ParseException ex) {
-            Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        if(!fechaFinalizacion.equals("")){
-            
-        try {
-            e.setFechaFinalizacion(format.parse(fechaFinalizacion));
-        } catch (ParseException ex) {
-            Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        }else{
-            e.setFechaFinalizacion(null);
-        }
-        
-        if(!descripcion.equals("")){
-            e.setDescripcion(descripcion);
-        }else{
-            e.setDescripcion(null);
-        }
-        
-          if(!ubicacion.equals("")){
-             e.setUbicacion(ubicacion);
-        }else{
-            e.setUbicacion(null);
-        }
-       
-          fachada.edit(e);
-        
-          //si estoy cambiando la clave primaria elimino y creo un estudio nuevo
-        if(!fechaComienzo.equals("")){
-            
-            if(!fechaComienzoPK.equals(fechaComienzo)){
+            String id = (String) request.getParameter("id");
+            String fechaComienzoPK = (String) request.getParameter("fechaComienzoPK");
+            String fechaComienzo = (String) request.getParameter("fechaComienzo");
+
+            String ubicacion = (String) request.getParameter("ubicacion");
+            String descripcion = (String) request.getParameter("descripcion");
+            String fechaFinalizacion = (String) request.getParameter("fechaFinalizacion");
+
+            int error = 0;
+
+            Estudios e = null;
             try {
-                
-                fachada.borrarEstudio(Integer.parseInt(id), format.parse(fechaComienzoPK));
-                Estudios estudioNuevo= new Estudios(Integer.parseInt(id), format.parse(fechaComienzo));
-                fachada.create(estudioNuevo);
-                fachada.edit(estudioNuevo);
-                fachada.edit(e);
-               if(!fechaFinalizacion.equals("")){
-            
-        try {
-            estudioNuevo.setFechaFinalizacion(format.parse(fechaFinalizacion));
-        } catch (ParseException ex) {
-            Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        }else{
-            estudioNuevo.setFechaFinalizacion(null);
-        }
-        
-        if(!descripcion.equals("")){
-            estudioNuevo.setDescripcion(descripcion);
-        }else{
-            estudioNuevo.setDescripcion(null);
-        }
-        
-          if(!ubicacion.equals("")){
-             estudioNuevo.setUbicacion(ubicacion);
-        }else{
-            estudioNuevo.setUbicacion(null);
-        }
-          
-          fachada.edit(estudioNuevo);
-        } catch (ParseException ex) {
-            Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-            
+                e = (Estudios) fachada.obtenerEstudioConIdyFecha(id, fechaComienzoPK);
+            } catch (ParseException ex) {
+                Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            
-        }else{
-            
-            error=1;
-        }
-        
-      
-        
-        
-        if(error!=0){ //error 
-            
-             response.sendRedirect(request.getContextPath() + "/editarEstudio.jsp?error="+error);
-        }else{
-            
-            response.sendRedirect(request.getContextPath() + "/Perfil");
 
+            if (!fechaFinalizacion.equals("")) {
+
+                try {
+                    e.setFechaFinalizacion(format.parse(fechaFinalizacion));
+                } catch (ParseException ex) {
+                    Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+                e.setFechaFinalizacion(null);
+            }
+
+            if (!descripcion.equals("")) {
+                e.setDescripcion(descripcion);
+            } else {
+                e.setDescripcion(null);
+            }
+
+            if (!ubicacion.equals("")) {
+                e.setUbicacion(ubicacion);
+            } else {
+                e.setUbicacion(null);
+            }
+
+            fachada.edit(e);
+
+            //si estoy cambiando la clave primaria elimino y creo un estudio nuevo
+            if (!fechaComienzo.equals("")) {
+
+                if (!fechaComienzoPK.equals(fechaComienzo)) {
+                    try {
+
+                        fachada.borrarEstudio(Integer.parseInt(id), format.parse(fechaComienzoPK));
+                        Estudios estudioNuevo = new Estudios(Integer.parseInt(id), format.parse(fechaComienzo));
+                        fachada.create(estudioNuevo);
+                        fachada.edit(estudioNuevo);
+                        fachada.edit(e);
+                        if (!fechaFinalizacion.equals("")) {
+
+                            try {
+                                estudioNuevo.setFechaFinalizacion(format.parse(fechaFinalizacion));
+                            } catch (ParseException ex) {
+                                Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                        } else {
+                            estudioNuevo.setFechaFinalizacion(null);
+                        }
+
+                        if (!descripcion.equals("")) {
+                            estudioNuevo.setDescripcion(descripcion);
+                        } else {
+                            estudioNuevo.setDescripcion(null);
+                        }
+
+                        if (!ubicacion.equals("")) {
+                            estudioNuevo.setUbicacion(ubicacion);
+                        } else {
+                            estudioNuevo.setUbicacion(null);
+                        }
+
+                        fachada.edit(estudioNuevo);
+                    } catch (ParseException ex) {
+                        Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+
+            } else {
+
+                error = 1;
+            }
+
+            if (error != 0) { //error 
+
+                response.sendRedirect(request.getContextPath() + "/editarEstudio.jsp?error=" + error);
+            } else {
+
+                response.sendRedirect(request.getContextPath() + "/Perfil");
+
+            }
+        } else {
+            response.sendRedirect(request.getContextPath());
         }
     }
 

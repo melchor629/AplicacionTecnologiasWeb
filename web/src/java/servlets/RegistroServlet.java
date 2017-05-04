@@ -2,7 +2,6 @@
  *
  * @author Rodrigo Represa Represa
  */
-
 package servlets;
 
 import app.cosas.Hash;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-
 @WebServlet(name = "RegistroServlet", urlPatterns = {"/RegistroServlet"})
 public class RegistroServlet extends HttpServlet {
 
@@ -37,67 +35,69 @@ public class RegistroServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-     String nombre =  request.getParameter("nombre");
-     String apellidos = request.getParameter("apellidos");
-     String nombreUsuario = request.getParameter("nombreUsuario");
-     String contraseña1 = request.getParameter("password1");
-     String contraseña2 = request.getParameter("password2");
-     String correo = request.getParameter("correo");
-     String almacheck = request.getParameter("almacheck");
-     String datoscheck = request.getParameter("datoscheck");
-     String hash = app.cosas.Hash.hash(nombreUsuario + ":" + contraseña1);
-     //String datoscheck = request.getParameter("datoschek");
-     String error = "";
-     boolean algoFalla = false;
-     
-     if(nombre.isEmpty()){
-         error = error + "- Campo Nombre obligatorio\n";
-         algoFalla = true;
-     }
-     if(apellidos.isEmpty()){
-         error = error + "- Campo Apellidos obligatorio\n";
-          algoFalla = true;
-     }
-     if( nombreUsuario.isEmpty()){
-         error = error + "- Campo Nombre de Usuario obligatorio\n";
-          algoFalla = true;
-     }
-     if(contraseña1.isEmpty()){
-         error = error + "- Campo Contraseña obligatorio\n";
-          algoFalla = true;
-     }
-     if(contraseña2.isEmpty()){
-         error = error + "- Debe volver a escribir la contraseña\n";
-         algoFalla = true;
-     }
-     if(correo.isEmpty()){
-         error = error + "- Campo Correo obligatorio\n";
-         algoFalla = true;
-     }
-     if(almacheck == null || datoscheck == null ){
-         error = error + "- Debe aceptar los términos\n";
-         algoFalla = true;
-     }else{
-         if(contraseña1.equals(contraseña2)){
-            try{
-                Usuario user = new Usuario(Integer.SIZE, nombre, apellidos, nombreUsuario, hash, correo);
-                u.create(user);
-                HttpSession session = request.getSession();
-                session.setAttribute("usuario", user);
-                response.sendRedirect(request.getContextPath() + "/perfil.jsp");
-            }catch(EJBException e){
-                lanzarError("- Usuario o correo en uso\n", request, response);
-            }
+        String nombre = request.getParameter("nombre");
+        String apellidos = request.getParameter("apellidos");
+        String nombreUsuario = request.getParameter("nombreUsuario");
+        String contraseña1 = request.getParameter("password1");
+        String contraseña2 = request.getParameter("password2");
+        String correo = request.getParameter("correo");
+        String almacheck = request.getParameter("almacheck");
+        String datoscheck = request.getParameter("datoscheck");
+        String hash = app.cosas.Hash.hash(nombreUsuario + ":" + contraseña1);
+        //String datoscheck = request.getParameter("datoschek");
+        String error = "";
+        boolean algoFalla = false;
 
-        }else{
-            String contraseñasDiferentes = "- Los valores de contraseña no coinciden\n"; 
-            lanzarError(contraseñasDiferentes, request, response);
+        if (nombre.isEmpty()) {
+            error = error + "- Campo Nombre obligatorio\n";
+            algoFalla = true;
         }
-     } if (algoFalla) {
-         System.out.println("El error es: " + error);
-         lanzarError(error, request, response);
-     }
+        if (apellidos.isEmpty()) {
+            error = error + "- Campo Apellidos obligatorio\n";
+            algoFalla = true;
+        }
+        if (nombreUsuario.isEmpty()) {
+            error = error + "- Campo Nombre de Usuario obligatorio\n";
+            algoFalla = true;
+        }
+        if (contraseña1.isEmpty()) {
+            error = error + "- Campo Contraseña obligatorio\n";
+            algoFalla = true;
+        }
+        if (contraseña2.isEmpty()) {
+            error = error + "- Debe volver a escribir la contraseña\n";
+            algoFalla = true;
+        }
+        if (correo.isEmpty()) {
+            error = error + "- Campo Correo obligatorio\n";
+            algoFalla = true;
+        }
+        if (almacheck == null || datoscheck == null) {
+            error = error + "- Debe aceptar los términos\n";
+            algoFalla = true;
+        } else {
+            if (contraseña1.equals(contraseña2)) {
+                try {
+                    Usuario user = new Usuario(Integer.SIZE, nombre, apellidos, nombreUsuario, hash, correo);
+                    u.create(user);
+                    HttpSession session = request.getSession();
+                    session.setAttribute("usuario", user);
+                    response.sendRedirect(request.getContextPath() + "/perfil.jsp");
+                } catch (EJBException e) {
+                    lanzarError("- Usuario o correo en uso\n", request, response);
+                }
+
+            } else {
+                String contraseñasDiferentes = "- Los valores de contraseña no coinciden\n";
+                lanzarError(contraseñasDiferentes, request, response);
+            }
+        }
+        if (algoFalla) {
+            System.out.println("El error es: " + error);
+            lanzarError(error, request, response);
+        }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -137,14 +137,12 @@ public class RegistroServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-
-
-private void lanzarError(String error,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    private void lanzarError(String error, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("error", error.replace("\n", "<br/>"));
         RequestDispatcher rd;
         rd = (RequestDispatcher) this.getServletContext().getRequestDispatcher("/registro.jsp");
         rd.forward(request, response);
-        
-}
+
+    }
 
 }

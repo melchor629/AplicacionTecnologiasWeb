@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,27 +36,38 @@ public class BuscarServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String buscar = request.getParameter("buscar");
 
-        List<Usuario> lista;
+        // Sesion HTTP
+        HttpSession session = request.getSession();
 
-        lista = u.buscarUsuarios(buscar);
+        Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
 
-        // HttpSession session = request.getSession();
-        request.setAttribute("resultados", lista);
+        if (usuarioLogueado != null) {
 
-        RequestDispatcher rd;
+            String buscar = request.getParameter("buscar");
 
-        rd = this.getServletContext().getRequestDispatcher("/busqueda.jsp");
-        rd.forward(request, response);
+            List<Usuario> lista;
 
-        /*  if (!lista.isEmpty()){
+            lista = u.buscarUsuarios(buscar);
+
+            // HttpSession session = request.getSession();
+            request.setAttribute("resultados", lista);
+
+            RequestDispatcher rd;
+
+            rd = this.getServletContext().getRequestDispatcher("/busqueda.jsp");
+            rd.forward(request, response);
+
+            /*  if (!lista.isEmpty()){
             for (Usuario aux : lista) {
                 System.out.println("HOLA SOY UN USER Y ESTOY EN EL SERVLET: " + aux.getNombreUsuario()); 
             
             }
         }*/
-        // response.sendRedirect(request.getContextPath() + "/busqueda.jsp");
+            // response.sendRedirect(request.getContextPath() + "/busqueda.jsp");
+        } else {
+            response.sendRedirect(request.getContextPath());
+        }
     }
 
 }

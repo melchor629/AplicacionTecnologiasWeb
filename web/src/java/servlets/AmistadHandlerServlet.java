@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "AmistadHandlerServlet", urlPatterns = {"/AmistadHandlerServlet"})
 public class AmistadHandlerServlet extends HttpServlet {
-
+    
     @EJB
     PeticionAmistadFacade fachadaPeticionAmistad;
     
@@ -48,55 +48,57 @@ public class AmistadHandlerServlet extends HttpServlet {
         String cadenaError = "Ha habido un error inesperado... has modificado los parametros de la url a mano?";
         
         HttpSession session = request.getSession();
-
+        
         Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
         
-        if(usuarioLogueado == null){
-           error = true;
-           cadenaError = "Sesion no iniciada";
-        }
-        else{
-        try{
-        
-        String accion = (String) request.getParameter("tipo");
-        Integer iduser = Integer.parseInt(request.getParameter("iduser"));
-       
-        
-        if(accion.equals("aceptar")){
-            // Aceptar la solicitud de amistad de un usuario
-            // comprobar que el usuario al que la envias no es ya tu amigo ni tu mismo ni le has mandado la peticion ya
-           /* if(id == usuarioLogueado.getId() || fachadaUsuario.sonAmigos(usuarioLogueado.getId(), id) || fachadaPeticionAmistad.peticionMandada(usuarioLogueado.getId(), id)){
+        if (usuarioLogueado == null) {
+            error = true;
+            cadenaError = "Sesion no iniciada";
+        } else {
+            try {
+                
+                String accion = (String) request.getParameter("tipo");
+                Integer iduser = Integer.parseInt(request.getParameter("iduser"));
+                
+                if (accion.equals("aceptar")) {
+                    // Aceptar la solicitud de amistad de un usuario
+                    // comprobar que el usuario al que la envias no es ya tu amigo ni tu mismo ni le has mandado la peticion ya
+                    /* if(id == usuarioLogueado.getId() || fachadaUsuario.sonAmigos(usuarioLogueado.getId(), id) || fachadaPeticionAmistad.peticionMandada(usuarioLogueado.getId(), id)){
                 error = true;
                 cadenaError = "Has intentado mandarte peticion a ti mismo, a un amigo tuyo o alguien que se la has mandado";
             }*/
-           
-           if (fachadaUsuario.sonAmigos(usuarioLogueado.getId(),iduser)){
-               error = true;
-               cadenaError = "Has intentado aceptar la petición de un usuario que ya es tu amigo.";
-               
-           } else{
-               fachadaUsuario.aceptarPeticionAmistad(iduser,usuarioLogueado.getId());
-               fachadaPeticionAmistad.eliminarPeticion(iduser, usuarioLogueado.getId());
-               session.setAttribute("usuario", fachadaUsuario.obtenerUsuarioPorId(usuarioLogueado.getId()));
-               System.out.println(usuarioLogueado.getNombreUsuario() + " ha aceptado a " + fachadaUsuario.obtenerUsuarioPorId(iduser).getNombreUsuario());
-           }
-            
-        } else if(accion.equals("rechazar")){
-          fachadaPeticionAmistad.eliminarPeticion(iduser, usuarioLogueado.getId());
-          session.setAttribute("usuario", fachadaUsuario.obtenerUsuarioPorId(usuarioLogueado.getId()));
-            System.out.println(usuarioLogueado.getNombreUsuario() + " ha rechazado a " + fachadaUsuario.obtenerUsuarioPorId(iduser).getNombreUsuario());
-        }
-        
-        response.sendRedirect(cpath+"/notificaciones.jsp");
-        }
-        catch(Exception E){
-            error = true;
-        }
+                    
+                    if (fachadaUsuario.sonAmigos(usuarioLogueado.getId(), iduser)) {
+                        error = true;
+                        cadenaError = "Has intentado aceptar la petición de un usuario que ya es tu amigo.";
+                        
+                    } else {
+                        fachadaUsuario.aceptarPeticionAmistad(iduser, usuarioLogueado.getId());
+                        fachadaPeticionAmistad.eliminarPeticion(iduser, usuarioLogueado.getId());
+                        session.setAttribute("usuario", fachadaUsuario.obtenerUsuarioPorId(usuarioLogueado.getId()));
+                        System.out.println(usuarioLogueado.getNombreUsuario() + " ha aceptado a " + fachadaUsuario.obtenerUsuarioPorId(iduser).getNombreUsuario());
+                    }
+                    
+                } else if (accion.equals("rechazar")) {
+                    fachadaPeticionAmistad.eliminarPeticion(iduser, usuarioLogueado.getId());
+                    session.setAttribute("usuario", fachadaUsuario.obtenerUsuarioPorId(usuarioLogueado.getId()));
+                    System.out.println(usuarioLogueado.getNombreUsuario() + " ha rechazado a " + fachadaUsuario.obtenerUsuarioPorId(iduser).getNombreUsuario());
+                }
+                
+                response.sendRedirect(cpath + "/notificaciones.jsp");
+            } catch (Exception E) {
+                error = true;
+            }
         }
         if (error) {
-            request.setAttribute("error", cadenaError);
-            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/error.jsp");
-            rd.forward(request, response);
+            
+            if (cadenaError.equals("Sesion no iniciada")) {
+                // redireccion a pagina principal
+                response.sendRedirect(cpath);
+            } else {
+                // Se lanza excepcion indicando el error
+                throw new RuntimeException(cadenaError);
+            }
         }
     }
 

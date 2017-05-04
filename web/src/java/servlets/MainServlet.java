@@ -29,10 +29,10 @@ public class MainServlet extends HttpServlet {
     private EstudiosFacade fachadaEstudios;
     @EJB
     private ExperienciaLaboralFacade fachadaTrabajos;
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
     }
 
     @Override
@@ -40,23 +40,23 @@ public class MainServlet extends HttpServlet {
         String usuario = request.getParameter("usuario");
         String password = request.getParameter("password");
         Usuario uLogged = u.obtenerUsuario(usuario, password);
-        
+
         if (uLogged == null) {
             RequestDispatcher rd;
             request.setAttribute("error", true);
             rd = this.getServletContext().getRequestDispatcher("/index.jsp");
             rd.forward(request, response);
         } else {
-        
-                HttpSession session = request.getSession();
-        
-                session.setAttribute("usuario", uLogged);
-                session.setAttribute("listaAficiones", fachadaAficiones);
-                session.setAttribute("listaEstudios", fachadaEstudios);
-                session.setAttribute("listaTrabajos", fachadaTrabajos);
-                response.sendRedirect(request.getContextPath() + "/perfil.jsp");
+
+            HttpSession session = request.getSession();
+
+            session.setAttribute("usuario", uLogged);
+            session.setAttribute("listaAficiones", fachadaAficiones);
+            session.setAttribute("listaEstudios", fachadaEstudios);
+            session.setAttribute("listaTrabajos", fachadaTrabajos);
+            response.sendRedirect(request.getContextPath() + "/perfil.jsp");
         }
-        
+
     }
-    
- }
+
+}

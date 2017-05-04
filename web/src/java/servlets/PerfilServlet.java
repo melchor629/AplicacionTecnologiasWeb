@@ -29,7 +29,7 @@ public class PerfilServlet extends HttpServlet {
      */
     @EJB
     private UsuarioFacade fachadaUsuario;
-    
+
     @EJB
     private PeticionAmistadFacade fachadaPeticionAmistad;
 
@@ -39,34 +39,33 @@ public class PerfilServlet extends HttpServlet {
 
         Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
 
-        if(usuarioLogueado == null){
+        if (usuarioLogueado == null) {
             response.sendRedirect(request.getContextPath() + "/");
-        }
-        else{
-        String idUsuario = request.getParameter("id");
-
-        if (idUsuario == null || idUsuario.isEmpty() || Integer.parseInt(idUsuario) == usuarioLogueado.getId()) {
-            response.sendRedirect(request.getContextPath() + "/perfil.jsp");
         } else {
-            int id = Integer.parseInt(idUsuario);
-            Usuario usuario = fachadaUsuario.obtenerUsuarioPorId(id);
-            request.setAttribute("otroUsuario", usuario);
-            RequestDispatcher rd;
+            String idUsuario = request.getParameter("id");
 
-            if (usuario != null) {
-                request.setAttribute("amigos", fachadaUsuario.sonAmigos(usuario.getId(), usuarioLogueado.getId()));
-                request.setAttribute("peticionEnviada", fachadaPeticionAmistad.peticionMandada(id, usuarioLogueado.getId()) || fachadaPeticionAmistad.peticionMandada(usuarioLogueado.getId(), id));
-                request.setAttribute("peticionMandadaPorMi", fachadaPeticionAmistad.peticionMandada(usuarioLogueado.getId(), id));
-                rd = this.getServletContext().getRequestDispatcher("/perfil.jsp");
-                rd.forward(request, response);
+            if (idUsuario == null || idUsuario.isEmpty() || Integer.parseInt(idUsuario) == usuarioLogueado.getId()) {
+                response.sendRedirect(request.getContextPath() + "/perfil.jsp");
             } else {
-                request.setAttribute("error", "El usuario solicitado no existe");
-                rd = this.getServletContext().getRequestDispatcher("/error.jsp");
-                rd.forward(request, response);
-            }
+                int id = Integer.parseInt(idUsuario);
+                Usuario usuario = fachadaUsuario.obtenerUsuarioPorId(id);
+                request.setAttribute("otroUsuario", usuario);
+                RequestDispatcher rd;
 
+                if (usuario != null) {
+                    request.setAttribute("amigos", fachadaUsuario.sonAmigos(usuario.getId(), usuarioLogueado.getId()));
+                    request.setAttribute("peticionEnviada", fachadaPeticionAmistad.peticionMandada(id, usuarioLogueado.getId()) || fachadaPeticionAmistad.peticionMandada(usuarioLogueado.getId(), id));
+                    request.setAttribute("peticionMandadaPorMi", fachadaPeticionAmistad.peticionMandada(usuarioLogueado.getId(), id));
+                    rd = this.getServletContext().getRequestDispatcher("/perfil.jsp");
+                    rd.forward(request, response);
+                } else {
+                    request.setAttribute("error", "El usuario solicitado no existe");
+                    rd = this.getServletContext().getRequestDispatcher("/error.jsp");
+                    rd.forward(request, response);
+                }
+
+            }
         }
-    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

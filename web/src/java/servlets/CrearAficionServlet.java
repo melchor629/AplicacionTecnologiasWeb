@@ -7,6 +7,7 @@ package servlets;
 
 import app.ejb.AficionesFacade;
 import app.entity.Aficiones;
+import app.entity.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,36 +34,43 @@ public class CrearAficionServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     @EJB
+    @EJB
     AficionesFacade fachadaAficiones;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String id = (String) request.getParameter("id");
-        String nombre = (String) request.getParameter("nombre");
+        HttpSession session = request.getSession();
+        Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
 
-        int error=0;
-        
-        if(!nombre.equals("")){
-        Aficiones a = new Aficiones(Integer.parseInt(id), nombre);
+        if (usuarioLogueado != null) {
 
-        fachadaAficiones.create(a);
+            String id = (String) request.getParameter("id");
+            String nombre = (String) request.getParameter("nombre");
 
-        fachadaAficiones.edit(a);
-        }else{
-            error=1;
+            int error = 0;
+
+            if (!nombre.equals("")) {
+                Aficiones a = new Aficiones(Integer.parseInt(id), nombre);
+
+                fachadaAficiones.create(a);
+
+                fachadaAficiones.edit(a);
+            } else {
+                error = 1;
+            }
+
+            if (error != 0) { //error 
+
+                response.sendRedirect(request.getContextPath() + "/crearAficion.jsp?error=" + error);
+            } else {
+
+                response.sendRedirect(request.getContextPath() + "/Perfil");
+
+            }
+        } else {
+            response.sendRedirect(request.getContextPath());
         }
-        
-        if(error!=0){ //error 
-            
-             response.sendRedirect(request.getContextPath() + "/crearAficion.jsp?error="+error);
-        }else{
-            
-            response.sendRedirect(request.getContextPath() + "/Perfil");
-
-        }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
