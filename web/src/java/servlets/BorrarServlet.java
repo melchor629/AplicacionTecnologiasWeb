@@ -194,6 +194,8 @@ public class BorrarServlet extends HttpServlet {
             } else {
                 response.sendRedirect(request.getContextPath() + "/perfil.jsp?exito=" + numeroParametroPerfil);
             }
+        }else{
+            response.sendRedirect(request.getContextPath());
         }
     }
 
