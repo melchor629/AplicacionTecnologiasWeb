@@ -176,6 +176,7 @@
 
                 <div class="col-lg-8">
                     <h3>Experiencia laboral</h3>
+                    <a href="<%= cpath%>/crearExperienciaLaboral.jsp" class="btn btn-default btn-flat"> <i class="fa fa-plus"></i>Añadir experiencia laboral</a>
                     <ul class="list-group">
                         <% for (ExperienciaLaboral experiencia : listaExperienciaLaboral) {%>
                         <li class="list-group-item">
@@ -210,7 +211,7 @@
 
                             <% if(request.getAttribute("otroUsuario") == null) { %>
                             <div class="edit-profile-jobs">
-                                <a href="#" class="btn btn-default btn-flat">
+                                <a href="<%= cpath%>/editarTrabajo.jsp?fechaComienzo=<%= fechaInicio%>" class="btn btn-default btn-flat">
                                     <i class="fa fa-pencil"></i> EDITAR
                                 </a>
                                 <a href="<%= cpath%>/Borrar?accion=1&idUsuario=<%= u.getId() %>&fechaComienzo=<%= fechaInicio %>" class="btn btn-primary btn-flat">
@@ -228,6 +229,7 @@
                     </ul>
 
                     <h3>Formación</h3>
+                    <a href="<%= cpath%>/crearEstudio.jsp" class="btn btn-default btn-flat"> <i class="fa fa-plus"></i>Añadir estudio</a>
                     <ul class="list-group">
                         <% for (Estudios estudio : listaEstudios) {%>
                         <li class="list-group-item">
@@ -259,7 +261,7 @@
 
                             <% if(request.getAttribute("otroUsuario") == null) { %>
                             <div class="edit-profile-jobs">
-                                <a href="#" class="btn btn-default btn-flat">
+                                <a href="<%= cpath%>/editarEstudio.jsp?fechaComienzo=<%= fechaInicio %>" class="btn btn-default btn-flat">
                                     <i class="fa fa-pencil"></i> EDITAR
                                 </a>
                                 <a href="<%= cpath%>/Borrar?accion=2&idUsuario=<%= u.getId() %>&fechaComienzo=<%= fechaInicio %>" class="btn btn-primary btn-flat">
@@ -277,6 +279,7 @@
                     </ul>
 
                     <h3>Aficiones</h3>
+                    <a href="<%= cpath%>/crearAficion.jsp" class="btn btn-default btn-flat"> <i class="fa fa-plus"></i>Añadir afición</a>
                     <ul class="list-group">
                         <% for (Aficiones experiencia : listaAficiones) {%>
                         <li class="list-group-item">
@@ -284,7 +287,7 @@
 
                             <% if(request.getAttribute("otroUsuario") == null) { %>
                             <div class="edit-profile-jobs pull-right">
-                                <a href="#" class="btn btn-default btn-flat btn-sm">
+                                <a href="<%= cpath%>/editarAficion.jsp?nombreAficion=<%= experiencia.getAficionesPK().getNombre() %>" class="btn btn-default btn-flat btn-sm">
                                     <i class="fa fa-pencil"></i>
                                 </a>
                                 <a href="<%= cpath%>/Borrar?accion=3&idUsuario=<%= u.getId() %>&nombreAficion=<%= experiencia.getAficionesPK().getNombre() %>" class="btn btn-primary btn-flat btn-sm">
