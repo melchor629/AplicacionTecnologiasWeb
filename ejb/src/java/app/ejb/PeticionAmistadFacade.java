@@ -36,6 +36,17 @@ public class PeticionAmistadFacade extends AbstractFacade<PeticionAmistad> {
     public void mandarPeticionAmistad(int idDesde, int idHacia, String mensaje){
         PeticionAmistad peticion = new PeticionAmistad(idDesde, idHacia);
         peticion.setMensaje(mensaje);
+        //Dado que no funciona el propio new (no guarda las ids de los usuarios en peticion)
+        //Se las pasamos nosotros manualmente
+        peticion.setUsuario(ufacade.obtenerUsuarioPorId(idDesde));
+        peticion.setUsuario1(ufacade.obtenerUsuarioPorId(idHacia));
+        //Buscamos los usuarios y actualizamos sus colecciones.
+        Usuario u1 = ufacade.obtenerUsuarioPorId(idDesde);
+        Usuario u2 = ufacade.obtenerUsuarioPorId(idHacia);
+        
+        u2.getPeticionAmistadCollection1().add(peticion);
+        u1.getPeticionAmistadCollection().add(peticion);
+        
         
         // Se guarda en la base de datos
         getEntityManager().persist(peticion);

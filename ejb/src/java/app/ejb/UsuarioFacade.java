@@ -93,11 +93,11 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         // El usuario que menda la peticion
         Usuario usuario = getEntityManager().find(Usuario.class, idDesde);
         Usuario futuraAmistad = getEntityManager().find(Usuario.class, idHacia);
-        // Se añade el usuario a su lista de amigos
-        usuario.getUsuarioCollection().add(futuraAmistad);
+       
+      
         // Se actualiza la entidad
         this.edit(usuario);
-        
+        // Se añade cada usuario a su respectiva lista de amigos
         u1.getUsuarioCollection1().add(u2);
         u2.getUsuarioCollection1().add(u1);
         
