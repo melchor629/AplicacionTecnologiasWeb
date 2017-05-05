@@ -6,6 +6,7 @@
 package servlets;
 
 import app.ejb.AficionesFacade;
+import app.ejb.UsuarioFacade;
 import app.entity.Aficiones;
 import app.entity.Usuario;
 import java.io.IOException;
@@ -36,6 +37,8 @@ public class CrearAficionServlet extends HttpServlet {
      */
     @EJB
     AficionesFacade fachadaAficiones;
+    @EJB
+    UsuarioFacade fachadaUsuario;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -53,9 +56,12 @@ public class CrearAficionServlet extends HttpServlet {
             if (!nombre.equals("")) {
                 Aficiones a = new Aficiones(Integer.parseInt(id), nombre);
 
-                fachadaAficiones.create(a);
-
-                fachadaAficiones.edit(a);
+                
+                usuarioLogueado.getAficionesCollection().add(a);
+                fachadaUsuario.edit(usuarioLogueado);
+                app.entity.Usuario u= fachadaUsuario.obtenerUsuarioPorId(usuarioLogueado.getId());
+                session.setAttribute("usuario", u);
+                
             } else {
                 error = 1;
             }

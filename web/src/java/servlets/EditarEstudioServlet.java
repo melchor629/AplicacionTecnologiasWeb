@@ -6,6 +6,7 @@
 package servlets;
 
 import app.ejb.EstudiosFacade;
+import app.ejb.UsuarioFacade;
 import app.entity.Estudios;
 import app.entity.Usuario;
 import java.io.IOException;
@@ -41,7 +42,8 @@ public class EditarEstudioServlet extends HttpServlet {
      * @throws java.text.ParseException
      */
     @EJB
-    EstudiosFacade fachada;
+    EstudiosFacade fachadaEstudios;
+    @EJB UsuarioFacade fachadaUsuario;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -64,36 +66,11 @@ public class EditarEstudioServlet extends HttpServlet {
 
             Estudios e = null;
             try {
-                e = (Estudios) fachada.obtenerEstudioConIdyFecha(id, fechaComienzoPK);
+                e = (Estudios) fachadaEstudios.obtenerEstudioConIdyFecha(id, fechaComienzoPK);
             } catch (ParseException ex) {
                 Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            if (!fechaFinalizacion.equals("")) {
-
-                try {
-                    e.setFechaFinalizacion(format.parse(fechaFinalizacion));
-                } catch (ParseException ex) {
-                    Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            } else {
-                e.setFechaFinalizacion(null);
-            }
-
-            if (!descripcion.equals("")) {
-                e.setDescripcion(descripcion);
-            } else {
-                e.setDescripcion(null);
-            }
-
-            if (!ubicacion.equals("")) {
-                e.setUbicacion(ubicacion);
-            } else {
-                e.setUbicacion(null);
-            }
-
-            fachada.edit(e);
 
             //si estoy cambiando la clave primaria elimino y creo un estudio nuevo
             if (!fechaComienzo.equals("")) {
@@ -101,11 +78,10 @@ public class EditarEstudioServlet extends HttpServlet {
                 if (!fechaComienzoPK.equals(fechaComienzo)) {
                     try {
 
-                        fachada.borrarEstudio(Integer.parseInt(id), format.parse(fechaComienzoPK));
+                        fachadaEstudios.borrarEstudio(Integer.parseInt(id), format.parse(fechaComienzoPK));
                         Estudios estudioNuevo = new Estudios(Integer.parseInt(id), format.parse(fechaComienzo));
-                        fachada.create(estudioNuevo);
-                        fachada.edit(estudioNuevo);
-                        fachada.edit(e);
+                        
+                        
                         if (!fechaFinalizacion.equals("")) {
 
                             try {
@@ -130,7 +106,14 @@ public class EditarEstudioServlet extends HttpServlet {
                             estudioNuevo.setUbicacion(null);
                         }
 
-                        fachada.edit(estudioNuevo);
+                       
+                usuarioLogueado.getEstudiosCollection().remove(e);
+                
+                usuarioLogueado.getEstudiosCollection().add(estudioNuevo);
+                fachadaUsuario.edit(usuarioLogueado);
+                app.entity.Usuario u= fachadaUsuario.obtenerUsuarioPorId(usuarioLogueado.getId());
+                session.setAttribute("usuario", u);
+                        
                     } catch (ParseException ex) {
                         Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }

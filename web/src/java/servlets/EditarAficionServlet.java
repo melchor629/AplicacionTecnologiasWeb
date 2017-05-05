@@ -37,6 +37,7 @@ public class EditarAficionServlet extends HttpServlet {
      */
     @EJB
     AficionesFacade fachadaAficiones;
+    @EJB
     UsuarioFacade fachadaUsuario;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -50,15 +51,17 @@ public class EditarAficionServlet extends HttpServlet {
             String nombre = (String) request.getParameter("nombre");
             String nombreOriginal = (String) request.getParameter("nombreOriginal");
 
-            if (!nombre.equals(nombreOriginal)) {
+            
                 Aficiones a = fachadaAficiones.obtenerAficionConIdyNombre(Integer.parseInt(id), nombreOriginal);
-                fachadaAficiones.remove(a);
-
+                fachadaAficiones.borrarAficion(Integer.parseInt(id), nombreOriginal);
+                usuarioLogueado.getAficionesCollection().remove(a);
                 Aficiones nuevaAficion = new Aficiones(Integer.parseInt(id), nombre);
-                fachadaAficiones.create(nuevaAficion);
-                fachadaAficiones.edit(nuevaAficion);
-
-            }
+                usuarioLogueado.getAficionesCollection().add(nuevaAficion);
+                fachadaUsuario.edit(usuarioLogueado);
+                app.entity.Usuario u= fachadaUsuario.obtenerUsuarioPorId(usuarioLogueado.getId());
+                session.setAttribute("usuario", u);
+                        
+           
 
             response.sendRedirect(request.getContextPath() + "/Perfil");
         } else {
