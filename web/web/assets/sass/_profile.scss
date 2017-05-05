@@ -201,6 +201,10 @@ div.profile-options {
         -webkit-box-flex: 0;
         flex: 0 0 100%;
         max-width: 100%;
+
+        > .text-right {
+            margin-bottom: 20px;
+        }
     }
 }
 
