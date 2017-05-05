@@ -57,4 +57,14 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
         // Almacenar mensaje
         getEntityManager().persist(mensaje);
     }
+    
+    public void marcarLeido(int id){
+        /*Query consulta = getEntityManager().createQuery("UPDATE mensaje SET leido = '1' WHERE id = :id");
+        consulta.setParameter("id", id);
+        cantidad = consulta.getResultList().size();*/
+        Mensaje mensaje = getEntityManager().find(Mensaje.class, id);
+        mensaje.setLeido(true);
+        edit(mensaje);
+    }
+
 }

@@ -1,5 +1,3 @@
-<%@page import="app.entity.PeticionAmistad"%>
-<%@page import="javax.management.Query"%>
 <%@page import="app.entity.Usuario"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
@@ -9,6 +7,16 @@
         response.sendRedirect(cpath);
     } else {
       request.setAttribute("pagina", "notificaciones");
+
+
+  Collection<Mensaje> mensajes = u.getMensajeCollection1();
+  Collection<Mensaje> mensajesNo = new ArrayList<Mensaje>();
+
+  for(Mensaje m : mensajes){
+      if(!m.getLeido()){
+          mensajesNo.add(m);
+      }
+  }
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,6 +32,10 @@
 
     <div class="container">
 
+        <%
+            
+            
+            %>
             <%
                 if(request.getParameter("info") != null && !request.getParameter("info").isEmpty()){
                     String mensaje = "S";
@@ -49,14 +61,14 @@
                 %>
 
         <div class="col-sm-6">
-      <h2 class="page-header">Peticiones de amistad <span class="badge"> 
-              
-            
+      <h2 class="page-header">Peticiones de amistad <span class="badge">
+
+
               <!--Se supone que esto debe retornar el número de peticiones que me han enviado-->
-              <%= u.getPeticionAmistadCollection1().size() %> 
-          
-          
-          
+              <%= u.getPeticionAmistadCollection1().size() %>
+
+
+
       </span></h2>
 
             <% for (PeticionAmistad p : u.getPeticionAmistadCollection1()) { %>
@@ -97,9 +109,23 @@
             <% } %>
 
         </div>
+
       
-      
-      <h2 class="page-header">Mensajes <span class="badge">4</span></h2>
+      <h2 class="page-header">Mensajes <span class="badge"><%= mensajesNo.size()%></span></h2>
+
+
+
+      <% for (Mensaje mn : mensajesNo){ %>
+            <p> <%= mn.getIdEmisor().getNombreUsuario() %>
+                <%= mn.getTitulo()%>
+                <%= mn.getTexto()%>
+                <div class="text-right">
+                    <a type="submit" class="btn btn-primary btn-raised" href="<%=cpath%>/MensajeLeidoServlet?id=<%= mn.getId()%>&emisor=<%=mn.getIdEmisor().getId()%>">RESPONDER</a>
+                </div>
+            </p>
+
+      <% } %>
+
       
       
       <%@include file="snippets/footer.jsp"%>
