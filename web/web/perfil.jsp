@@ -179,7 +179,9 @@
 
                 <div class="col-lg-8">
                     <h3>Experiencia laboral</h3>
+                    <% if(request.getAttribute("otroUsuario") == null) { %>
                     <a href="<%= cpath%>/crearExperienciaLaboral.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
+                    <% } %>
                     <ul class="list-group">
                         <% for (ExperienciaLaboral experiencia : listaExperienciaLaboral) {%>
                         <li class="list-group-item">
@@ -232,7 +234,9 @@
                     </ul>
 
                     <h3>Formación</h3>
+                    <% if(request.getAttribute("otroUsuario") == null) { %>
                     <a href="<%= cpath%>/crearEstudio.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
+                    <% } %>
                     <ul class="list-group">
                         <% for (Estudios estudio : listaEstudios) {%>
                         <li class="list-group-item">
@@ -283,7 +287,9 @@
 
                     <div class="clearfix">
                         <h3 class="pull-left">Aficiones</h3>
+                        <% if(request.getAttribute("otroUsuario") == null) { %>
                         <a href="<%= cpath%>/crearAficion.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
+                        <% } %>
                     </div>
                     <ul class="list-group">
                         <% for (Aficiones experiencia : listaAficiones) {%>
