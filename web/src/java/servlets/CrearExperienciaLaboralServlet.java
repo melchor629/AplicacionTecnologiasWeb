@@ -6,6 +6,7 @@
 package servlets;
 
 import app.ejb.ExperienciaLaboralFacade;
+import app.ejb.UsuarioFacade;
 import app.entity.ExperienciaLaboral;
 import app.entity.Usuario;
 import java.io.IOException;
@@ -40,7 +41,10 @@ public class CrearExperienciaLaboralServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @EJB
-    ExperienciaLaboralFacade fachada;
+    ExperienciaLaboralFacade fachadaTrabajo;
+    
+    @EJB
+    UsuarioFacade fachadaUsuario;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -94,8 +98,10 @@ public class CrearExperienciaLaboralServlet extends HttpServlet {
 
                 e.setPuesto(puesto);
 
-                fachada.create(e);//peta
-                fachada.edit(e);
+                usuarioLogueado.getExperienciaLaboralCollection().add(e);
+                        fachadaUsuario.edit(usuarioLogueado);
+                        app.entity.Usuario u= fachadaUsuario.obtenerUsuarioPorId(usuarioLogueado.getId());
+                        session.setAttribute("usuario", u);
             } else {
 
                 error = 1;

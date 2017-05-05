@@ -6,6 +6,7 @@
 package servlets;
 
 import app.ejb.EstudiosFacade;
+import app.ejb.UsuarioFacade;
 import app.entity.Estudios;
 import app.entity.Usuario;
 import java.io.IOException;
@@ -40,7 +41,9 @@ public class CrearEstudioServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @EJB
-    EstudiosFacade fachada;
+    EstudiosFacade fachadaEstudio;
+    @EJB
+    UsuarioFacade fachadaUsuario;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -66,8 +69,8 @@ public class CrearEstudioServlet extends HttpServlet {
                 Estudios e = null;
                 try {
                     e = new Estudios(Integer.parseInt(id), format.parse(fechaComienzo));
-                    fachada.create(e);
-                    fachada.edit(e);
+                    fachadaEstudio.create(e);
+                    fachadaEstudio.edit(e);
                 } catch (ParseException ex) {
                     Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -96,7 +99,10 @@ public class CrearEstudioServlet extends HttpServlet {
                     e.setUbicacion(null);
                 }
 
-                fachada.edit(e);
+              usuarioLogueado.getEstudiosCollection().add(e);
+                fachadaUsuario.edit(usuarioLogueado);
+                app.entity.Usuario u= fachadaUsuario.obtenerUsuarioPorId(usuarioLogueado.getId());
+                session.setAttribute("usuario", u);
             } else {
 
                 error = 1;

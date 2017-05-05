@@ -7,6 +7,7 @@ package servlets;
 
 import app.ejb.EstudiosFacade;
 import app.ejb.ExperienciaLaboralFacade;
+import app.ejb.UsuarioFacade;
 import app.entity.Estudios;
 import app.entity.ExperienciaLaboral;
 import app.entity.Usuario;
@@ -43,6 +44,7 @@ public class EditarTrabajoServlet extends HttpServlet {
      */
     @EJB
     ExperienciaLaboralFacade fachada;
+    @EJB UsuarioFacade uff;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -71,86 +73,59 @@ public class EditarTrabajoServlet extends HttpServlet {
                 Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            if (!fechaFinalizacion.equals("")) {
-
-                try {
-                    e.setFechaFinalizacion(format.parse(fechaFinalizacion));
-                } catch (ParseException ex) {
-                    Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            } else {
-                e.setFechaFinalizacion(null);
-            }
-
-            if (!empresa.equals("")) {
-                e.setEmpresa(empresa);
-            } else {
-                e.setEmpresa(null);
-            }
-
-            if (!webEmpresa.equals("")) {
-                e.setWebEmpresa(webEmpresa);
-            } else {
-                e.setWebEmpresa(null);
-            }
-
-            if (!puesto.equals("")) {
-                e.setPuesto(puesto);
-            } else {
-                e.setPuesto(null);
-            }
-
-            fachada.edit(e);
 
             //si estoy cambiando la clave primaria elimino y creo un estudio nuevo
             if (!fechaComienzo.equals("")) {
 
-                if (!fechaComienzoPK.equals(fechaComienzo)) {
+                
                     try {
 
-                        fachada.borrarExperienciaLaboral(Integer.parseInt(id), format.parse(fechaComienzoPK));
                         ExperienciaLaboral trabajoNuevo = new ExperienciaLaboral(Integer.parseInt(id), format.parse(fechaComienzo));
-                        fachada.create(trabajoNuevo);
-                        fachada.edit(trabajoNuevo);
-                        fachada.edit(e);
+                        
+                        
 
                         if (!fechaFinalizacion.equals("")) {
 
                             try {
-                                e.setFechaFinalizacion(format.parse(fechaFinalizacion));
+                                trabajoNuevo.setFechaFinalizacion(format.parse(fechaFinalizacion));
                             } catch (ParseException ex) {
                                 Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
                             }
 
                         } else {
-                            e.setFechaFinalizacion(null);
+                            trabajoNuevo.setFechaFinalizacion(null);
                         }
 
                         if (!empresa.equals("")) {
-                            e.setEmpresa(empresa);
+                            trabajoNuevo.setEmpresa(empresa);
                         } else {
-                            e.setEmpresa(null);
+                            trabajoNuevo.setEmpresa(null);
                         }
 
                         if (!webEmpresa.equals("")) {
-                            e.setWebEmpresa(webEmpresa);
+                            trabajoNuevo.setWebEmpresa(webEmpresa);
                         } else {
-                            e.setWebEmpresa(null);
+                            trabajoNuevo.setWebEmpresa(null);
                         }
 
                         if (!puesto.equals("")) {
-                            e.setPuesto(puesto);
+                            trabajoNuevo.setPuesto(puesto);
                         } else {
-                            e.setPuesto(null);
+                            trabajoNuevo.setPuesto(null);
                         }
 
-                        fachada.edit(trabajoNuevo);
+                        fachada.borrarExperienciaLaboral(Integer.parseInt(id), format.parse(fechaComienzoPK));
+                        usuarioLogueado.getExperienciaLaboralCollection().remove(e);
+                        usuarioLogueado.getExperienciaLaboralCollection().add(trabajoNuevo);
+                        uff.edit(usuarioLogueado);
+                        app.entity.Usuario u= uff.obtenerUsuarioPorId(usuarioLogueado.getId());
+                        session.setAttribute("usuario", u);
+                        
                     } catch (ParseException ex) {
                         Logger.getLogger(EditarEstudioServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
-                }
+                
 
             } else {
 
