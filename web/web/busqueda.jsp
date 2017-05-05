@@ -109,12 +109,13 @@ else{
                         <h1 style="font-size:6em"><small style="color:black">PRAISE THE</small> SUN</h1>
                     </div>
                 </div>
-                <% } %>
+                <% } 
+                
+            }
+                
+    }%>
 
-                <%}
-
-            %>
-            </div>
+             </div>
 
             <%@include file="snippets/footer.jsp" %>
         </div>
@@ -122,4 +123,4 @@ else{
         <%@include file="snippets/body-end.jsp" %>
     </body>
 </html>
-<%= } >
+
