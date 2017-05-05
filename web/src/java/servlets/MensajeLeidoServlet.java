@@ -8,8 +8,7 @@ package servlets;
 import app.ejb.MensajeFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Usuario;
-import java.io.IOException;
-import java.io.PrintWriter;
+
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  *
@@ -49,7 +49,11 @@ public class MensajeLeidoServlet extends HttpServlet {
         Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
         Usuario prueba = u.obtenerUsuarioPorId(usuarioLogueado.getId());
         session.setAttribute("usuario", prueba);
-        response.sendRedirect(request.getContextPath() + "/Perfil?id="+emisor);
+        if(request.getParameter("descartar") == null) {
+            response.sendRedirect(request.getContextPath() + "/Perfil?id=" + emisor);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/notificaciones.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
