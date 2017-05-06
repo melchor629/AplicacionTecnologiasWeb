@@ -58,7 +58,7 @@
         %>
 
       <!-- Contenido -->
-      <form class="form-horizontal" name="edit" action="<%=cpath%>/EditarTrabajo" method="POST">
+      <form name="edit" action="<%=cpath%>/EditarTrabajo" method="POST">
           
        <div class="form-group">
          <label for="fechaComienzo">Fecha de comienzo</label>

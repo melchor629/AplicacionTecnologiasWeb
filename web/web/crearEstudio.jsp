@@ -7,6 +7,10 @@
   String cpath = request.getContextPath();
   
   Usuario u= (Usuario) session.getAttribute("usuario");
+
+  if(u == null) {
+      response.sendRedirect(cpath);
+  } else {
   String id= u.getId().toString();
   
     EstudiosFacade fachada =(EstudiosFacade) session.getAttribute("listaEstudios");
@@ -50,7 +54,7 @@
         %>
 
       <!-- Contenido -->
-      <form class="form-horizontal" name="edit" action="<%=cpath%>/CrearEstudio" method="POST">
+      <form name="edit" action="<%=cpath%>/CrearEstudio" method="POST">
           
        <div class="form-group">
          <label for="fechaComienzo">Fecha de comienzo</label>
@@ -90,3 +94,4 @@
     <%@include file="snippets/body-end.jsp"%>
   </body>
 </html>
+<% } %>

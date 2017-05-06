@@ -158,7 +158,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-8 col-md-9 row">
+            <div class="col-sm-8 col-md-9 row profile-rest-section">
                 <% if (request.getAttribute("otroUsuario") == null || mostrarPerfil) {
                     // Lista de aficiones
                     Collection<Aficiones> listaAficiones = u.getAficionesCollection();
@@ -182,7 +182,7 @@
                     <% if(request.getAttribute("otroUsuario") == null) { %>
                     <a href="<%= cpath%>/crearExperienciaLaboral.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
                     <% } %>
-                    <ul class="list-group">
+                    <ul class="list-group experiencia">
                         <% for (ExperienciaLaboral experiencia : listaExperienciaLaboral) {%>
                         <li class="list-group-item">
                             <h4><%= experiencia.getPuesto()%></h4>
@@ -237,7 +237,7 @@
                     <% if(request.getAttribute("otroUsuario") == null) { %>
                     <a href="<%= cpath%>/crearEstudio.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
                     <% } %>
-                    <ul class="list-group">
+                    <ul class="list-group estudios">
                         <% for (Estudios estudio : listaEstudios) {%>
                         <li class="list-group-item">
                             <h4><%= estudio.getDescripcion()%></h4>
@@ -291,7 +291,7 @@
                         <a href="<%= cpath%>/crearAficion.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
                         <% } %>
                     </div>
-                    <ul class="list-group">
+                    <ul class="list-group aficiones">
                         <% for (Aficiones experiencia : listaAficiones) {%>
                         <li class="list-group-item">
                             <%= experiencia.getAficionesPK().getNombre()%>
@@ -341,7 +341,7 @@
                 </div>
 
                 <% if(request.getAttribute("otroUsuario") == null) { %>
-                <div class="col-xs-12">
+                <div class="col-xs-12 missatges-rebuts">
                     <h3>Mensajes recibidos</h3>
                     <% for(Mensaje mensaje : u.getMensajeCollection1()) { %>
                     <div class="mensaje row">
@@ -374,7 +374,8 @@
             </div>
 
             <% if (request.getAttribute("otroUsuario") != null && amigos) {%>
-            <div class="clearfix casual">
+            <div class="clearfix"></div>
+            <div class="casual">
                 <div class="col-sm-offset-4 col-md-offset-3">
                     <h3>Mandar mensaje a <%= u.getNombreUsuario()%></h3>
                     <form method="POST" action="<%=cpath%>/Mensaje">

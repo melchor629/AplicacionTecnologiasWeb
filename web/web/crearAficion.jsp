@@ -1,15 +1,13 @@
-<%-- 
-    Document   : editarAficion
-    Created on : 28-abr-2017, 17:50:11
-    Author     : Lucia y Francis
---%>
-
 <%@page import="app.entity.Usuario"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
   String cpath = request.getContextPath();
   
   Usuario u= (Usuario) session.getAttribute("usuario");
+
+  if(u == null) {
+      response.sendRedirect(cpath);
+  } else {
   String id= u.getId().toString();
   
 %>
@@ -47,10 +45,10 @@
             }
         %> 
       <!-- Contenido -->
-       <form class="form-horizontal" name="edit" action="<%=cpath%>/CrearAficion" method="POST">
+       <form name="edit" action="<%=cpath%>/CrearAficion" method="POST">
            
            
-           <textarea class="form-control" rows="3" name="nombre" placeholder="Aficion" value=""></textarea>
+           <textarea class="form-control" rows="3" name="nombre" placeholder="Aficion" ></textarea>
            
            <input type="hidden" value="<%=id %>" name="id">
            
@@ -68,3 +66,4 @@
     <%@include file="snippets/body-end.jsp"%>
   </body>
 </html>
+<% } %>

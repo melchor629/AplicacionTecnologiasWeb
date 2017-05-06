@@ -86,7 +86,21 @@ div.profile-options {
     }
 }
 
+.profile-rest-section {
+    @media(max-width: 767px) {
+        padding-top: 1.6180339887em;
+    }
+}
+
+.aficiones {
+    margin-bottom: 0;
+}
+
 .profile-contacts {
+    @media(max-width: 767px) {
+        padding-top: 1.6180339887em;
+    }
+
     @media(min-width: 768px) {
         &:hover .profile-contact {
             filter: saturate(70%) brightness(0.7);
@@ -101,7 +115,7 @@ div.profile-options {
         margin-bottom: 10px;
 
         @media(min-width: 768px) {
-            margin-bottom: 5px;
+            margin-bottom: 1.6180339887em * 0.5;
             &:hover {
                 filter: saturate(100%) brightness(1);
             }
@@ -131,6 +145,10 @@ div.profile-options {
     position: -webkit-sticky;
     top: 10px;
     z-index: 2
+}
+
+.missatges-rebuts, .casual {
+    padding-top: 1.6180339887em;
 }
 
 .mensaje {
@@ -214,8 +232,12 @@ div.profile-options {
     bottom: 38px;
 
     .clearfix > & {
-        bottom: -18px;
+        bottom: 0;
     }
+}
+
+.col-lg-8 > .clearfix > h3 {
+    margin-top: 0;
 }
 
 

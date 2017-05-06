@@ -41,18 +41,23 @@ public class MensajeLeidoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException { 
-        int id = Integer.parseInt(request.getParameter("id")); 
-        int emisor = Integer.parseInt(request.getParameter("emisor"));
-        m.marcarLeido(id);
-         
         HttpSession session = request.getSession();
         Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
-        Usuario prueba = u.obtenerUsuarioPorId(usuarioLogueado.getId());
-        session.setAttribute("usuario", prueba);
-        if(request.getParameter("descartar") == null) {
-            response.sendRedirect(request.getContextPath() + "/Perfil?id=" + emisor);
+
+        if(usuarioLogueado != null) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            int emisor = Integer.parseInt(request.getParameter("emisor"));
+            m.marcarLeido(id);
+
+            Usuario prueba = u.obtenerUsuarioPorId(usuarioLogueado.getId());
+            session.setAttribute("usuario", prueba);
+            if (request.getParameter("descartar") == null) {
+                response.sendRedirect(request.getContextPath() + "/Perfil?id=" + emisor);
+            } else {
+                response.sendRedirect(request.getContextPath() + "/notificaciones.jsp");
+            }
         } else {
-            response.sendRedirect(request.getContextPath() + "/notificaciones.jsp");
+            response.sendRedirect(request.getContextPath());
         }
     }
 

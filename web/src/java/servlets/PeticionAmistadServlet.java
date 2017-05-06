@@ -52,8 +52,7 @@ public class PeticionAmistadServlet extends HttpServlet {
         Usuario usuarioLogueado = (Usuario) session.getAttribute("usuario");
         
        if(usuarioLogueado == null){
-           error = true;
-           cadenaError = "Sesion no iniciada";
+           response.sendRedirect(request.getContextPath());
         }
         else{
         try{

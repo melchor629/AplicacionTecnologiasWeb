@@ -5,11 +5,11 @@
   
   String nombreAficion = (String) request.getParameter("nombreAficion");
   Usuario u= (Usuario) session.getAttribute("usuario");
-  String id= u.getId().toString();
-  
+
 if(u == null){
     response.sendRedirect(request.getContextPath());
 }else{
+  String id= u.getId().toString();
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -26,7 +26,7 @@ if(u == null){
     <div class="container">
 
       <!-- Contenido -->
-       <form class="form-horizontal" name="edit" action="<%=cpath%>/EditarAficion" method="POST" id="usrform">
+       <form name="edit" action="<%=cpath%>/EditarAficion" method="POST" id="usrform">
            
            
            <textarea class="form-control" form="usrform" rows="3" name="nombre" placeholder="Aficion"><%= nombreAficion %></textarea>
