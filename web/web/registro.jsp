@@ -1,12 +1,3 @@
-<%/*
- *
- * @author Eduardo Guidet Jiménez
- * 
- * 
- */%>
-
-
- 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
     String cpath = request.getContextPath();
@@ -40,7 +31,7 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="nombre" class="col-sm-3 control-label">Nombre</label>
-                        
+                        <div class="col-sm-9">
          
                                                  
                             <% if(error != null) { %>
@@ -51,6 +42,7 @@
                             <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control" autofocus>
                             <% } %>
                             <span class="help-block">Nombre ej.: Evaristo Jos&eacute;</span>
+                        </div>
                         
                     </div>
                     <div class="form-group">
