@@ -17,6 +17,7 @@ import java.io.IOException;
 /**
  *
  * @author Melchor Alejo Garau Madrigal
+ * @author Antonio Ángel Cruzado Castillo
  */
 @WebServlet(name = "PerfilServlet", urlPatterns = {"/Perfil"})
 public class PerfilServlet extends HttpServlet {

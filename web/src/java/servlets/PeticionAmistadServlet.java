@@ -18,6 +18,7 @@ import java.io.IOException;
  * @author Eduardo Guidet Jiménez
  * @author Antonio Ángel Cruzado Castillo
  * @author Melchor Alejo Garau Madrigal
+ * 
  */
 @WebServlet(name = "PeticionAmistadServlet", urlPatterns = {"/PeticionAmistadServlet"})
 public class PeticionAmistadServlet extends HttpServlet {

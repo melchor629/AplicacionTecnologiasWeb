@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * @author Eduardo Guidet Jiménez
- * @author
+ * @author Antonio Ángel Cruzado Castillo
  */
 @WebServlet(name = "AmistadHandlerServlet", urlPatterns = {"/AmistadHandlerServlet"})
 public class AmistadHandlerServlet extends HttpServlet {

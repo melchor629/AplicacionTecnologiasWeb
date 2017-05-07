@@ -16,8 +16,9 @@ import javax.persistence.Query;
 
 /**
  *
- * @author antonio
+ * @author Antonio Ángel Cruzado Castillo
  * //Francisco Reyes Sánchez
+ * 
  */
 @Stateless
 public class EstudiosFacade extends AbstractFacade<Estudios> {

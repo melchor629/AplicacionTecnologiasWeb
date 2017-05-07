@@ -11,7 +11,7 @@ import javax.persistence.Query;
 
 /**
  * @author Eduardo Guidet Jiménez
- * @author antonio
+ * @author Antonio Ángel Cruzado Castillo
  */
 @Stateless
 public class PeticionAmistadFacade extends AbstractFacade<PeticionAmistad> {

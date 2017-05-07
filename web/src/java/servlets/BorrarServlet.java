@@ -25,12 +25,12 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author antonio
+ * @author Antonio Ángel Cruzado Castillo
  *
  * ¡¡ Importante !!
  *
- * Los borrados son delicados por le tema de las referencias. Un objeto no se
- * borra añ no ser que su referencia sea null.
+ * Los borrados son delicados por el tema de las referencias. Un objeto no se
+ * borra al no ser que su referencia sea null.
  *
  * De forma que cuando empleamos JPA y hacemos remove se nos garantiza que la
  * entidad se borra de la BD (normalmente la fila correspondiente).
