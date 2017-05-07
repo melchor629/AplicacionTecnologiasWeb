@@ -1,12 +1,6 @@
-<%/*
- *
- * @author Eduardo Guidet Jiménez
- * 
- * 
- */%>
+<% //Eduardo Guidet Jiménez %>
+<% //Melchor Alejo Garau Madrigal %>
 
-
- 
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
     String cpath = request.getContextPath();

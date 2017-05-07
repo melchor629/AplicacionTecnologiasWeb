@@ -11,9 +11,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
+/**
+ *
+ * @author Melchor Alejo Garau Madrigal
+ */
 @WebServlet(name = "PerfilServlet", urlPatterns = {"/Perfil"})
 public class PerfilServlet extends HttpServlet {
 

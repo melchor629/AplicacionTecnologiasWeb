@@ -1,3 +1,5 @@
+
+
 <%@page import="app.entity.Mensaje" %>
 <%@ page import="app.entity.PeticionAmistad" %>
 <%@ page import="app.entity.Usuario" %>

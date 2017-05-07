@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import app.ejb.PeticionAmistadFacade;
@@ -22,6 +17,7 @@ import java.io.IOException;
 /**
  *
  * @author antonio
+ * @author Melchor Alejo Garau Madrigal
  */
 @WebServlet(name = "PeticionAmistadServlet", urlPatterns = {"/PeticionAmistadServlet"})
 public class PeticionAmistadServlet extends HttpServlet {

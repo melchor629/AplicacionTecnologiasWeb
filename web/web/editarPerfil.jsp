@@ -1,6 +1,7 @@
+<% //Melchor Alejo Garau Madrigal %>
+
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@page import="app.entity.Usuario" %>
-
 <%
     String cpath = request.getContextPath();
     Usuario u = (Usuario) session.getAttribute("usuario");

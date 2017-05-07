@@ -2,6 +2,10 @@ package app.cosas;
 
 import java.security.MessageDigest;
 
+/**
+ *
+ * @author Melchor Alejo Garau Madrigal
+ */
 public class Hash {
     
     

@@ -10,7 +10,8 @@ import java.io.IOException;
  * Ademas añade comodidad ya que en los servlets se puede obtener directamente la cadena
  * que el navegador envia como UTF8 sin tener que hacer la conversion desde ISO (getBytes...).
  *
- * @author antonio
+ * @author Antonio Ángel Cruzado Castillo
+ * @author Melchor Alejo Garau Madrigal
  */
 @WebFilter(filterName = "FiltroUTF8", urlPatterns = {"/*"})
 public class FiltroUTF8 implements Filter {

@@ -1,10 +1,5 @@
-/**
- *
- * @author Rodrigo Represa Represa
- */
 package servlets;
 
-import app.cosas.Hash;
 import app.ejb.UsuarioFacade;
 import app.entity.Usuario;
 
@@ -19,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ *
+ * @author Melchor Alejo Garau Madrigal
+ */
 @WebServlet(name = "RegistroServlet", urlPatterns = {"/RegistroServlet"})
 public class RegistroServlet extends HttpServlet {
 

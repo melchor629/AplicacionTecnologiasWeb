@@ -3,8 +3,6 @@ package servlets;
 import app.ejb.AficionesFacade;
 import app.ejb.EstudiosFacade;
 import app.ejb.ExperienciaLaboralFacade;
-import app.ejb.MensajeFacade;
-import app.ejb.PeticionAmistadFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Usuario;
 
@@ -18,6 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ *
+ * @author Melchor Alejo Garau Madrigal
+ */
 @WebServlet(name = "MainServlet", urlPatterns = {"/Main"})
 public class MainServlet extends HttpServlet {
 

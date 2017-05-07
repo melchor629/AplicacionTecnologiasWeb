@@ -11,7 +11,9 @@ import java.util.List;
 
 /**
  *
- * @author Antonio, Edu
+ * @author Antonio
+ * @author Edu
+ * @author Melchor Alejo Garau Madrigal
  */
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> {

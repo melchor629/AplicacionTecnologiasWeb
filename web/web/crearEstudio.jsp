@@ -3,6 +3,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="app.ejb.EstudiosFacade"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<% //Melchor Alejo Garau Madrigal %>
 <%
   String cpath = request.getContextPath();
   
