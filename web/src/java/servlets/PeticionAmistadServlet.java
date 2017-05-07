@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- *
- * @author antonio
+ * @author Eduardo Guidet Jiménez
+ * @author Antonio Ángel Cruzado Castillo
  * @author Melchor Alejo Garau Madrigal
  */
 @WebServlet(name = "PeticionAmistadServlet", urlPatterns = {"/PeticionAmistadServlet"})

@@ -1,5 +1,6 @@
 <% //Rodrigo Represa Represa %>
 <% //Eduardo Guidet Jiménez %>
+<% //Eduardo Guidet Jiménez %>
 
 <%@page import="app.entity.Mensaje" %>
 <%@ page import="app.entity.PeticionAmistad" %>

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  *
  * @author Antonio
- * @author Edu
+ * @author Eduardo Guidet Jiménez
  * @author Melchor Alejo Garau Madrigal
  */
 @Stateless

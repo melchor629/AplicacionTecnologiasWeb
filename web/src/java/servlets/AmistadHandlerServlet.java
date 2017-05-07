@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author user
+ * @author Eduardo Guidet Jiménez
+ * @author
  */
 @WebServlet(name = "AmistadHandlerServlet", urlPatterns = {"/AmistadHandlerServlet"})
 public class AmistadHandlerServlet extends HttpServlet {

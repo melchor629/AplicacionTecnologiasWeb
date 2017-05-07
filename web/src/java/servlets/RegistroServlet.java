@@ -17,6 +17,7 @@ import java.io.IOException;
 /**
  * @author Rodrigo Represa Represa
  * @author Melchor Alejo Garau Madrigal
+ * @author Eduardo Guidet Jiménez
  */
 @WebServlet(name = "RegistroServlet", urlPatterns = {"/RegistroServlet"})
 public class RegistroServlet extends HttpServlet {

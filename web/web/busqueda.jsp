@@ -1,5 +1,6 @@
 <% //Melchor Alejo Garau Madrigal %>
 <% //Rodrigo Represa Represa %>
+<% //Eduardo Guidet Jiménez %>
 
 <%@page import="app.entity.Estudios" %>
 <%@page import="app.entity.ExperienciaLaboral" %>

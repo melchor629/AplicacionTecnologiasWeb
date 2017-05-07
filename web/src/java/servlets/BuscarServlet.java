@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- *
+ * @author Eduardo Guidet Jiménez
  * @author Melchor Alejo Garau Madrigal
  */
 @WebServlet(name = "BuscarServlet", urlPatterns = {"/BuscarServlet"})

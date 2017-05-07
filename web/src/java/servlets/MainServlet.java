@@ -19,6 +19,7 @@ import java.io.IOException;
 /**
  *
  * @author Melchor Alejo Garau Madrigal
+ * @author Eduardo Guidet Jiménez 
  */
 @WebServlet(name = "MainServlet", urlPatterns = {"/Main"})
 public class MainServlet extends HttpServlet {

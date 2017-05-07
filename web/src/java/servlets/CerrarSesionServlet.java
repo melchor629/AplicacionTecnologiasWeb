@@ -14,8 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author user
+ * @author Eduardo Guidet Jiménez
  */
 @WebServlet(name = "CerrarSesionServlet", urlPatterns = {"/CerrarSesionServlet"})
 public class CerrarSesionServlet extends HttpServlet {

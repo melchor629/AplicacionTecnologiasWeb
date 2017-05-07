@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 /**
- *
+ * @author Eduardo Guidet Jiménez
  * @author antonio
  */
 @Stateless

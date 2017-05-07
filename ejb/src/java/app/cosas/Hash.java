@@ -3,9 +3,9 @@ package app.cosas;
 import java.security.MessageDigest;
 
 /**
- *
  * @author Melchor Alejo Garau Madrigal
- */
+ * @author Eduardo Guidet Jiménez
+*/
 public class Hash {
     
     
