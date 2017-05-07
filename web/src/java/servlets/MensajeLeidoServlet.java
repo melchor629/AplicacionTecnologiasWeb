@@ -15,7 +15,7 @@ import java.io.IOException;
 
 /**
  *
- * @author Rodrii
+ * @author Rodrigo Represa Represa
  * @author Melchor Alejo Garau Madrigal
  */
 @WebServlet(name = "MensajeLeidoServlet", urlPatterns = {"/MensajeLeidoServlet"})

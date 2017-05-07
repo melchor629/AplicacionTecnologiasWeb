@@ -29,6 +29,7 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author Lucia y Francis
+ * La Lucia esa es una hacker!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!O_o
  */
 @WebServlet(name = "EditarTrabajo", urlPatterns = {"/EditarTrabajo"})
 public class EditarTrabajoServlet extends HttpServlet {

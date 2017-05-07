@@ -11,6 +11,7 @@ import javax.persistence.Query;
 /**
  *
  * @author antonio
+ * @author Rodrigo Represa Represa
  */
 @Stateless
 public class MensajeFacade extends AbstractFacade<Mensaje> {

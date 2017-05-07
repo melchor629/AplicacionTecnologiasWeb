@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- *
+ * @author Rodrigo Represa Represa
  * @author Melchor Alejo Garau Madrigal
  */
 @WebServlet(name = "RegistroServlet", urlPatterns = {"/RegistroServlet"})
