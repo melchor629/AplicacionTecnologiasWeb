@@ -4,6 +4,7 @@
 <%@page import="app.ejb.EstudiosFacade"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <% //Melchor Alejo Garau Madrigal %>
+<% //Francisco Reyes Sánchez%>
 <%
   String cpath = request.getContextPath();
   
