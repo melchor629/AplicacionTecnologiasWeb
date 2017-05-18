@@ -72,7 +72,7 @@
 
             <div class="col-sm-4 col-md-3 profile-info-section">
                 <% if (u.getFoto() == null) { %>
-                <img src="<%@include file="snippets/fotoPerfil.txt"%>" class="img-responsive profile-photo"
+                <img src="<%@include file="WEB-INF/fotoPerfil.txt"%>" class="img-responsive profile-photo"
                      alt="Foto de perfil genérico">
                 <% } else {%>
                 <img src="<%=u.getFoto()%>" class="img-responsive profile-photo" alt="Foto de perfil de <%=u.getNombre()%>">
@@ -330,7 +330,7 @@
                                     <% if(contacto.getFoto() != null) { %>
                                      style="background-image: url('<%=contacto.getFoto()%>')"
                                     <% } else { %>
-                                     style="background-image: url('<%@include file="snippets/fotoPerfil.txt"%>')"
+                                     style="background-image: url('<%@include file="WEB-INF/fotoPerfil.txt"%>')"
                                     <% } %>
                                 ></div>
                             </a>
@@ -354,7 +354,7 @@
                                 <% if(mensaje.getIdEmisor().getFoto() != null) { %>
                                  style="background-image: url('<%=mensaje.getIdEmisor().getFoto()%>')"
                                 <% } else { %>
-                                 style="background-image: url('<%@include file="snippets/fotoPerfil.txt"%>')"
+                                 style="background-image: url('<%@include file="WEB-INF/fotoPerfil.txt"%>')"
                                 <% } %>
                             ></div>
                         </div>

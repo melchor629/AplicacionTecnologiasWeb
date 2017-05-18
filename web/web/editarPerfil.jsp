@@ -330,7 +330,7 @@
                 if(url) {
                     $('#foto-cambiame').attr('src', url);
                 } else {
-                    $('#foto-cambiame').attr('src', '<%@include file="snippets/fotoPerfil.txt"%>')
+                    $('#foto-cambiame').attr('src', '<%@include file="WEB-INF/fotoPerfil.txt"%>')
                 }
             });
         });

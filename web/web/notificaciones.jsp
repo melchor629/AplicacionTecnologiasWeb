@@ -83,7 +83,7 @@
                             <% if (p.getUsuario().getFoto() != null) { %>
                          style="background-image: url('<%=p.getUsuario().getFoto()%>')"
                             <% } else { %>
-                         style="background-image: url('<%@include file="snippets/fotoPerfil.txt" %>')"
+                         style="background-image: url('<%@include file="WEB-INF/fotoPerfil.txt" %>')"
                             <% } %>
                     ></div>
                 </div>
@@ -131,7 +131,7 @@
                             <% if(mensaje.getIdEmisor().getFoto() != null) { %>
                          style="background-image: url('<%=mensaje.getIdEmisor().getFoto()%>')"
                             <% } else { %>
-                         style="background-image: url('<%@include file="snippets/fotoPerfil.txt"%>')"
+                         style="background-image: url('<%@include file="WEB-INF/fotoPerfil.txt"%>')"
                             <% } %>
                     ></div>
                 </div>

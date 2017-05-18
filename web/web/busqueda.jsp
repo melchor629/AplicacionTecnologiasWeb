@@ -84,7 +84,7 @@ else{
                                     <img
                                         <% if(aux.getFoto() != null) { %>
                                             src="<%=aux.getFoto()%>" <% } else { %>
-                                            src="<%@include file="snippets/fotoPerfil.txt"%>"
+                                            src="<%@include file="WEB-INF/fotoPerfil.txt"%>"
                                         <% } %>
                                         class="img-responsive result-photo" alt="Foto de perfil de <%=aux.getNombre() %>">
                                 </a>
