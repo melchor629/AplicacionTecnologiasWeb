@@ -21,11 +21,11 @@
                 <span class="navbar-brand">LinkedOut</span>
 
                 <ul class="nav navbar-nav">
-                    <li><!--<%="perfil".equals(request.getAttribute("pagina")) ? "class=\"active\"" : ""%>-->
-                        <a href="perfil.jsp"><i class="fa fa-user" /> <span class="hidden-xs">Mi perfil</span></a>
+                    <li class="#{request.requestURI.contains('perfil') ? 'active' : ''}">
+                        <a href="perfil.jsf"><i class="fa fa-user" /> <span class="hidden-xs">Mi perfil</span></a>
                     </li>
-                    <li> <!--<%="notificaciones".equals(request.getAttribute("pagina")) ? "class=\"active\"" : ""%>-->
-                        <a href="notificaciones.jsp"><i class="fa fa-bell-o" /> <span class="hidden-xs">Notificaciones</span></a>
+                    <li class="#{request.requestURI.contains('notificaciones') ? 'active' : ''}">
+                        <a href="notificaciones.jsf"><i class="fa fa-bell-o" /> <span class="hidden-xs">Notificaciones</span></a>
                     </li>
                 </ul>
             </div>
