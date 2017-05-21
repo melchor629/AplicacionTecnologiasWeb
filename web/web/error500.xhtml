@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Melchor Alejo Garau Madrigal -->
+<!DOCTYPE html>
+<html
+        lang="es"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+    <title>Algo malo nos ha pasado - LinkedOut</title>
+    <meta name="description" content="Muestra un error cuando ha pasado algo malo en el servidor" />
+    <ui:include src="/WEB-INF/head.xhtml" />
+</head>
+
+<body>
+
+    <ui:fragment rendered="#{sesionBean.haIniciadoSesion()}">
+        <ui:include src="/WEB-INF/nav-logged.xhtml" />
+    </ui:fragment>
+    <ui:fragment rendered="#{!sesionBean.haIniciadoSesion()}">
+        <ui:include src="/WEB-INF/nav-unlogged.xhtml" />
+        <style>body > .container { padding-top: 10px; }</style>
+    </ui:fragment>
+
+    <div class="container">
+
+        <div class="text-center">
+            <h1>Algo en nuestra web ha fallado</h1>
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <img src="assets/img/dead logo.png" class="img-responsive" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-3 col-md-6 text-center">
+                    <p class="lead">
+                        Inténtalo de nuevo o espera unos minutos a ver si vuelve a funcionar.
+                        Si el problema persiste, contáctenos.
+                    </p>
+                    <p>
+                        <a href="javascript:history.back()" class="btn btn-raised btn-primary">VOLVER ATRÁS</a>
+                        <a href="#collapseWithError" class="btn btn-raised btn-default" role="button" data-toggle="collapse">
+                            MOSTRAR ERROR
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="collapse" id="collapseWithError">
+            <pre>
+Error:
+#{error505Bean.throwable}
+---
+Stack Trace:
+#{error505Bean.stackTrace}
+---
+Request URI: #{error505Bean.requestUri}
+---
+Servlet name: #{error505Bean.servletName}
+            </pre>
+        </div>
+
+        <ui:include src="/WEB-INF/footer.xhtml" />
+    </div>
+
+    <ui:include src="/WEB-INF/body-end.xhtml" />
+</body>
+</html>
