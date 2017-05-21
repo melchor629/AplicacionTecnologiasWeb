@@ -107,13 +107,27 @@
                 }
             }
 
+            form {
+                height: 50px;
+                transition: height .25s ease-in-out;
+            }
+            form > a {
+                padding: 15px 10px;
+                position: relative;
+                top: 15px
+            }
+
             &:hover, &.active {
                 border-bottom: 5px solid $secondary_color;
-                a, a:hover {
+                a, a:hover, form > a {
                     padding-bottom: 10px;
                     color: $secondary_color;
                     span { color: $secondary_color }
                     background-color: transparent;
+                }
+
+                form {
+                    height: 45px;
                 }
 
                 @media(max-width: 767px) {

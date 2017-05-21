@@ -32,7 +32,9 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="CerrarSesionServlet"><i class="glyphicon glyphicon-log-out" /> Cerrar sesión</a>
+                        <h:form>
+                            <h:commandLink action="#{sesionBean.cerrarSesion}"><i class="glyphicon glyphicon-log-out" /> Cerrar sesión</h:commandLink>
+                        </h:form>
                     </li>
                 </ul>
 
