@@ -20,9 +20,9 @@ public class SesionBean implements Serializable {
      * el ID 0 no existe en la base de datos nunca :)
      */
     private int usuarioID;
-    private String usuario;
-    private String password;
-    private String error = null;
+    private String usuario; //Valor desde formulario jsf
+    private String password; //Valor desde formulario jsf
+    private String error = null; //Valor para index.xhtml
 
     @EJB private UsuarioFacade uf;
 
@@ -44,7 +44,9 @@ public class SesionBean implements Serializable {
 
     /**
      * Comprueba las credenciales del usuario y si son correctas
-     * accedes a tu perfil, si no son correctas, redirije a /index
+     * accedes a tu perfil, si no son correctas, redirije a /index.
+     * Este método se llama por el formulario de WEB-INF/nav-unlogged.xhtml
+     * para intentar iniciar sesión (ve a la linea 21).
      * @return cap a on vaig
      */
     public String iniciarSesion() {
@@ -62,7 +64,8 @@ public class SesionBean implements Serializable {
     }
 
     /**
-     * Cierra sesión, si hay una sesión iniciada
+     * Cierra sesión, si hay una sesión iniciada. Se llama desde el formulario
+     * de WEB-INFO/nav-logged.xhtml para cerrar sesión (ve a la linea 41).
      * @return a /index si se ha cerrado sesión o a la página a la que está
      */
     public String cerrarSesion() {
@@ -77,6 +80,8 @@ public class SesionBean implements Serializable {
 
 
     /// GETTERS & SETTERS \\\
+    //Si no se definen, desde JSF no podremos acceder a ellos
+    //y eso seria malo :(
     public String getUsuario() {
         return usuario;
     }
