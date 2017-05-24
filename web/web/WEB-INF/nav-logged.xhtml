@@ -42,13 +42,15 @@
                     <div class="input-group">
                         <h:inputText p:placeholder="Buscar a..." p:class="form-control" value="#{buscarBean.busqueda}" />
                         <span class="input-group-btn">
+                            <!-- Uso la biblioteca Passthrough para que el botón sea un button en lugar de un input[type="submit"] -->
+                            <!-- En nuestra web, todos los botones van a tener que ser así, en lugar de <h:commandButton> -->
                             <button type="submit" p:id="buscar" class="btn btn-default" jsf:action="#{buscarBean.buscar()}">
                                 <i class="fa fa-search" />
                             </button>
                         </span>
                     </div>
                 </h:form>
-            </div><!--/.navbar-collapse -->
+            </div>
         </div>
     </nav>
 
