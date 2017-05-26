@@ -53,5 +53,20 @@
       </div>
 
     <ui:include src="/WEB-INF/body-end.xhtml" />
+
+    <ui:fragment rendered="#{sesionBean.error != null}">
+        <script>
+            $(function() {
+                if($(window).width() < 768) $('.navbar-header').find('button').click();
+                setTimeout(function() {
+                    $('.navbar-form').popover({
+                        content: '#{sesionBean.error}',
+                        placement: 'bottom',
+                        trigger: 'manual'
+                    }).popover('show');
+                }, 0);
+            });
+        </script>
+    </ui:fragment>
 </body>
 </html>        
