@@ -1,5 +1,7 @@
 package beans;
 
+import app.ejb.MensajeFacade;
+import app.ejb.PeticionAmistadFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Usuario;
 
@@ -25,6 +27,8 @@ public class SesionBean implements Serializable {
     private String error = null; //Valor para index.xhtml
 
     @EJB private UsuarioFacade uf;
+    @EJB private PeticionAmistadFacade paf;
+    @EJB private MensajeFacade mf;
 
     /**
      * @return {@code true} si esa persona ha iniciado sesión
@@ -77,6 +81,10 @@ public class SesionBean implements Serializable {
             //Esto indica que redirija a la página a la que está
             return null;
         }
+    }
+
+    public int obtenerCantidadNotificaciones() {
+        return paf.peticionesRecibidas(usuarioID) + mf.mensajesSinLeer(usuarioID);
     }
 
 

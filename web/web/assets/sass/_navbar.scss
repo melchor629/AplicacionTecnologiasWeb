@@ -138,6 +138,25 @@
                     }
                 }
             }
+
+            &.notificaciones > a {
+                .badge {
+                    position: relative;
+                    bottom: 8px;
+                    font-size: 8px;
+                    padding: 2px 4px;
+                    left: -8px;
+                    background-color: $accent_color;
+                    color: #444;
+
+                    &:hover { color: #444 }
+                }
+
+                span:nth-child(3) {
+                    position: relative;
+                    right: 10px;
+                }
+            }
         }
     }
 }

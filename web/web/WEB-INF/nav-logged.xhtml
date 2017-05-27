@@ -24,8 +24,14 @@
                     <li class="#{request.requestURI.contains('perfil') ? 'active' : ''}">
                         <a href="perfil.jsf"><i class="fa fa-user" /> <span class="hidden-xs">Mi perfil</span></a>
                     </li>
-                    <li class="#{request.requestURI.contains('notificaciones') ? 'active' : ''}">
-                        <a href="notificaciones.jsf"><i class="fa fa-bell-o" /> <span class="hidden-xs">Notificaciones</span></a>
+                    <li class="#{request.requestURI.contains('notificaciones') ? 'active' : ''} notificaciones">
+                        <a href="notificaciones.jsf">
+                            <i class="fa fa-bell-o" />
+                            <ui:fragment rendered="#{sesionBean.obtenerCantidadNotificaciones()>0}">
+                                <span class="badge">#{sesionBean.obtenerCantidadNotificaciones()}</span>
+                            </ui:fragment>
+                            <span class="hidden-xs">Notificaciones</span>
+                        </a>
                     </li>
                 </ul>
             </div>
