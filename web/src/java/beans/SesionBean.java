@@ -56,6 +56,7 @@ public class SesionBean implements Serializable {
         this.password = null;
         if(u != null) {
             this.usuarioID = u.getId();
+            this.error = null;
             return "perfil";
         } else {
             this.error = "El usuario o la contraseña son incorrectas";
