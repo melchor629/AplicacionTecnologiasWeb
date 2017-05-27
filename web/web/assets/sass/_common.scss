@@ -241,3 +241,22 @@ footer {
         font-size: 12px;
     }
 }
+
+//jsf
+#javax_faces_developmentstage_messages {
+    position: fixed;
+    width: 33.333333333%;
+    height: auto;
+    top: 70px;
+    left: 20px;
+    background: white;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    padding: 10px 10px 10px 30px;
+
+    &:before {
+        content: 'Mensajes de JSF';
+        font-size: 16px;
+        font-weight: bold;
+    }
+}
