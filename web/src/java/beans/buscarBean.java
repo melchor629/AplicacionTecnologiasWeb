@@ -36,6 +36,7 @@ public class buscarBean {
     private String busqueda;
     private List<Usuario> resultadoBusqueda;
     
+    
     public buscarBean() {
     }
 
@@ -52,7 +53,7 @@ public class buscarBean {
                                 return o2.getExperienciaLaboralPK().getFechaComienzo().compareTo(o1.getExperienciaLaboralPK().getFechaComienzo());
             }
         });
-        return experiencia.iterator().next();
+        return experiencia.get(0);
     }
     
     public Estudios obtenerEstudio(Usuario u){
@@ -63,7 +64,7 @@ public class buscarBean {
                 return o2.getEstudiosPK().getFechaComienzo().compareTo(o1.getEstudiosPK().getFechaComienzo());
             }
         });
-        return estudios.iterator().next();
+        return estudios.get(0);
     }
     
      public String getBusqueda() {
