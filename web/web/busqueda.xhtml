@@ -6,7 +6,8 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 <head>
     <title>Resultados Búsqueda - LinkedOut</title>
     <meta name="description" content="Descripcion de la pagina" />
@@ -20,6 +21,47 @@
     <div class="container">
 
         <ui:repeat value="#{buscarBean.resultadoBusqueda}" var="usuario" rendered="#{!buscarBean.resultadoBusqueda.isEmpty()}">
+         <div class="result-card-container col-sm-6 col-lg-4">
+                    <div class="panel panel-default result-card">
+                        <div class="panel-body">
+                            <div class="col-xs-8 result-info-container">
+                                <a href="perfilBean">
+                                    <h4 class="result-name">
+                                        #{usuario.nombre}
+                                    </h4>
+                                </a>
+                                <p class="result-users">
+                                    <a href="busqueda.jsf">
+                                        <small>#{usuario.nombreUsuario}</small>
+                                    </a>
+                                </p>
+                                <h:head class="result-info-jobs" rendered="#{!usuario.experienciaLaboralCollection.isEmpty()}">
+                                    <h:head class="result-info-jobs" rendered="#{buscarBean.obtenerExperienciaLaboral(usuario).getFechaFinalizacion() == null}">Trabaja como:</h:head>
+                                    <h:head class="result-info-jobs" rendered="#{buscarBean.obtenerExperienciaLaboral(usuario).getFechaFinalizacion() != null}">Trabajó como:</h:head>    
+                                     #{buscarBean.obtenerExperienciaLaboral(usuario).getPuesto()} en 
+                                     #{buscarBean.obtenerExperienciaLaboral(usuario).getEmpresa()}
+                   
+                                </h:head>
+                                <p class="result-info-jobs" rendered="#{!usuario.estudiosCollection.isEmpty()}">
+                                    <h:head class="result-info-jobs" rendered="#{buscarBean.obtenerEstudio(usuario).getFechaFinalizacion() == null}">Estudia:</h:head>
+                                    <h:head class="result-info-jobs" rendered="#{buscarBean.obtenerEstudio(usuario).getFechaFinalizacion() != null}">Estudió en:</h:head>    
+                                     #{buscarBean.obtenerEstudio(usuario).getDescripcion()} en 
+                                     #{buscarBean.obtenerEstudio(usuario).getUbicacion()}
+                                    <!--{buscarBean.obtenerEstudio(usuario)}-->
+                                    <!--{buscarBean.obtenerExperienciaLaboral(usuario)}-->
+                                    <!--e.getFechaFinalizacion() == null ? "Trabaja como" : "Trabajó como"%> <%= e.getPuesto() -->
+                                </p> 
+                            </div>
+
+                            <div class="col-xs-4 result-photo-container">
+                                <a href="busqueda.jsf"> 
+                                    <img src="#{usuario.getFoto()}" rendered="#{usuario.getFoto() != null}" class="img-responsive result-photo" alt="Foto de perfil de #{usuario.getNombre()}"> </img>
+                                    <img src="WEB-INF/fotoPerfil.txt" rendered="#{usuario.getFoto() == null}" class="img-responsive result-photo" alt="Foto de perfil de #{usuario.getNombre()}"></img>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         
         </ui:repeat>
         
