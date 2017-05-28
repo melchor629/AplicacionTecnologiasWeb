@@ -9,7 +9,7 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:jsf="http://xmlns.jcp.org/jsf">
 <head>
-    <title>Creando Estudios - LinkedOut</title>
+    <title>Creando Experiencia Laboral - LinkedOut</title>
     <meta name="description" content="Descripcion de la pagina" />
     <ui:include src="/WEB-INF/head.xhtml" />
 </head>
@@ -20,9 +20,9 @@
 
     <div class="container">
         
-        <ui:fragment rendered="#{crearEstudioBean.msgError != null}">
+        <ui:fragment rendered="#{crearExperienciaBean.msgError != null}">
         <div class="alert alert-danger">
-            #{crearEstudioBean.msgError}
+            #{crearExperienciaBean.msgError}
         </div>
         </ui:fragment>
 
@@ -32,7 +32,7 @@
           
        <div class="form-group">
          <label for="fechaComienzo">Fecha de comienzo</label>
-         <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{crearEstudioBean.fechaComienzo}">
+         <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{crearExperienciaBean.fechaComienzo}">
              <f:convertDateTime pattern="dd/MM/yyyy"/> 
          </h:inputText>
 
@@ -40,32 +40,38 @@
        
            <div class="form-group">
          <label for="fechaFinalizacion">Fecha de finalización</label>
-         <h:inputText p:type="date" p:class="form-control" id="fechaFinalizacion" p:placeholder="Fecha de finalización" value="#{crearEstudioBean.fechaFinalizacion}">
+         <h:inputText p:type="date" p:class="form-control" id="fechaFinalizacion" p:placeholder="Fecha de finalización" value="#{crearExperienciaBean.fechaFinalizacion}">
               <f:convertDateTime pattern="dd/MM/yyyy"/> 
          </h:inputText>
           </div>
            
 
           <div class="form-group">
-         <label for="descripcion">Descripción</label>
-         <h:inputText p:type="text" p:class="form-control" id="descripcion" p:placeholder="Descripción" value="#{crearEstudioBean.descripcion}">
+         <label for="descripcion">Empresa</label>
+         <h:inputText p:type="text" p:class="form-control" id="empresa" p:placeholder="Empresa" value="#{crearExperienciaBean.empresa}">
          
          </h:inputText>
        </div>
       
 
            <div class="form-group">
-         <label for="ubicacion">Ubicación</label>
-         <h:inputText p:type="text" p:class="form-control" id="ubicacion" p:placeholder="Ubicación" value="#{crearEstudioBean.ubicacion}">
+         <label for="ubicacion">Puesto</label>
+         <h:inputText p:type="text" p:class="form-control" id="puesto" p:placeholder="Puesto" value="#{crearExperienciaBean.puesto}">
          </h:inputText>
        </div>
+            
+             <div class="form-group">
+         <label for="ubicacion">Web Empresa</label>
+         <h:inputText p:type="text" p:class="form-control" id="webEmpresa" p:placeholder="Web de la Empresa" value="#{crearExperienciaBean.webEmpresa}">
+         </h:inputText>
+       </div>      
      
 
             
        
        <div class="form-group edit-profile-form-group">
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-raised" jsf:action="#{crearEstudioBean.crear()}">GUARDAR</button>
+                    <button type="submit" class="btn btn-primary btn-raised" jsf:action="#{crearExperienciaBean.crear()}">GUARDAR</button>
                     <a href="perfil.jsf" class="btn btn-default btn-raised">CANCELAR</a>
                 </div>
             </div>
