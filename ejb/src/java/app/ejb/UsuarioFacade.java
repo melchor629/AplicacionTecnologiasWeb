@@ -72,7 +72,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         return usuario;
     }
     
-  
+ 
     public boolean sonAmigos(int id1, int id2) {
         /* Query consulta = getEntityManager().createQuery("SELECT amistad FROM Contactos amistad WHERE (amistad.idUsuario = :id1 AND amistad.Amigo = :id2) OR (amistad.idUsuario = :id2 AND amistad.Amigo = :id1)");
         consulta.setParameter("id1", id1);

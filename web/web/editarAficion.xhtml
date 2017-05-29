@@ -23,7 +23,7 @@
         <!-- Contenido -->
        <h:form>
 
-           <h:inputTextarea class="form-control"  rows="3" p:placeholder="hola" 
+           <h:inputTextarea class="form-control"  rows="3" p:placeholder="#{editarAficionBean.aficion.aficionesPK.nombre}" 
                             value="#{editarAficionBean.aficion.aficionesPK.nombre}"></h:inputTextarea>
            <span class="input-group-btn">
                 <button type="submit" p:id="buscar" class="btn btn-default" jsf:action="#{buscarBean.buscar()}">

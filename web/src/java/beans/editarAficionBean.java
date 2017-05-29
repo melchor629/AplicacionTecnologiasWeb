@@ -29,7 +29,7 @@ public class editarAficionBean {
     private SesionBean sb;
     @EJB
     private AficionesFacade af;
-    
+    private String nombre;
     private Aficiones aficion;
     
     public editarAficionBean() {
@@ -37,6 +37,7 @@ public class editarAficionBean {
     
     public String editar(String nombre){
         this.aficion = af.obtenerAficionConIdyNombre(sb.obtenerUsuario().getId(), nombre);
+        this.nombre = aficion.getAficionesPK().getNombre();
         return "editarAficion";
     }
 
@@ -48,6 +49,10 @@ public class editarAficionBean {
         this.aficion = aficion;
     }
     
-    
+    public String doGuardar(){
+        aficion.getAficionesPK().setNombre(nombre);
+        af.edit(aficion);
+        return "perfil.jsf";
+    }
     
 }
