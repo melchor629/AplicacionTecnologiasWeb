@@ -79,7 +79,10 @@
             &::-webkit-input-placeholder { color: $color }
             &::-moz-placeholder { color: $color }
             &:-ms-input-placeholder { color: $color }
-            //&[placeholder] { color: $color }
+        }
+
+        .input-group {
+            margin-right: -36px;
         }
     }
 
@@ -136,6 +139,25 @@
                         padding-bottom: 7px;
                         padding-top: 7px;
                     }
+                }
+            }
+
+            &.notificaciones > a {
+                .badge {
+                    position: relative;
+                    bottom: 8px;
+                    font-size: 8px;
+                    padding: 2px 4px;
+                    left: -8px;
+                    background-color: $accent_color;
+                    color: #444;
+
+                    &:hover { color: #444 }
+                }
+
+                span:nth-child(3) {
+                    position: relative;
+                    right: 10px;
                 }
             }
         }
