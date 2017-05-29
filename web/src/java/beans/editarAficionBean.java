@@ -5,7 +5,10 @@
  */
 package beans;
 
+import app.ejb.AficionesFacade;
+import app.ejb.UsuarioFacade;
 import app.entity.Aficiones;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
@@ -24,6 +27,8 @@ public class editarAficionBean {
      */
     @Inject
     private SesionBean sb;
+    @EJB
+    private AficionesFacade af;
     
     private Aficiones aficion;
     
@@ -31,9 +36,18 @@ public class editarAficionBean {
     }
     
     public String editar(String nombre){
-        for(Aficiones af : sb.obtenerUsuario().getAficionesCollection()){
-            if(af.)
-        }
+        this.aficion = af.obtenerAficionConIdyNombre(sb.obtenerUsuario().getId(), nombre);
+        return "editarAficion";
     }
+
+    public Aficiones getAficion() {
+        return aficion;
+    }
+
+    public void setAficion(Aficiones aficion) {
+        this.aficion = aficion;
+    }
+    
+    
     
 }
