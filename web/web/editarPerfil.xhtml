@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html
+    lang="es"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<head>
+    <title>Editar Perfil - LinkedOut</title>
+    <meta name="description" content="Descripcion de la pagina" />
+    <ui:include src="/WEB-INF/head.xhtml" />
+</head>
+
+<body>
+
+    <ui:include src="/WEB-INF/nav-logged.xhtml" />
+
+    <div class="container">
+        
+        <h1 class="text-center">Editando perfil de #{editarPerfilBean.usuario.nombreUsuario}</h1>
+        
+        <h:outputText value=" #{editarPerfilBean.error}" p:class="alert alert-danger" rendered="#{editarPerfilBean.error != null}" />
+              <br/>
+              
+        
+        <h:form class="form-horizontal">
+            
+             <div class="row">
+                 <div class="col-sm-6 col-xs-12">
+              
+                     <div class="form-group edit-profile-form-group">
+                     <h:outputLabel for="nombreUsuario" p:class="col-sm-3 control-label" value="Nombre Usuario"/>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-user-o"></i></div>
+                            <h:inputText id="nombreUsuario" class="form-control" value="#{editarPerfilBean.usuario.nombreUsuario}" p:placeholder="Nombre Usuario"/><br/>
+                        </div>
+                     </div>
+                     
+                     <div class="form-group edit-profile-form-group">
+                     <h:outputLabel for="nombre" class="col-sm-3 control-label" value="Nombre"/>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
+                            <h:inputText  id="nombre" class="form-control" value="#{editarPerfilBean.usuario.nombre}" p:placeholder="Nombre"/>
+                        </div>
+                     </div>
+                     
+                     <div class="form-group edit-profile-form-group">
+                     <h:outputLabel for="apellidos" class="col-sm-3 control-label" value="Apellidos"/>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
+                            <h:inputText  id="apellidos" class="form-control"  value="#{editarPerfilBean.usuario.apellidos}" p:placeholder="Apellidos"/>
+                        </div>
+                     </div>
+                     
+                     <div class="form-group edit-profile-form-group">
+                     <h:outputLabel for="correo" class="col-sm-3 control-label" value="Correo"/>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                            <h:inputText p:type="email" id="correo" class="form-control" value="#{editarPerfilBean.usuario.correo}" p:placeholder="Correo"/>
+                        </div>
+                     </div>
+                     
+                      <!-- mostrar contraseña siempre en blanco y comprobar que son iguales -->
+                    <div class="form-group edit-profile-form-group">
+                      <h:outputLabel for="password1" class="col-sm-3 control-label" value="Contraseña"/>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                            <h:inputSecret id="password1" class="form-control"  value="#{editarPerfilBean.contraseñaNueva}" p:placeholder="Contraseña"/>
+                        </div>
+                        <div class="col-sm-9 col-sm-offset-3 pad">
+                            <span class="help-block">Para cambiar la contraseña, solo tienes que escribir la nueva contraseña aquí</span>
+                        </div>
+                    </div>
+
+                      <div class="form-group edit-profile-form-group">
+                      <h:outputLabel for="password2" class="col-sm-3 control-label" value="Repetir Contraseña"/>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                            <h:inputSecret id="password2" class="form-control"  value="#{editarPerfilBean.contraseñaRepetida}" p:placeholder="Repetir contraseña"/>
+                        </div>
+                        <div class="col-sm-9 col-sm-offset-3 pad">
+                            <span class="help-block">No olvides repetir la contraseña para asegurarnos de que la has escrito bien</span>
+                        </div>
+                      </div>
+                      
+                 </div>
+                     
+                 <div class="col-sm-6 col-xs-12">
+                     
+                     <!-- primero muestro la foto despues el campo de texto para cambiar la foto -->
+                     <div class="form-group edit-profile-form-group text-center">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <img src="#{editarPerfilBean.usuario.foto}" width="100%" id="foto-cambiame" class="profile-photo profile-photo-small"></img>
+                        </div>
+                    </div>
+                     
+                     <div class="form-group edit-profile-form-group">
+                         <h:outputLabel for="foto" class="col-sm-3 control-label" value="Foto"/>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-picture-o"></i></div>
+                            <h:inputText id="foto" class="form-control" value="#{editarPerfilBean.usuario.foto}" p:placeholder="Foto"/>
+                        </div>
+                    </div>
+                     
+                     
+                     <div class="form-group edit-profile-form-group">
+                         <h:outputLabel for="twitter" class="col-sm-3 control-label" value="Twitter"/>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-twitter"></i></div>
+                            <h:inputText  id="twitter" class="form-control" value="#{editarPerfilBean.usuario.twitter}" p:placeholder="Twitter"/>
+                        </div>
+                    </div>
+                     
+                    
+                     <div class="form-group edit-profile-form-group">
+                         <h:outputLabel for="instagram" class="col-sm-3 control-label" value="Instagram"/>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-instagram"></i></div>
+                            <h:inputText  id="instagram" class="form-control"  value="#{editarPerfilBean.usuario.instagram}" p:placeholder="Instagram"/>
+                        </div>
+                    </div>
+                     
+                     
+                     
+                     <div class="form-group edit-profile-form-group">
+                     <h:outputLabel for="web" p:class="col-sm-3 control-label" value="Web"/>
+                        <div class="col-sm-9 input-group">
+                            <div class="input-group-addon"><i class="fa fa-globe"></i></div>
+                            <h:inputText id="web" p:class="form-control" value="#{editarPerfilBean.usuario.web}" p:placeholder="Web"/><br/>
+                        </div>
+                    </div>
+                     
+                    </div>
+                 </div>
+            
+            
+             
+             <div class="form-group edit-profile-form-group">
+                <div class="text-center">
+                    <h:commandButton action="#{editarPerfilBean.doGuardar()}" class="btn btn-primary btn-raised" value="GUARDAR"/>
+                    <a href="/perfil.jsf" class="btn btn-default btn-raised">CANCELAR</a>
+                </div>
+            </div>
+            
+        </h:form>
+        
+        <ui:include src="/WEB-INF/footer.xhtml" />
+    </div>
+
+    <ui:include src="/WEB-INF/body-end.xhtml" />
+</body>
+</html>

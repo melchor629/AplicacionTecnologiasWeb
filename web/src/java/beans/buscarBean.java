@@ -41,6 +41,9 @@ public class buscarBean {
     }
 
     public String buscar(){
+        if(busqueda == null){
+            busqueda = "";
+        }
         this.resultadoBusqueda = uf.buscarUsuarios(this.busqueda);
         return "busqueda";
     }
