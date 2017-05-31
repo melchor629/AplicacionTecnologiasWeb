@@ -20,7 +20,7 @@ import javax.inject.Inject;
  */
 @Named
 @RequestScoped
-public class editarAficionBean {
+public class EditarAficionBean {
 
     /**
      * Creates a new instance of editarAficionBean
@@ -32,7 +32,7 @@ public class editarAficionBean {
     private String nombre;
     private Aficiones aficion;
     
-    public editarAficionBean() {
+    public EditarAficionBean() {
     }
     
     public String editar(String nombre){
