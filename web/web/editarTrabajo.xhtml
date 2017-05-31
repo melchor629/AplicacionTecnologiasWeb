@@ -19,7 +19,55 @@
 
     <div class="container">
 
-        <!-- Contenido -->
+       <!-- Error con las contraseñas-->
+       <ui:fragment rendered="#{editarTrabajoBean.error != null}">
+            <div class="col-xs-12"> 
+                <h:outputText value=" #{editarTrabajoBean.error}" p:class="alert alert-danger"/>
+              <br/>            
+            </div>
+        </ui:fragment>
+        
+       <h:form>
+           
+           <div class="form-group">
+               <h:outputLabel for="fechaComienzo" value="Fecha de comienzo"/>
+               <h:inputText p:type="Date" class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{editarTrabajoBean.trabajo.experienciaLaboralPK.fechaComienzo}">
+                   <f:convertDateTime pattern="dd/MM/yyyy" />
+               </h:inputText>
+       </div>
+           
+           <div class="form-group">
+               <h:outputLabel for="fechaFinalizacion" value="Fecha de finalización"/>
+               <h:inputText p:type="Date" class="form-control" id="fechaFinalizacion" p:placeholder="Fecha de finalización" value="#{editarTrabajoBean.trabajo.fechaFinalizacion}">
+                   <f:convertDateTime pattern="dd/MM/yyyy" />
+               </h:inputText>
+       </div>
+           
+            <div class="form-group">
+                <h:outputLabel for="empresa" value="Empresa"/>
+                <h:inputText  class="form-control" id="empresa"  p:placeholder="Empresa" value="#{editarTrabajoBean.trabajo.empresa}"/>
+       </div>
+           
+           <div class="form-group">
+               <h:outputLabel for="puesto" value="Puesto"/>
+               <h:inputText  class="form-control" id="puesto"  p:placeholder="puesto" value="#{editarTrabajoBean.trabajo.puesto}"/>
+       </div>
+           
+            <div class="form-group">
+                <h:outputLabel for="webEmpresa" value="Web empresa"/>
+                <h:inputText  class="form-control" id="webEmpresa"  p:placeholder="Web Empresa" value="#{editarTrabajoBean.trabajo.webEmpresa}"/>
+       </div>
+           
+           
+           <div class="form-group edit-profile-form-group">
+                <div class="text-center">
+                    <h:commandButton action="#{editarTrabajoBean.doGuardar()}" class="btn btn-primary btn-raised" value="GUARDAR"/>
+                    <a href="/perfil.jsf" class="btn btn-default btn-raised">CANCELAR</a>
+                </div>
+            </div>
+           
+       </h:form>
+        
 
         <ui:include src="/WEB-INF/footer.xhtml" />
     </div>
