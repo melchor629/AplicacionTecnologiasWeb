@@ -8,76 +8,76 @@
     xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-<head>
-    <title>Resultados Búsqueda - LinkedOut</title>
-    <meta name="description" content="Descripcion de la pagina" />
-    <ui:include src="/WEB-INF/head.xhtml" />
-</head>
+    <head>
+        <title>Resultados Búsqueda - LinkedOut</title>
+        <meta name="description" content="Descripcion de la pagina" />
+        <ui:include src="/WEB-INF/head.xhtml" />
+    </head>
 
-<body>
+    <body>
 
-    <ui:include src="/WEB-INF/nav-logged.xhtml" />
+        <ui:include src="/WEB-INF/nav-logged.xhtml" />
 
-    <div class="container">
+        <div class="container">
+            <div class="row">
 
-        <ui:repeat value="#{buscarBean.resultadoBusqueda}" var="usuario" rendered="#{!buscarBean.resultadoBusqueda.isEmpty()}">
-         <div class="result-card-container col-sm-6 col-lg-4">
-                    <div class="panel panel-default result-card">
-                        <div class="panel-body">
-                            <div class="col-xs-8 result-info-container">
-                                <a href="perfilBean">
-                                    <h4 class="result-name">
-                                        #{usuario.nombre}
-                                    </h4>
-                                </a>
-                                <p class="result-users">
-                                    <a href="busqueda.jsf">
-                                        <small>#{usuario.nombreUsuario}</small>
+                <ui:repeat value="#{buscarBean.resultadoBusqueda}" var="usuario" rendered="#{!buscarBean.resultadoBusqueda.isEmpty()}">
+                    <div class="result-card-container col-sm-6 col-lg-4">
+                        <div class="panel panel-default result-card">
+                            <div class="panel-body">
+                                <div class="col-xs-8 result-info-container">
+                                    <a href="perfilBean">
+                                        <h4 class="result-name">
+                                            #{usuario.nombre}
+                                        </h4>
                                     </a>
-                                </p>
-                                <h:head class="result-info-jobs" rendered="#{!usuario.experienciaLaboralCollection.isEmpty()}">
-                                    <h:head class="result-info-jobs" rendered="#{buscarBean.obtenerExperienciaLaboral(usuario).getFechaFinalizacion() == null}">Trabaja como:</h:head>
-                                    <h:head class="result-info-jobs" rendered="#{buscarBean.obtenerExperienciaLaboral(usuario).getFechaFinalizacion() != null}">Trabajó como:</h:head>    
-                                     #{buscarBean.obtenerExperienciaLaboral(usuario).getPuesto()} en 
-                                     #{buscarBean.obtenerExperienciaLaboral(usuario).getEmpresa()}
-                   
-                                </h:head>
-                                <p class="result-info-jobs" rendered="#{!usuario.estudiosCollection.isEmpty()}">
-                                    <h:head class="result-info-jobs" rendered="#{buscarBean.obtenerEstudio(usuario).getFechaFinalizacion() == null}">Estudia:</h:head>
-                                    <h:head class="result-info-jobs" rendered="#{buscarBean.obtenerEstudio(usuario).getFechaFinalizacion() != null}">Estudió en:</h:head>    
-                                     #{buscarBean.obtenerEstudio(usuario).getDescripcion()} en 
-                                     #{buscarBean.obtenerEstudio(usuario).getUbicacion()}
-                                    <!--{buscarBean.obtenerEstudio(usuario)}-->
-                                    <!--{buscarBean.obtenerExperienciaLaboral(usuario)}-->
-                                    <!--e.getFechaFinalizacion() == null ? "Trabaja como" : "Trabajó como"%> <%= e.getPuesto() -->
-                                </p> 
-                            </div>
+                                    <p class="result-users">
+                                        <a href="busqueda.jsf">
+                                            <small>#{usuario.nombreUsuario}</small>
+                                        </a>
+                                    </p>
+                                    <ui:fragment rendered="#{!usuario.experienciaLaboralCollection.isEmpty()}">
+                                        <p class="result-info-jobs">
+                                            <h:outputText class="result-info-jobs" rendered="#{buscarBean.obtenerExperienciaLaboral(usuario).getFechaFinalizacion() == null}">Trabaja como:</h:outputText>
+                                            <h:outputText class="result-info-jobs" rendered="#{buscarBean.obtenerExperienciaLaboral(usuario).getFechaFinalizacion() != null}">Trabajó como:</h:outputText>   
+                                            #{buscarBean.obtenerExperienciaLaboral(usuario).getPuesto()} en 
+                                            #{buscarBean.obtenerExperienciaLaboral(usuario).getEmpresa()}
+                                        </p>
+                                    </ui:fragment>
+                                    <ui:fragment  rendered="#{!usuario.estudiosCollection.isEmpty()}">
+                                        <p class="result-info-jobs">
+                                            <h:outputText class="result-info-jobs" rendered="#{buscarBean.obtenerEstudio(usuario).getFechaFinalizacion() == null}">Estudia:</h:outputText>
+                                            <h:outputText class="result-info-jobs" rendered="#{buscarBean.obtenerEstudio(usuario).getFechaFinalizacion() != null}">Estudió en:</h:outputText>    
+                                            #{buscarBean.obtenerEstudio(usuario).getDescripcion()} en 
+                                            #{buscarBean.obtenerEstudio(usuario).getUbicacion()}
+                                        </p>
+                                    </ui:fragment>
+                                </div>
 
-                            <div class="col-xs-4 result-photo-container">
-                                <a href="busqueda.jsf"> 
-                                    <img src="#{usuario.getFoto()}" rendered="#{usuario.getFoto() != null}" class="img-responsive result-photo" alt="Foto de perfil de #{usuario.getNombre()}"> </img>
-                                    <img src="WEB-INF/fotoPerfil.txt" rendered="#{usuario.getFoto() == null}" class="img-responsive result-photo" alt="Foto de perfil de #{usuario.getNombre()}"></img>
-                                </a>
+                                <div class="col-xs-4 result-photo-container">
+                                    <a href="busqueda.jsf"> 
+                                        <img src="#{usuario.getFoto()}" class="img-responsive result-photo" alt="Foto de perfil de #{usuario.getNombre()}"> </img>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-        
-        </ui:repeat>
-        
-        <ui:fragment rendered="#{buscarBean.resultadoBusqueda.isEmpty()}">
-            <div class="col-xs-12">
-                <div class="text-center search-perrete">
-                    <div class="fotete perrete"></div>
-                    <h1>¡Lo sentimos!</h1>
-                    <h2 class="text-muted">No hemos encontrado ningún resultado :(</h2>
-                </div>
+
+                </ui:repeat>
+
+                <ui:fragment rendered="#{buscarBean.resultadoBusqueda.isEmpty()}">
+                    <div class="col-xs-12">
+                        <div class="text-center search-perrete">
+                            <div class="fotete perrete"></div>
+                            <h1>¡Lo sentimos!</h1>
+                            <h2 class="text-muted">No hemos encontrado ningún resultado :(</h2>
+                        </div>
+                    </div>
+                </ui:fragment>
             </div>
-        </ui:fragment>
+            <ui:include src="/WEB-INF/footer.xhtml" />
+        </div>
 
-        <ui:include src="/WEB-INF/footer.xhtml" />
-    </div>
-
-    <ui:include src="/WEB-INF/body-end.xhtml" />
-</body>
+        <ui:include src="/WEB-INF/body-end.xhtml" />
+    </body>
 </html>

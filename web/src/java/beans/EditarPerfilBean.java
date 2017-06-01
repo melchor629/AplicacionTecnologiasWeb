@@ -127,13 +127,14 @@ public class EditarPerfilBean {
             
             //si las contraseñas no estan nulas y son iguales cambio la contraseña
             if(contraseñaNueva!=null && contraseñaRepetida!=null && contraseñaNueva.equals(contraseñaRepetida)){
-                usuario.setContraseña(contraseñaNueva);
+                
+                 String hash = app.cosas.Hash.hash(usuario.getNombreUsuario()+":"+contraseñaNueva);
+                usuario.setContraseña(hash);
             }
             
              this.fachadaUsuario.edit(this.usuario);
-             
-            //CAMBIAR EL RETURN POR PERFIL CUANDO ESTE TERMINADO
-             return "editarPerfil";
+         
+             return "perfil";
         }
         
     }

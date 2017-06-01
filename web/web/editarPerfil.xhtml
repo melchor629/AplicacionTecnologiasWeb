@@ -21,9 +21,6 @@
     <div class="container">
         
         <h1 class="text-center">Editando perfil de #{editarPerfilBean.usuario.nombreUsuario}</h1>
-        
-        <h:outputText value=" #{editarPerfilBean.error}" p:class="alert alert-danger" rendered="#{editarPerfilBean.error != null}" />
-              <br/>
               
         
         <h:form class="form-horizontal">
@@ -65,6 +62,7 @@
                      
                       <!-- mostrar contraseña siempre en blanco y comprobar que son iguales -->
                     <div class="form-group edit-profile-form-group">
+                    
                       <h:outputLabel for="password1" class="col-sm-3 control-label" value="Contraseña"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-key"></i></div>
@@ -147,6 +145,14 @@
             
         </h:form>
         
+              <!-- Error con las contraseñas-->
+               <ui:fragment rendered="#{editarPerfilBean.error != null}">
+            <div class="col-xs-12"> 
+                    <h:outputText value=" #{editarPerfilBean.error}" p:class="alert alert-danger"/>
+              <br/>            
+            </div>
+        </ui:fragment>
+              
         <ui:include src="/WEB-INF/footer.xhtml" />
     </div>
 
