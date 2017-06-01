@@ -8,6 +8,7 @@ package beans;
 import app.ejb.AficionesFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Aficiones;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -20,7 +21,7 @@ import javax.inject.Inject;
  */
 @Named
 @RequestScoped
-public class editarAficionBean {
+public class EditarAficionBean {
 
     /**
      * Creates a new instance of editarAficionBean
@@ -32,11 +33,20 @@ public class editarAficionBean {
     private String nombre;
     private Aficiones aficion;
     
-    public editarAficionBean() {
+    public EditarAficionBean() {
     }
     
+    @PostConstruct
+    public void caca(){
+         this.aficion = af.obtenerAficionConIdyNombre(sb.obtenerUsuario().getId(), "Muñeca en la mierda");
+        //this.aficion = af.obtenerAficionConIdyNombre(sb.obtenerUsuario().getId(), nombre);
+        this.nombre = aficion.getAficionesPK().getNombre();
+    }
+            
+    
     public String editar(String nombre){
-        this.aficion = af.obtenerAficionConIdyNombre(sb.obtenerUsuario().getId(), nombre);
+        this.aficion = af.obtenerAficionConIdyNombre(sb.obtenerUsuario().getId(), "Muñeca en la mierda");
+        //this.aficion = af.obtenerAficionConIdyNombre(sb.obtenerUsuario().getId(), nombre);
         this.nombre = aficion.getAficionesPK().getNombre();
         return "editarAficion";
     }
@@ -50,9 +60,19 @@ public class editarAficionBean {
     }
     
     public String doGuardar(){
-        aficion.getAficionesPK().setNombre(nombre);
-        af.edit(aficion);
+        Aficiones nueva = new Aficiones(sb.obtenerUsuario().getId(), nombre);
+        af.remove(aficion);
+        af.create(nueva);
         return "perfil.jsf";
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     
 }

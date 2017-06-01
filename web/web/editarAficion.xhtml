@@ -8,42 +8,35 @@
     xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:jsf="http://xmlns.jcp.org/jsf">
-<head>
-    <title>? - LinkedOut</title>
-    <meta name="description" content="Descripcion de la pagina" />
-    <ui:include src="/WEB-INF/head.xhtml" />
-</head>
+    <head>
+        <title>Editar Aficion- LinkedOut</title>
+        <meta name="description" content="Descripcion de la pagina" />
+        <ui:include src="/WEB-INF/head.xhtml" />
+    </head>
 
-<body>
+    <body>
 
-    <ui:include src="/WEB-INF/nav-logged.xhtml" />
+        <ui:include src="/WEB-INF/nav-logged.xhtml" />
 
-    <div class="container">
+        <div class="container">
 
-        <!-- Contenido -->
-       <h:form>
+            <!-- Contenido -->
+            <h:form>
 
-           <h:inputTextarea class="form-control"  rows="3" p:placeholder="#{editarAficionBean.aficion.aficionesPK.nombre}" 
-                            value="#{editarAficionBean.aficion.aficionesPK.nombre}"></h:inputTextarea>
-           <span class="input-group-btn">
-                <button type="submit" p:id="buscar" class="btn btn-default" jsf:action="#{buscarBean.buscar()}">
-                     <i class="fa fa-search" />
-                     GUARDAR
-                </button>
-           </span>
-           <span class="input-group-btn">
-                <button type="submit" p:id="buscar" class="btn btn-default" action="index.jsf">
-                     <i class="fa fa-search" />
-                     CANCELAR
-                </button>
-           </span>
-        </h:form>   
-    </div>
-          
+                <h:inputTextarea class="form-control"  rows="3" p:placeholder="#{editarAficionBean.nombre}" 
+                                 value="#{editarAficionBean.nombre}"></h:inputTextarea>
+                <div class="form-group edit-hobby-form-group">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-raised" jsf:action="#{editarAficionBean.doGuardar()}">GUARDAR</button>
+                        <a href="javascript:history.back()" class="btn btn-default btn-raised">CANCELAR</a>
+                    </div>
+                </div>
+            </h:form>   
 
-    <ui:include src="/WEB-INF/footer.xhtml" />
 
-    <ui:include src="/WEB-INF/body-end.xhtml" />
-</body>
+
+            <ui:include src="/WEB-INF/footer.xhtml" />
+        </div>
+        <ui:include src="/WEB-INF/body-end.xhtml" />
+    </body>
 </html>
-

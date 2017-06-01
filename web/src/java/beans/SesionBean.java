@@ -114,4 +114,10 @@ public class SesionBean implements Serializable {
     public void setError(String error) {
         this.error = error;
     }
+
+    public int getUsuarioID() {
+        return usuarioID;
+    }
+    
+    
 }

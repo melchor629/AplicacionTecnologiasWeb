@@ -25,7 +25,7 @@ import javax.enterprise.context.RequestScoped;
  */
 @Named
 @RequestScoped
-public class buscarBean {
+public class BuscarBean {
 
     /**
      * Creates a new instance of buscarBean
@@ -37,12 +37,12 @@ public class buscarBean {
     private List<Usuario> resultadoBusqueda;
     
     
-    public buscarBean() {
+    public BuscarBean() {
     }
 
     public String buscar(){
         if(busqueda == null){
-            busqueda = "";
+            return "index";
         }
         this.resultadoBusqueda = uf.buscarUsuarios(this.busqueda);
         return "busqueda";
