@@ -36,7 +36,7 @@ public class ExperienciaLaboralFacade extends AbstractFacade<ExperienciaLaboral>
         super(ExperienciaLaboral.class);
     }
 
-    public List<Estudios> obtenerTrabajos(Usuario u) {
+    public List<ExperienciaLaboral> obtenerTrabajos(Usuario u) {
 
         Query q;
 

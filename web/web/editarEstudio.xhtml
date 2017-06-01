@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html
+    lang="es"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+    <title>Editando Estudios - LinkedOut</title>
+    <meta name="description" content="Descripcion de la pagina" />
+    <ui:include src="/WEB-INF/head.xhtml" />
+</head>
+
+<body>
+
+    <ui:include src="/WEB-INF/nav-logged.xhtml" />
+
+    <div class="container">
+        
+       <!--  Los errores los controlará JSF de otra forma (validadores de nulls en los beans)
+       <ui:fragment rendered="#    {editarEstudioBean.msgError != null}">
+            <div class="alert alert-danger">
+              #    {editarEstudioBean.msgError}
+            </div>
+        </ui:fragment> -->
+        <!-- Contenido -->
+        
+        <h:form>
+            
+            <div class="form-group">
+                <label for="fechaComienzo">Fecha de comienzo</label>
+                <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="#{editarEstudioBean.estudio.estudiosPK.fechaComienzo}" value="#{editarEstudioBean.fechaComienzo}">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:inputText>
+            </div>
+
+            <div class="form-group">
+                <label for="fechaFinalizacion">Fecha de finalización</label>
+                <h:inputText p:type="date" p:class="form-control" id="fechaFinalizacion" p:placeholder="#{editarEstudioBean.estudio.fechaFinalizacion}" value="#{editarEstudioBean.estudio.fechaFinalizacion}">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:inputText>
+            </div>
+
+            <div class="form-group">
+                <label for="fechaComienzo">Descripción</label>
+                <h:inputText p:type="text" p:class="form-control" id="descripcion" p:placeholder="#{editarEstudioBean.estudio.descripcion}" value="#{editarEstudioBean.estudio.descripcion}">
+                </h:inputText>
+            </div>
+            
+            <div class="form-group">
+                <label for="ubicacion">Ubicación</label>
+                <h:inputText p:type="text" p:class="form-control" id="ubicacion" p:placeholder="#{editarEstudioBean.estudio.ubicacion}" value="#{editarEstudioBean.estudio.ubicacion}">
+                </h:inputText>
+            </div>
+       
+              
+            <div class="form-group edit-profile-form-group">
+                <div class="text-center">
+                    <h:commandButton action="#{editarEstudioBean.editar()}" class="btn btn-primary btn-raised" value="GUARDAR"/>
+                    <a href="/perfil.jsf" class="btn btn-default btn-raised">CANCELAR</a>
+                </div>
+            </div>
+            
+            
+            
+        </h:form>
+        
+
+        <ui:include src="/WEB-INF/footer.xhtml" />
+    </div>
+
+    <ui:include src="/WEB-INF/body-end.xhtml" />
+</body>
+</html>
