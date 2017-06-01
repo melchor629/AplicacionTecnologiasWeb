@@ -9,7 +9,7 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:jsf="http://xmlns.jcp.org/jsf">
     <head>
-        <title>? - LinkedOut</title>
+        <title>Editar Aficion- LinkedOut</title>
         <meta name="description" content="Descripcion de la pagina" />
         <ui:include src="/WEB-INF/head.xhtml" />
     </head>
@@ -23,11 +23,11 @@
             <!-- Contenido -->
             <h:form>
 
-                <h:inputTextarea class="form-control"  rows="3" p:placeholder="#{editarAficionBean.aficion.aficionesPK.nombre}" 
-                                 value="#{editarAficionBean.aficion.aficionesPK.nombre}"></h:inputTextarea>
+                <h:inputTextarea class="form-control"  rows="3" p:placeholder="#{editarAficionBean.nombre}" 
+                                 value="#{editarAficionBean.nombre}"></h:inputTextarea>
                 <div class="form-group edit-hobby-form-group">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary btn-raised" jsf:action="#{editarAficion.doGuardar()}">GUARDAR</button>
+                        <button type="submit" class="btn btn-primary btn-raised" jsf:action="#{editarAficionBean.doGuardar()}">GUARDAR</button>
                         <a href="javascript:history.back()" class="btn btn-default btn-raised">CANCELAR</a>
                     </div>
                 </div>
