@@ -54,10 +54,10 @@ public class EditarTrabajoBean {
         
         //trabajo de prueba BORRAR
         this.trabajo= fachadaTrabajo.obtenerTrabajos(usuario).get(0);
-        this.trabajoOriginal=fachadaTrabajo.obtenerTrabajos(usuario).get(0);;
+        this.trabajoOriginal=fachadaTrabajo.obtenerTrabajos(usuario).get(0);
         
        // this.trabajo = this.perfilBean.getTrabajoSeleccionado();
-       //this.trabajoOriginal=trabajo;
+       //this.trabajoOriginal=fachadaTrabajo.obtenerTrabajos(usuario).get(0);
     }
     
     public String getError(){
