@@ -47,7 +47,7 @@
 
             <ui:fragment rendered="#{perfilBean.mostrarExito}">
                 <div class="alert alert-success profile-send-info profile-send-info" style="top:50px">
-                    Soy un mensaje de exito
+                    #{perfilBean.cadenaExito()}
                 </div>
             </ui:fragment>
             <!-- Fin mostrar mensaje exito-->
@@ -104,19 +104,24 @@
                 <!-- Opciones de perfil -->
                 <!-- Edicion de perfil, peticiones...etc-->
                 <div class="profile-options">
-
-                    <!--<a href="editarPerfil.jsp" class="btn btn-primary btn-raised">
+                    
+                    <ui:fragment rendered="#{perfilBean.miPerfil}">
+                    <a href="editarPerfil.jsp" class="btn btn-primary btn-raised">
                         <i class="fa fa-pencil"></i> Editar perfil
-                    </a>-->
-
-                    <!--<a href="PeticionAmistadServlet?accion=2&id=IDUSUARIO" class="btn btn-primary btn-raised">
+                    </a>
+                    </ui:fragment>
+                        
+                    <ui:fragment rendered="#{!perfilBean.miPerfil and perfilBean.amigos}">
+                    <a href="#" class="btn btn-primary btn-raised">
                         <i class="fa fa-user-times"></i> Eliminar amistad
-                    </a>-->
-
-                    <!--<a href="PeticionAmistadServlet?accion=1&id=IDUSUARIO" class="btn btn-primary btn-raised">
+                    </a>
+                    </ui:fragment>
+                        
+                    <ui:fragment rendered="#{!perfilBean.miPerfil and !perfilBean.amigos}">
+                    <a href="#" class="btn btn-primary btn-raised">
                         <i class="fa fa-user-plus"></i> Enviar solicitud de amistad
-                    </a>-->
-
+                    </a>
+                    </ui:fragment>
 
                     <ui:fragment rendered="#{perfilBean.peticionMandada}">
                         <div class="alert alert-info">
@@ -142,10 +147,12 @@
                 <!-- En esta seccion se muestran la mayoria de datos de un perfil -->
                 <div class="col-lg-8">
                     <h3>Experiencia laboral</h3>
-                    <!--<a href="crearExperienciaLaboral.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a> -->
+                    <ui:fragment rendered="#{perfilBean.miPerfil}">
+                    <a href="crearExperienciaLaboral.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
+                    </ui:fragment>
                     <ul class="list-group experiencia">
 
-                        <ui:fragment rendered="#{perfilBean.usuario.getExperienciaLaboralCollection().size() > 0}">
+                        <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getExperienciaLaboralCollection().size() > 0}">
 
                             <ui:repeat value="#{perfilBean.usuario.getExperienciaLaboralCollection()}" var="experiencia">
                                 <li class="list-group-item">
@@ -165,12 +172,15 @@
 
 
                                     <div class="edit-profile-jobs">
-                                        <!--<a href="editarTrabajo.jsp?fechaComienzo=FECHAINICIOTRABAJO" class="btn btn-default btn-flat">
+                                        <ui:fragment rendered="#{perfilBean.miPerfil}">
+                                        <a href="#" class="btn btn-default btn-flat">
                                             <i class="fa fa-pencil"></i> EDITAR
-                                        </a> -->
-                                        <!--<a href="Borrar?accion=1&idUsuario=IDUSUARIO&fechaComienzo=FECHAINICIO" class="btn btn-primary btn-flat">
+                                        </a>
+                                        
+                                       <a href="#" class="btn btn-primary btn-flat">
                                             <i class="fa fa-trash-o"></i> BORRAR
-                                        </a> -->
+                                        </a>
+                                        </ui:fragment>
                                     </div>
 
                                 </li>
@@ -178,7 +188,7 @@
                         </ui:fragment>
 
                         <!-- Tengo experiencia laboral? -->
-                        <ui:fragment rendered="#{perfilBean.usuario.getExperienciaLaboralCollection().size() == 0}">
+                        <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getExperienciaLaboralCollection().size() == 0}">
                             <li class="list-group-item">
                                 Sin experiencia laboral
                             </li>
@@ -191,7 +201,7 @@
                     <!-- <a href="crearEstudio.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a> -->
                      
                         <ul class="list-group estudios">
-                            <ui:fragment rendered="#{perfilBean.usuario.getEstudiosCollection().size() > 0}">
+                            <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getEstudiosCollection().size() > 0}">
                             <ui:repeat value="#{perfilBean.usuario.getEstudiosCollection()}" var="estudio">
                         <li class="list-group-item">
                             <h4>#{estudio.getDescripcion()}</h4>
@@ -205,19 +215,21 @@
 
 
                             <div class="edit-profile-jobs">
-                                <!--<a href="editarEstudio.jsp?fechaComienzo=FECHAINICIO" class="btn btn-default btn-flat">
+                                <ui:fragment rendered="#{perfilBean.miPerfil}">
+                                <a href="#" class="btn btn-default btn-flat">
                                     <i class="fa fa-pencil"></i> EDITAR
-                                </a> -->
-                                <!--<a href="Borrar?accion=2&idUsuario=IDUSUARIO&fechaComienzo=FECHACOMIENZO" class="btn btn-primary btn-flat">
+                                </a>
+                               <a href="#" class="btn btn-primary btn-flat">
                                     <i class="fa fa-trash-o"></i> BORRAR
-                                </a> -->
+                                </a>
+                                </ui:fragment>
                             </div>
 
                         </li>
                             </ui:repeat>
                     </ui:fragment>
                         <!-- cuando no tienes estudios -->
-                        <ui:fragment rendered="#{perfilBean.usuario.getEstudiosCollection().size() == 0}">
+                        <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getEstudiosCollection().size() == 0}">
                         <li class="list-group-item">
                             Sin estudios
                         </li>
@@ -235,23 +247,25 @@
 
                     </div>
                     <ul class="list-group aficiones">
-                        <ui:fragment rendered="#{perfilBean.usuario.getAficionesCollection().size() != 0}">
+                        <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getAficionesCollection().size() != 0}">
                             <ui:repeat value="#{perfilBean.usuario.getAficionesCollection()}" var="aficion">
                         <li class="list-group-item">                         
                             #{aficion.getAficionesPK().getNombre()}
                             <!-- Mostrar iconor de lapiz a papelera segun corresponda-->
                             <div class="edit-profile-jobs pull-right">
-                                <!-- <a href="editarAficion.jsp?nombreAficion=NOMBREAFICION" class="btn btn-default btn-flat btn-sm">
+                                <ui:fragment rendered="#{perfilBean.miPerfil}">
+                                <a href="#" class="btn btn-default btn-flat btn-sm">
                                      <i class="fa fa-pencil"></i>
-                                 </a> -->
-                                <!--<a href="Borrar?accion=3&idUsuario=IDUSUARIO&nombreAficion=NOMBREAFICION" class="btn btn-primary btn-flat btn-sm">
+                                 </a>
+                                <a href="#" class="btn btn-primary btn-flat btn-sm">
                                     <i class="fa fa-trash-o"></i>
-                                </a> -->
+                                </a>
+                                </ui:fragment>
                             </div>
                         </li>
                             </ui:repeat>
                         </ui:fragment>  
-                        <ui:fragment rendered="#{perfilBean.usuario.getAficionesCollection().size() == 0}">
+                        <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getAficionesCollection().size() == 0}">
                         <li class="list-group-item">
                             Sin aficiones
                         </li>
@@ -264,7 +278,7 @@
                 <!-- Mostrar contactos del perfil -->
                 <div class="col-lg-4 profile-contacts">
                     <h3>Contactos</h3>
-                    
+                    <ui:fragment rendered="#{perfilBean.amigos or perfilBean.miPerfil}">
                     <ui:repeat value="#{perfilBean.contactos}" var="contacto">
                     <div class="row profile-contact">
                         <div class="col-lg-3 col-sm-2 col-xs-3 profile-contact-photo">
@@ -279,37 +293,33 @@
                         </div>
                     </div>
                     </ui:repeat>
+                    </ui:fragment>
                 </div>
                 <!-- Fin lista de contactos, a la hora de usar la foto se emplea el mismo procedimiento-->
-
+                <ui:fragment rendered="#{perfilBean.miPerfil}">
                 <div class="col-xs-12 missatges-rebuts">
                     <h3>Mensajes recibidos</h3>
-
+                    <ui:repeat value="#{perfilBean.usuario.getMensajeCollection1()}" var="mensaje">
                     <div class="mensaje row">
                         <div class="col-xs-3 col-sm-1">
-                            <div class="img-circle img-profile">
-                                <!-- Imagen de fondo depende del jsp
-                               <% if(mensaje.getIdEmisor().getFoto() != null) { %>
-                                style="background-image: url('<%=mensaje.getIdEmisor().getFoto()%>')"
-                               <% } else { %>
-                                style="background-image: url('<%@include file="WEB-INF/fotoPerfil.txt"%>')"
-                               <% } %> -->
+                            <div class="img-circle img-profile" style="background-image: url(#{perfilBean.fotoPerfilContacto(mensaje.getIdEmisor())});">
                             </div>
                         </div>
                         <div class="col-xs-9 col-sm-11">
                             <div>
-                                <h4>Titulo del mensaje</h4>
-                                <small>de <!--<a href="Perfil?id=IDUSUARIO">@<%=mensaje.getIdEmisor().getNombreUsuario()%></a> --></small>
+                                <h4>#{mensaje.getTitulo()}</h4>
+                                <small>de <a href="Perfil?id=#{mensaje.getIdEmisor().getId()}">@#{mensaje.getIdEmisor().getNombreUsuario()}</a></small>
                             </div>
                         </div>
                         <div class="col-xs-12">
                             <p class="lead">
-                                Texto del mensaje
+                                #{mensaje.getTexto()}
                             </p>
                         </div>
                     </div>
-
-                </div> 
+                        </ui:repeat>
+                </div>
+                </ui:fragment>
                 <!-- Fin de mostrar mensajes, solo para el usuario del que se esta viendo el perfil -->
 
             </div>

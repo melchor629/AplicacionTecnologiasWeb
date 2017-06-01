@@ -196,7 +196,7 @@ public class PerfilBean {
             salida += meses+" mes";
             
             if(meses > 1){
-            salida += "ses";
+            salida += "es";
         }
         salida += ", ";
         }
