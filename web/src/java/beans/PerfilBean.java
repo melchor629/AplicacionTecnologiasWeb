@@ -7,6 +7,7 @@ package beans;
 
 import app.ejb.PeticionAmistadFacade;
 import app.ejb.UsuarioFacade;
+import app.entity.ExperienciaLaboral;
 import app.entity.Usuario;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -92,6 +93,9 @@ public class PerfilBean {
     
     // Con exito
     private boolean mostrarExito = false;
+    
+    
+       ExperienciaLaboral trabajoSeleccionado;
 
     /**
      * Creates a new instance of PerfilBean
@@ -337,7 +341,12 @@ public class PerfilBean {
     }
     
     
-
+    public String editarTrabajo(ExperienciaLaboral trabajo){
+        
+        this.trabajoSeleccionado= trabajo;
+        
+        return "editarTrabajo";
+    }
     
    
 }

@@ -6,7 +6,8 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 
     <f:metadata>
@@ -173,7 +174,7 @@
 
                                     <div class="edit-profile-jobs">
                                         <ui:fragment rendered="#{perfilBean.miPerfil}">
-                                        <a href="#" class="btn btn-default btn-flat">
+                                            <a jsf:action="#{perfilBean.editarTrabajo(experiencia)}"  class="btn btn-default btn-flat">
                                             <i class="fa fa-pencil"></i> EDITAR
                                         </a>
                                         
