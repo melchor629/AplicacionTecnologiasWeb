@@ -6,7 +6,8 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
 <head>
     <title>Creando Afición - LinkedOut</title>
     <meta name="description" content="Descripcion de la pagina" />
@@ -20,24 +21,25 @@
     <div class="container">
 
         <!-- Error con las contraseñas-->
-       <ui:fragment rendered="#{crearAficionBean.error != null}">
+        <ui:fragment rendered="#{crearAficionBean.error != null}">
             <div class="col-xs-12"> 
                 <h:outputText value=" #{crearAficionBean.error}" p:class="alert alert-danger"/>
               <br/>            
             </div>
         </ui:fragment>
+
         
         <h:form>
             
             
-            <h:inputTextarea class="form-control" rows="3" p:placeholder="Aficion" value="#{crearAficionBean.nombre}" />
-            
+            <h:outputLabel for="descrip" value="Descripción: "/>
+            <h:inputTextarea id="descrip" class="form-control" rows="3" p:placeholder="Aficion" value="#{crearAficionBean.nombre}" />
             
             
              <div class="form-group edit-profile-form-group">
                 <div class="text-center">
-                    <h:commandButton action="#{crearAficionBean.doGuardar()}" class="btn btn-primary btn-raised" value="GUARDAR"/>
-                    <a href="/perfil.jsf" class="btn btn-default btn-raised">CANCELAR</a>
+                    <button jsf:action="#{crearAficionBean.doGuardar()}" class="btn btn-primary btn-raised">GUARDAR</button>
+                    <a href="/web/perfil.jsf" class="btn btn-default btn-raised">CANCELAR</a>
                 </div>
             </div>
             

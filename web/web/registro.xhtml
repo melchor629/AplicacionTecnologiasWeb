@@ -6,7 +6,8 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
 <head>
     <title>Registrarse - LinkedOut</title>
     <meta name="description" content="Descripcion de la pagina" />
@@ -97,7 +98,7 @@
 
 
             <div class="pull-right registro-botones">
-                <h:commandButton action="#{registroBean.doRegistrar()}" class="btn btn-primary btn-raised" value="REGISTRARME"/>
+                <button jsf:action="#{registroBean.doRegistrar()}" class="btn btn-primary btn-raised" value="REGISTRARME"/>
                 <a href="javascript:history.back()" class="btn btn-default btn-raised">CANCELAR</a>
             </div>
             <div class="clearfix"></div>

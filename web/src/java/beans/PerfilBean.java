@@ -94,8 +94,6 @@ public class PerfilBean {
     // Con exito
     private boolean mostrarExito = false;
     
-    
-       ExperienciaLaboral trabajoSeleccionado;
 
     /**
      * Creates a new instance of PerfilBean
@@ -338,14 +336,6 @@ public class PerfilBean {
 
     public Collection<Usuario> getContactos() {
         return contactos;
-    }
-    
-    
-    public String editarTrabajo(ExperienciaLaboral trabajo){
-        
-        this.trabajoSeleccionado= trabajo;
-        
-        return "editarTrabajo";
     }
     
    

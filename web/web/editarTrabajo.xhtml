@@ -6,7 +6,8 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
 <head>
     <title>Editando Trabajo - LinkedOut</title>
     <meta name="description" content="Descripcion de la pagina" />
@@ -28,6 +29,8 @@
         </ui:fragment>
         
        <h:form>
+           
+           <h:inputHidden value="#{editarTrabajoBean.trabajoSeleccionado}" />
            
            <div class="form-group">
                <h:outputLabel for="fechaComienzo" value="Fecha de comienzo"/>
@@ -61,7 +64,7 @@
            
            <div class="form-group edit-profile-form-group">
                 <div class="text-center">
-                    <h:commandButton  action="#{editarTrabajoBean.doGuardar()}" class="btn btn-primary btn-raised" value="GUARDAR"/>
+                    <button  jsf:action="#{editarTrabajoBean.doGuardar()}" class="btn btn-primary btn-raised" value="GUARDAR"/>
                     <a href="/perfil.jsf" class="btn btn-default btn-raised">CANCELAR</a>
                 </div>
             </div>

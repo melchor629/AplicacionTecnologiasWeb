@@ -149,8 +149,10 @@
                 <div class="col-lg-8">
                     <h3>Experiencia laboral</h3>
                     <ui:fragment rendered="#{perfilBean.miPerfil}">
-                    <a href="crearExperienciaLaboral.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
+                    <a href="crearExperienciaLaboral.jsf" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
                     </ui:fragment>
+                    
+                    
                     <ul class="list-group experiencia">
 
                         <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getExperienciaLaboralCollection().size() > 0}">
@@ -160,10 +162,12 @@
                                     <h4>#{experiencia.getPuesto()}</h4>
                                     <p>#{experiencia.getEmpresa()}</p>
 
+                                   
                                     <!-- Tiene web la empresa? -->
                                     <ui:fragment rendered="#{!(empty experiencia.getWebEmpresa())}">
                                         <p><a href="#{experiencia.getWebEmpresa()}">Web empresa</a></p>
                                     </ui:fragment>
+                                    
 
                                     <p class="text-muted">
                                         <small>
@@ -172,20 +176,25 @@
                                     </p>
 
 
+                                   
                                     <div class="edit-profile-jobs">
+                                        
+                                        <form>
                                         <ui:fragment rendered="#{perfilBean.miPerfil}">
-                                            <a jsf:action="#{perfilBean.editarTrabajo(experiencia)}"  class="btn btn-default btn-flat">
+                                            <button jsf:action="#{editarTrabajoBean.editarTrabajo(experiencia)}"  class="btn btn-default btn-flat">
                                             <i class="fa fa-pencil"></i> EDITAR
-                                        </a>
+                                        </button>
                                         
                                        <a href="#" class="btn btn-primary btn-flat">
                                             <i class="fa fa-trash-o"></i> BORRAR
                                         </a>
                                         </ui:fragment>
+                                        </form>
                                     </div>
-
+                                    
                                 </li>
                             </ui:repeat>
+                            
                         </ui:fragment>
 
                         <!-- Tengo experiencia laboral? -->
@@ -196,11 +205,13 @@
                         </ui:fragment>
 
                     </ul>
-
                     <h3>Formación</h3>
 
                     <!-- <a href="crearEstudio.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a> -->
-                     
+                     <ui:fragment rendered="#{perfilBean.miPerfil}">
+                    <a href="crearEstudios.jsf" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
+                    </ui:fragment>
+                    
                         <ul class="list-group estudios">
                             <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getEstudiosCollection().size() > 0}">
                             <ui:repeat value="#{perfilBean.usuario.getEstudiosCollection()}" var="estudio">
@@ -216,14 +227,17 @@
 
 
                             <div class="edit-profile-jobs">
+                                
+                                <h:form>
                                 <ui:fragment rendered="#{perfilBean.miPerfil}">
-                                <a href="#" class="btn btn-default btn-flat">
+                                <button jsf:action="#" class="btn btn-default btn-flat">
                                     <i class="fa fa-pencil"></i> EDITAR
-                                </a>
+                                </button>
                                <a href="#" class="btn btn-primary btn-flat">
                                     <i class="fa fa-trash-o"></i> BORRAR
                                 </a>
                                 </ui:fragment>
+                                    </h:form>
                             </div>
 
                         </li>
@@ -242,7 +256,9 @@
                     
                     <div class="clearfix">
                         <h3 class="pull-left">Aficiones</h3>
-
+                        <ui:fragment rendered="#{perfilBean.miPerfil}">
+                    <a href="crearAficion.jsf" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
+                    </ui:fragment>
                         <!-- Crear aficion cuando estas en tu perfil -->
                         <!--<a href="crearAficion.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a> -->
 
