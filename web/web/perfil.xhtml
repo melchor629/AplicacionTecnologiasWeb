@@ -10,368 +10,376 @@
     xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 
-    <f:metadata>
-        <f:viewParam name="id" value="#{perfilBean.idParameter}" />
-        <f:viewParam name="error" value="#{perfilBean.errorParameter}" />
-        <f:viewParam name="exito" value="#{perfilBean.exitoParameter}" />
-        <f:event type="preRenderView" listener="#{perfilBean.onParameterReceived()}"></f:event>
-    </f:metadata>
+<f:metadata>
+    <f:viewParam name="id" value="#{perfilBean.idParameter}"/>
+    <f:viewParam name="error" value="#{perfilBean.errorParameter}"/>
+    <f:viewParam name="exito" value="#{perfilBean.exitoParameter}"/>
+    <f:event type="preRenderView" listener="#{perfilBean.onParameterReceived()}" />
+</f:metadata>
 
-    <head>
-        <title>Perfil de #{perfilBean.usuario.nombre} #{perfilBean.usuario.apellidos} - LinkedOut</title>
-        <meta name="description" content="Descripcion de la pagina" />
-        <ui:include src="/WEB-INF/head.xhtml" />
-    </head>
+<h:head>
+    <title>Perfil de #{perfilBean.usuario.nombre} #{perfilBean.usuario.apellidos} - LinkedOut</title>
+    <meta name="description" content="Descripcion de la pagina"/>
+    <ui:include src="/WEB-INF/head.xhtml"/>
+</h:head>
 
-    <body>
+<h:body>
 
-        <ui:include src="/WEB-INF/nav-logged.xhtml" />
+    <ui:include src="/WEB-INF/nav-logged.xhtml"/>
 
-        <div class="container">
+    <h:form p:class="container">
 
-            <!-- Comienzo de jsp-->
+        <input type="hidden" jsf:value="#{perfilBean.magiaNegra}" />
 
-            <!-- Se muestra condicionalmente dependiendo de si ha habido un error o no -->
-            <ui:fragment rendered="#{perfilBean.mostrarError}">
-                <div class="panel panel-danger profile-send-info">
-                    <div class="panel-heading">Error:</div>
-                    <div class="panel-body">
-                        Has intentado mandar un mensaje sin título o cuerpo...
-                    </div>
+        <!-- Comienzo de jsp-->
+
+        <!-- Se muestra condicionalmente dependiendo de si ha habido un error o no -->
+        <ui:fragment rendered="#{perfilBean.mostrarError}">
+            <div class="panel panel-danger profile-send-info">
+                <div class="panel-heading">Error:</div>
+                <div class="panel-body">
+                    Has intentado mandar un mensaje sin título o cuerpo...
                 </div>
-            </ui:fragment>
-            <!-- Fin error condicional-->
+            </div>
+        </ui:fragment>
+        <!-- Fin error condicional-->
 
 
-            <!-- Mostrar mensaje de exito el cual contendra un texto u otro dependiendo de lo que ha ocurrido -->            
+        <!-- Mostrar mensaje de exito el cual contendra un texto u otro dependiendo de lo que ha ocurrido -->
 
 
-            <ui:fragment rendered="#{perfilBean.mostrarExito}">
-                <div class="alert alert-success profile-send-info profile-send-info" style="top:50px">
-                    #{perfilBean.cadenaExito()}
-                </div>
-            </ui:fragment>
-            <!-- Fin mostrar mensaje exito-->
+        <ui:fragment rendered="#{perfilBean.mostrarExito}">
+            <div class="alert alert-success profile-send-info profile-send-info" style="top:50px">
+                #{perfilBean.cadenaExito()}
+            </div>
+        </ui:fragment>
+        <!-- Fin mostrar mensaje exito-->
 
-            <!-- Si los usuarios son amigos interesa comprobar si la peticion esta enviada -->
-            <!-- Esto se hace en el bean-->
+        <!-- Si los usuarios son amigos interesa comprobar si la peticion esta enviada -->
+        <!-- Esto se hace en el bean-->
 
-            <!-- Fin comprobacion-->
+        <!-- Fin comprobacion-->
 
-            <!-- Rellenar perfil -->
+        <!-- Rellenar perfil -->
 
-            <!-- Foto -->
-            <div class="col-sm-4 col-md-3 profile-info-section">
-                <img src="#{perfilBean.fotoPerfil()}" class="img-responsive profile-photo"
-                     alt="Foto de perfil dle usuario"></img>
-                <!-- Depende de si el usuario tiene foto o no -->
+        <!-- Foto -->
+        <div class="col-sm-4 col-md-3 profile-info-section">
+            <img src="#{perfilBean.fotoPerfil()}" class="img-responsive profile-photo" alt="Foto de perfil dle usuario"/>
+            <!-- Depende de si el usuario tiene foto o no -->
 
 
-                <h5 id="nombreApellidos">
-                    #{perfilBean.usuario.getNombre()} #{perfilBean.usuario.getApellidos()}
-                </h5>
+            <h5 id="nombreApellidos">
+                #{perfilBean.usuario.getNombre()} #{perfilBean.usuario.getApellidos()}
+            </h5>
 
-                <p id="nombreUsuario">
-                    <i class="fa fa-at"></i> #{perfilBean.usuario.getNombre()}
+            <p id="nombreUsuario">
+                <i class="fa fa-at" /> #{perfilBean.usuario.getNombre()}
+            </p>
+
+            <p id="email">
+                <i class="fa fa-envelope-o" />
+                <a href="mailto:#{perfilBean.usuario.getCorreo()}">#{perfilBean.usuario.getCorreo()}</a>
+            </p>
+
+            <ui:fragment rendered="#{!(empty perfilBean.usuario.getTwitter())}">
+                <p id="twitter">
+                    <i class="fa fa-twitter" />
+                    <a href="https://twitter.com/#{perfilBean.usuario.getTwitter()}"
+                       target="_blank">@#{perfilBean.usuario.getTwitter()}</a>
                 </p>
+            </ui:fragment>
 
-                <p id="email">
-                    <i class="fa fa-envelope-o"></i>
-                    <a href="mailto:#{perfilBean.usuario.getCorreo()}">#{perfilBean.usuario.getCorreo()}</a>
+            <ui:fragment rendered="#{!(empty perfilBean.usuario.getInstagram())}">
+                <p id="instagram">
+                    <i class="fa fa-instagram" />
+                    <a href="https://www.instagram.com/#{perfilBean.usuario.getInstagram()}"
+                       target="_blank">#{perfilBean.usuario.getInstagram()}</a>
                 </p>
+            </ui:fragment>
 
-                <ui:fragment rendered="#{!(empty perfilBean.usuario.getTwitter())}">
-                    <p id="twitter">
-                        <i class="fa fa-twitter"></i>
-                        <a href="https://twitter.com/#{perfilBean.usuario.getTwitter()}" target="_blank">@#{perfilBean.usuario.getTwitter()}</a>
-                    </p>
-                </ui:fragment>
-
-                <ui:fragment rendered="#{!(empty perfilBean.usuario.getInstagram())}">
-                    <p id="instagram">
-                        <i class="fa fa-instagram"></i>
-                        <a href="https://www.instagram.com/#{perfilBean.usuario.getInstagram()}" target="_blank">#{perfilBean.usuario.getInstagram()}</a>
-                    </p>
-                </ui:fragment>
-
-                <ui:fragment rendered="#{!(empty perfilBean.usuario.getWeb())}">
-                    <p id="web">
-                        <i class="fa fa-globe"></i>
-                        <a href="#{perfilBean.usuario.getWeb()}" target="_blank">#{perfilBean.usuario.getWeb()}</a>
-                    </p>
-                </ui:fragment>
+            <ui:fragment rendered="#{!(empty perfilBean.usuario.getWeb())}">
+                <p id="web">
+                    <i class="fa fa-globe" />
+                    <a href="#{perfilBean.usuario.getWeb()}" target="_blank">#{perfilBean.usuario.getWeb()}</a>
+                </p>
+            </ui:fragment>
 
 
-                <!-- Opciones de perfil -->
-                <!-- Edicion de perfil, peticiones...etc-->
-                <div class="profile-options">
-                    
-                    <ui:fragment rendered="#{perfilBean.miPerfil}">
+            <!-- Opciones de perfil -->
+            <!-- Edicion de perfil, peticiones...etc-->
+            <div class="profile-options">
+
+                <ui:fragment rendered="#{perfilBean.miPerfil}">
                     <a href="editarPerfil.jsf" class="btn btn-primary btn-raised">
-                        <i class="fa fa-pencil"></i> Editar perfil
+                        <i class="fa fa-pencil" /> Editar perfil
                     </a>
-                    </ui:fragment>
-                        
-                    <ui:fragment rendered="#{!perfilBean.miPerfil and perfilBean.amigos}">
+                </ui:fragment>
+
+                <ui:fragment rendered="#{!perfilBean.miPerfil and perfilBean.amigos}">
                     <a href="#" class="btn btn-primary btn-raised">
-                        <i class="fa fa-user-times"></i> Eliminar amistad
+                        <i class="fa fa-user-times" /> Eliminar amistad
                     </a>
-                    </ui:fragment>
-                        
-                    <ui:fragment rendered="#{!perfilBean.miPerfil and !perfilBean.amigos}">
+                </ui:fragment>
+
+                <ui:fragment rendered="#{!perfilBean.miPerfil and !perfilBean.amigos}">
                     <a href="#" class="btn btn-primary btn-raised">
-                        <i class="fa fa-user-plus"></i> Enviar solicitud de amistad
+                        <i class="fa fa-user-plus" /> Enviar solicitud de amistad
                     </a>
-                    </ui:fragment>
+                </ui:fragment>
 
-                    <ui:fragment rendered="#{perfilBean.peticionMandada}">
-                        <div class="alert alert-info">
-                            Ya has mandado una peticion de amistad a este usuario, espera a que te acepte o rechace
-                        </div>
-                    </ui:fragment>
+                <ui:fragment rendered="#{perfilBean.peticionMandada}">
+                    <div class="alert alert-info">
+                        Ya has mandado una peticion de amistad a este usuario, espera a que te acepte o rechace
+                    </div>
+                </ui:fragment>
 
-                    <ui:fragment rendered="#{perfilBean.peticionRecibida}">
-                        <div class="alert alert-info">
-                            Has recibido una peticion de amistad de este usuario, puedes aceptarla desde el <h:link value="panel de notificaciones" outcome="notificaciones"></h:link>
-                        </div>
-                    </ui:fragment>
-
-                </div>
-
-                <!-- Fin opciones perfil-->
+                <ui:fragment rendered="#{perfilBean.peticionRecibida}">
+                    <div class="alert alert-info">
+                        Has recibido una peticion de amistad de este usuario, puedes aceptarla desde el
+                        <h:link value="panel de notificaciones" outcome="notificaciones" />
+                    </div>
+                </ui:fragment>
 
             </div>
 
-            <!-- Obtener listas de datos correspondientes de un perfil si procede-->
+            <!-- Fin opciones perfil-->
 
-            <div class="col-sm-8 col-md-9 row profile-rest-section">
-                <!-- En esta seccion se muestran la mayoria de datos de un perfil -->
-                <div class="col-lg-8">
-                    <h3>Experiencia laboral</h3>
-                    <ui:fragment rendered="#{perfilBean.miPerfil}">
-                    <a href="crearExperienciaLaboral.jsf" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
-                    </ui:fragment>
-                    
-                    
-                    <ul class="list-group experiencia">
+        </div>
 
-                        <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getExperienciaLaboralCollection().size() > 0}">
+        <!-- Obtener listas de datos correspondientes de un perfil si procede-->
 
-                            <ui:repeat value="#{perfilBean.usuario.getExperienciaLaboralCollection()}" var="experiencia">
-                                <li class="list-group-item">
-                                    <h4>#{experiencia.getPuesto()}</h4>
-                                    <p>#{experiencia.getEmpresa()}</p>
+        <div class="col-sm-8 col-md-9 row profile-rest-section">
+            <!-- En esta seccion se muestran la mayoria de datos de un perfil -->
+            <div class="col-lg-8">
+                <h3>Experiencia laboral</h3>
+                <ui:fragment rendered="#{perfilBean.miPerfil}">
+                    <a href="crearExperienciaLaboral.jsf" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus" /></a>
+                </ui:fragment>
 
-                                   
-                                    <!-- Tiene web la empresa? -->
-                                    <ui:fragment rendered="#{!(empty experiencia.getWebEmpresa())}">
-                                        <p><a href="#{experiencia.getWebEmpresa()}">Web empresa</a></p>
-                                    </ui:fragment>
-                                    
+                <ul class="list-group experiencia">
 
-                                    <p class="text-muted">
-                                        <small>
-                                            #{perfilBean.tiempoTranscurrido(experiencia.getExperienciaLaboralPK().getFechaComienzo(), experiencia.getFechaFinalizacion())}
-                                        </small>
-                                    </p>
+                    <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getExperienciaLaboralCollection().size() > 0}">
 
-
-                                   
-                                    <div class="edit-profile-jobs">
-                                        
-                                        <form>
-                                        <ui:fragment rendered="#{perfilBean.miPerfil}">
-                                            <button jsf:action="#{editarTrabajoBean.editarTrabajo(experiencia)}"  class="btn btn-default btn-flat">
-                                            <i class="fa fa-pencil"></i> EDITAR
-                                        </button>
-                                        
-                                       <a href="#" class="btn btn-primary btn-flat">
-                                            <i class="fa fa-trash-o"></i> BORRAR
-                                        </a>
-                                        </ui:fragment>
-                                        </form>
-                                    </div>
-                                    
-                                </li>
-                            </ui:repeat>
-                            
-                        </ui:fragment>
-
-                        <!-- Tengo experiencia laboral? -->
-                        <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getExperienciaLaboralCollection().size() == 0}">
+                        <ui:repeat value="#{perfilBean.usuario.getExperienciaLaboralCollection()}" var="experiencia">
                             <li class="list-group-item">
-                                Sin experiencia laboral
-                            </li>
-                        </ui:fragment>
-
-                    </ul>
-                    <h3>Formación</h3>
-
-                    <!-- <a href="crearEstudio.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a> -->
-                     <ui:fragment rendered="#{perfilBean.miPerfil}">
-                    <a href="crearEstudios.jsf" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
-                    </ui:fragment>
-                    
-                        <ul class="list-group estudios">
-                            <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getEstudiosCollection().size() > 0}">
-                            <ui:repeat value="#{perfilBean.usuario.getEstudiosCollection()}" var="estudio">
-                        <li class="list-group-item">
-                            <h4>#{estudio.getDescripcion()}</h4>
-                            <p>#{estudio.getUbicacion()}</p>
-
-                            <p class="text-muted">
-                                <small>
-                                    #{perfilBean.tiempoTranscurrido(estudio.getEstudiosPK().getFechaComienzo(), estudio.getFechaFinalizacion())}
-                                </small>
-                            </p>
+                                <h4>#{experiencia.getPuesto()}</h4>
+                                <p>#{experiencia.getEmpresa()}</p>
 
 
-                            <div class="edit-profile-jobs">
-                                
-                                <h:form>
-                                <ui:fragment rendered="#{perfilBean.miPerfil}">
-                                <button jsf:action="#" class="btn btn-default btn-flat">
-                                    <i class="fa fa-pencil"></i> EDITAR
-                                </button>
-                               <a href="#" class="btn btn-primary btn-flat">
-                                    <i class="fa fa-trash-o"></i> BORRAR
-                                </a>
+                                <!-- Tiene web la empresa? -->
+                                <ui:fragment rendered="#{!(empty experiencia.getWebEmpresa())}">
+                                    <p><a href="#{experiencia.getWebEmpresa()}">Web empresa</a></p>
                                 </ui:fragment>
-                                    </h:form>
-                            </div>
 
-                        </li>
-                            </ui:repeat>
+
+                                <p class="text-muted">
+                                    <small>
+                                        #{perfilBean.tiempoTranscurrido(experiencia.getExperienciaLaboralPK().getFechaComienzo(), experiencia.getFechaFinalizacion())}
+                                    </small>
+                                </p>
+
+
+                                <div class="edit-profile-jobs">
+
+                                    <ui:fragment rendered="#{perfilBean.miPerfil}">
+                                        <button jsf:action="#{editarTrabajoBean.editarTrabajo(experiencia)}"
+                                                class="btn btn-default btn-flat">
+                                            <i class="fa fa-pencil" /> EDITAR
+                                        </button>
+
+                                        <a href="#" class="btn btn-primary btn-flat">
+                                            <i class="fa fa-trash-o" /> BORRAR
+                                        </a>
+                                    </ui:fragment>
+                                </div>
+
+                            </li>
+                        </ui:repeat>
+
                     </ui:fragment>
-                        <!-- cuando no tienes estudios -->
-                        <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getEstudiosCollection().size() == 0}">
+
+                    <!-- Tengo experiencia laboral? -->
+                    <ui:fragment
+                            rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getExperienciaLaboralCollection().size() == 0}">
+                        <li class="list-group-item">
+                            Sin experiencia laboral
+                        </li>
+                    </ui:fragment>
+
+                </ul>
+                <h3>Formación</h3>
+
+                <!-- <a href="crearEstudio.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a> -->
+                <ui:fragment rendered="#{perfilBean.miPerfil}">
+                    <a href="crearEstudio.jsf" class="btn btn-default btn-flat btn-sm profile-add">
+                        <i class="fa fa-plus" />
+                    </a>
+                </ui:fragment>
+
+                <ul class="list-group estudios">
+                    <ui:fragment
+                            rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getEstudiosCollection().size() > 0}">
+                        <ui:repeat value="#{perfilBean.usuario.getEstudiosCollection()}" var="estudio">
+                            <li class="list-group-item">
+                                <h4>#{estudio.getDescripcion()}</h4>
+                                <p>#{estudio.getUbicacion()}</p>
+
+                                <p class="text-muted">
+                                    <small>
+                                        #{perfilBean.tiempoTranscurrido(estudio.getEstudiosPK().getFechaComienzo(), estudio.getFechaFinalizacion())}
+                                    </small>
+                                </p>
+
+
+                                <div class="edit-profile-jobs">
+
+                                    <ui:fragment rendered="#{perfilBean.miPerfil}">
+                                        <button jsf:action="#" class="btn btn-default btn-flat">
+                                            <i class="fa fa-pencil" /> EDITAR
+                                        </button>
+                                        <a href="#" class="btn btn-primary btn-flat">
+                                            <i class="fa fa-trash-o" /> BORRAR
+                                        </a>
+                                    </ui:fragment>
+                                </div>
+
+                            </li>
+                        </ui:repeat>
+                    </ui:fragment>
+                    <!-- cuando no tienes estudios -->
+                    <ui:fragment
+                            rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getEstudiosCollection().size() == 0}">
                         <li class="list-group-item">
                             Sin estudios
                         </li>
-                        </ui:fragment>
-                        <!-- Vaya -->
-                    </ul>
-                           
-                    
-                    
-                    <div class="clearfix">
-                        <h3 class="pull-left">Aficiones</h3>
-                        <ui:fragment rendered="#{perfilBean.miPerfil}">
-                    <a href="crearAficion.jsf" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a>
                     </ui:fragment>
-                        <!-- Crear aficion cuando estas en tu perfil -->
-                        <!--<a href="crearAficion.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a> -->
+                    <!-- Vaya -->
+                </ul>
 
-                    </div>
-                    <ul class="list-group aficiones">
-                        <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getAficionesCollection().size() != 0}">
-                            <ui:repeat value="#{perfilBean.usuario.getAficionesCollection()}" var="aficion">
-                        <li class="list-group-item">
-                            #{aficion.getAficionesPK().getNombre()}
-                            <!-- Mostrar iconor de lapiz a papelera segun corresponda-->
-                            <div class="edit-profile-jobs pull-right">
-                                <ui:fragment rendered="#{perfilBean.miPerfil}">
-                                    <a jsf:action="#{editarAficionBean.editar(aficion.getAficionesPK.getNombre)}" class="btn btn-default btn-flat btn-sm">
-                                     <i class="fa fa-pencil"></i>
-                                 <a>
-                                <a href="#" class="btn btn-primary btn-flat btn-sm">
-                                    <i class="fa fa-trash-o"></i>
-                                </a>
-                                </ui:fragment>
-                            </div>
-                        </li>
-                            </ui:repeat>
-                        </ui:fragment>  
-                        <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getAficionesCollection().size() == 0}">
+
+                <div class="clearfix">
+                    <h3 class="pull-left">Aficiones</h3>
+                    <ui:fragment rendered="#{perfilBean.miPerfil}">
+                        <a href="crearAficion.jsf" class="btn btn-default btn-flat btn-sm profile-add">
+                            <i class="fa fa-plus" />
+                        </a>
+                    </ui:fragment>
+
+                </div>
+                <ul class="list-group aficiones">
+                    <ui:fragment
+                            rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getAficionesCollection().size() != 0}">
+                        <ui:repeat value="#{perfilBean.usuario.getAficionesCollection()}" var="aficion">
+                            <li class="list-group-item">
+                                #{aficion.getAficionesPK().getNombre()}
+                                <!-- Mostrar iconor de lapiz a papelera segun corresponda-->
+                                <div class="edit-profile-jobs pull-right">
+                                    <ui:fragment rendered="#{perfilBean.miPerfil}">
+                                        <a jsf:action="#{editarAficionBean.editar(aficion.aficionesPK.nombre)}" class="btn btn-default btn-flat btn-sm">
+                                            <i class="fa fa-pencil" />
+                                        </a>
+                                        <a href="#" class="btn btn-primary btn-flat btn-sm">
+                                            <i class="fa fa-trash-o" />
+                                        </a>
+                                    </ui:fragment>
+                                </div>
+                            </li>
+                        </ui:repeat>
+                    </ui:fragment>
+                    <ui:fragment
+                            rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getAficionesCollection().size() == 0}">
                         <li class="list-group-item">
                             Sin aficiones
                         </li>
-                        </ui:fragment>
-                        <!-- Cuando no tienes Aficiones-->
-                    </ul>
-                </div>
-                <!-- Fin de usar listas de datos-->
+                    </ui:fragment>
+                    <!-- Cuando no tienes Aficiones-->
+                </ul>
+            </div>
+            <!-- Fin de usar listas de datos-->
 
-                <!-- Mostrar contactos del perfil -->
-                <div class="col-lg-4 profile-contacts">
-                    <h3>Contactos</h3>
-                    <ui:fragment rendered="#{perfilBean.amigos or perfilBean.miPerfil}">
+            <!-- Mostrar contactos del perfil -->
+            <div class="col-lg-4 profile-contacts">
+                <h3>Contactos</h3>
+                <ui:fragment rendered="#{perfilBean.amigos or perfilBean.miPerfil}">
                     <ui:repeat value="#{perfilBean.contactos}" var="contacto">
-                    <div class="row profile-contact">
-                        <div class="col-lg-3 col-sm-2 col-xs-3 profile-contact-photo">
-                            <a href="perfil.jsf?id=#{contacto.getId()}">
-                                <div class="img-circle img-profile" style="background-image: url(#{perfilBean.fotoPerfilContacto(contacto)});"></div>
-                            </a>
-                        </div>
-                        <div class="col-lg-9 col-sm-10 col-xs-9 profile-contact-name">
-                            <div>
-                                <a href="perfil.jsf?id=#{contacto.getId()}">#{contacto.getNombre()} #{contacto.getApellidos()}</a>
+                        <div class="row profile-contact">
+                            <div class="col-lg-3 col-sm-2 col-xs-3 profile-contact-photo">
+                                <a href="perfil.jsf?id=#{contacto.getId()}">
+                                    <div class="img-circle img-profile" style="background-image: url(#{perfilBean.fotoPerfilContacto(contacto)});" />
+                                </a>
+                            </div>
+                            <div class="col-lg-9 col-sm-10 col-xs-9 profile-contact-name">
+                                <div>
+                                    <a href="perfil.jsf?id=#{contacto.getId()}">#{contacto.getNombre()} #{contacto.getApellidos()}</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </ui:repeat>
-                    </ui:fragment>
-                </div>
-                <!-- Fin lista de contactos, a la hora de usar la foto se emplea el mismo procedimiento-->
-                <ui:fragment rendered="#{perfilBean.miPerfil}">
+                </ui:fragment>
+            </div>
+            <!-- Fin lista de contactos, a la hora de usar la foto se emplea el mismo procedimiento-->
+            <ui:fragment rendered="#{perfilBean.miPerfil}">
                 <div class="col-xs-12 missatges-rebuts">
                     <h3>Mensajes recibidos</h3>
                     <ui:repeat value="#{perfilBean.usuario.getMensajeCollection1()}" var="mensaje">
-                    <div class="mensaje row">
-                        <div class="col-xs-3 col-sm-1">
-                            <div class="img-circle img-profile" style="background-image: url(#{perfilBean.fotoPerfilContacto(mensaje.getIdEmisor())});">
+                        <div class="mensaje row">
+                            <div class="col-xs-3 col-sm-1">
+                                <div class="img-circle img-profile"
+                                     style="background-image: url(#{perfilBean.fotoPerfilContacto(mensaje.getIdEmisor())});">
+                                </div>
+                            </div>
+                            <div class="col-xs-9 col-sm-11">
+                                <div>
+                                    <h4>#{mensaje.getTitulo()}</h4>
+                                    <small>de <a
+                                            href="Perfil?id=#{mensaje.getIdEmisor().getId()}">@#{mensaje.getIdEmisor().getNombreUsuario()}</a>
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <p class="lead">
+                                    #{mensaje.getTexto()}
+                                </p>
                             </div>
                         </div>
-                        <div class="col-xs-9 col-sm-11">
-                            <div>
-                                <h4>#{mensaje.getTitulo()}</h4>
-                                <small>de <a href="Perfil?id=#{mensaje.getIdEmisor().getId()}">@#{mensaje.getIdEmisor().getNombreUsuario()}</a></small>
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <p class="lead">
-                                #{mensaje.getTexto()}
-                            </p>
-                        </div>
-                    </div>
-                        </ui:repeat>
+                    </ui:repeat>
                 </div>
-                </ui:fragment>
-                <!-- Fin de mostrar mensajes, solo para el usuario del que se esta viendo el perfil -->
+            </ui:fragment>
+            <!-- Fin de mostrar mensajes, solo para el usuario del que se esta viendo el perfil -->
 
-            </div>
-
-            <div class="clearfix"></div>
-            <!-- Mandar mensaje a un usuario-->
-            <div class="casual">
-                <div class="col-sm-offset-4 col-md-offset-3">
-                    <h3>Mandar mensaje a tal usuario</h3>
-                    <!-- <form method="POST" action="<%=cpath%>/Mensaje">
-                        <input type="hidden" name="idHacia" value="<%= u.getId()%>">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                                <input maxlength="100" type="text" id="titulo" class="form-control" name="titulo"
-                                       placeholder="Titulo del mensaje">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-comment-o"></i></div>
-                                <textarea maxlength="999" class="form-control" id="mensaje" name="mensaje" placeholder="Mensaje..."></textarea>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <button type="submit" class="btn btn-primary btn-raised">ENVIAR</button>
-                        </div>
-                    </form> -->
-                </div>
-            </div>
-
-            <ui:include src="/WEB-INF/footer.xhtml" />
         </div>
 
-        <ui:include src="/WEB-INF/body-end.xhtml" />
-    </body>
+        <div class="clearfix" />
+        <!-- Mandar mensaje a un usuario-->
+        <div class="casual">
+            <div class="col-sm-offset-4 col-md-offset-3">
+                <h3>Mandar mensaje a tal usuario</h3>
+                <!-- <form method="POST" action="<%=cpath%>/Mensaje">
+                    <input type="hidden" name="idHacia" value="<%= u.getId()%>">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                            <input maxlength="100" type="text" id="titulo" class="form-control" name="titulo"
+                                   placeholder="Titulo del mensaje">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-comment-o"></i></div>
+                            <textarea maxlength="999" class="form-control" id="mensaje" name="mensaje" placeholder="Mensaje..."></textarea>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary btn-raised">ENVIAR</button>
+                    </div>
+                </form> -->
+            </div>
+        </div>
+
+        <ui:include src="/WEB-INF/footer.xhtml"/>
+    </h:form>
+
+    <ui:include src="/WEB-INF/body-end.xhtml"/>
+</h:body>
 </html>

@@ -7,22 +7,19 @@ package beans;
 
 import app.ejb.PeticionAmistadFacade;
 import app.ejb.UsuarioFacade;
-import app.entity.ExperienciaLaboral;
 import app.entity.Usuario;
-import java.io.UnsupportedEncodingException;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 
 /**
  *
@@ -50,10 +47,10 @@ public class PerfilBean {
     
     // Fachada de usuarios para obtener estos y datos relacionados con ellos
     @EJB
-    UsuarioFacade fachadaUsuarios;
+    private UsuarioFacade fachadaUsuarios;
 
     @EJB
-    PeticionAmistadFacade fachadaPeticionDeAmistad;
+    private PeticionAmistadFacade fachadaPeticionDeAmistad;
 
     // Se inyecta el SessionBean, necesario para obtener datos relacionados con
     // la sesion que hay iniciada
@@ -103,6 +100,15 @@ public class PerfilBean {
 
     @PostConstruct
     public void init() {
+        //Si tenemos el usuarioPerfilID en el bean de sesión significa que hemos hecho click
+        //en algo con el atributo jsf:action, por tanto tenemos que coger la info de ahí y
+        //seguir haciendo cosas como si nada, con esto funciona.
+        //Si no hacemos esto, todos los rendered se evaluan a false y por tanto el botón
+        //que clickamos no existe en la petición, JSF se atonta y no hace nada.
+        if(sesionBean.usuarioPerfilID != -1) {
+            usuario = fachadaUsuarios.obtenerUsuarioPorId(sesionBean.usuarioPerfilID);
+            onParameterReceived();
+        }
     }
 
     // Este metodo se ejecuta cuando ya se tiene el parámetro que se ha pasado por URL
@@ -128,15 +134,14 @@ public class PerfilBean {
             // Se muestra en el perfil el usuario que ha iniciado sesión
             this.usuario = sesionBean.obtenerUsuario();
             this.miPerfil = true;
+            this.amigos = false;
         } else {
             // Se va a mostrar un usuario distinto al que ha iniciado sesion
             this.usuario = fachadaUsuarios.obtenerUsuarioPorId(this.idParameter);
             this.miPerfil = false;
 
             // Comprobar amistad
-            if (this.fachadaUsuarios.sonAmigos(this.sesionBean.getUsuarioID(), this.usuario.getId())) {
-                this.amigos = true;
-            }
+            this.amigos = this.fachadaUsuarios.sonAmigos(this.sesionBean.getUsuarioID(), this.usuario.getId());
 
             // Comprobar si la peticion ha sido recibida
             if (this.fachadaPeticionDeAmistad.peticionMandada(this.usuario.getId(), this.sesionBean.getUsuarioID())) {
@@ -151,6 +156,9 @@ public class PerfilBean {
         // Se procede a rellenar debidamente la lista de contactos del robots
         this.contactos = this.usuario.getUsuarioCollection();
         this.contactos.addAll(this.usuario.getUsuarioCollection1());
+
+        //Hack
+        sesionBean.usuarioPerfilID = this.usuario.getId();
         
     }
 
@@ -336,6 +344,16 @@ public class PerfilBean {
 
     public Collection<Usuario> getContactos() {
         return contactos;
+    }
+
+    public void setMagiaNegra(int idParameter) {
+        this.idParameter = idParameter;
+        onParameterReceived();
+        this.sesionBean.usuarioPerfilID = -1; //Hay que ir borrando esto cada vez que salgamos de la página de perfil
+    }
+
+    public int getMagiaNegra() {
+        return idParameter;
     }
     
    

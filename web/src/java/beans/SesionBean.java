@@ -25,6 +25,7 @@ public class SesionBean implements Serializable {
     private String usuario; //Valor desde formulario jsf
     private String password; //Valor desde formulario jsf
     private String error = null; //Valor para index.xhtml
+    int usuarioPerfilID = -1; //No me hace ninguna gracia hacer esto, pero el maldito JSF es demasiado tonto para hacer lo que toca
 
     @EJB private UsuarioFacade uf;
     @EJB private PeticionAmistadFacade paf;
