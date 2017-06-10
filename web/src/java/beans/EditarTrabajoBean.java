@@ -42,6 +42,18 @@ public class EditarTrabajoBean {
     ExperienciaLaboral trabajo,trabajoOriginal;
     String error=null;
     
+    
+    
+       ExperienciaLaboral trabajoSeleccionado;
+
+    public ExperienciaLaboral getTrabajoSeleccionado() {
+        return trabajoSeleccionado;
+    }
+
+    public void setTrabajoSeleccionado(ExperienciaLaboral trabajoSeleccionado) {
+        this.trabajoSeleccionado = trabajoSeleccionado;
+    }
+    
     public void EditarTrabajoBean(){
         
     }
@@ -51,13 +63,8 @@ public class EditarTrabajoBean {
     public void init () {
         this.usuario = this.sesionBean.obtenerUsuario();
         
-        
-        //trabajo de prueba BORRAR
-        this.trabajo= fachadaTrabajo.obtenerTrabajos(usuario).get(0);
-        this.trabajoOriginal=fachadaTrabajo.obtenerTrabajos(usuario).get(0);
-        
-       // this.trabajo = this.perfilBean.getTrabajoSeleccionado();
-       //this.trabajoOriginal=fachadaTrabajo.obtenerTrabajos(usuario).get(0);
+        this.trabajo= trabajoSeleccionado;
+        this.trabajoOriginal=trabajoSeleccionado;
     }
     
     public String getError(){
@@ -99,5 +106,14 @@ public class EditarTrabajoBean {
         
         
     }
+    
+        
+    public String editarTrabajo(ExperienciaLaboral trabajo){
+        
+        this.trabajoSeleccionado= trabajo;
+        
+        return "editarTrabajo";
+    }
+    
             
 }

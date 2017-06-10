@@ -7,7 +7,8 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
 <head>
     <title>Editando Perfil - LinkedOut</title>
     <meta name="description" content="Descripcion de la pagina" />
@@ -138,7 +139,7 @@
              
              <div class="form-group edit-profile-form-group">
                 <div class="text-center">
-                    <h:commandButton action="#{editarPerfilBean.doGuardar()}" class="btn btn-primary btn-raised" value="GUARDAR"/>
+                    <button jsf:action="#{editarPerfilBean.doGuardar()}" class="btn btn-primary btn-raised" >GUARDAR</button>
                     <a href="/perfil.jsf" class="btn btn-default btn-raised">CANCELAR</a>
                 </div>
             </div>

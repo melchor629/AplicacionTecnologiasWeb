@@ -12,9 +12,7 @@ import app.entity.Usuario;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.NoneScoped;
 import javax.inject.Inject;
 
 /**
@@ -48,7 +46,7 @@ public class CrearAficionBean {
     public void init () {
         this.usuario = this.sesionBean.obtenerUsuario();
         
-        
+        error= null; 
         this.aficion= null;
             
     }
@@ -80,10 +78,14 @@ public class CrearAficionBean {
       public String doGuardar(){
         
         //si hay un error
+        
+        if(nombre==null || nombre.equals("") || nombre.equals(" ")){
+            error= " La descripción no puede estar vacia";
+        }
+        
         if(error!=null){
             
-            error="Ha ocurrido un Error";
-            return "editarAficion";
+            return "crearAficion";
         }else{
             
             error=null;

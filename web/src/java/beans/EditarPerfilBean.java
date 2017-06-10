@@ -6,6 +6,7 @@
 package beans;
 
 import app.ejb.UsuarioFacade;
+import app.entity.ExperienciaLaboral;
 import app.entity.Usuario;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -35,6 +36,9 @@ public class EditarPerfilBean {
     String contraseñaRepetida=null;
     String contraseñaNueva=null;
     String error=null;
+    
+ 
+    
     
     public EditarPerfilBean() {
     }
