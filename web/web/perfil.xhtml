@@ -6,7 +6,8 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
 
 
     <f:metadata>
@@ -249,14 +250,14 @@
                     <ul class="list-group aficiones">
                         <ui:fragment rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getAficionesCollection().size() != 0}">
                             <ui:repeat value="#{perfilBean.usuario.getAficionesCollection()}" var="aficion">
-                        <li class="list-group-item">                         
+                        <li class="list-group-item">
                             #{aficion.getAficionesPK().getNombre()}
                             <!-- Mostrar iconor de lapiz a papelera segun corresponda-->
                             <div class="edit-profile-jobs pull-right">
                                 <ui:fragment rendered="#{perfilBean.miPerfil}">
-                                <a href="#" class="btn btn-default btn-flat btn-sm">
+                                    <a jsf:action="#{editarAficionBean.editar(aficion.getAficionesPK.getNombre)}" class="btn btn-default btn-flat btn-sm">
                                      <i class="fa fa-pencil"></i>
-                                 </a>
+                                 <a>
                                 <a href="#" class="btn btn-primary btn-flat btn-sm">
                                     <i class="fa fa-trash-o"></i>
                                 </a>

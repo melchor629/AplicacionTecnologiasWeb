@@ -36,17 +36,11 @@ public class EditarAficionBean {
     public EditarAficionBean() {
     }
     
-    @PostConstruct
-    public void caca(){
-         this.aficion = af.obtenerAficionConIdyNombre(sb.obtenerUsuario().getId(), "Muñeca en la mierda");
-        //this.aficion = af.obtenerAficionConIdyNombre(sb.obtenerUsuario().getId(), nombre);
-        this.nombre = aficion.getAficionesPK().getNombre();
-    }
+    
             
     
     public String editar(String nombre){
-        this.aficion = af.obtenerAficionConIdyNombre(sb.obtenerUsuario().getId(), "Muñeca en la mierda");
-        //this.aficion = af.obtenerAficionConIdyNombre(sb.obtenerUsuario().getId(), nombre);
+        this.aficion = af.obtenerAficionConIdyNombre(sb.obtenerUsuario().getId(), nombre);
         this.nombre = aficion.getAficionesPK().getNombre();
         return "editarAficion";
     }
@@ -63,7 +57,7 @@ public class EditarAficionBean {
         Aficiones nueva = new Aficiones(sb.obtenerUsuario().getId(), nombre);
         af.remove(aficion);
         af.create(nueva);
-        return "perfil.jsf";
+        return "perfil";
     }
 
     public String getNombre() {
