@@ -9,6 +9,8 @@ import app.ejb.AficionesFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Aficiones;
 import app.entity.AficionesPK;
+import app.entity.ExperienciaLaboral;
+import app.entity.Usuario;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -35,20 +37,26 @@ public class EditarAficionBean {
     private UsuarioFacade uf;
     
     private String nombre;
-    private Aficiones aficion;
+    private Aficiones aficionSeleccionada;
+    Aficiones aficion,aficionOriginal;
     private String hidden;
+    private Usuario usuario;
+    String error = null;
     
     public EditarAficionBean() {
-        this.aficion = new Aficiones();
+        
     }
     
-    
+    @PostConstruct
+    public void init(){
+        this.usuario = sb.obtenerUsuario();
+        this.aficion= aficionSeleccionada;
+        this.aficionOriginal=aficionSeleccionada;
+    }
             
     
-    public String editar(String aficion){
-        this.aficion = af.obtenerAficionConIdyNombre(sb.getUsuarioID(), aficion);
-        this.nombre = aficion;
-        this.hidden = aficion;
+    public String editar(Aficiones aficion){
+        this.aficionSeleccionada = aficion;
         return "editarAficion";
     }
 
@@ -61,21 +69,25 @@ public class EditarAficionBean {
     }
     
     public String doGuardar(){
-        int id = sb.obtenerUsuario().getId();
         
-        this.aficion = af.obtenerAficionConIdyNombre(id, hidden);
-        sb.obtenerUsuario().getAficionesCollection().remove(aficion);
-        
-        Aficiones nueva = new Aficiones(id , nombre);
-        sb.obtenerUsuario().getAficionesCollection().add(nueva);
-        
-        af.borrarAficion(id, hidden);
-        
-        af.create(nueva);
-        
-        uf.edit(sb.obtenerUsuario());
-        System.out.println(sb.obtenerUsuario().getAficionesCollection().size());
-        return "perfil";
+        //si hay un error
+        if(error!=null){
+            
+            error="Ha ocurrido un Error";
+            return "editarTrabajo";
+        }else{
+            
+            error=null;
+            
+            //como no puedo editar el trabajo creo borro el que tengo y creo uno nuevo
+            
+            af.borrarAficion(this.usuario.getId(), this.aficionOriginal.getAficionesPK().getNombre()); 
+            usuario.getAficionesCollection().remove(this.aficion);
+            usuario.getAficionesCollection().add(aficion);
+            
+            uf.edit(usuario);
+            return "perfil";
+        }
     }
 
     public String getNombre() {

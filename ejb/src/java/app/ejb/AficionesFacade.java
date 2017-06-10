@@ -50,6 +50,16 @@ public class AficionesFacade extends AbstractFacade<Aficiones> {
 
         return a;
     }
+    
+    public void editarAficionConIdyNombre(int id, String nombre, String nuevoNombre) {
+
+        Query q;
+        q = this.em.createQuery("UPDATE Aficiones a SET a.aficionesPK.nombre = :nuevo WHERE a.aficionesPK.idUsuario = :idUsuario AND a.aficionesPK.nombre = :nombre");
+        q.setParameter("idUsuario", id);
+        q.setParameter("nombre", nombre);
+        q.setParameter("nuevo", nuevoNombre);
+        
+    }
 
     public void borrarAficion(int idUsuario, String textoAficion) {
         AficionesPK clave = new AficionesPK(idUsuario, textoAficion);
