@@ -8,6 +8,7 @@ package beans;
 import app.ejb.AficionesFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Aficiones;
+import app.entity.AficionesPK;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -30,18 +31,21 @@ public class EditarAficionBean {
     private SesionBean sb;
     @EJB
     private AficionesFacade af;
-    private String nombre;
+    private AficionesPK aficionPK;
     private Aficiones aficion;
+    private String nombre;
     
     public EditarAficionBean() {
+        this.aficion = null;
     }
     
     
             
     
-    public String editar(String nombre){
-        this.aficion = af.obtenerAficionConIdyNombre(sb.obtenerUsuario().getId(), nombre);
-        this.nombre = aficion.getAficionesPK().getNombre();
+    public String editar(AficionesPK aficionpk){
+        this.aficion = null;
+        this.aficionPK = aficionpk;
+        this.aficion = af.find(aficionpk);
         return "editarAficion";
     }
 
@@ -54,9 +58,9 @@ public class EditarAficionBean {
     }
     
     public String doGuardar(){
-        Aficiones nueva = new Aficiones(sb.obtenerUsuario().getId(), nombre);
-        af.remove(aficion);
-        af.create(nueva);
+        aficionPK.setNombre(this.nombre);
+        aficion.setAficionesPK(aficionPK);
+        af.edit(aficion);
         return "perfil";
     }
 
