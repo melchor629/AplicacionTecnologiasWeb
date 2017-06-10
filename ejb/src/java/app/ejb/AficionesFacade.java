@@ -56,4 +56,8 @@ public class AficionesFacade extends AbstractFacade<Aficiones> {
         Aficiones aficion = getEntityManager().find(Aficiones.class, clave);
         getEntityManager().remove(aficion);
     }
+    
+  
+    
+
 }

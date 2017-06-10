@@ -31,21 +31,24 @@ public class EditarAficionBean {
     private SesionBean sb;
     @EJB
     private AficionesFacade af;
-    private AficionesPK aficionPK;
-    private Aficiones aficion;
+    @EJB
+    private UsuarioFacade uf;
+    
     private String nombre;
+    private Aficiones aficion;
+    private String hidden;
     
     public EditarAficionBean() {
-        this.aficion = null;
+        this.aficion = new Aficiones();
     }
     
     
             
     
-    public String editar(AficionesPK aficionpk){
-        this.aficion = null;
-        this.aficionPK = aficionpk;
-        this.aficion = af.find(aficionpk);
+    public String editar(String aficion){
+        this.aficion = af.obtenerAficionConIdyNombre(sb.getUsuarioID(), aficion);
+        this.nombre = aficion;
+        this.hidden = aficion;
         return "editarAficion";
     }
 
@@ -53,14 +56,25 @@ public class EditarAficionBean {
         return aficion;
     }
 
-    public void setAficion(Aficiones aficion) {
+    public void setAficion(Aficiones aficion) { 
         this.aficion = aficion;
     }
     
     public String doGuardar(){
-        aficionPK.setNombre(this.nombre);
-        aficion.setAficionesPK(aficionPK);
-        af.edit(aficion);
+        int id = sb.obtenerUsuario().getId();
+        
+        this.aficion = af.obtenerAficionConIdyNombre(id, hidden);
+        sb.obtenerUsuario().getAficionesCollection().remove(aficion);
+        
+        Aficiones nueva = new Aficiones(id , nombre);
+        sb.obtenerUsuario().getAficionesCollection().add(nueva);
+        
+        af.borrarAficion(id, hidden);
+        
+        af.create(nueva);
+        
+        uf.edit(sb.obtenerUsuario());
+        System.out.println(sb.obtenerUsuario().getAficionesCollection().size());
         return "perfil";
     }
 
@@ -70,6 +84,14 @@ public class EditarAficionBean {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(String hidden) {
+        this.hidden = hidden;
     }
     
     

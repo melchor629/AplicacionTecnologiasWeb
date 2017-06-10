@@ -23,7 +23,7 @@
             <!-- Contenido -->
             <h:form>
 
-                <h:inputTextarea class="form-control"  rows="3" p:placeholder="#{editarAficionBean.aficion.aficionesPK.nombre}" 
+                <h:inputTextarea class="form-control"  rows="3" p:placeholder="#{editarAficionBean.nombre}" 
                                  value="#{editarAficionBean.nombre}"></h:inputTextarea>
                 <div class="form-group edit-hobby-form-group">
                     <div class="text-center">
@@ -31,6 +31,7 @@
                         <a href="javascript:history.back()" class="btn btn-default btn-raised">CANCELAR</a>
                     </div>
                 </div>
+                <h:inputHidden value="#{editarAficionBean.hidden}" id="name"></h:inputHidden>
             </h:form>   
 
 
