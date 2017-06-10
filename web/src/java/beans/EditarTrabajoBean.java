@@ -58,14 +58,6 @@ public class EditarTrabajoBean {
         
     }
     
-    //obtengo el usuario de sesion
-    @PostConstruct
-    public void init () {
-        this.usuario = this.sesionBean.obtenerUsuario();
-        
-        this.trabajo= trabajoSeleccionado;
-        this.trabajoOriginal=trabajoSeleccionado;
-    }
     
     public String getError(){
         return error;
@@ -111,6 +103,10 @@ public class EditarTrabajoBean {
     public String editarTrabajo(ExperienciaLaboral trabajo){
         
         this.trabajoSeleccionado= trabajo;
+         this.usuario = this.sesionBean.obtenerUsuario();
+        
+        this.trabajo= trabajoSeleccionado;
+        this.trabajoOriginal=trabajoSeleccionado;
         
         return "editarTrabajo";
     }
