@@ -25,6 +25,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -74,7 +75,7 @@ public class PerfilBean implements Serializable {
 
     @EJB
     private MensajeFacade fachadaMensajes;
-    
+
     @EJB
     private PeticionAmistadFacade fachadaPeticionAmistad;
 
@@ -137,7 +138,6 @@ public class PerfilBean implements Serializable {
     public PerfilBean() {
     }
 
-   
     // Este metodo se ejecuta cuando ya se tiene el parámetro que se ha pasado por URL
     public void onParameterReceived() {
 
@@ -180,12 +180,11 @@ public class PerfilBean implements Serializable {
         }
 
         // Se procede a rellenar debidamente la lista de contactos del usuario
-        this.contactos = this.usuario.getUsuarioCollection();
+        // Se crea una nueva copia para no modificar la lista de la entidad usuario
+        // ya que esto hace que al editar la entidad en el borrado de items por ejemplo
+        // acaben habiendo problemas
+        this.contactos = new ArrayList<>(this.usuario.getUsuarioCollection());
         this.contactos.addAll(this.usuario.getUsuarioCollection1());
-
-        //Hack
-        // sesionBean.usuarioPerfilID = this.usuario.getId();
-
     }
 
     // Algunos metodos auxiliares mostrados en la vista
@@ -335,27 +334,27 @@ public class PerfilBean implements Serializable {
 // Una vez mandado el mensaje se fijan las variables necesarias para mostrar el mensaje de error
         this.mostrarExito = true;
         this.exitoParameterFalso = "0";
-        
+
         // Vaciar los campos de texto para que no salgan rellenos de nuevo en la pagina
         setTituloMensaje(null);
         setCuerpoMensaje(null);
     }
-    
+
     // Mandar peticion de amistad a un usuario, se hara mediante ajax tambien
-    public void mandarPeticion(){
+    public void mandarPeticion() {
         Usuario usuarioLogueado = this.sesionBean.obtenerUsuario();
-        this.fachadaPeticionAmistad.mandarPeticionAmistad(this.sesionBean.getUsuarioID(), this.usuario.getId(), "El usuario "+usuarioLogueado.getNombre()+" "+usuarioLogueado.getApellidos()+" te quiere stalkear");
+        this.fachadaPeticionAmistad.mandarPeticionAmistad(this.sesionBean.getUsuarioID(), this.usuario.getId(), "El usuario " + usuarioLogueado.getNombre() + " " + usuarioLogueado.getApellidos() + " te quiere stalkear");
         // establecer correctamente mensaje de exito
         this.exitoParameterFalso = "10";
         this.mostrarExito = true;
         this.peticionMandada = true;
     }
-    
-    public void eliminarAmistad(){
+
+    public void eliminarAmistad() {
         this.fachadaUsuarios.borrarAmistad(this.sesionBean.getUsuarioID(), this.usuario.getId());
         // Ya no son amigos los usuarios
         this.amigos = false;
-        
+
         // Mostrar mensaje de exito adecuado
         this.mostrarExito = true;
         this.exitoParameterFalso = "11";
