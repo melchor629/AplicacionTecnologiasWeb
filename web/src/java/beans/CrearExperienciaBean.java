@@ -10,6 +10,7 @@ import app.ejb.ExperienciaLaboralFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Estudios;
 import app.entity.ExperienciaLaboral;
+import app.entity.Usuario;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -162,10 +163,14 @@ public class CrearExperienciaBean implements Serializable{ //Serializable import
                  e.setWebEmpresa(webEmpresa);
              }
              
-            sesionBean.obtenerUsuario().getExperienciaLaboralCollection().add(e);
-            usuarioFacade.edit(sesionBean.obtenerUsuario());
-            experienciaFacade.create(e);
+             
+             Usuario funcionaplis = sesionBean.obtenerUsuario();
             
+             funcionaplis.getExperienciaLaboralCollection().add(e);
+             
+             experienciaFacade.create(e);
+            usuarioFacade.edit(funcionaplis);
+           
            // System.out.println("Exp laboral de:" + sesionBean.obtenerUsuario().getNombreUsuario() + sesionBean.obtenerUsuario().getExperienciaLaboralCollection().toString());
             
             return "perfil";
