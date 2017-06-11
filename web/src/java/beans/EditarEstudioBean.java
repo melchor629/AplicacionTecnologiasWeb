@@ -1,3 +1,5 @@
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,12 +8,17 @@
 package beans;
 
 import app.ejb.EstudiosFacade;
+import app.ejb.UsuarioFacade;
 import app.entity.Estudios;
 import app.entity.EstudiosPK;
+import app.entity.Usuario;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,16 +35,31 @@ public class EditarEstudioBean implements Serializable {
     
     private String ubicacion;
     private String descripcion;
-    private Date fechaComienzo;
+    private Date fechaComienzo, fechaComienzoOriginal;
     private Date fechaFinalizacion;
     private Estudios estudio;
     private String msgError;
+    private Usuario usuario;
     
     @EJB
     private EstudiosFacade estudiosFacade;
+    @EJB
+    private UsuarioFacade usuarioFacade;
     
     @Inject
     private SesionBean sesionBean;
+    @Inject
+    private PerfilBean perfilBean;
+    private String fechaComienzoStr;
+    
+    @PostConstruct
+    public void init () {
+        
+        
+        this.usuario = this.sesionBean.obtenerUsuario();
+        
+        
+    }
 
     public String getMsgError() {
         return msgError;
@@ -86,41 +108,67 @@ public class EditarEstudioBean implements Serializable {
     public void setFechaFinalizacion(Date fechaFinalizacion) {
         this.fechaFinalizacion = fechaFinalizacion;
     }
-
-    public String editar (){
-        //Suponemos que me pasan todo bien
-        
-        if (fechaComienzo.equals(estudio.getEstudiosPK().getFechaComienzo())) {
-            
-        estudiosFacade.edit(estudio);
-            
-            return "perfil";
-        } else { //si la pk no es igual, creo de nuevo el objeto
-            
-            estudiosFacade.borrarEstudio(sesionBean.obtenerUsuario().getId(), estudio.getEstudiosPK().getFechaComienzo());
-            
-            Estudios nEstudio = new Estudios(sesionBean.obtenerUsuario().getId(), fechaComienzo);
-            
-            nEstudio.setDescripcion(estudio.getDescripcion());
-            nEstudio.setFechaFinalizacion(estudio.getFechaFinalizacion());
-            nEstudio.setUbicacion(estudio.getUbicacion());
-            
-            estudiosFacade.create(nEstudio);
-            
-            return "perfil";
-            
-        }   
+    
+    public String goEdit (Estudios e) {
+        estudio = e;        
+        return "editarEstudio.jsf";
     }
     
-  /* @PostConstruct
-    public void trucarBean () {
-       Estudios it = sesionBean.obtenerUsuario().getEstudiosCollection().iterator().next(); 
-       
-       estudio = it;
-       fechaComienzo = estudio.getEstudiosPK().getFechaComienzo()
-       
+    
+
+    public String editar (){
         
+        Estudios estudioNuevo, estudioOriginal;
+        int i = usuario.getId();
+        estudioOriginal = (Estudios) estudiosFacade.obtenerEstudio(usuario.getId(), fechaComienzoOriginal);
+        //usuario = sesionBean.obtenerUsuario();
+        usuario.getEstudiosCollection().remove(estudioOriginal);
+        this.estudiosFacade.remove(estudioOriginal);
+        
+        estudioNuevo = new Estudios(usuario.getId(), fechaComienzo);
+        estudioNuevo.setFechaFinalizacion(fechaFinalizacion);
+        estudioNuevo.setDescripcion(descripcion);
+        estudioNuevo.setUbicacion(ubicacion);
+        
+        this.estudiosFacade.create(estudioNuevo);
+        usuario.getEstudiosCollection().add(estudioNuevo);
+        this.usuarioFacade.edit(usuario);
+        
+        return "perfil";
+       
     }
-    */
+    
+
+
+    public String getFechaComienzoStr() {
+        return fechaComienzoStr;
+    }
+
+    public void setFechaComienzoStr(String fechaComienzoStr) {
+        this.fechaComienzoStr = fechaComienzoStr;
+    }
+
+    public Date getFechaComienzoOriginal() {
+        return fechaComienzoOriginal;
+    }
+
+    public void setFechaComienzoOriginal(Date fechaComienzoOriginal) {
+        this.fechaComienzoOriginal = fechaComienzoOriginal;
+    }
+    
+    
+    
+     public String goEditEstudio(Estudios e) {
+         
+         this.usuario = this.sesionBean.obtenerUsuario();
+        
+        this.descripcion = e.getDescripcion();
+        this.ubicacion = e.getUbicacion();
+        this.fechaComienzo = e.getEstudiosPK().getFechaComienzo();
+        this.fechaComienzoOriginal = e.getEstudiosPK().getFechaComienzo();
+        this.fechaFinalizacion = e.getFechaFinalizacion();
+                
+        return "editarEstudio";
+    }
     
 }
