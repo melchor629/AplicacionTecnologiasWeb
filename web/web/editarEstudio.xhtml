@@ -30,29 +30,34 @@
         
         <h:form>
             
+            <h:inputHidden value="#{editarEstudioBean.fechaComienzoOriginal}" >
+                <f:convertDateTime pattern="dd-MM-yyyy" />
+            </h:inputHidden>
+            
+            
             <div class="form-group">
-                <label for="fechaComienzo">Fecha de comienzo</label>
-                <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="#{editarEstudioBean.estudio.getEstudiosPK().getFechaComienzo()}" value="#{editarEstudioBean.estudio.getEstudiosPK().getFechaComienzo()}">
-                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                <h:outputLabel for="fechaComienzo" value="Fecha de comienzo"/>
+                <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{editarEstudioBean.fechaComienzo}">
+                    <f:convertDateTime pattern="dd-MM-yyyy"/>
                 </h:inputText>
             </div>
 
             <div class="form-group">
-                <label for="fechaFinalizacion">Fecha de finalización</label>
-                <h:inputText p:type="date" p:class="form-control" id="fechaFinalizacion" p:placeholder="#{editarEstudioBean.estudio.fechaFinalizacion}" value="#{editarEstudioBean.estudio.fechaFinalizacion}">
-                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                <h:outputLabel for="fechaFinalizacion" value="Fecha de finalización"/>
+                <h:inputText p:type="date" p:class="form-control" id="fechaFinalizacion" p:placeholder="Fecha de finalización" value="#{editarEstudioBean.fechaFinalizacion}">
+                    <f:convertDateTime pattern="dd-MM-yyyy"/>
                 </h:inputText>
             </div>
 
             <div class="form-group">
-                <label for="fechaComienzo">Descripción</label>
-                <h:inputText p:type="text" p:class="form-control" id="descripcion" p:placeholder="#{editarEstudioBean.estudio.descripcion}" value="#{editarEstudioBean.estudio.descripcion}">
+                <h:outputLabel for="descripcion" value="Descripción"/>
+                <h:inputText p:type="text" p:class="form-control" id="descripcion" p:placeholder="Descripción" value="#{editarEstudioBean.descripcion}">
                 </h:inputText>
             </div>
             
             <div class="form-group">
-                <label for="ubicacion">Ubicación</label>
-                <h:inputText p:type="text" p:class="form-control" id="ubicacion" p:placeholder="#{editarEstudioBean.estudio.ubicacion}" value="#{editarEstudioBean.estudio.ubicacion}">
+                <h:outputLabel for="ubicacion" value="Ubicación"/>
+                <h:inputText p:type="text" p:class="form-control" id="ubicacion" p:placeholder="Ubicación" value="#{editarEstudioBean.ubicacion}">
                 </h:inputText>
             </div>
             
@@ -63,14 +68,11 @@
             <div class="form-group edit-profile-form-group">
                 <div class="text-center">
                     
-                    <button jsf:action="#{editarEstudioBean.editar()}" class="btn btn-primary btn-raised" value="GUARDAR">GUARDAR</button>
+                    <button jsf:action="#{editarEstudioBean.editar()}" class="btn btn-primary btn-raised">GUARDAR</button>
                      
-                    <a href="/perfil.jsf" class="btn btn-default btn-raised">CANCELAR</a>
+                    <a href="javascript:history.back()" class="btn btn-default btn-raised">CANCELAR</a>
                 </div>
             </div>
-            
-            <h:inputHidden value="#{editarEstudioBean.fechaComienzoStr}" id="fhidden"></h:inputHidden>
-            
             
             
         </h:form>

@@ -35,10 +35,11 @@ public class EditarEstudioBean implements Serializable {
     
     private String ubicacion;
     private String descripcion;
-    private Date fechaComienzo;
+    private Date fechaComienzo, fechaComienzoOriginal;
     private Date fechaFinalizacion;
     private Estudios estudio;
     private String msgError;
+    private Usuario usuario;
     
     @EJB
     private EstudiosFacade estudiosFacade;
@@ -53,14 +54,9 @@ public class EditarEstudioBean implements Serializable {
     
     @PostConstruct
     public void init () {
-        if (estudio == null) { //y si compruebo si el hidden es null? :-/
-           
-           
-           estudio = new Estudios();
-           //fechaComienzo = null;
-           //fechaComienzoStr="";
-          
-        } 
+        
+        
+        this.usuario = this.sesionBean.obtenerUsuario();
         
         
     }
@@ -121,58 +117,28 @@ public class EditarEstudioBean implements Serializable {
     
 
     public String editar (){
-        //Suponemos que me pasan todo bien
         
-        //if (!fechaComienzoStr.equals("")) {
-            SimpleDateFormat sdf2 = new SimpleDateFormat ("dd/MM/yyyy");
-            try {
-                estudio = estudiosFacade.obtenerEstudio(sesionBean.getUsuarioID(), sdf2.parse(fechaComienzoStr));
-            } catch (ParseException ex) {
-                Logger.getLogger(EditarEstudioBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
-       // }
+        Estudios estudioNuevo, estudioOriginal;
+        int i = usuario.getId();
+        estudioOriginal = (Estudios) estudiosFacade.obtenerEstudio(usuario.getId(), fechaComienzoOriginal);
+        //usuario = sesionBean.obtenerUsuario();
+        usuario.getEstudiosCollection().remove(estudioOriginal);
+        this.estudiosFacade.remove(estudioOriginal);
         
-        estudio = estudiosFacade.obtenerEstudio(sesionBean.getUsuarioID(), fechaComienzo);
+        estudioNuevo = new Estudios(usuario.getId(), fechaComienzo);
+        estudioNuevo.setFechaFinalizacion(fechaFinalizacion);
+        estudioNuevo.setDescripcion(descripcion);
+        estudioNuevo.setUbicacion(ubicacion);
         
-        if (fechaComienzo.equals(estudio.getEstudiosPK().getFechaComienzo())) {
-            Usuario nUser = sesionBean.obtenerUsuario();
-            //actualizar colección? 
-            estudiosFacade.edit(estudio);
-            
-            return "perfil";
-        } else { //si la pk no es igual, creo de nuevo el objeto
-            
-            estudiosFacade.borrarEstudio(sesionBean.obtenerUsuario().getId(), estudio.getEstudiosPK().getFechaComienzo());
-            
-            Estudios nEstudio = new Estudios(sesionBean.obtenerUsuario().getId(), fechaComienzo);
-            
-            nEstudio.setDescripcion(estudio.getDescripcion());
-            nEstudio.setFechaFinalizacion(estudio.getFechaFinalizacion());
-            nEstudio.setUbicacion(estudio.getUbicacion());
-            
-             
-            Usuario funcionaplis = sesionBean.obtenerUsuario();
-            funcionaplis.getEstudiosCollection().add(nEstudio);
-                     
-            
-            estudiosFacade.create(nEstudio);
-            usuarioFacade.edit(funcionaplis);
-            
-            return "perfil";
-            
-        }   
+        this.estudiosFacade.create(estudioNuevo);
+        usuario.getEstudiosCollection().add(estudioNuevo);
+        this.usuarioFacade.edit(usuario);
+        
+        return "perfil";
+       
     }
     
-  /* @PostConstruct
-    public void trucarBean () {
-       Estudios it = sesionBean.obtenerUsuario().getEstudiosCollection().iterator().next(); 
-       
-       estudio = it;
-       fechaComienzo = estudio.getEstudiosPK().getFechaComienzo()
-       
-        
-    }
-    */
+
 
     public String getFechaComienzoStr() {
         return fechaComienzoStr;
@@ -181,15 +147,28 @@ public class EditarEstudioBean implements Serializable {
     public void setFechaComienzoStr(String fechaComienzoStr) {
         this.fechaComienzoStr = fechaComienzoStr;
     }
+
+    public Date getFechaComienzoOriginal() {
+        return fechaComienzoOriginal;
+    }
+
+    public void setFechaComienzoOriginal(Date fechaComienzoOriginal) {
+        this.fechaComienzoOriginal = fechaComienzoOriginal;
+    }
     
     
     
      public String goEditEstudio(Estudios e) {
-        estudio = e;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        fechaComienzo = estudio.getEstudiosPK().getFechaComienzo();
-        fechaComienzoStr = sdf.format(estudio.getEstudiosPK().getFechaComienzo());
-        return "editarEstudio.jsf";
+         
+         this.usuario = this.sesionBean.obtenerUsuario();
+        
+        this.descripcion = e.getDescripcion();
+        this.ubicacion = e.getUbicacion();
+        this.fechaComienzo = e.getEstudiosPK().getFechaComienzo();
+        this.fechaComienzoOriginal = e.getEstudiosPK().getFechaComienzo();
+        this.fechaFinalizacion = e.getFechaFinalizacion();
+                
+        return "editarEstudio";
     }
     
 }
