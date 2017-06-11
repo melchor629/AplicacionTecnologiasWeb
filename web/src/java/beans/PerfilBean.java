@@ -120,9 +120,6 @@ public class PerfilBean implements Serializable {
     // Con exito
     private boolean mostrarExito = false;
 
-    // Otra chapuza mas by Antonio, creo que u
-    // Un flag para solucionar un problemilla
-    // private boolean 
     /**
      * Mandar mensaje a un usuario *
      */
@@ -362,6 +359,8 @@ public class PerfilBean implements Serializable {
         // Mostrar mensaje de exito adecuado
         this.mostrarExito = true;
         this.exitoParameterFalso = "11";
+        // Actualizacion del usuario
+        this.usuario = this.fachadaUsuarios.obtenerUsuarioPorId(this.usuario.getId());
     }
 
     //Getters y setters
