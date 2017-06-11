@@ -116,14 +116,16 @@
                     </ui:fragment>
 
                     <ui:fragment rendered="#{!perfilBean.miPerfil and perfilBean.amigos}">
-                        <a href="#" class="btn btn-primary btn-raised">
+                        <a jsf:action="#{perfilBean.eliminarAmistad()}" class="btn btn-primary btn-raised" jsf:id="botonEliminarAmistad">
                             <i class="fa fa-user-times" /> Eliminar amistad
+                            <f:ajax execute="botonEliminarAmistad" render="contenedorPerfilUsuario"/>
                         </a>
                     </ui:fragment>
 
-                    <ui:fragment rendered="#{!perfilBean.miPerfil and !perfilBean.amigos}">
-                        <a href="#" class="btn btn-primary btn-raised">
+                    <ui:fragment rendered="#{!perfilBean.miPerfil and !perfilBean.amigos and !perfilBean.peticionRecibida and !perfilBean.peticionMandada}">
+                        <a jsf:action="#{perfilBean.mandarPeticion()}" class="btn btn-primary btn-raised" jsf:id="botonMandarSolicitud">
                             <i class="fa fa-user-plus" /> Enviar solicitud de amistad
+                            <f:ajax execute="botonMandarSolicitud" render="contenedorPerfilUsuario"/>
                         </a>
                     </ui:fragment>
 
@@ -151,7 +153,9 @@
             <div class="col-sm-8 col-md-9 row profile-rest-section">
                 <!-- En esta seccion se muestran la mayoria de datos de un perfil -->
                 <div class="col-lg-8">
-                    <h3>Experiencia laboral</h3>
+                    <ui:fragment rendered="#{perfilBean.amigos or perfilBean.miPerfil}">
+                        <h3>Experiencia laboral</h3>
+                    </ui:fragment>
                     <ui:fragment rendered="#{perfilBean.miPerfil}">
                         <a href="crearExperienciaLaboral.jsf" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus" /></a>
                     </ui:fragment>
@@ -208,7 +212,9 @@
                         </ui:fragment>
 
                     </ul>
-                    <h3>Formación</h3>
+                    <ui:fragment rendered="#{perfilBean.amigos or perfilBean.miPerfil}">
+                        <h3>Formación</h3>
+                    </ui:fragment>
 
                     <!-- <a href="crearEstudio.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a> -->
                     <ui:fragment rendered="#{perfilBean.miPerfil}">
@@ -260,7 +266,10 @@
 
 
                     <div class="clearfix">
-                        <h3 class="pull-left">Aficiones</h3>
+                        <ui:fragment rendered="#{perfilBean.amigos or perfilBean.miPerfil}">
+                            <h3 class="pull-left">Aficiones</h3>
+                        </ui:fragment>
+
                         <ui:fragment rendered="#{perfilBean.miPerfil}">
                             <a href="crearAficion.jsf" class="btn btn-default btn-flat btn-sm profile-add">
                                 <i class="fa fa-plus" />
@@ -302,7 +311,9 @@
 
                 <!-- Mostrar contactos del perfil -->
                 <div class="col-lg-4 profile-contacts">
-                    <h3>Contactos</h3>
+                    <ui:fragment rendered="#{perfilBean.amigos or perfilBean.miPerfil}">
+                        <h3>Contactos</h3>
+                    </ui:fragment>
                     <ui:fragment rendered="#{perfilBean.amigos or perfilBean.miPerfil}">
                         <ui:repeat value="#{perfilBean.contactos}" var="contacto">
                             <div class="row profile-contact">
@@ -362,7 +373,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                                <h:inputText value="#{perfilBean.tituloMensaje}" id="campoTituloMensaje" p:placeholder="Título del mensaje" styleClass="form-control" required="true" requiredMessage="El mensaje debe tener un titulo" validatorMessage="El título no puede superar los 100 caracteres">
+                                <h:inputText value="#{perfilBean.tituloMensaje}" id="campoTituloMensaje" p:placeholder="Título del mensaje" p:maxlength="100" styleClass="form-control" required="true" requiredMessage="El mensaje debe tener un titulo" validatorMessage="El título no puede superar los 100 caracteres">
                                     <f:validateLength minimum="1" maximum="100" />
                                 </h:inputText>
                                 <h:message id="tituloValidatorError" for="campoTituloMensaje" style="color:red"/>
@@ -372,7 +383,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-comment-o"></i></div>
-                                <h:inputTextarea value="#{perfilBean.cuerpoMensaje}" id="campoCuerpoMensaje" styleClass="form-control" p:placeholder="Mensaje..." required="true" requiredMessage="El mensaje no puede estar vacío" validatorMessage="El mensaje no puede superar los 999 caracteres">
+                                <h:inputTextarea value="#{perfilBean.cuerpoMensaje}" id="campoCuerpoMensaje" styleClass="form-control" p:placeholder="Mensaje..." p:maxlength="999" required="true" requiredMessage="El mensaje no puede estar vacío" validatorMessage="El mensaje no puede superar los 999 caracteres">
                                     <f:validateLength minimum="1" maximum="999" />
                                 </h:inputTextarea>
                                 <h:message id="mensajeValidatorError" for="campoCuerpoMensaje" style="color:red"/>
