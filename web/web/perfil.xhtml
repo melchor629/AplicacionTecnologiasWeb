@@ -235,12 +235,11 @@
                                 <div class="edit-profile-jobs">
 
                                     <ui:fragment rendered="#{perfilBean.miPerfil}">
-                                        <button jsf:action="#" class="btn btn-default btn-flat">
+                                        <button jsf:action="#{editarEstudioBean.goEditEstudio(estudio)}" class="btn btn-default btn-flat">
                                             <i class="fa fa-pencil" /> EDITAR
                                         </button>
-                                        <a jsf:action="#{perfilBean.borrarItem(estudio)}" class="btn btn-primary btn-flat" jsf:id="botonEliminarEstudio">
+                                        <a href="#" class="btn btn-primary btn-flat">
                                             <i class="fa fa-trash-o" /> BORRAR
-                                            <f:ajax execute="botonEliminarEstudio" render="contenedorPerfilUsuario"/>
                                         </a>
                                     </ui:fragment>
                                 </div>
