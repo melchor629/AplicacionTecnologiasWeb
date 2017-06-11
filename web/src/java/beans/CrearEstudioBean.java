@@ -8,6 +8,7 @@ package beans;
 import app.ejb.EstudiosFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Estudios;
+import app.entity.Usuario;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,7 +38,9 @@ public class CrearEstudioBean implements Serializable {
     private String ubicacion;
     
       @EJB private EstudiosFacade estudiosFacade;
+      @EJB private UsuarioFacade usuarioFacade;
       @Inject private SesionBean sesionBean;
+      @Inject private PerfilBean perfilBean;
 
     public String getMsgError() {
         return msgError;
@@ -134,7 +137,13 @@ public class CrearEstudioBean implements Serializable {
                  e.setUbicacion(ubicacion);
              }
              
-            estudiosFacade.create(e);
+             Usuario funcionaplis = sesionBean.obtenerUsuario();
+            
+             funcionaplis.getEstudiosCollection().add(e);
+             
+             estudiosFacade.create(e);
+            usuarioFacade.edit(funcionaplis);
+           
             
             return "perfil";
         } else { //y si no..

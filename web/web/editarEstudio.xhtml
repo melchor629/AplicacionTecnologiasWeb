@@ -6,7 +6,8 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:jsf="http://xmlns.jcp.org/jsf">
 <head>
     <title>Editando Estudios - LinkedOut</title>
     <meta name="description" content="Descripcion de la pagina" />
@@ -31,7 +32,7 @@
             
             <div class="form-group">
                 <label for="fechaComienzo">Fecha de comienzo</label>
-                <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="#{editarEstudioBean.estudio.estudiosPK.fechaComienzo}" value="#{editarEstudioBean.fechaComienzo}">
+                <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="#{editarEstudioBean.estudio.getEstudiosPK().getFechaComienzo()}" value="#{editarEstudioBean.estudio.getEstudiosPK().getFechaComienzo()}">
                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                 </h:inputText>
             </div>
@@ -54,20 +55,27 @@
                 <h:inputText p:type="text" p:class="form-control" id="ubicacion" p:placeholder="#{editarEstudioBean.estudio.ubicacion}" value="#{editarEstudioBean.estudio.ubicacion}">
                 </h:inputText>
             </div>
+            
+           <!-- <input type="hidden" jsf:value="# {editarEstudioBean.fechaComienzoStr}"/>-->
+            
        
               
             <div class="form-group edit-profile-form-group">
                 <div class="text-center">
-                    <h:commandButton action="#{editarEstudioBean.editar()}" class="btn btn-primary btn-raised" value="GUARDAR"/>
+                    
+                    <button jsf:action="#{editarEstudioBean.editar()}" class="btn btn-primary btn-raised" value="GUARDAR">GUARDAR</button>
+                     
                     <a href="/perfil.jsf" class="btn btn-default btn-raised">CANCELAR</a>
                 </div>
             </div>
+            
+            <h:inputHidden value="#{editarEstudioBean.fechaComienzoStr}" id="fhidden"></h:inputHidden>
             
             
             
         </h:form>
         
-
+        
         <ui:include src="/WEB-INF/footer.xhtml" />
     </div>
 

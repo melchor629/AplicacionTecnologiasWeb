@@ -1,3 +1,5 @@
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,12 +8,17 @@
 package beans;
 
 import app.ejb.EstudiosFacade;
+import app.ejb.UsuarioFacade;
 import app.entity.Estudios;
 import app.entity.EstudiosPK;
+import app.entity.Usuario;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -35,9 +42,28 @@ public class EditarEstudioBean implements Serializable {
     
     @EJB
     private EstudiosFacade estudiosFacade;
+    @EJB
+    private UsuarioFacade usuarioFacade;
     
     @Inject
     private SesionBean sesionBean;
+    @Inject
+    private PerfilBean perfilBean;
+    private String fechaComienzoStr;
+    
+    @PostConstruct
+    public void init () {
+        if (estudio == null) { //y si compruebo si el hidden es null? :-/
+           
+           
+           estudio = new Estudios();
+           //fechaComienzo = null;
+           //fechaComienzoStr="";
+          
+        } 
+        
+        
+    }
 
     public String getMsgError() {
         return msgError;
@@ -86,13 +112,32 @@ public class EditarEstudioBean implements Serializable {
     public void setFechaFinalizacion(Date fechaFinalizacion) {
         this.fechaFinalizacion = fechaFinalizacion;
     }
+    
+    public String goEdit (Estudios e) {
+        estudio = e;        
+        return "editarEstudio.jsf";
+    }
+    
+    
 
     public String editar (){
         //Suponemos que me pasan todo bien
         
+        //if (!fechaComienzoStr.equals("")) {
+            SimpleDateFormat sdf2 = new SimpleDateFormat ("dd/MM/yyyy");
+            try {
+                estudio = estudiosFacade.obtenerEstudio(sesionBean.getUsuarioID(), sdf2.parse(fechaComienzoStr));
+            } catch (ParseException ex) {
+                Logger.getLogger(EditarEstudioBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+       // }
+        
+        estudio = estudiosFacade.obtenerEstudio(sesionBean.getUsuarioID(), fechaComienzo);
+        
         if (fechaComienzo.equals(estudio.getEstudiosPK().getFechaComienzo())) {
-            
-        estudiosFacade.edit(estudio);
+            Usuario nUser = sesionBean.obtenerUsuario();
+            //actualizar colección? 
+            estudiosFacade.edit(estudio);
             
             return "perfil";
         } else { //si la pk no es igual, creo de nuevo el objeto
@@ -105,7 +150,13 @@ public class EditarEstudioBean implements Serializable {
             nEstudio.setFechaFinalizacion(estudio.getFechaFinalizacion());
             nEstudio.setUbicacion(estudio.getUbicacion());
             
+             
+            Usuario funcionaplis = sesionBean.obtenerUsuario();
+            funcionaplis.getEstudiosCollection().add(nEstudio);
+                     
+            
             estudiosFacade.create(nEstudio);
+            usuarioFacade.edit(funcionaplis);
             
             return "perfil";
             
@@ -122,5 +173,23 @@ public class EditarEstudioBean implements Serializable {
         
     }
     */
+
+    public String getFechaComienzoStr() {
+        return fechaComienzoStr;
+    }
+
+    public void setFechaComienzoStr(String fechaComienzoStr) {
+        this.fechaComienzoStr = fechaComienzoStr;
+    }
+    
+    
+    
+     public String goEditEstudio(Estudios e) {
+        estudio = e;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        fechaComienzo = estudio.getEstudiosPK().getFechaComienzo();
+        fechaComienzoStr = sdf.format(estudio.getEstudiosPK().getFechaComienzo());
+        return "editarEstudio.jsf";
+    }
     
 }
