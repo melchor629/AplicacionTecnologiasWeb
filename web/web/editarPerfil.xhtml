@@ -33,7 +33,7 @@
                      <h:outputLabel for="nombreUsuario" p:class="col-sm-3 control-label" value="Nombre Usuario"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-user-o"></i></div>
-                            <h:inputText id="nombreUsuario" class="form-control" value="#{editarPerfilBean.usuario.nombreUsuario}" p:placeholder="Nombre Usuario"/><br/>
+                            <h:inputText id="nombreUsuario" class="form-control" value="#{editarPerfilBean.nombreUsuario}" p:placeholder="Nombre Usuario"/><br/>
                         </div>
                      </div>
                      
@@ -41,7 +41,7 @@
                      <h:outputLabel for="nombre" class="col-sm-3 control-label" value="Nombre"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
-                            <h:inputText  id="nombre" class="form-control" value="#{editarPerfilBean.usuario.nombre}" p:placeholder="Nombre"/>
+                            <h:inputText  id="nombre" class="form-control" value="#{editarPerfilBean.nombre}" p:placeholder="Nombre"/>
                         </div>
                      </div>
                      
@@ -49,7 +49,7 @@
                      <h:outputLabel for="apellidos" class="col-sm-3 control-label" value="Apellidos"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
-                            <h:inputText  id="apellidos" class="form-control"  value="#{editarPerfilBean.usuario.apellidos}" p:placeholder="Apellidos"/>
+                            <h:inputText  id="apellidos" class="form-control"  value="#{editarPerfilBean.apellidos}" p:placeholder="Apellidos"/>
                         </div>
                      </div>
                      
@@ -57,7 +57,7 @@
                      <h:outputLabel for="correo" class="col-sm-3 control-label" value="Correo"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                            <h:inputText p:type="email" id="correo" class="form-control" value="#{editarPerfilBean.usuario.correo}" p:placeholder="Correo"/>
+                            <h:inputText p:type="email" id="correo" class="form-control" value="#{editarPerfilBean.correo}" p:placeholder="Correo"/>
                         </div>
                      </div>
                      
@@ -140,14 +140,14 @@
              <div class="form-group edit-profile-form-group">
                 <div class="text-center">
                     <button jsf:action="#{editarPerfilBean.doGuardar()}" class="btn btn-primary btn-raised" >GUARDAR</button>
-                    <a href="/perfil.jsf" class="btn btn-default btn-raised">CANCELAR</a>
+                    <a href="javascript:history.back()" class="btn btn-default btn-raised">CANCELAR</a>
                 </div>
             </div>
             
         </h:form>
         
               <!-- Error con las contraseñas-->
-               <ui:fragment rendered="#{editarPerfilBean.error != null}">
+              <ui:fragment rendered="#{editarPerfilBean.correcto == false}">
             <div class="col-xs-12"> 
                     <h:outputText value=" #{editarPerfilBean.error}" p:class="alert alert-danger"/>
               <br/>            

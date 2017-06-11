@@ -5,8 +5,14 @@
  */
 package beans;
 
+import app.ejb.AficionesFacade;
+import app.ejb.EstudiosFacade;
+import app.ejb.ExperienciaLaboralFacade;
 import app.ejb.PeticionAmistadFacade;
 import app.ejb.UsuarioFacade;
+import app.entity.Aficiones;
+import app.entity.Estudios;
+import app.entity.ExperienciaLaboral;
 import app.entity.Usuario;
 
 import javax.annotation.PostConstruct;
@@ -45,12 +51,21 @@ public class PerfilBean {
     };
     
     
-    // Fachada de usuarios para obtener estos y datos relacionados con ellos
+    // Fachadas necesarias en etse bean
     @EJB
     private UsuarioFacade fachadaUsuarios;
 
     @EJB
     private PeticionAmistadFacade fachadaPeticionDeAmistad;
+    
+    @EJB
+    private ExperienciaLaboralFacade fachadaExperienciaLaboral;
+    
+    @EJB
+    private EstudiosFacade fachadaEstudios;
+    
+    @EJB
+    private AficionesFacade fachadaAficiones;
 
     // Se inyecta el SessionBean, necesario para obtener datos relacionados con
     // la sesion que hay iniciada
@@ -65,6 +80,9 @@ public class PerfilBean {
     
     // Parametro que indica el exito producido
     private String exitoParameter = "";
+    
+    // Otro parametro de exito "falso" usado para que ajax funcione
+    private String exitoParameterFalso = "";
     
     // Usuario a mostrar en el perfil
     private Usuario usuario;
@@ -153,7 +171,7 @@ public class PerfilBean {
             // Comprobar si la peticion ha sido mandada
         }
         
-        // Se procede a rellenar debidamente la lista de contactos del robots
+        // Se procede a rellenar debidamente la lista de contactos del usuario
         this.contactos = this.usuario.getUsuarioCollection();
         this.contactos.addAll(this.usuario.getUsuarioCollection1());
 
@@ -233,6 +251,9 @@ public class PerfilBean {
         if(!exitoParameter.equals("")){
             numeroExito = Integer.parseInt(exitoParameter);
         }
+        if(!exitoParameterFalso.equals("")){
+            numeroExito = Integer.parseInt(exitoParameterFalso);
+        }
         return MENSAJES_EXITO[numeroExito];
     }
     
@@ -274,6 +295,31 @@ public class PerfilBean {
         }
         
         return retorno;
+    }
+    
+    // Borra un item del perfil, que puede ser Experiencia Laboral, Formacion o Aficion
+    public void borrarItem(Object item){
+        
+        // Al ser bidireccional la asociacion, borrar tambien del usuario y editar este
+        
+        if(item instanceof ExperienciaLaboral){
+            this.fachadaExperienciaLaboral.remove((ExperienciaLaboral)item);
+            this.usuario.getExperienciaLaboralCollection().remove((ExperienciaLaboral)item);
+            this.exitoParameterFalso = "1";
+        } else if(item instanceof Estudios){
+            this.fachadaEstudios.remove((Estudios)item);
+            this.usuario.getEstudiosCollection().remove((Estudios) item);
+            this.exitoParameterFalso = "2";
+        }else if(item instanceof Aficiones){
+            this.fachadaAficiones.remove((Aficiones) item);
+            this.usuario.getAficionesCollection().remove((Aficiones) item);
+            this.exitoParameterFalso = "3";
+        }
+        
+        this.fachadaUsuarios.edit(this.usuario);
+        
+        // Hacer que se muestre mensaje de exito
+        this.mostrarExito = true;
     }
     
     //Getters y setters

@@ -28,12 +28,55 @@ public class RegistroBean {
     UsuarioFacade fachadaUsuario;
     
     
-    Usuario usuario;
-    
-    String error=null;
+    String error="";
     
     String password=null;
     String passwordConfirmada=null;
+    String nombre;
+    String apellidos;
+    String correo;
+    String nombreUsuario;
+    boolean correcto=true;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public boolean isCorrecto() {
+        return correcto;
+    }
+
+    public void setCorrecto(boolean correcto) {
+        this.correcto = correcto;
+    }
     
     boolean check1=false;
     boolean check2=false;
@@ -56,7 +99,10 @@ public class RegistroBean {
     
     @PostConstruct
     public void init(){
-        this.usuario= new Usuario();
+        this.error="";
+      password=null;
+     passwordConfirmada=null;
+        
     }
 
 
@@ -68,13 +114,7 @@ public class RegistroBean {
         this.error = error;
     }
     
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+  
 
     
     public RegistroBean() {
@@ -98,42 +138,66 @@ public class RegistroBean {
     
     public String doRegistrar(){
        
+        correcto=true;
      
-        if(!password.equals(passwordConfirmada)|| password.equals("") || passwordConfirmada.equalsIgnoreCase("")){
+            if((this.password==null && this.passwordConfirmada==null) || (this.password.equals("") && this.passwordConfirmada.equals("")) || !this.password.equals(this.passwordConfirmada)){
             
-            error="Contraseñas Incorrectas";
-        }else{
-            
-            //las contraseñas estan correctas
-             String hash = app.cosas.Hash.hash(usuario.getNombreUsuario()+":"+this.password);
-                usuario.setContraseña(hash);
-           
-        }
+                 error +=  "- Las contraseñas no coinciden o estan vacias";
+                correcto=false;
+            }
         
         if(!check1 || !check2 ){
             
-            if(error==null){
-                
-                error= "Tienes que aceptar las condiciones";
-            }else{
+          
                 
             error= error +" - Tienes que aceptar las condiciones";
         
-            }
+            correcto= false;
         }    
         
+        if(this.nombreUsuario==null || this.nombreUsuario.equals("")){
+               
+               error +=  "- El nombre de usuario no puede estar vacío";
+               correcto=false;
+           }
+           
+           if(this.nombre==null || this.nombre.equals("")){
+               error +=  "- El nombre no puede estar vacío";
+               correcto=false;
+           }
+           
+           if(this.apellidos==null || this.apellidos.equals("")){
+              error +=  "- Los apellidos no pueden estar vacios"; 
+               correcto=false;
+           }
+           
+           if(this.correo==null || this.correo.equals("")){
+               error +=  "- El correo no puede estar vacío";
+               correcto=false;
+           }
+        
         //Error
-        if(error!=null){
+        if(!correcto){
             
             return "registro";
         }else{
             
-            error= null;
+            Usuario usuario;
             //si esta todo bien creo el usuario
             
+            usuario = new Usuario(Integer.SIZE);
             
-            this.usuario.setId(Integer.SIZE);
-            this.fachadaUsuario.create(this.usuario);
+            if((password!=null && passwordConfirmada!=null)  && (!this.password.equals("") && !this.passwordConfirmada.equals("")) && password.equals(passwordConfirmada)){
+                
+                 String hash = app.cosas.Hash.hash(this.nombreUsuario+":"+password);
+                usuario.setContraseña(hash);
+            }
+            
+            usuario.setNombre(this.nombre);
+            usuario.setNombreUsuario(this.nombreUsuario);
+            usuario.setApellidos(this.apellidos);
+            usuario.setCorreo(this.correo);
+            fachadaUsuario.create(usuario);
             
             return "index";
         }
