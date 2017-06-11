@@ -275,7 +275,7 @@
                                 <!-- Mostrar iconor de lapiz a papelera segun corresponda-->
                                 <div class="edit-profile-jobs pull-right">
                                     <ui:fragment rendered="#{perfilBean.miPerfil}">
-                                        <a jsf:action="#{editarAficionBean.editar(aficion)}" class="btn btn-default btn-flat btn-sm">
+                                        <a jsf:action="#{editarAficionBean.editar(aficion.aficionesPK.nombre)}" class="btn btn-default btn-flat btn-sm">
                                             <i class="fa fa-pencil" />
                                         </a>
                                         <a href="#" class="btn btn-primary btn-flat btn-sm">
