@@ -30,42 +30,44 @@
         
        <h:form>
            
-           <h:inputHidden value="#{editarTrabajoBean.trabajoSeleccionado}" />
+           <h:inputHidden value="#{editarTrabajoBean.fechaComienzoOriginal}" >
+           <f:convertDateTime pattern="dd-MM-yyyy" />
+           </h:inputHidden>
            
            <div class="form-group">
                <h:outputLabel for="fechaComienzo" value="Fecha de comienzo"/>
-               <h:inputText p:type="Date" class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{editarTrabajoBean.trabajo.experienciaLaboralPK.fechaComienzo}">
-                   <f:convertDateTime pattern="dd/MM/yyyy" />
+               <h:inputText p:type="Date" class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{editarTrabajoBean.fechaComienzo}">
+                   <f:convertDateTime pattern="dd-MM-yyyy" />
                </h:inputText>
        </div>
            
            <div class="form-group">
                <h:outputLabel for="fechaFinalizacion" value="Fecha de finalización"/>
-               <h:inputText p:type="Date" class="form-control" id="fechaFinalizacion" p:placeholder="Fecha de finalización" value="#{editarTrabajoBean.trabajo.fechaFinalizacion}">
-                   <f:convertDateTime pattern="dd/MM/yyyy" />
+               <h:inputText p:type="Date" class="form-control" id="fechaFinalizacion" p:placeholder="Fecha de finalización" value="#{editarTrabajoBean.fechaFinalizacion}">
+                   <f:convertDateTime pattern="dd-MM-yyyy" />
                </h:inputText>
        </div>
            
             <div class="form-group">
                 <h:outputLabel for="empresa" value="Empresa"/>
-                <h:inputText  class="form-control" id="empresa"  p:placeholder="Empresa" value="#{editarTrabajoBean.trabajo.empresa}"/>
+                <h:inputText  class="form-control" id="empresa"  p:placeholder="Empresa" value="#{editarTrabajoBean.empresa}"/>
        </div>
            
            <div class="form-group">
                <h:outputLabel for="puesto" value="Puesto"/>
-               <h:inputText  class="form-control" id="puesto"  p:placeholder="puesto" value="#{editarTrabajoBean.trabajo.puesto}"/>
+               <h:inputText  class="form-control" id="puesto"  p:placeholder="puesto" value="#{editarTrabajoBean.puesto}"/>
        </div>
            
             <div class="form-group">
                 <h:outputLabel for="webEmpresa" value="Web empresa"/>
-                <h:inputText  class="form-control" id="webEmpresa"  p:placeholder="Web Empresa" value="#{editarTrabajoBean.trabajo.webEmpresa}"/>
+                <h:inputText  class="form-control" id="webEmpresa"  p:placeholder="Web Empresa" value="#{editarTrabajoBean.web}"/>
        </div>
            
            
            <div class="form-group edit-profile-form-group">
                 <div class="text-center">
                     <button  jsf:action="#{editarTrabajoBean.doGuardar()}" class="btn btn-primary btn-raised" >GUARDAR</button>
-                    <a href="/web/perfil.jsf" class="btn btn-default btn-raised">CANCELAR</a>
+                    <a href="javascript:history.back()" class="btn btn-default btn-raised">CANCELAR</a>
                 </div>
             </div>
            
