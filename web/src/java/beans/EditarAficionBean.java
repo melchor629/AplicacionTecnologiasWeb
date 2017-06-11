@@ -54,6 +54,7 @@ public class EditarAficionBean {
     public String editar(Aficiones aficion){
         this.nombre = aficion.getAficionesPK().getNombre();
         this.hidden = aficion.getAficionesPK().getNombre();
+        
         return "editarAficion";
     }
 
