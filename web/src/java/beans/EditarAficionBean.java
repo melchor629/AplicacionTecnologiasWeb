@@ -36,9 +36,8 @@ public class EditarAficionBean {
     private UsuarioFacade uf;
     
     private String nombre;
-    private Aficiones aficion;
-    private String hidden;
     private Usuario u;
+    private String error;
     
     public EditarAficionBean() {
         
@@ -46,39 +45,44 @@ public class EditarAficionBean {
     
     @PostConstruct
     public void init(){
-        this.u=sb.obtenerUsuario();
-        this.aficion = new Aficiones();
+        this.u = this.sb.obtenerUsuario();
+        error = null;
     }
             
     
-    public String editar(String aficion){
-        this.aficion = af.obtenerAficionConIdyNombre(sb.getUsuarioID(), aficion);
-        this.nombre = aficion;
-        this.hidden = aficion;
+    public String editar(Aficiones aficion){
+        this.nombre = aficion.getAficionesPK().getNombre();
         return "editarAficion";
     }
 
-    public Aficiones getAficion() {
-        return aficion;
-    }
-
-    public void setAficion(Aficiones aficion) { 
-        this.aficion = aficion;
-    }
+ 
     
     public String doGuardar(){
-  
-        this.aficion = af.obtenerAficionConIdyNombre(u.getId(), hidden);
-        System.out.println(hidden);
-        u.getAficionesCollection().remove(aficion);
         
-        aficion.getAficionesPK().setNombre(hidden);
-        
-    
-        u.getAficionesCollection().add(aficion);
+        if (error != null) {
 
-        
-        uf.edit(u);
+            error = "Ha ocurrido un Error" + error;
+            return "editarAficion";
+        } else {
+            error = null;
+            
+            Aficiones aficionNueva;
+            Aficiones aficionOriginal;
+            
+            aficionOriginal = af.obtenerAficionConIdyNombre(this.u.getId(), this.nombre);
+            this.u.getAficionesCollection().remove(aficionOriginal);
+            
+            this.af.remove(aficionOriginal);
+            this.uf.edit(u);
+            
+            aficionNueva = new Aficiones(this.u.getId(), nombre);
+            aficionNueva.setUsuario(u);
+            
+            
+            this.af.create(aficionNueva);
+            this.u.getAficionesCollection().add(aficionNueva);
+            this.uf.edit(u);
+        }
         
         return "perfil";
     }
@@ -91,13 +95,7 @@ public class EditarAficionBean {
         this.nombre = nombre;
     }
 
-    public String getHidden() {
-        return hidden;
-    }
-
-    public void setHidden(String hidden) {
-        this.hidden = hidden;
-    }
+ 
     
     
 }
