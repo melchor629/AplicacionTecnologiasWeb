@@ -27,7 +27,7 @@
 
     <ui:include src="/WEB-INF/nav-logged.xhtml"/>
 
-    <h:form p:class="container">
+    <h:form p:class="container" id="contenedorPerfilUsuario">
 
         <input type="hidden" jsf:value="#{perfilBean.magiaNegra}" />
 
@@ -187,8 +187,9 @@
                                             <i class="fa fa-pencil" /> EDITAR
                                         </button>
 
-                                        <a href="#" class="btn btn-primary btn-flat">
+                                        <a jsf:action="#{perfilBean.borrarItem(experiencia)}" class="btn btn-primary btn-flat" jsf:id="botonEliminarExperiencia">
                                             <i class="fa fa-trash-o" /> BORRAR
+                                            <f:ajax execute="botonEliminarExperiencia" render="contenedorPerfilUsuario"/>
                                         </a>
                                     </ui:fragment>
                                 </div>
@@ -237,8 +238,9 @@
                                         <button jsf:action="#" class="btn btn-default btn-flat">
                                             <i class="fa fa-pencil" /> EDITAR
                                         </button>
-                                        <a href="#" class="btn btn-primary btn-flat">
+                                        <a jsf:action="#{perfilBean.borrarItem(estudio)}" class="btn btn-primary btn-flat" jsf:id="botonEliminarEstudio">
                                             <i class="fa fa-trash-o" /> BORRAR
+                                            <f:ajax execute="botonEliminarEstudio" render="contenedorPerfilUsuario"/>
                                         </a>
                                     </ui:fragment>
                                 </div>
@@ -278,8 +280,9 @@
                                         <a jsf:action="#{editarAficionBean.editar(aficion.aficionesPK.nombre)}" class="btn btn-default btn-flat btn-sm">
                                             <i class="fa fa-pencil" />
                                         </a>
-                                        <a href="#" class="btn btn-primary btn-flat btn-sm">
+                                        <a jsf:action="#{perfilBean.borrarItem(aficion)}" class="btn btn-primary btn-flat btn-sm" jsf:id="botonEliminarAficion">
                                             <i class="fa fa-trash-o" />
+                                            <f:ajax execute="botonEliminarAficion" render="contenedorPerfilUsuario"/>
                                         </a>
                                     </ui:fragment>
                                 </div>
