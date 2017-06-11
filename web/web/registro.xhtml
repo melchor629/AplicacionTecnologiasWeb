@@ -20,7 +20,7 @@
 
     <div class="container">
 
-        <ui:fragment rendered="#{registroBean.error != null}">
+        <ui:fragment rendered="#{registroBean.correcto == false}">
             <div class="col-xs-12"> 
                 <h:outputText value=" #{registroBean.error}" p:class="alert alert-danger"/>
               <br/>            
@@ -36,7 +36,7 @@
                         <h:outputLabel for="nombre" class="col-sm-3 control-label"  value="Nombre"/>
                         <div class="col-sm-9">
              
-                            <h:inputText id="nombre" p:placeholder="Nombre" class="form-control" value="#{registroBean.usuario.nombre}"/>
+                            <h:inputText id="nombre" p:placeholder="Nombre" class="form-control" value="#{registroBean.nombre}"/>
                          <span class="help-block">Nombre ej.: Evaristo José;</span>
                         </div>
              
@@ -44,7 +44,7 @@
                     <div class="form-group">
                         <h:outputLabel for="apellidos" class="col-sm-3 control-label" value="Apellidos"/>
                         <div class="col-sm-9">
-                            <h:inputText id="apellidos" p:placeholder="Apellidos" class="form-control" value="#{registroBean.usuario.apellidos}"/>
+                            <h:inputText id="apellidos" p:placeholder="Apellidos" class="form-control" value="#{registroBean.apellidos}"/>
                              <span class="help-block">Apellidos ej.: Escobar Kennedy</span>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                     <div class="form-group">
                         <h:outputLabel for="correo" class="col-sm-3 control-label" value="Correo"/>
                         <div class="col-sm-9">
-                            <h:inputText  id="correo" p:placeholder="Correo" class="form-control" value="#{registroBean.usuario.correo}"/>
+                            <h:inputText  id="correo" p:placeholder="Correo" class="form-control" value="#{registroBean.correo}"/>
                          </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                     <div class="form-group">
                         <h:outputLabel for="usuario" class="col-sm-3 control-label" value="Nombre de Usuario"/>
                         <div class="col-sm-9">
-                            <h:inputText  id="usuario" p:placeholder="Nombre de Usuario" class="form-control" value="#{registroBean.usuario.nombreUsuario}"/>
+                            <h:inputText  id="usuario" p:placeholder="Nombre de Usuario" class="form-control" value="#{registroBean.nombreUsuario}"/>
                          
                          <span class="help-block">Usuario ej.: TecnoWebWins666</span>
                         </div>
@@ -98,7 +98,7 @@
 
 
             <div class="pull-right registro-botones">
-                <button jsf:action="#{registroBean.doRegistrar()}" class="btn btn-primary btn-raised" value="REGISTRARME"/>
+                <button jsf:action="#{registroBean.doRegistrar()}" class="btn btn-primary btn-raised">REGISTRARME</button>
                 <a href="javascript:history.back()" class="btn btn-default btn-raised">CANCELAR</a>
             </div>
             <div class="clearfix"></div>
