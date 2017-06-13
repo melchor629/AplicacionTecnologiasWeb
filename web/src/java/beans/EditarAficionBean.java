@@ -36,6 +36,7 @@ public class EditarAficionBean {
     private UsuarioFacade uf;
     
     private String nombre;
+    private String hidden;
     private Usuario u;
     private String error;
     
@@ -52,6 +53,8 @@ public class EditarAficionBean {
     
     public String editar(Aficiones aficion){
         this.nombre = aficion.getAficionesPK().getNombre();
+        this.hidden = aficion.getAficionesPK().getNombre();
+        
         return "editarAficion";
     }
 
@@ -69,7 +72,7 @@ public class EditarAficionBean {
             Aficiones aficionNueva;
             Aficiones aficionOriginal;
             
-            aficionOriginal = af.obtenerAficionConIdyNombre(this.u.getId(), this.nombre);
+            aficionOriginal = af.obtenerAficionConIdyNombre(this.u.getId(), this.hidden);
             this.u.getAficionesCollection().remove(aficionOriginal);
             
             this.af.remove(aficionOriginal);
@@ -93,6 +96,14 @@ public class EditarAficionBean {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(String hidden) {
+        this.hidden = hidden;
     }
 
  

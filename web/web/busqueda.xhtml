@@ -26,13 +26,13 @@
                         <div class="panel panel-default result-card">
                             <div class="panel-body">
                                 <div class="col-xs-8 result-info-container">
-                                    <a href="perfilBean">
+                                    <a href="perfil.jsf?id=#{usuario.id}">
                                         <h4 class="result-name">
                                             #{usuario.nombre}
                                         </h4>
                                     </a>
                                     <p class="result-users">
-                                        <a href="busqueda.jsf">
+                                        <a href="perfil.jsf?id=#{usuario.id}">
                                             <small>#{usuario.nombreUsuario}</small>
                                         </a>
                                     </p>
@@ -55,12 +55,12 @@
                                 </div>
 
                                 <div class="col-xs-4 result-photo-container">
-                                    <a href="busqueda.jsf"> 
+                                    <a href="perfil.jsf?id=#{usuario.id}"> 
                                         <img src="#{usuario.getFoto()}" class="img-responsive result-photo" alt="Foto de perfil de #{usuario.getNombre()}"> </img>
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
                     </div>
 
                 </ui:repeat>
