@@ -6,14 +6,13 @@
 package beans;
 
 import app.ejb.UsuarioFacade;
-import app.entity.ExperienciaLaboral;
 import app.entity.Usuario;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
@@ -206,7 +205,7 @@ public class EditarPerfilBean {
             
              this.fachadaUsuario.edit(this.usuario);
          
-             return "perfil";
+             return "perfil?faces-redirect=true";
         }
         
     }

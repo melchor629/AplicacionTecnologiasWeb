@@ -9,14 +9,15 @@ import app.ejb.EstudiosFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Estudios;
 import app.entity.Usuario;
-import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -145,7 +146,7 @@ public class CrearEstudioBean implements Serializable {
             usuarioFacade.edit(funcionaplis);
            
             
-            return "perfil";
+            return "perfil?faces-redirect=true";
         } else { //y si no..
             //Esto indica que redirija a la página a la que está
             this.msgError = "Error: La fecha de comienzo no puede estar vacía";

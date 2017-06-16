@@ -21,7 +21,7 @@
                 <span class="navbar-brand">LinkedOut</span>
 
                 <ul class="nav navbar-nav">
-                    <li class="#{request.requestURI.contains('perfil') ? 'active' : ''}">
+                    <li class="#{request.requestURI.contains('perfil') and perfilBean.miPerfil ? 'active' : ''}">
                         <a href="perfil.jsf"><i class="fa fa-user" /> <span class="hidden-xs">Mi perfil</span></a>
                     </li>
                     <li class="#{request.requestURI.contains('notificaciones') ? 'active' : ''} notificaciones">

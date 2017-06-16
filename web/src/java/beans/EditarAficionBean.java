@@ -8,14 +8,13 @@ package beans;
 import app.ejb.AficionesFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Aficiones;
-import app.entity.AficionesPK;
 import app.entity.Usuario;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
@@ -87,7 +86,7 @@ public class EditarAficionBean {
             this.uf.edit(u);
         }
         
-        return "perfil";
+        return "perfil?faces-redirect=true";
     }
 
     public String getNombre() {

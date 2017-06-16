@@ -9,6 +9,7 @@ import app.ejb.UsuarioFacade;
 import app.entity.Usuario;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 
@@ -26,6 +27,8 @@ public class RegistroBean {
     
     @EJB
     UsuarioFacade fachadaUsuario;
+
+    @Inject private SesionBean sb;
     
     
     String error="";
@@ -198,8 +201,8 @@ public class RegistroBean {
             usuario.setApellidos(this.apellidos);
             usuario.setCorreo(this.correo);
             fachadaUsuario.create(usuario);
-            
-            return "index";
+
+            return sb.iniciarSesion(usuario);
         }
        
     }
