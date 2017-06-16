@@ -43,10 +43,15 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
     
     public Collection<Mensaje> mensajesNoLeidoUsuario(int idUsuario){
         Collection<Mensaje> mensajes;
-        Query consulta = getEntityManager().createQuery("SELECT m FROM Mensaje m WHERE m.idReceptor = :id AND m.leido = '0'");
+        Query consulta = getEntityManager().createQuery("SELECT m FROM Mensaje m WHERE m.idReceptor = :id AND m.leido = :c");
         consulta.setParameter("id", idUsuario);
+        consulta.setParameter("id", 0);
         mensajes = consulta.getResultList();
-        return mensajes;
+        if(mensajes.isEmpty()){
+            return null;
+        }else{
+            return mensajes;
+        }
     }
     
     // Cantidad de mensajes sin leer que tiene un usuario
