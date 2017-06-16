@@ -41,10 +41,17 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
         return mensajes;
     }
     
+    public Collection<Mensaje> mensajesNoLeidoUsuario(int idUsuario){
+        Collection<Mensaje> mensajes;
+        Query consulta = getEntityManager().createQuery("SELECT m FROM Mensaje m WHERE m.idReceptor = :id AND m.leido = '0'");
+        consulta.setParameter("id", idUsuario);
+        mensajes = consulta.getResultList();
+        return mensajes;
+    }
+    
     // Cantidad de mensajes sin leer que tiene un usuario
     public int mensajesSinLeer(int idUsuario){
         int cantidad = 0;
-        
         Query consulta = getEntityManager().createQuery("SELECT m FROM Mensaje m WHERE m.idReceptor = :id AND m.leido = false");
         consulta.setParameter("id", fachadaUsuario.obtenerUsuarioPorId(idUsuario));
         cantidad = consulta.getResultList().size();

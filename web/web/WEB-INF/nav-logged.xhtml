@@ -25,7 +25,7 @@
                         <a href="perfil.jsf"><i class="fa fa-user" /> <span class="hidden-xs">Mi perfil</span></a>
                     </li>
                     <li class="#{request.requestURI.contains('notificaciones') ? 'active' : ''} notificaciones">
-                        <a href="notificaciones.jsf">
+                        <a jsf:action="#{notificacionesBean.notificar()}">
                             <i class="fa fa-bell-o" />
                             <ui:fragment rendered="#{sesionBean.obtenerCantidadNotificaciones()>0}">
                                 <span class="badge">#{sesionBean.obtenerCantidadNotificaciones()}</span>
