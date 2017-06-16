@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html
+    lang="es"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<head>
+    <title>? - LinkedOut</title>
+    <meta name="description" content="Descripcion de la pagina" />
+    <ui:include src="/WEB-INF/head.xhtml" />
+</head>
+
+<body>
+
+    <ui:include src="/WEB-INF/nav-logged.xhtml" />
+
+    <div class="container">
+
+        
+        <!--
+        
+        TO DO: Habría que hacer un if listamensajes != null mostrar mensajes
+        Se podría hacer con el boolean que he creado en el init
+        notificacionesBean.hayMensajesSinLeer;
+        Para las peticiones de amistad igual.
+        
+        El codigo a continuación es para probar que funcionan ambas funciones,
+        solo queda ponerlas bonitas, con sus botones y tal.
+        ¿Al abrir el mensaje se lee?
+        Habría que poner el mensaje.leído a true;
+        -->
+        Test
+    <br/>
+        Tamaño de mensajes:#{notificacionesBean.listaMensajes.size()}
+    <br/>
+    Algún dato del mensaje:#{notificacionesBean.listaMensajes.get(0).texto}
+    <br/>
+    Tamaño de peticiones:#{notificacionesBean.listaPeticiones.size()}
+    <br/>
+    Algún dato de la petición:#{notificacionesBean.listaPeticiones.get(0).mensaje}
+        <ui:include src="/WEB-INF/footer.xhtml" />
+    </div>
+
+    <ui:include src="/WEB-INF/body-end.xhtml" />
+</body>
+</html>
