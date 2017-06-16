@@ -10,20 +10,15 @@ package beans;
 import app.ejb.EstudiosFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Estudios;
-import app.entity.EstudiosPK;
 import app.entity.Usuario;
-import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -134,7 +129,7 @@ public class EditarEstudioBean implements Serializable {
         usuario.getEstudiosCollection().add(estudioNuevo);
         this.usuarioFacade.edit(usuario);
         
-        return "perfil";
+        return "perfil?faces-redirect=true";
        
     }
     

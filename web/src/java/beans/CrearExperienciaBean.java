@@ -5,21 +5,19 @@
  */
 package beans;
 
-import app.ejb.EstudiosFacade;
 import app.ejb.ExperienciaLaboralFacade;
 import app.ejb.UsuarioFacade;
-import app.entity.Estudios;
 import app.entity.ExperienciaLaboral;
 import app.entity.Usuario;
+
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.ejb.EJB;
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 
 /**
  *
@@ -173,7 +171,7 @@ public class CrearExperienciaBean implements Serializable{ //Serializable import
            
            // System.out.println("Exp laboral de:" + sesionBean.obtenerUsuario().getNombreUsuario() + sesionBean.obtenerUsuario().getExperienciaLaboralCollection().toString());
             
-            return "perfil";
+            return "perfil?faces-redirect=true";
         } else { //y si no..
             //Esto indica que redirija a la página a la que está
             this.msgError = "Error: La fecha de comienzo, empresa y puesto no pueden estar vacíos";

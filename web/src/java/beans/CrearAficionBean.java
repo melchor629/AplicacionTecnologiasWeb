@@ -96,7 +96,7 @@ public class CrearAficionBean {
           
            fachadaUsuario.edit(this.usuario);
            
-            return "perfil";
+            return "perfil?faces-redirect=true";
         }
         
         

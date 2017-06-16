@@ -61,11 +61,21 @@ public class SesionBean implements Serializable {
         if(u != null) {
             this.usuarioID = u.getId();
             this.error = null;
-            return "perfil";
+            return "perfil?faces-redirect=true";
         } else {
             this.error = "El usuario o la contraseña son incorrectas";
             return "index";
         }
+    }
+
+    /**
+     * Inicia sesión con el usuario dado por el objeto
+     * @param usuario Usuario al que iniciar sesión
+     * @return URL para JSF
+     */
+    public String iniciarSesion(Usuario usuario) {
+        this.usuarioID = usuario.getId();
+        return "perfil?faces-redirect=true";
     }
 
     /**

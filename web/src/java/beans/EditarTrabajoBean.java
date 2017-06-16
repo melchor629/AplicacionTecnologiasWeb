@@ -9,14 +9,13 @@ import app.ejb.ExperienciaLaboralFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.ExperienciaLaboral;
 import app.entity.Usuario;
-import java.util.Date;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ejb.LocalBean;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Date;
 
 /**
  *
@@ -137,7 +136,7 @@ public class EditarTrabajoBean {
 
             this.fachadaUsuario.edit(this.usuario);
             
-            return "perfil";
+            return "perfil?faces-redirect=true";
         }
 
     }
