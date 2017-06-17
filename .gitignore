@@ -30,6 +30,12 @@ build.xml
 /web/dist/
 out/
 
+#commonmark lib for web
+!web/lib/
+web/lib/*
+!web/lib/commonmark-*.jar
+!web/lib/autolink-*.jar
+
 #npm
 node_modules
 

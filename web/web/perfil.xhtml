@@ -350,10 +350,9 @@
                                         </small>
                                     </div>
                                 </div>
-                                <div class="col-xs-12">
-                                    <p class="lead">
-                                        #{mensaje.getTexto()}
-                                    </p>
+                                <div class="col-xs-12 lead">
+                                    <!-- https://stackoverflow.com/questions/7993898/jsf-output-html-formatted-text -->
+                                    <h:outputText value="#{markdownParserBean.parse(mensaje.getTexto())}" escape="false" />
                                 </div>
                             </div>
                         </ui:repeat>
@@ -372,7 +371,7 @@
                         <h3>Mandar mensaje a #{perfilBean.usuario.nombre}</h3>
                         <div class="form-group">
                             <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                                <div class="input-group-addon"><i class="fa fa-envelope-o" /></div>
                                 <h:inputText value="#{perfilBean.tituloMensaje}" id="campoTituloMensaje" p:placeholder="Título del mensaje" p:maxlength="100" styleClass="form-control" required="true" requiredMessage="El mensaje debe tener un titulo" validatorMessage="El título no puede superar los 100 caracteres">
                                     <f:validateLength minimum="1" maximum="100" />
                                 </h:inputText>
@@ -382,7 +381,7 @@
 
                         <div class="form-group">
                             <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-comment-o"></i></div>
+                                <div class="input-group-addon"><i class="fa fa-comment-o" /></div>
                                 <h:inputTextarea value="#{perfilBean.cuerpoMensaje}" id="campoCuerpoMensaje" styleClass="form-control" p:placeholder="Mensaje..." p:maxlength="999" required="true" requiredMessage="El mensaje no puede estar vacío" validatorMessage="El mensaje no puede superar los 999 caracteres">
                                     <f:validateLength minimum="1" maximum="999" />
                                 </h:inputTextarea>
