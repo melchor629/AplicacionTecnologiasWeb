@@ -38,14 +38,20 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
         Query consulta = getEntityManager().createQuery("SELECT m FROM Mensaje m WHERE m.idReceptor = :id");
         consulta.setParameter("id", idUsuario);
         mensajes = consulta.getResultList();
-        return mensajes;
+         if(mensajes.isEmpty()){
+            return null;
+        }else{
+            return mensajes;
+        }
+     
     }
     
     public Collection<Mensaje> mensajesNoLeidoUsuario(int idUsuario){
         Collection<Mensaje> mensajes;
+        int cero = 0;
         Query consulta = getEntityManager().createQuery("SELECT m FROM Mensaje m WHERE m.idReceptor = :id AND m.leido = :c");
         consulta.setParameter("id", idUsuario);
-        consulta.setParameter("id", 0);
+        consulta.setParameter("id", cero);
         mensajes = consulta.getResultList();
         if(mensajes.isEmpty()){
             return null;
