@@ -5,11 +5,14 @@
  */
 package beans;
 
+import app.ejb.UsuarioFacade;
 import app.entity.Mensaje;
 import app.entity.PeticionAmistad;
+import app.entity.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
@@ -32,11 +35,15 @@ public class NotificacionesBean {
     private List <PeticionAmistad> listaPeticiones;
     private boolean hayMensajesSinLeer;
     private boolean hayPeticionesDeAmistad;
+    private Usuario u;
     
     @Inject
     SesionBean sesionBean;
     
+    @EJB
+    private UsuarioFacade uf;
     
+   
     public NotificacionesBean() {
     }
     
@@ -44,12 +51,12 @@ public class NotificacionesBean {
     
     @PostConstruct
     public void init (){
-    
+        this.u = sesionBean.obtenerUsuario();
         if (listaMensajes == null) {
             
             List <Mensaje> mAux = new ArrayList<>();
             
-            for (Mensaje m : sesionBean.obtenerUsuario().getMensajeCollection1()) {
+            for (Mensaje m : u.getMensajeCollection1()) {
                 
                 if (!m.getLeido()) {
                     mAux.add(m);
@@ -72,7 +79,7 @@ public class NotificacionesBean {
             
             List <PeticionAmistad> pAux = new ArrayList<>();
             
-            for (PeticionAmistad p: sesionBean.obtenerUsuario().getPeticionAmistadCollection1()) {
+            for (PeticionAmistad p: u.getPeticionAmistadCollection1()) {
                 
                 pAux.add(p);
                     //quizás da error porque es null y no puedo hacerle add?
@@ -101,23 +108,48 @@ public class NotificacionesBean {
         this.listaPeticiones = listaPeticiones;
     }
 
-    public boolean isHayMensajesSinLeer() {
-        return hayMensajesSinLeer;
-    }
 
     public void setHayMensajesSinLeer(boolean hayMensajesSinLeer) {
         this.hayMensajesSinLeer = hayMensajesSinLeer;
     }
 
-    public boolean isHayPeticionesDeAmistad() {
-        return hayPeticionesDeAmistad;
-    }
-
+    
     public void setHayPeticionesDeAmistad(boolean hayPeticionesDeAmistad) {
         this.hayPeticionesDeAmistad = hayPeticionesDeAmistad;
     }
 
+    public String responder(Mensaje mensaje){
+        for(Mensaje m : u.getMensajeCollection1()){
+            if(m.getId().equals(mensaje.getId())){
+                m.setLeido(true);
+            }
+        }
+        uf.edit(u);
+        return "perfil.jsf?id="+mensaje.getIdEmisor().getId()+"";
+    }
     
+    public String descartar(Mensaje mensaje){
+        for(Mensaje m : u.getMensajeCollection1()){
+            if(m.getId().equals(mensaje.getId())){
+                m.setLeido(true);
+            }
+        }
+        uf.edit(u);
+        return "notificaciones";
+    }
+    
+    public String aceptar(PeticionAmistad peticion){
+        uf.aceptarPeticionAmistad(peticion.getUsuario().getId(), peticion.getUsuario1().getId());
+        u.getPeticionAmistadCollection1().remove(peticion);
+        uf.edit(u);
+        return "perfil";
+    }
+    
+    public String rechazar(PeticionAmistad peticion){
+        u.getPeticionAmistadCollection1().remove(peticion);
+        uf.edit(u);
+        return "notificaciones";
+    }
     
     public List<Mensaje> getListaMensajes() {
         return listaMensajes;
