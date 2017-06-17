@@ -1,0 +1,24 @@
+@import 'common';
+
+date-input-polyfill {
+    padding: 10px !important;
+
+    th, td {
+        height: 32px !important;
+    }
+
+    td[data-day]:hover {
+        border-radius: 100px !important;
+        background: lighten($primary_color, 50) !important;
+    }
+
+    td[data-selected] {
+        border-radius: 100px !important;
+        background: $primary_color !important;
+        color: white !important;
+
+        &:hover {
+            background: lighten($primary_color, 20) !important;
+        }
+    }
+}

@@ -33,7 +33,7 @@
        <div class="form-group">
          <label for="fechaComienzo">Fecha de comienzo</label>
          <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{crearEstudioBean.fechaComienzo}">
-             <f:convertDateTime pattern="dd/MM/yyyy"/> 
+             <f:convertDateTime pattern="yyyy-MM-dd"/>
          </h:inputText>
 
         </div>
@@ -41,7 +41,7 @@
            <div class="form-group">
          <label for="fechaFinalizacion">Fecha de finalización</label>
          <h:inputText p:type="date" p:class="form-control" id="fechaFinalizacion" p:placeholder="Fecha de finalización" value="#{crearEstudioBean.fechaFinalizacion}">
-              <f:convertDateTime pattern="dd/MM/yyyy"/> 
+              <f:convertDateTime pattern="yyyy-MM-dd"/>
          </h:inputText>
           </div>
            

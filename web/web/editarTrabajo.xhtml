@@ -37,14 +37,14 @@
            <div class="form-group">
                <h:outputLabel for="fechaComienzo" value="Fecha de comienzo"/>
                <h:inputText p:type="Date" class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{editarTrabajoBean.fechaComienzo}">
-                   <f:convertDateTime pattern="dd-MM-yyyy" />
+                   <f:convertDateTime pattern="yyyy-MM-dd" />
                </h:inputText>
        </div>
            
            <div class="form-group">
                <h:outputLabel for="fechaFinalizacion" value="Fecha de finalización"/>
                <h:inputText p:type="Date" class="form-control" id="fechaFinalizacion" p:placeholder="Fecha de finalización" value="#{editarTrabajoBean.fechaFinalizacion}">
-                   <f:convertDateTime pattern="dd-MM-yyyy" />
+                   <f:convertDateTime pattern="yyyy-MM-dd" />
                </h:inputText>
        </div>
            
