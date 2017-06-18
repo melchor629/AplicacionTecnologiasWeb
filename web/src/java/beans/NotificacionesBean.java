@@ -9,6 +9,7 @@ import app.ejb.UsuarioFacade;
 import app.entity.Mensaje;
 import app.entity.PeticionAmistad;
 import app.entity.Usuario;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -16,6 +17,8 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -118,24 +121,24 @@ public class NotificacionesBean {
         this.hayPeticionesDeAmistad = hayPeticionesDeAmistad;
     }
 
-    public String responder(Mensaje mensaje){
+    public void responder(Mensaje mensaje) throws IOException{
         for(Mensaje m : u.getMensajeCollection1()){
             if(m.getId().equals(mensaje.getId())){
                 m.setLeido(true);
             }
         }
         uf.edit(u);
-        return "perfil.jsf?id="+mensaje.getIdEmisor().getId()+"";
+        this.redirect(mensaje.getIdEmisor().getId());
     }
     
-    public String descartar(Mensaje mensaje){
+    public void descartar(Mensaje mensaje) throws IOException{
         for(Mensaje m : u.getMensajeCollection1()){
             if(m.getId().equals(mensaje.getId())){
                 m.setLeido(true);
             }
         }
         uf.edit(u);
-        return "notificaciones";
+        this.redirectN();
     }
     
     public String aceptar(PeticionAmistad peticion){
@@ -145,10 +148,10 @@ public class NotificacionesBean {
         return "perfil";
     }
     
-    public String rechazar(PeticionAmistad peticion){
+    public void rechazar(PeticionAmistad peticion) throws IOException{
         u.getPeticionAmistadCollection1().remove(peticion);
         uf.edit(u);
-        return "notificaciones";
+        this.redirectN();
     }
     
     public List<Mensaje> getListaMensajes() {
@@ -158,6 +161,21 @@ public class NotificacionesBean {
     public void setListaMensajes(List<Mensaje> listaMensajes) {
         this.listaMensajes = listaMensajes;
     }
+    
+    public void redirect(int id) throws IOException {
+    // ...
+
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.redirect("perfil.jsf?id="+id);
+    }
+    
+    public void redirectN() throws IOException {
+    // ...
+
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.redirect("notificaciones.jsf");
+    }
+
     
     
 }
