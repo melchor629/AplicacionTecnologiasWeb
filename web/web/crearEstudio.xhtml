@@ -30,37 +30,37 @@
         
         <h:form>
           
-       <div class="form-group">
+       <div class="form-group #{!fechaComienzo.valid and fechaComienzo.size != 0 ? 'has-error' : ''}">
          <label for="fechaComienzo">Fecha de comienzo</label>
-         <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{crearEstudioBean.fechaComienzo}" required="true" requiredMessage="La fecha de comienzo no puede estar vacía" validatorMessage="La fecha de comienzo no puede estar vacía">
+         <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" binding="#{fechaComienzo}" p:placeholder="Fecha de comienzo" value="#{crearEstudioBean.fechaComienzo}" required="true" requiredMessage="La fecha de comienzo no puede estar vacía" validatorMessage="La fecha de comienzo no puede estar vacía">
              <f:convertDateTime pattern="yyyy-MM-dd"/>
          </h:inputText>
-         <h:message id="mensajeValidatorErrorUno" for="fechaComienzo" style="color:red"/>
+         <h:message id="mensajeValidatorErrorUno" for="fechaComienzo" p:class="help-block" />
         </div>
        
            <div class="form-group">
          <label for="fechaFinalizacion">Fecha de finalización</label>
-         <h:inputText p:type="date" p:class="form-control" id="fechaFinalizacion" p:placeholder="Fecha de finalización" value="#{crearEstudioBean.fechaFinalizacion}">
+         <h:inputText p:type="date" p:class="form-control" id="fechaFinalizacion" binding="#{fechaFinalizacion}" p:placeholder="Fecha de finalización" value="#{crearEstudioBean.fechaFinalizacion}">
               <f:convertDateTime pattern="yyyy-MM-dd"/>
          </h:inputText>
           </div>
            
 
-          <div class="form-group">
+          <div class="form-group #{!descripcion.valid and descripcion.size != 0 ? 'has-error' : ''}">
          <label for="descripcion">Descripción</label>
-         <h:inputText p:type="text" p:class="form-control" id="descripcion" p:placeholder="Descripción" value="#{crearEstudioBean.descripcion}" validatorMessage="La lontigud de la descripción no puede superar los 255 caracteres">
+         <h:inputText p:type="text" p:class="form-control" id="descripcion" binding="#{descripcion}" p:placeholder="Descripción" value="#{crearEstudioBean.descripcion}" validatorMessage="La lontigud de la descripción no puede superar los 255 caracteres">
              <f:validateLength minimum="0" maximum="255" />
          </h:inputText>
-         <h:message id="mensajeValidatorErrorDos" for="descripcion" style="color:red"/>
+         <h:message id="mensajeValidatorErrorDos" for="descripcion" p:class="help-block" />
        </div>
       
 
-           <div class="form-group">
+           <div class="form-group #{!ubicacion.valid and ubicacion.size != 0 ? 'has-error' : ''}">
          <label for="ubicacion">Ubicación</label>
-         <h:inputText p:type="text" p:class="form-control" id="ubicacion" p:placeholder="Ubicación" value="#{crearEstudioBean.ubicacion}" validatorMessage="La longitud de la ubicación no puede superar los 455 caracteres.">
+         <h:inputText p:type="text" p:class="form-control" id="ubicacion" binding="#{ubicacion}" p:placeholder="Ubicación" value="#{crearEstudioBean.ubicacion}" validatorMessage="La longitud de la ubicación no puede superar los 455 caracteres.">
             <f:validateLength minimum="0" maximum="455" />
          </h:inputText>
-         <h:message id="mensajeValidatorErrorTres" for="ubicacion" style="color:red"/>
+         <h:message id="mensajeValidatorErrorTres" for="ubicacion" p:class="help-block" />
        </div>
      
 
