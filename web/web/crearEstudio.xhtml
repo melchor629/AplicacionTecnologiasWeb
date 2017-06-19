@@ -32,9 +32,8 @@
           
        <div class="form-group">
          <label for="fechaComienzo">Fecha de comienzo</label>
-         <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{crearEstudioBean.fechaComienzo}">
+         <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{crearEstudioBean.fechaComienzo}" required="true" requiredMessage="La fecha de comienzo no puede estar vacía">
              <f:convertDateTime pattern="yyyy-MM-dd"/>
-             <f:validateRequired />
          </h:inputText>
 
         </div>

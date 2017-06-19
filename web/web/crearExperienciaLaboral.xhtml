@@ -32,9 +32,9 @@
           
        <div class="form-group">
          <label for="fechaComienzo">Fecha de comienzo</label>
-         <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{crearExperienciaBean.fechaComienzo}">
+         <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{crearExperienciaBean.fechaComienzo}" required="true" requiredMessage="La fecha de comienzo no puede estar vacía">
              <f:convertDateTime pattern="yyyy-MM-dd"/>
-             <f:validateRequired />
+             
          </h:inputText>
 
         </div>
@@ -49,18 +49,21 @@
 
           <div class="form-group">
          <label for="empresa">Empresa</label>
-         <h:inputText p:type="text" p:class="form-control" id="empresa" p:placeholder="Empresa" value="#{crearExperienciaBean.empresa}">
+         <h:inputText p:type="text" p:class="form-control" id="empresa" p:placeholder="Empresa" value="#{crearExperienciaBean.empresa}" required="true" requiredMessage="La empresa no puede estar vacía">
              <f:validateLength minimum="0" maximum="45" />
-             <f:validateRequired />
+             
          </h:inputText>
        </div>
       
 
            <div class="form-group">
          <label for="puesto">Puesto</label>
-         <h:inputText p:type="text" p:class="form-control" id="puesto" p:placeholder="Puesto" value="#{crearExperienciaBean.puesto}">
+         <h:inputText p:type="text" p:class="form-control" id="puesto" p:placeholder="Puesto" value="#{crearExperienciaBean.puesto}" required="true" requiredMessage="El puesto no puede estar vacío" >
              <f:validateLength minimum="0" maximum="45" />
-             <f:validateRequired />
+             
+             
+             
+            
          </h:inputText>
        </div>
             
