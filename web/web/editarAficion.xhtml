@@ -22,9 +22,14 @@
 
             <!-- Contenido -->
             <h:form>
+                
+                <h:outputLabel for="descrip" value="Descripción: "/>
 
-                <h:inputTextarea class="form-control"  rows="3" p:placeholder="#{editarAficionBean.nombre}" 
-                                 value="#{editarAficionBean.nombre}" />
+                <h:inputTextarea   id="descrip" rows="3" p:placeholder="#{editarAficionBean.nombre}" styleClass="form-control"
+                                 value="#{editarAficionBean.nombre}" required="true" requiredMessage="La descripción no puede estar vacía"  validatorMessage="La descripción no puede superar los 255 caracteres" >
+                    <f:validateLength minimum="1" maximum="255" />
+                </h:inputTextarea>
+                <h:message id="mensajeValidatorError" for="descrip" style="color:red"/>
                 <div class="form-group edit-hobby-form-group">
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary btn-raised" jsf:action="#{editarAficionBean.doGuardar()}">GUARDAR</button>
