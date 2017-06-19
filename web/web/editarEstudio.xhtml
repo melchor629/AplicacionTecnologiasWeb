@@ -37,10 +37,10 @@
             
             <div class="form-group">
                 <h:outputLabel for="fechaComienzo" value="Fecha de comienzo"/>
-                <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{editarEstudioBean.fechaComienzo}" required="true" requiredMessage="La fecha de comienzo no puede estar vacía">
+                <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{editarEstudioBean.fechaComienzo}" required="true" requiredMessage="La fecha de comienzo no puede estar vacía" validatorMessage="La fecha de comienzo no puede estar vacía">
                     <f:convertDateTime pattern="yyyy-MM-dd"/>
-                    
                 </h:inputText>
+                    <h:message id="mensajeValidatorErrorUno" for="fechaComienzo" style="color:red"/>
             </div>
 
             <div class="form-group">
@@ -52,16 +52,20 @@
 
             <div class="form-group">
                 <h:outputLabel for="descripcion" value="Descripción"/>
-                <h:inputText p:type="text" p:class="form-control" id="descripcion" p:placeholder="Descripción" value="#{editarEstudioBean.descripcion}">
+                <h:inputText p:type="text" p:class="form-control" id="descripcion" p:placeholder="Descripción" value="#{editarEstudioBean.descripcion}" validatorMessage="La descripción no puede superar los 255 caracteres">
                     <f:validateLength minimum="0" maximum="255" />
+                    
                 </h:inputText>
+                <h:message id="mensajeValidatorErrorDos" for="descripcion" style="color:red"/>
             </div>
             
             <div class="form-group">
                 <h:outputLabel for="ubicacion" value="Ubicación"/>
-                <h:inputText p:type="text" p:class="form-control" id="ubicacion" p:placeholder="Ubicación" value="#{editarEstudioBean.ubicacion}">
+                <h:inputText p:type="text" p:class="form-control" id="ubicacion" p:placeholder="Ubicación" value="#{editarEstudioBean.ubicacion}" validatorMessage="La ubicación no puede superar los 255 caracteres">
                     <f:validateLength minimum="0" maximum="455" />
+                    
                 </h:inputText>
+                <h:message id="mensajeValidatorErrorTres" for="ubicacion" style="color:red"/>
             </div>
             
            <!-- <input type="hidden" jsf:value="# {editarEstudioBean.fechaComienzoStr}"/>-->
