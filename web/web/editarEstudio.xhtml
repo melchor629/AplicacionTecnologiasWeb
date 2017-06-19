@@ -39,6 +39,7 @@
                 <h:outputLabel for="fechaComienzo" value="Fecha de comienzo"/>
                 <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{editarEstudioBean.fechaComienzo}">
                     <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    <f:validateRequired />
                 </h:inputText>
             </div>
 
@@ -52,12 +53,14 @@
             <div class="form-group">
                 <h:outputLabel for="descripcion" value="Descripción"/>
                 <h:inputText p:type="text" p:class="form-control" id="descripcion" p:placeholder="Descripción" value="#{editarEstudioBean.descripcion}">
+                    <f:validateLength minimum="0" maximum="255" />
                 </h:inputText>
             </div>
             
             <div class="form-group">
                 <h:outputLabel for="ubicacion" value="Ubicación"/>
                 <h:inputText p:type="text" p:class="form-control" id="ubicacion" p:placeholder="Ubicación" value="#{editarEstudioBean.ubicacion}">
+                    <f:validateLength minimum="0" maximum="455" />
                 </h:inputText>
             </div>
             
