@@ -33,36 +33,10 @@
         ¿Al abrir el mensaje se lee?
         Habría que poner el mensaje.leído a true;
         -->
-        <ui:repeat value="#{notificacionesBean.listaMensajes}" var="mensaje" rendered="#{notificacionesBean.listaMensajes.size() != 0}">
-            <div class="mensaje row">
-                <div class="col-xs-3 col-sm-1">
-                    <div class="img-circle img-profile" style="background-image: url('#{mensaje.idEmisor.foto}')" rendered="#{mensaje.idEmisor.foto != null}"></div>
-                    <div class="img-circle img-profile" style="background-image: url('WEB-INF/fotoPerfil.txt')" rendered="#{mensaje.idEmisor.foto == null}"></div>
- 
-                         <!--style="background-image: url('<%include file="WEB-INF/fotoPerfil.txt"%>')" -->
-                </div>
-                <div class="col-xs-9 col-sm-11">
-                    <div>
-                        <h4>#{mensaje.titulo}</h4>
-                        <small>de <a href="perfil.jsf?id=#{mensaje.idEmisor.id}">#{mensaje.idEmisor.nombreUsuario}</a></small>
-                    </div>
-                </div>
-                <div class="col-xs-12">
-                    <p class="lead">
-                        #{mensaje.texto}
-                    </p>
-                    <h:form>
-                        <div class="text-right">
-                            <a class="btn btn-primary btn-raised"
-                               jsf:action="#{notificacionesBean.responder(mensaje)}">RESPONDER</a>
-                            <a class="btn btn-default btn-raised"
-                               jsf:action="#{notificacionesBean.descartar(mensaje)}">DESCARTAR</a>
-                        </div>
-                    </h:form>
-                </div>
-            </div>
         
-        </ui:repeat>
+        <div class="col-sm-6">
+            <h2 class="page-header">Peticiones de amistad <span class="badge"></span></h2>
+                    
         
         <ui:repeat value="#{notificacionesBean.listaPeticiones}" var="peticion" rendered="#{notificacionesBean.listaPeticiones.size() != 0}">
             <div class="peticion-amigo row">
@@ -98,7 +72,49 @@
                     </div>
                 </div>
         </ui:repeat>
+    </div>
         
+        
+        
+        
+        
+        
+        
+          <div class="col-sm-6">
+            <h2 class="page-header">Mensajes <span class="badge"></span></h2>
+        
+        <ui:repeat value="#{notificacionesBean.listaMensajes}" var="mensaje" rendered="#{notificacionesBean.listaMensajes.size() != 0}">
+            <div class="mensaje row">
+                <div class="col-xs-3 col-sm-1">
+                    <div class="img-circle img-profile" style="background-image: url('#{mensaje.idEmisor.foto}')" rendered="#{mensaje.idEmisor.foto != null}"></div>
+                    <div class="img-circle img-profile" style="background-image: url('WEB-INF/fotoPerfil.txt')" rendered="#{mensaje.idEmisor.foto == null}"></div>
+ 
+                         <!--style="background-image: url('<%include file="WEB-INF/fotoPerfil.txt"%>')" -->
+                </div>
+                <div class="col-xs-9 col-sm-11">
+                    <div>
+                        <h4>#{mensaje.titulo}</h4>
+                        <small>de <a href="perfil.jsf?id=#{mensaje.idEmisor.id}">#{mensaje.idEmisor.nombreUsuario}</a></small>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <p class="lead">
+                        #{mensaje.texto}
+                    </p>
+                    <h:form>
+                        <div class="text-right">
+                            <a class="btn btn-primary btn-raised"
+                               jsf:action="#{notificacionesBean.responder(mensaje)}">RESPONDER</a>
+                            <a class="btn btn-default btn-raised"
+                               jsf:action="#{notificacionesBean.descartar(mensaje)}">DESCARTAR</a>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        
+        </ui:repeat>
+        
+     </div>  
         <ui:include src="/WEB-INF/footer.xhtml" />
     </div>
 
