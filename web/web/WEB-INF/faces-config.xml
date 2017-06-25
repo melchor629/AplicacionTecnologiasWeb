@@ -9,6 +9,7 @@
             <default-locale>en</default-locale>
             <supported-locale>es</supported-locale>
             <supported-locale>fr</supported-locale>
+            <supported-locale>ca</supported-locale>
         </locale-config>
    
         <resource-bundle>
