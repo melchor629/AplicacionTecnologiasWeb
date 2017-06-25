@@ -13,7 +13,7 @@
    
         <resource-bundle>
             <base-name>internacionalizacion.traducciones</base-name>
-            <var>msg</var>
+            <var>intMsg</var>
         </resource-bundle>
     </application>
 </faces-config>
