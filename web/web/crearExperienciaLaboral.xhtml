@@ -67,9 +67,9 @@
             
              <div class="form-group #{!webEmpresa.valid and webEmpresa.size != 0 ? 'has-error' : ''}">
          <label for="webEmpresa">Web Empresa</label>
-         <h:inputText p:type="text" p:class="form-control" id="webEmpresa" binding="#{webEmpresa}" p:placeholder="Web de la Empresa" value="#{crearExperienciaBean.webEmpresa}" validatorMessage="La longitud de la web de empresa no puede superar los 45 caracteres">
+         <h:inputText p:type="text" p:class="form-control" id="webEmpresa" binding="#{webEmpresa}" p:placeholder="Web de la Empresa" value="#{crearExperienciaBean.webEmpresa}" validatorMessage="La longitud de la web de empresa no puede superar los 45 caracteres y debe ser una URL a una web">
              <f:validateLength minimum="0" maximum="45" />
-             
+             <f:validateRegex pattern="^((https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?)?$" />
          </h:inputText>
          <h:message id="mensajeValidatorErrorCuatro" for="webEmpresa" p:class="help-block" />
        </div>      
