@@ -33,7 +33,10 @@
                      <h:outputLabel for="nombreUsuario" p:class="col-sm-3 control-label" value="Nombre Usuario"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-user-o"></i></div>
-                            <h:inputText id="nombreUsuario" class="form-control" value="#{editarPerfilBean.nombreUsuario}" p:placeholder="Nombre Usuario"/><br/>
+                            <h:inputText id="nombreUsuario" class="form-control" value="#{editarPerfilBean.nombreUsuario}" p:placeholder="Nombre Usuario" required="true" requiredMessage="El nombre de usuario no puede estar vacío" validatorMessage="El nombre de usuario no puede estar vacío">
+                            <f:validateLength minimum="0" maximum="45" />
+                            </h:inputText><br/>
+                             <h:message id="mensajeValidatorErrorUno" for="nombreUsuario" p:class="help-block" />
                         </div>
                      </div>
                      
@@ -41,7 +44,10 @@
                      <h:outputLabel for="nombre" class="col-sm-3 control-label" value="Nombre"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
-                            <h:inputText  id="nombre" class="form-control" value="#{editarPerfilBean.nombre}" p:placeholder="Nombre"/>
+                            <h:inputText  id="nombre" class="form-control" value="#{editarPerfilBean.nombre}" p:placeholder="Nombre" required="true" requiredMessage="El nombre no puede estar vacío" validatorMessage="El nombre no puede estar vacío">
+                             <f:validateLength minimum="0" maximum="50" />
+                            </h:inputText>
+                            <h:message id="mensajeValidatorErrorDos" for="nombre" p:class="help-block" />
                         </div>
                      </div>
                      
@@ -49,7 +55,10 @@
                      <h:outputLabel for="apellidos" class="col-sm-3 control-label" value="Apellidos"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
-                            <h:inputText  id="apellidos" class="form-control"  value="#{editarPerfilBean.apellidos}" p:placeholder="Apellidos"/>
+                            <h:inputText  id="apellidos" class="form-control"  value="#{editarPerfilBean.apellidos}" p:placeholder="Apellidos" required="true" requiredMessage="El apellido no puede estar vacío" validatorMessage="El apellido no puede estar vacío">
+                            <f:validateLength minimum="0" maximum="100" />
+                            </h:inputText>
+                             <h:message id="mensajeValidatorErrorTres" for="apellidos" p:class="help-block" />
                         </div>
                      </div>
                      
@@ -57,7 +66,10 @@
                      <h:outputLabel for="correo" class="col-sm-3 control-label" value="Correo"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                            <h:inputText p:type="email" id="correo" class="form-control" value="#{editarPerfilBean.correo}" p:placeholder="Correo"/>
+                            <h:inputText p:type="email" id="correo" class="form-control" value="#{editarPerfilBean.correo}" p:placeholder="Correo" required="true" requiredMessage="El correo no puede estar vacío" validatorMessage="El correo no puede estar vacío">
+                            <f:validateLength minimum="0" maximum="255" />
+                            </h:inputText>
+                            <h:message id="mensajeValidatorErrorCuatro" for="correo" p:class="help-block" />
                         </div>
                      </div>
                      
@@ -67,7 +79,10 @@
                       <h:outputLabel for="password1" class="col-sm-3 control-label" value="Contraseña"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                            <h:inputSecret id="password1" class="form-control"  value="#{editarPerfilBean.contraseñaNueva}" p:placeholder="Contraseña"/>
+                            <h:inputSecret id="password1" class="form-control"  value="#{editarPerfilBean.contraseñaNueva}" p:placeholder="Contraseña" required="true" requiredMessage="La contraseña no puede estar vacía" validatorMessage="La contraseña no puede estar vacía">
+                            <f:validateLength minimum="0" maximum="200" />
+                            </h:inputSecret>
+                             <h:message id="mensajeValidatorErrorCinco" for="password1" p:class="help-block" />
                         </div>
                         <div class="col-sm-9 col-sm-offset-3 pad">
                             <span class="help-block">Para cambiar la contraseña, solo tienes que escribir la nueva contraseña aquí</span>
@@ -78,7 +93,10 @@
                       <h:outputLabel for="password2" class="col-sm-3 control-label" value="Repetir Contraseña"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                            <h:inputSecret id="password2" class="form-control"  value="#{editarPerfilBean.contraseñaRepetida}" p:placeholder="Repetir contraseña"/>
+                            <h:inputSecret id="password2" class="form-control"  value="#{editarPerfilBean.contraseñaRepetida}" p:placeholder="Repetir contraseña" required="true" requiredMessage="La contraseña no puede estar vacía" validatorMessage="La contraseña no puede estar vacía">
+                            <f:validateLength minimum="0" maximum="200" />
+                            </h:inputSecret>
+                             <h:message id="mensajeValidatorErrorSeis" for="password2" p:class="help-block" />
                         </div>
                         <div class="col-sm-9 col-sm-offset-3 pad">
                             <span class="help-block">No olvides repetir la contraseña para asegurarnos de que la has escrito bien</span>

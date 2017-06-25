@@ -33,7 +33,10 @@
             
             
             <h:outputLabel for="descrip" value="Descripción: "/>
-            <h:inputTextarea id="descrip" class="form-control" rows="3" p:placeholder="Aficion" value="#{crearAficionBean.nombre}" />
+            <h:inputTextarea id="descrip" class="form-control" rows="3" p:placeholder="Aficion" value="#{crearAficionBean.nombre}" required="true" requiredMessage="La descripción no puede estar vacía"  validatorMessage="La descripción no puede superar los 255 caracteres" >
+            <f:validateLength minimum="1" maximum="255" />
+            </h:inputTextarea>
+            <h:message id="mensajeValidatorError" for="descrip" p:class="help-block" />
             
             
              <div class="form-group edit-hobby-form-group">
