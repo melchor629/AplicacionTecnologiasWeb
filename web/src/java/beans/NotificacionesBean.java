@@ -41,12 +41,16 @@ public class NotificacionesBean {
     private Usuario u;
     
     @Inject
+    GravatarBean gb;
+    
+    @Inject
     SesionBean sesionBean;
     
     @EJB
     private UsuarioFacade uf;
     
    
+    
     public NotificacionesBean() {
     }
     
@@ -101,6 +105,21 @@ public class NotificacionesBean {
         }
         
         
+    }
+    
+    
+    public String fotoPerfil (int id) {
+        Usuario u = uf.obtenerUsuarioPorId(id);
+        
+        return u.getFoto() == null ? imagenPorDefecto(u) : u.getFoto();
+    }
+    
+     private String imagenPorDefecto(Usuario usuario) {
+        /*if (usuario == null) {
+            usuario = this.uf
+        }*/
+
+        return gb.imagenPorDefecto(usuario);
     }
 
     public List<PeticionAmistad> getListaPeticiones() {
