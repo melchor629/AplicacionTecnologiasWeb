@@ -80,7 +80,7 @@
                       <h:outputLabel for="password1" class="col-sm-3 control-label" value="Contraseña"/>
                         <div class="col-sm-9 input-group #{!password1.valid and password1.size != 0 ? 'has-error' : ''}">
                             <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                            <h:inputSecret id="password1" binding="#{password1}" class="form-control"  value="#{editarPerfilBean.contraseñaNueva}" p:placeholder="Contraseña" required="true" requiredMessage="La contraseña no puede estar vacía" validatorMessage="La contraseña no puede estar vacía">
+                            <h:inputSecret id="password1" binding="#{password1}" class="form-control"  value="#{editarPerfilBean.contraseñaNueva}" p:placeholder="Contraseña" validatorMessage="La contraseña no puede estar vacía">
                                 <f:validateLength minimum="0" maximum="200" />
                             </h:inputSecret>
                             <h:message id="mensajeValidatorErrorCinco" for="password1" p:class="help-block" />
@@ -94,7 +94,7 @@
                         <h:outputLabel for="password2" class="col-sm-3 control-label" value="Repetir Contraseña"/>
                         <div class="col-sm-9 input-group #{!password2.valid and password2.size != 0 ? 'has-error' : ''}">
                             <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                            <h:inputSecret id="password2" binding="#{password2}" class="form-control"  value="#{editarPerfilBean.contraseñaRepetida}" p:placeholder="Repetir contraseña" required="true" requiredMessage="La contraseña no puede estar vacía" validatorMessage="La contraseña no puede estar vacía">
+                            <h:inputSecret id="password2" binding="#{password2}" class="form-control"  value="#{editarPerfilBean.contraseñaRepetida}" p:placeholder="Repetir contraseña" required="#{not empty password1.value}" requiredMessage="La contraseña no puede estar vacía" validatorMessage="La contraseña no puede estar vacía">
                                 <f:validateLength minimum="0" maximum="200" />
                             </h:inputSecret>
                              <h:message id="mensajeValidatorErrorSeis" for="password2" p:class="help-block" />
