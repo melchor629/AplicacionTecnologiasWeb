@@ -30,45 +30,48 @@
         
         <h:form>
           
-       <div class="form-group">
+       <div class="form-group #{!fechaComienzo.valid and fechaComienzo.size != 0 ? 'has-error' : ''}">
          <label for="fechaComienzo">Fecha de comienzo</label>
-         <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{crearExperienciaBean.fechaComienzo}">
+         <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" binding="#{fechaComienzo}" p:placeholder="Fecha de comienzo" value="#{crearExperienciaBean.fechaComienzo}" required="true" requiredMessage="La fecha de comienzo no puede estar vacía" validatorMessage="La fecha de comienzo no puede estar vacía">
              <f:convertDateTime pattern="yyyy-MM-dd"/>
-             <f:validateRequired />
          </h:inputText>
+           <h:message id="mensajeValidatorErrorUno" for="fechaComienzo" p:class="help-block" />
 
         </div>
        
            <div class="form-group">
          <label for="fechaFinalizacion">Fecha de finalización</label>
-         <h:inputText p:type="date" p:class="form-control" id="fechaFinalizacion" p:placeholder="Fecha de finalización" value="#{crearExperienciaBean.fechaFinalizacion}">
+         <h:inputText p:type="date" p:class="form-control" id="fechaFinalizacion" binding="#{fechaFinalizacion}" p:placeholder="Fecha de finalización" value="#{crearExperienciaBean.fechaFinalizacion}" >
               <f:convertDateTime pattern="yyyy-MM-dd"/>
          </h:inputText>
           </div>
            
 
-          <div class="form-group">
+          <div class="form-group #{!empresa.valid and empresa.size != 0 ? 'has-error' : ''}">
          <label for="empresa">Empresa</label>
-         <h:inputText p:type="text" p:class="form-control" id="empresa" p:placeholder="Empresa" value="#{crearExperienciaBean.empresa}">
+         <h:inputText  p:class="form-control" id="empresa" binding="#{empresa}" p:placeholder="Empresa" value="#{crearExperienciaBean.empresa}" required="true" requiredMessage="La empresa no puede estar vacía" validatorMessage="La longitud de la empresa no puede superar los 45 caracteres">
              <f:validateLength minimum="0" maximum="45" />
-             <f:validateRequired />
+             
          </h:inputText>
+         <h:message id="mensajeValidatorErrorDos" for="empresa" p:class="help-block" />
        </div>
       
 
-           <div class="form-group">
+           <div class="form-group #{!puesto.valid and puesto.size != 0 ? 'has-error' : ''}">
          <label for="puesto">Puesto</label>
-         <h:inputText p:type="text" p:class="form-control" id="puesto" p:placeholder="Puesto" value="#{crearExperienciaBean.puesto}">
+         <h:inputText p:type="text" p:class="form-control" id="puesto" binding="#{puesto}" p:placeholder="Puesto" value="#{crearExperienciaBean.puesto}" required="true" requiredMessage="El puesto no puede estar vacío" validatorMessage="La longitud del puesto no puede superar los 45 caracteres">
              <f:validateLength minimum="0" maximum="45" />
-             <f:validateRequired />
          </h:inputText>
+         <h:message id="mensajeValidatorErrorTres" for="puesto" p:class="help-block" />
        </div>
             
-             <div class="form-group">
+             <div class="form-group #{!webEmpresa.valid and webEmpresa.size != 0 ? 'has-error' : ''}">
          <label for="webEmpresa">Web Empresa</label>
-         <h:inputText p:type="text" p:class="form-control" id="webEmpresa" p:placeholder="Web de la Empresa" value="#{crearExperienciaBean.webEmpresa}">
+         <h:inputText p:type="text" p:class="form-control" id="webEmpresa" binding="#{webEmpresa}" p:placeholder="Web de la Empresa" value="#{crearExperienciaBean.webEmpresa}" validatorMessage="La longitud de la web de empresa no puede superar los 45 caracteres">
              <f:validateLength minimum="0" maximum="45" />
+             
          </h:inputText>
+         <h:message id="mensajeValidatorErrorCuatro" for="webEmpresa" p:class="help-block" />
        </div>      
      
 

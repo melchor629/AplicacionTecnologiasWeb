@@ -36,9 +36,10 @@
            
            <div class="form-group">
                <h:outputLabel for="fechaComienzo" value="Fecha de comienzo"/>
-               <h:inputText p:type="Date" class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{editarTrabajoBean.fechaComienzo}">
+               <h:inputText p:type="Date" class="form-control" id="fechaComienzo" p:placeholder="Fecha de comienzo" value="#{editarTrabajoBean.fechaComienzo}" required="true" requiredMessage="La fecha de comienzo no puede estar vacía" validatorMessage="La fecha de comienzo no puede estar vacía">
                    <f:convertDateTime pattern="yyyy-MM-dd" />
                </h:inputText>
+               <h:message id="mensajeValidatorErrorUno" for="fechaComienzo" p:class="help-block" />
        </div>
            
            <div class="form-group">
@@ -50,17 +51,26 @@
            
             <div class="form-group">
                 <h:outputLabel for="empresa" value="Empresa"/>
-                <h:inputText  class="form-control" id="empresa"  p:placeholder="Empresa" value="#{editarTrabajoBean.empresa}"/>
+                <h:inputText  class="form-control" id="empresa"  p:placeholder="Empresa" value="#{editarTrabajoBean.empresa}" required="true" requiredMessage="La empresa no puede estar vacía" validatorMessage="La longitud de la empresa no puede superar los 45 caracteres">
+                 <f:validateLength minimum="0" maximum="45" />
+                </h:inputText>
+                <h:message id="mensajeValidatorErrorDos" for="empresa" p:class="help-block" />
        </div>
            
            <div class="form-group">
                <h:outputLabel for="puesto" value="Puesto"/>
-               <h:inputText  class="form-control" id="puesto"  p:placeholder="puesto" value="#{editarTrabajoBean.puesto}"/>
+               <h:inputText  class="form-control" id="puesto"  p:placeholder="puesto" value="#{editarTrabajoBean.puesto}" required="true" requiredMessage="El puesto no puede estar vacío" validatorMessage="La longitud del puesto no puede superar los 45 caracteres">
+                 <f:validateLength minimum="0" maximum="45" />
+               </h:inputText>
+               <h:message id="mensajeValidatorErrorTres" for="puesto" p:class="help-block" />
        </div>
            
             <div class="form-group">
                 <h:outputLabel for="webEmpresa" value="Web empresa"/>
-                <h:inputText  class="form-control" id="webEmpresa"  p:placeholder="Web Empresa" value="#{editarTrabajoBean.web}"/>
+                <h:inputText  class="form-control" id="webEmpresa"  p:placeholder="Web Empresa" value="#{editarTrabajoBean.web}" validatorMessage="La longitud de la web de empresa no puede superar los 45 caracteres">
+                  <f:validateLength minimum="0" maximum="45" />
+                </h:inputText>
+                <h:message id="mensajeValidatorErrorCuatro" for="webEmpresa" p:class="help-block" />
        </div>
            
            

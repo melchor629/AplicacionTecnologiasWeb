@@ -370,22 +370,22 @@
 
                         <h3>Mandar mensaje a #{perfilBean.usuario.nombre}</h3>
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group #{!campoTituloMensaje.valid and campoTituloMensaje.size != 0 ? 'has-error' : ''}">
                                 <div class="input-group-addon"><i class="fa fa-envelope-o" /></div>
-                                <h:inputText value="#{perfilBean.tituloMensaje}" id="campoTituloMensaje" p:placeholder="Título del mensaje" p:maxlength="100" styleClass="form-control" required="true" requiredMessage="El mensaje debe tener un titulo" validatorMessage="El título no puede superar los 100 caracteres">
+                                <h:inputText binding="#{campoTituloMensaje}" value="#{perfilBean.tituloMensaje}" id="campoTituloMensaje" p:placeholder="Título del mensaje" p:maxlength="100" styleClass="form-control" p:required="required" required="true" requiredMessage="El mensaje debe tener un titulo" validatorMessage="El título no puede superar los 100 caracteres">
                                     <f:validateLength minimum="1" maximum="100" />
                                 </h:inputText>
-                                <h:message id="tituloValidatorError" for="campoTituloMensaje" style="color:red"/>
+                                <h:message id="tituloValidatorError" for="campoTituloMensaje" p:class="help-block" />
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group  #{!campoCuerpoMensaje.valid and campoCuerpoMensaje.value.length != 0 ? 'has-error' : ''}">
                                 <div class="input-group-addon"><i class="fa fa-comment-o" /></div>
-                                <h:inputTextarea value="#{perfilBean.cuerpoMensaje}" id="campoCuerpoMensaje" styleClass="form-control" p:placeholder="Mensaje..." p:maxlength="999" required="true" requiredMessage="El mensaje no puede estar vacío" validatorMessage="El mensaje no puede superar los 999 caracteres">
+                                <h:inputTextarea binding="#{campoCuerpoMensaje}" value="#{perfilBean.cuerpoMensaje}" id="campoCuerpoMensaje" styleClass="form-control" p:placeholder="Mensaje..." p:maxlength="999" p:required="required" required="true" requiredMessage="El mensaje no puede estar vacío" validatorMessage="El mensaje no puede superar los 999 caracteres">
                                     <f:validateLength minimum="1" maximum="999" />
                                 </h:inputTextarea>
-                                <h:message id="mensajeValidatorError" for="campoCuerpoMensaje" style="color:red"/>
+                                <h:message id="mensajeValidatorError" for="campoCuerpoMensaje" p:class="help-block" />
                             </div>
                         </div>
                         <div class="text-right">
