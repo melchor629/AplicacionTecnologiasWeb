@@ -29,45 +29,45 @@
              <div class="row">
                  <div class="col-sm-6 col-xs-12">
               
-                     <div class="form-group edit-profile-form-group">
-                     <h:outputLabel for="nombreUsuario" p:class="col-sm-3 control-label" value="Nombre Usuario"/>
+                     <div class="form-group edit-profile-form-group #{!nombreUsuario.valid and nombreUsuario.size != 0 ? 'has-error' : ''}">
+                        <h:outputLabel for="nombreUsuario" p:class="col-sm-3 control-label" value="Nombre Usuario"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-user-o"></i></div>
-                            <h:inputText id="nombreUsuario" class="form-control" value="#{editarPerfilBean.nombreUsuario}" p:placeholder="Nombre Usuario" required="true" requiredMessage="El nombre de usuario no puede estar vacío" validatorMessage="El nombre de usuario no puede estar vacío">
+                            <h:inputText id="nombreUsuario" binding="#{nombreUsuario}" class="form-control" value="#{editarPerfilBean.nombreUsuario}" p:placeholder="Nombre Usuario" required="true" requiredMessage="El nombre de usuario no puede estar vacío" validatorMessage="El nombre de usuario no puede estar vacío">
                             <f:validateLength minimum="0" maximum="45" />
                             </h:inputText><br/>
-                             <h:message id="mensajeValidatorErrorUno" for="nombreUsuario" p:class="help-block" />
+                            <h:message id="mensajeValidatorErrorUno" for="nombreUsuario" p:class="help-block" />
                         </div>
                      </div>
                      
-                     <div class="form-group edit-profile-form-group">
-                     <h:outputLabel for="nombre" class="col-sm-3 control-label" value="Nombre"/>
+                     <div class="form-group edit-profile-form-group #{!nombre.valid and nombre.size != 0 ? 'has-error' : ''}">
+                        <h:outputLabel for="nombre" class="col-sm-3 control-label" value="Nombre"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
-                            <h:inputText  id="nombre" class="form-control" value="#{editarPerfilBean.nombre}" p:placeholder="Nombre" required="true" requiredMessage="El nombre no puede estar vacío" validatorMessage="El nombre no puede estar vacío">
-                             <f:validateLength minimum="0" maximum="50" />
+                            <h:inputText  id="nombre" binding="#{nombre}" class="form-control" value="#{editarPerfilBean.nombre}" p:placeholder="Nombre" required="true" requiredMessage="El nombre no puede estar vacío" validatorMessage="El nombre no puede estar vacío">
+                                <f:validateLength minimum="0" maximum="50" />
                             </h:inputText>
                             <h:message id="mensajeValidatorErrorDos" for="nombre" p:class="help-block" />
                         </div>
                      </div>
                      
-                     <div class="form-group edit-profile-form-group">
-                     <h:outputLabel for="apellidos" class="col-sm-3 control-label" value="Apellidos"/>
+                     <div class="form-group edit-profile-form-group #{!apellidos.valid and apellidos.size != 0 ? 'has-error' : ''}">
+                        <h:outputLabel for="apellidos" class="col-sm-3 control-label" value="Apellidos"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-address-card-o"></i></div>
-                            <h:inputText  id="apellidos" class="form-control"  value="#{editarPerfilBean.apellidos}" p:placeholder="Apellidos" required="true" requiredMessage="El apellido no puede estar vacío" validatorMessage="El apellido no puede estar vacío">
-                            <f:validateLength minimum="0" maximum="100" />
+                            <h:inputText  id="apellidos" binding="#{apellidos}" class="form-control"  value="#{editarPerfilBean.apellidos}" p:placeholder="Apellidos" required="true" requiredMessage="El apellido no puede estar vacío" validatorMessage="El apellido no puede estar vacío">
+                                <f:validateLength minimum="0" maximum="100" />
                             </h:inputText>
                              <h:message id="mensajeValidatorErrorTres" for="apellidos" p:class="help-block" />
                         </div>
                      </div>
                      
-                     <div class="form-group edit-profile-form-group">
-                     <h:outputLabel for="correo" class="col-sm-3 control-label" value="Correo"/>
+                     <div class="form-group edit-profile-form-group #{!correo.valid and correo.size != 0 ? 'has-error' : ''}">
+                        <h:outputLabel for="correo" class="col-sm-3 control-label" value="Correo"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                            <h:inputText p:type="email" id="correo" class="form-control" value="#{editarPerfilBean.correo}" p:placeholder="Correo" required="true" requiredMessage="El correo no puede estar vacío" validatorMessage="El correo no puede estar vacío">
-                            <f:validateLength minimum="0" maximum="255" />
+                            <h:inputText p:type="email" id="correo" binding="#{correo}" class="form-control" value="#{editarPerfilBean.correo}" p:placeholder="Correo" required="true" requiredMessage="El correo no puede estar vacío" validatorMessage="El correo no puede estar vacío">
+                                <f:validateLength minimum="0" maximum="255" />
                             </h:inputText>
                             <h:message id="mensajeValidatorErrorCuatro" for="correo" p:class="help-block" />
                         </div>
@@ -77,12 +77,12 @@
                     <div class="form-group edit-profile-form-group">
                     
                       <h:outputLabel for="password1" class="col-sm-3 control-label" value="Contraseña"/>
-                        <div class="col-sm-9 input-group">
+                        <div class="col-sm-9 input-group #{!password1.valid and password1.size != 0 ? 'has-error' : ''}">
                             <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                            <h:inputSecret id="password1" class="form-control"  value="#{editarPerfilBean.contraseñaNueva}" p:placeholder="Contraseña" required="true" requiredMessage="La contraseña no puede estar vacía" validatorMessage="La contraseña no puede estar vacía">
-                            <f:validateLength minimum="0" maximum="200" />
+                            <h:inputSecret id="password1" binding="#{password1}" class="form-control"  value="#{editarPerfilBean.contraseñaNueva}" p:placeholder="Contraseña" required="true" requiredMessage="La contraseña no puede estar vacía" validatorMessage="La contraseña no puede estar vacía">
+                                <f:validateLength minimum="0" maximum="200" />
                             </h:inputSecret>
-                             <h:message id="mensajeValidatorErrorCinco" for="password1" p:class="help-block" />
+                            <h:message id="mensajeValidatorErrorCinco" for="password1" p:class="help-block" />
                         </div>
                         <div class="col-sm-9 col-sm-offset-3 pad">
                             <span class="help-block">Para cambiar la contraseña, solo tienes que escribir la nueva contraseña aquí</span>
@@ -90,11 +90,11 @@
                     </div>
 
                       <div class="form-group edit-profile-form-group">
-                      <h:outputLabel for="password2" class="col-sm-3 control-label" value="Repetir Contraseña"/>
-                        <div class="col-sm-9 input-group">
+                        <h:outputLabel for="password2" class="col-sm-3 control-label" value="Repetir Contraseña"/>
+                        <div class="col-sm-9 input-group #{!password2.valid and password2.size != 0 ? 'has-error' : ''}">
                             <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                            <h:inputSecret id="password2" class="form-control"  value="#{editarPerfilBean.contraseñaRepetida}" p:placeholder="Repetir contraseña" required="true" requiredMessage="La contraseña no puede estar vacía" validatorMessage="La contraseña no puede estar vacía">
-                            <f:validateLength minimum="0" maximum="200" />
+                            <h:inputSecret id="password2" binding="#{password2}" class="form-control"  value="#{editarPerfilBean.contraseñaRepetida}" p:placeholder="Repetir contraseña" required="true" requiredMessage="La contraseña no puede estar vacía" validatorMessage="La contraseña no puede estar vacía">
+                                <f:validateLength minimum="0" maximum="200" />
                             </h:inputSecret>
                              <h:message id="mensajeValidatorErrorSeis" for="password2" p:class="help-block" />
                         </div>
@@ -144,9 +144,13 @@
                      
                      <div class="form-group edit-profile-form-group">
                      <h:outputLabel for="web" p:class="col-sm-3 control-label" value="Web"/>
-                        <div class="col-sm-9 input-group">
+                        <div class="col-sm-9 input-group #{!web.valid and web.size != 0 ? 'has-error' : ''}">
                             <div class="input-group-addon"><i class="fa fa-globe"></i></div>
-                            <h:inputText id="web" p:class="form-control" value="#{editarPerfilBean.usuario.web}" p:placeholder="Web"/><br/>
+                            <h:inputText id="web" binding="#{web}" p:class="form-control" value="#{editarPerfilBean.usuario.web}" p:placeholder="Web" validatorMessage="La URL debe ser válida, tipo http://twitter.com/archillect">
+                                <f:validateRegex pattern="^((https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?)?$" />
+                            </h:inputText>
+                            <h:message id="mensajeValidatorErrorSiete" for="web" p:class="help-block" />
+                            <br/>
                         </div>
                     </div>
                      
