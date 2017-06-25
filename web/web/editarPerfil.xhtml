@@ -66,8 +66,9 @@
                         <h:outputLabel for="correo" class="col-sm-3 control-label" value="Correo"/>
                         <div class="col-sm-9 input-group">
                             <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                            <h:inputText p:type="email" id="correo" binding="#{correo}" class="form-control" value="#{editarPerfilBean.correo}" p:placeholder="Correo" required="true" requiredMessage="El correo no puede estar vacío" validatorMessage="El correo no puede estar vacío">
+                            <h:inputText p:type="email" id="correo" binding="#{correo}" class="form-control" value="#{editarPerfilBean.correo}" p:placeholder="Correo" required="true" requiredMessage="El correo no puede estar vacío" validatorMessage="El correo no puede estar vacío y debe ser válido (ej.: manolo@cabesadebolo.com)">
                                 <f:validateLength minimum="0" maximum="255" />
+                                <f:validateRegex pattern="^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$" />
                             </h:inputText>
                             <h:message id="mensajeValidatorErrorCuatro" for="correo" p:class="help-block" />
                         </div>
