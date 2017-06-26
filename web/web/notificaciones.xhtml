@@ -42,9 +42,9 @@
             <div class="peticion-amigo row">
                     <div class="col-xs-3 col-sm-2 col-lg-2">
                         
-                        <div class="img-circle img-profile" style="background-image: url('#{peticion.usuario.foto}')" rendered="#{peticion.usuario.foto != null}"></div>
-                        <div class="img-circle img-profile" style="background-image: url('WEB-INF/fotoPerfil.txt')" rendered="#{peticion.usuario.foto == null}"></div>
-                        
+                        <div class="img-circle img-profile" style="background-image: url('#{notificacionesBean.fotoPerfil(peticion.usuario.id)}')"></div>
+                       <!-- <div class="img-circle img-profile" style="background-image: url('#{gravatarBean.imagenPorDefecto(peticion.usuario)}')" rendered="#{peticion.usuario.foto == null}"></div>
+                -->        
                     </div>
                     <div class="col-xs-9 col-sm-10 col-lg-10">
                         <h3>#{peticion.usuario.nombreUsuario}
@@ -86,9 +86,9 @@
         <ui:repeat value="#{notificacionesBean.listaMensajes}" var="mensaje" rendered="#{notificacionesBean.listaMensajes.size() != 0}">
             <div class="mensaje row">
                 <div class="col-xs-3 col-sm-1">
-                    <div class="img-circle img-profile" style="background-image: url('#{mensaje.idEmisor.foto}')" rendered="#{mensaje.idEmisor.foto != null}"></div>
-                    <div class="img-circle img-profile" style="background-image: url(#{gravatarBean.imagenPorDefecto(mensaje.idEmisor)})" rendered="#{mensaje.idEmisor.foto == null}"></div>
- 
+                    <div class="img-circle img-profile" style="background-image: url('#{notificacionesBean.fotoPerfil(mensaje.idEmisor.id)}')" rendered="#{mensaje.idEmisor.foto != null}"></div>
+                    <!-- <div class="img-circle img-profile" style="background-image: url('#{gravatarBean.imagenPorDefecto(mensaje.idEmisor)}')" rendered="#{mensaje.idEmisor.foto == null}"></div>
+ -->
                          <!--style="background-image: url('<%include file="WEB-INF/fotoPerfil.txt"%>')" -->
                 </div>
                 <div class="col-xs-9 col-sm-11">
