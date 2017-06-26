@@ -99,7 +99,8 @@
                 </div>
                 <div class="col-xs-12">
                     <p class="lead">
-                        #{mensaje.texto}
+                        <h:outputText value="#{markdownParserBean.parse(mensaje.texto)}" escape="false" />
+                        
                     </p>
                     <h:form>
                         <div class="text-right">
