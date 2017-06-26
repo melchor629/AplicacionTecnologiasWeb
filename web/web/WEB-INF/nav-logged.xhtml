@@ -46,9 +46,7 @@
 
                 <h:form styleClass="navbar-form navbar-right">
                     <div class="input-group">
-                       <h:inputText id="busqueda" p:placeholder="Buscar a..." p:class="form-control" value="#{buscarBean.busqueda}"> <!--required="true" requiredMessage="El campo de búsqueda no puede estar vacío" validatorMessage="El campo de búsqueda no puede estar vacío"-->
-                        </h:inputText>
-                        <!--<h:message id="mensajeValidatorErrorBusc" for="busqueda" p:class="help-block" />-->
+                        <h:inputText id="busqueda" p:placeholder="Buscar a..." p:class="form-control" value="#{buscarBean.busqueda}" />
                         <span class="input-group-btn">
                             <!-- Uso la biblioteca Passthrough para que el botón sea un button en lugar de un input[type="submit"] -->
                             <!-- En nuestra web, todos los botones van a tener que ser así, en lugar de <h:commandButton> -->

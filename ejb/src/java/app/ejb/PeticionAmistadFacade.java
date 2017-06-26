@@ -61,18 +61,8 @@ public class PeticionAmistadFacade extends AbstractFacade<PeticionAmistad> {
         return peticion != null;
     }
     
-    public void eliminarPeticion(int idDesde, int idHacia){
-        
-        Usuario u1 = ufacade.obtenerUsuarioPorId(idDesde);
-        Usuario u2 = ufacade.obtenerUsuarioPorId(idHacia);
-        
-        
-        PeticionAmistadPK clavePrimaria = new PeticionAmistadPK(idDesde, idHacia);
-        PeticionAmistad peticion = getEntityManager().find(PeticionAmistad.class, clavePrimaria);
+    public void eliminarPeticion(PeticionAmistad peticion){
         getEntityManager().remove(peticion);
-        
-        u2.getPeticionAmistadCollection1().remove(peticion);
-        u1.getPeticionAmistadCollection().remove(peticion);
     }
     
     // Cantidad de peticiones que el usuario tiene pendiente de aceptar o rechazar

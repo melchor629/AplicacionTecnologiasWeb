@@ -56,7 +56,7 @@
 
                                 <div class="col-xs-4 result-photo-container">
                                     <a href="perfil.jsf?id=#{usuario.id}"> 
-                                        <img src="#{usuario.getFoto()}" class="img-responsive result-photo" alt="Foto de perfil de #{usuario.getNombre()}"> </img>
+                                        <img src="#{buscarBean.fotoPerfil(usuario.id)}" class="img-responsive result-photo" alt="Foto de perfil de #{usuario.getNombre()}"> </img>
                                     </a>
                                 </div>
                             </div>

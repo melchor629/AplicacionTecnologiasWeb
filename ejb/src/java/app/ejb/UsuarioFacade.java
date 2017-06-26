@@ -1,6 +1,7 @@
 package app.ejb;
 
 import app.entity.Aficiones;
+import app.entity.PeticionAmistad;
 import app.entity.Usuario;
 
 import javax.ejb.Stateless;
@@ -89,14 +90,18 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     // Le permite al usuario con id idDesde aceptar una peticion de amistad
     // al usuario idHacia
-    public void aceptarPeticionAmistad(int idDesde, int idHacia) {
+    public void aceptarPeticionAmistad(PeticionAmistad p) {
         // El usuario que menda la peticion
-        Usuario usuario = getEntityManager().find(Usuario.class, idDesde);
-        Usuario futuraAmistad = getEntityManager().find(Usuario.class, idHacia);
+        Usuario usuario = p.getUsuario();
+        Usuario futuraAmistad = p.getUsuario1();
 
         // Se añade cada usuario a su respectiva lista de amigos
         usuario.getUsuarioCollection1().add(futuraAmistad);
         futuraAmistad.getUsuarioCollection().add(usuario);
+
+        //Se elimina la petición de amistad
+        usuario.getPeticionAmistadCollection().remove(p);
+        futuraAmistad.getPeticionAmistadCollection1().remove(p);
 
         // Se actualiza la entidad
         this.edit(usuario);

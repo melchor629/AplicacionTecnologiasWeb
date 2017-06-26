@@ -5,21 +5,22 @@
  */
 package beans;
 
+import app.ejb.PeticionAmistadFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Mensaje;
 import app.entity.PeticionAmistad;
 import app.entity.Usuario;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -41,12 +42,18 @@ public class NotificacionesBean {
     private Usuario u;
     
     @Inject
+    GravatarBean gb;
+    
+    @Inject
     SesionBean sesionBean;
     
     @EJB
     private UsuarioFacade uf;
+
+    @EJB private PeticionAmistadFacade paf;
     
    
+    
     public NotificacionesBean() {
     }
     
@@ -102,6 +109,21 @@ public class NotificacionesBean {
         
         
     }
+    
+    
+    public String fotoPerfil (int id) {
+        Usuario u = uf.obtenerUsuarioPorId(id);
+        
+        return u.getFoto() == null ? imagenPorDefecto(u) : u.getFoto();
+    }
+    
+     private String imagenPorDefecto(Usuario usuario) {
+        /*if (usuario == null) {
+            usuario = this.uf
+        }*/
+
+        return gb.imagenPorDefecto(usuario);
+    }
 
     public List<PeticionAmistad> getListaPeticiones() {
         return listaPeticiones;
@@ -142,15 +164,17 @@ public class NotificacionesBean {
     }
     
     public String aceptar(PeticionAmistad peticion){
-        uf.aceptarPeticionAmistad(peticion.getUsuario().getId(), peticion.getUsuario1().getId());
-        u.getPeticionAmistadCollection1().remove(peticion);
-        uf.edit(u);
-        return "perfil";
+        paf.eliminarPeticion(peticion);
+        uf.aceptarPeticionAmistad(peticion);
+        return "perfil?faces-redirect=true&id="+peticion.getUsuario().getId();
     }
     
     public void rechazar(PeticionAmistad peticion) throws IOException{
         u.getPeticionAmistadCollection1().remove(peticion);
+        peticion.getUsuario().getPeticionAmistadCollection().remove(peticion);
         uf.edit(u);
+        uf.edit(peticion.getUsuario());
+        paf.remove(peticion);
         this.redirectN();
     }
     
