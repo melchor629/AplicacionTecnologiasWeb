@@ -87,7 +87,7 @@
             <div class="mensaje row">
                 <div class="col-xs-3 col-sm-1">
                     <div class="img-circle img-profile" style="background-image: url('#{mensaje.idEmisor.foto}')" rendered="#{mensaje.idEmisor.foto != null}"></div>
-                    <div class="img-circle img-profile" style="background-image: url('WEB-INF/fotoPerfil.txt')" rendered="#{mensaje.idEmisor.foto == null}"></div>
+                    <div class="img-circle img-profile" style="background-image: url(#{gravatarBean.imagenPorDefecto(mensaje.idEmisor)})" rendered="#{mensaje.idEmisor.foto == null}"></div>
  
                          <!--style="background-image: url('<%include file="WEB-INF/fotoPerfil.txt"%>')" -->
                 </div>
