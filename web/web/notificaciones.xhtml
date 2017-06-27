@@ -35,18 +35,16 @@
 
                         <div class="col-xs-12 forms">
                             <div class="clearfix">
-                                <div id="rechazar-#{peticion.usuario.id}" class="pull-right form-horizontal" role="form">
-                                    <a type="submit"
-                                       class="btn btn-default btn-raised" jsf:action="#{notificacionesBean.rechazar(peticion)}">
-                                        Rechazar
+                                <div id="rechazar-#{peticion.usuario.id}" class="pull-right form-horizontal notif-button" role="form">
+                                    <a type="submit" class="btn btn-default btn-raised" jsf:action="#{notificacionesBean.rechazar(peticion)}">
+                                        RECHAZAR
                                         <f:ajax execute="@form" render="@form :notificaciones" />
                                     </a>
                                 </div>
 
-                                <div id="aceptar-#{peticion.usuario.id}" class="pull-right form-horizontal" role="form">
-                                    <a type="submit"
-                                       class="btn btn-primary btn-raised" jsf:action="#{notificacionesBean.aceptar(peticion)}">
-                                        Aceptar
+                                <div id="aceptar-#{peticion.usuario.id}" class="pull-right form-horizontal notif-button" role="form">
+                                    <a type="submit" class="btn btn-primary btn-raised" jsf:action="#{notificacionesBean.aceptar(peticion)}">
+                                        ACEPTAR
                                     </a>
                                 </div>
                             </div>
@@ -72,20 +70,24 @@
                             </div>
                         </div>
                         <div class="col-xs-12">
-                            <p class="lead">
+                            <div class="lead">
                                 <h:outputText value="#{markdownParserBean.parse(mensaje.texto)}" escape="false" />
-                            </p>
-                            <div class="text-right">
-                                <a class="btn btn-primary btn-raised" jsf:action="#{notificacionesBean.responder(mensaje)}">RESPONDER</a>
-                                <a class="btn btn-default btn-raised" jsf:action="#{notificacionesBean.descartar(mensaje)}">
-                                    DESCARTAR
-                                    <f:ajax execute="@form" render="@form  :notificaciones" />
-                                </a>
+                            </div>
+                            <div class="clearfix">
+                                <div class="pull-right form-horizontal notif-button">
+                                    <a class="btn btn-default btn-raised" jsf:action="#{notificacionesBean.descartar(mensaje)}">
+                                        DESCARTAR
+                                        <f:ajax execute="@form" render="@form :notificaciones" />
+                                    </a>
+                                </div>
+                                <div class="pull-right form-horizontal notif-button">
+                                    <a class="btn btn-primary btn-raised" jsf:action="#{notificacionesBean.responder(mensaje)}">RESPONDER</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                </ui:repeat></h:form>
+                </ui:repeat>
+            </h:form>
 
         </div>
         <ui:include src="/WEB-INF/footer.xhtml" />
