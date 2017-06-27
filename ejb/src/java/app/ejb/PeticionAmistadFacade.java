@@ -62,7 +62,13 @@ public class PeticionAmistadFacade extends AbstractFacade<PeticionAmistad> {
     }
     
     public void eliminarPeticion(PeticionAmistad peticion){
-        getEntityManager().remove(peticion);
+        Usuario u1 = peticion.getUsuario();
+        Usuario u2 = peticion.getUsuario1();
+
+        PeticionAmistadPK clavePrimaria = new PeticionAmistadPK(u1.getId(), u2.getId());
+        
+        PeticionAmistad peticionDos = getEntityManager().find(PeticionAmistad.class, clavePrimaria);
+        getEntityManager().remove(peticionDos);
     }
     
     // Cantidad de peticiones que el usuario tiene pendiente de aceptar o rechazar

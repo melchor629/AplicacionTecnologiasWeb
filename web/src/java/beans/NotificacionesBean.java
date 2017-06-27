@@ -152,8 +152,9 @@ public class NotificacionesBean {
     }
     
     public String aceptar(PeticionAmistad peticion){
-        paf.eliminarPeticion(peticion);
         uf.aceptarPeticionAmistad(peticion);
+        paf.eliminarPeticion(peticion);
+        
         return "perfil?faces-redirect=true&id="+peticion.getUsuario().getId();
     }
     

@@ -43,52 +43,57 @@
                                     </a>
                                 </div>
 
-                                <div id="aceptar-#{peticion.usuario.id}" class="pull-right form-horizontal" role="form">
-                                    <a type="submit"
-                                       class="btn btn-primary btn-raised" jsf:action="#{notificacionesBean.aceptar(peticion)}">
-                                        Aceptar
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </ui:repeat>
-            </h:form>
-        </div>
+                            <div id="aceptar-#{peticion.usuario.id}" class="pull-right form-horizontal" role="form">
 
-        <div class="col-sm-6">
-            <h2 class="page-header">Mensajes <span class="badge" /></h2>
-
-            <h:form>
-                <ui:repeat value="#{notificacionesBean.listaMensajes}" var="mensaje">
-                    <div class="mensaje row">
-                        <div class="col-xs-3 col-sm-1">
-                            <div class="img-circle img-profile" style="background-image: url('#{notificacionesBean.fotoPerfil(mensaje.idEmisor.id)}')" />
-                        </div>
-                        <div class="col-xs-9 col-sm-11">
-                            <div>
-                                <h4>#{mensaje.titulo}</h4>
-                                <small>de <a href="perfil.jsf?id=#{mensaje.idEmisor.id}">#{mensaje.idEmisor.nombreUsuario}</a></small>
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <p class="lead">
-                                #{mensaje.texto}
-                            </p>
-                            <div class="text-right">
-                                <a class="btn btn-primary btn-raised"
-                                   jsf:action="#{notificacionesBean.responder(mensaje)}">RESPONDER</a>
-                                <a class="btn btn-default btn-raised" jsf:action="#{notificacionesBean.descartar(mensaje)}">
-                                    DESCARTAR
-                                    <f:ajax execute="@form" render="@form" />
+                                <a type="submit"
+                                   class="btn btn-primary btn-raised" jsf:action="#{notificacionesBean.aceptar(peticion)}">
+                                    Aceptar
                                 </a>
                             </div>
                         </div>
                     </div>
-                </ui:repeat>
-            </h:form>
-
+                </div>
+        </ui:repeat>
+    </h:form>
         </div>
+
+
+
+
+
+
+
+          <div class="col-sm-6">
+            <h2 class="page-header">Mensajes <span class="badge"/></h2>
+
+        <h:form>
+                <ui:repeat value="#{notificacionesBean.listaMensajes}" var="mensaje" >
+            <div class="mensaje row">
+                <div class="col-xs-3 col-sm-1">
+                    <div class="img-circle img-profile" style="background-image: url('#{notificacionesBean.fotoPerfil(mensaje.idEmisor.id)}')" />
+                </div>
+                <div class="col-xs-9 col-sm-11">
+                    <div>
+                        <h4>#{mensaje.titulo}</h4>
+                        <small>de <a href="perfil.jsf?id=#{mensaje.idEmisor.id}">#{mensaje.idEmisor.nombreUsuario}</a></small>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <p class="lead">
+                        <h:outputText value="#{markdownParserBean.parse(mensaje.texto)}" escape="false" />
+                    </p>
+                    <div class="text-right">
+                            <a class="btn btn-primary btn-raised"
+                               jsf:action="#{notificacionesBean.responder(mensaje)}">RESPONDER</a>
+                            <a class="btn btn-default btn-raised"
+                               jsf:action="#{notificacionesBean.descartar(mensaje)}">DESCARTAR<f:ajax execute="@form" render="@form" /></a>
+                        </div>
+                    </div>
+            </div>
+
+        </ui:repeat></h:form>
+        
+     </div>  
         <ui:include src="/WEB-INF/footer.xhtml" />
     </div>
 
