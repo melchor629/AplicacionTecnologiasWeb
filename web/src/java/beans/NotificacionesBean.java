@@ -62,49 +62,37 @@ public class NotificacionesBean {
     @PostConstruct
     public void init (){
         this.u = sesionBean.obtenerUsuario();
-        if (listaMensajes == null) {
             
-            List <Mensaje> mAux = new ArrayList<>();
-            
-            for (Mensaje m : u.getMensajeCollection1()) {
-                
-                if (!m.getLeido()) {
-                    mAux.add(m);
-                    //quizás da error porque es null y no puedo hacerle add?
-                }
-                
+        List <Mensaje> mAux = new ArrayList<>();
+
+        for (Mensaje m : u.getMensajeCollection1()) {
+
+            if (!m.getLeido()) {
+                mAux.add(m);
+                //quizás da error porque es null y no puedo hacerle add?
             }
-            
-            listaMensajes = mAux;
-            
-            if (listaMensajes.size()>0) {
-                hayMensajesSinLeer = true;
-            } else{
-                hayMensajesSinLeer = false;
-            }
-            
+
         }
-        
-         if (listaPeticiones == null) {
-            
-            List <PeticionAmistad> pAux = new ArrayList<>();
-            
-            for (PeticionAmistad p: u.getPeticionAmistadCollection1()) {
-                
-                pAux.add(p);
-                    //quizás da error porque es null y no puedo hacerle add?
-                
-                
-            }
-            
-            listaPeticiones = pAux;
-            
-            if (listaPeticiones.size()>0) {
-                this.hayPeticionesDeAmistad = true;
-            } else{
-                this.hayPeticionesDeAmistad = false;
-            }
-            
+
+        listaMensajes = mAux;
+
+        if (listaMensajes.size()>0) {
+            hayMensajesSinLeer = true;
+        } else{
+            hayMensajesSinLeer = false;
+        }
+
+        List <PeticionAmistad> pAux = new ArrayList<>();
+
+        //quizás da error porque es null y no puedo hacerle add?
+        pAux.addAll(u.getPeticionAmistadCollection1());
+
+        listaPeticiones = pAux;
+
+        if (listaPeticiones.size()>0) {
+            this.hayPeticionesDeAmistad = true;
+        } else{
+            this.hayPeticionesDeAmistad = false;
         }
         
         
@@ -160,7 +148,7 @@ public class NotificacionesBean {
             }
         }
         uf.edit(u);
-        this.redirectN();
+        init();
     }
     
     public String aceptar(PeticionAmistad peticion){
@@ -175,7 +163,7 @@ public class NotificacionesBean {
         uf.edit(u);
         uf.edit(peticion.getUsuario());
         paf.remove(peticion);
-        this.redirectN();
+        init();
     }
     
     public List<Mensaje> getListaMensajes() {
