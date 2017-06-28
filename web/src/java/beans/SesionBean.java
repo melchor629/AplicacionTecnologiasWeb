@@ -86,7 +86,7 @@ public class SesionBean implements Serializable {
     public String cerrarSesion() {
         if(this.usuarioID > 0) {
             this.usuarioID = 0;
-            return "index";
+            return "index?faces-redirect=true";
         } else {
             //Esto indica que redirija a la página a la que está
             return null;

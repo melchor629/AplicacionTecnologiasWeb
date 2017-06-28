@@ -3,15 +3,36 @@
  */
 .peticion-amigo {
     @media(max-width: 767px) {
-        margin-bottom: 20px;
-
         h3 {
             margin-top: 5px;
             margin-bottom: 20px;
         }
     }
 
+    &:after {
+        content: ' ';
+        width: 100%;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(230, 230, 230, 0.8);
+    }
+
+    &:last-of-type:after {
+        margin-bottom: 0;
+        border: 0;
+        padding-bottom: 0;
+    }
+
     form:first-child {
+        margin-left: 10px;
+    }
+}
+.mensaje > div:nth-child(3) .text-right {
+    margin-bottom: 20px
+}
+
+.notif-button {
+    &:first-child, &:first-of-type {
         margin-left: 10px;
     }
 }

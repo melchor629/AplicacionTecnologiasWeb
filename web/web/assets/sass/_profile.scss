@@ -172,7 +172,7 @@ div.profile-options {
         margin-top: -5px;
     }
 
-    &:last-child:after {
+    &:last-child:after, &:last-of-type:after {
         border-bottom: none;
         margin-bottom: 0;
         margin-top: 0;

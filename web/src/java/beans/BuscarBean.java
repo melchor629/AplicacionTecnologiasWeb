@@ -14,10 +14,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -30,6 +33,10 @@ public class BuscarBean {
     /**
      * Creates a new instance of buscarBean
      */
+    
+    @Inject
+    GravatarBean gb;
+    
     @EJB
     private UsuarioFacade uf;
     
@@ -39,9 +46,41 @@ public class BuscarBean {
     
     public BuscarBean() {
     }
+    
+    /*@PostConstruct
+    public void init (){
+             
+    }*/
+    
+    public String fotoPerfil (int id) {
+        Usuario u = uf.obtenerUsuarioPorId(id);
+        
+        return u.getFoto() == null ? imagenPorDefecto(u) : u.getFoto();
+    }
+    
+     private String imagenPorDefecto(Usuario usuario) {
+        /*if (usuario == null) {
+            usuario = this.uf
+        }*/
 
+        return gb.imagenPorDefecto(usuario);
+    }
+    
+    
     public String buscar(){
+         if (busqueda.equals("")) {
+            Random r = new Random();
+            //= java.util.Random.nextInt();
+            busqueda = r.nextInt()+ "R4ND0MV4LU3" + r.nextInt();
+        }          
+        
         this.resultadoBusqueda = uf.buscarUsuarios(this.busqueda);
+        
+        if (this.resultadoBusqueda.isEmpty()){
+            busqueda = "";
+        }
+        
+        
         return "busqueda";
     }
     

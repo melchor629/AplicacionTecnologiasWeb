@@ -64,7 +64,7 @@
 
             <!-- Foto -->
             <div class="col-sm-4 col-md-3 profile-info-section">
-                <img src="#{perfilBean.fotoPerfil()}" class="img-responsive profile-photo" alt="Foto de perfil dle usuario"/>
+                <img src="#{perfilBean.fotoPerfil()}" class="img-responsive profile-photo" alt="Foto de perfil del usuario"/>
                 <!-- Depende de si el usuario tiene foto o no -->
 
 
@@ -336,25 +336,27 @@
                     <div class="col-xs-12 missatges-rebuts">
                         <h3>Mensajes recibidos</h3>
                         <ui:repeat value="#{perfilBean.usuario.getMensajeCollection1()}" var="mensaje">
-                            <div class="mensaje row">
-                                <div class="col-xs-3 col-sm-1">
-                                    <div class="img-circle img-profile"
-                                         style="background-image: url(#{perfilBean.fotoPerfilContacto(mensaje.getIdEmisor())});">
+                            <ui:fragment rendered="#{mensaje.getLeido()}">
+                                <div class="mensaje row">
+                                    <div class="col-xs-3 col-sm-1">
+                                        <div class="img-circle img-profile"
+                                             style="background-image: url(#{perfilBean.fotoPerfilContacto(mensaje.getIdEmisor())});">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-9 col-sm-11">
+                                        <div>
+                                            <h4>#{mensaje.getTitulo()}</h4>
+                                            <small>de <a
+                                                    href="perfil.jsf?id=#{mensaje.getIdEmisor().getId()}">@#{mensaje.getIdEmisor().getNombreUsuario()}</a>
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 lead">
+                                        <!-- https://stackoverflow.com/questions/7993898/jsf-output-html-formatted-text -->
+                                        <h:outputText value="#{markdownParserBean.parse(mensaje.getTexto())}" escape="false" />
                                     </div>
                                 </div>
-                                <div class="col-xs-9 col-sm-11">
-                                    <div>
-                                        <h4>#{mensaje.getTitulo()}</h4>
-                                        <small>de <a
-                                                href="perfil.jsf?id=#{mensaje.getIdEmisor().getId()}">@#{mensaje.getIdEmisor().getNombreUsuario()}</a>
-                                        </small>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 lead">
-                                    <!-- https://stackoverflow.com/questions/7993898/jsf-output-html-formatted-text -->
-                                    <h:outputText value="#{markdownParserBean.parse(mensaje.getTexto())}" escape="false" />
-                                </div>
-                            </div>
+                            </ui:fragment>
                         </ui:repeat>
                     </div>
                 </ui:fragment>

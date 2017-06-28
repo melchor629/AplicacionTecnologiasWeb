@@ -5,21 +5,22 @@
  */
 package beans;
 
+import app.ejb.PeticionAmistadFacade;
 import app.ejb.UsuarioFacade;
 import app.entity.Mensaje;
 import app.entity.PeticionAmistad;
 import app.entity.Usuario;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -41,12 +42,18 @@ public class NotificacionesBean {
     private Usuario u;
     
     @Inject
+    GravatarBean gb;
+    
+    @Inject
     SesionBean sesionBean;
     
     @EJB
     private UsuarioFacade uf;
+
+    @EJB private PeticionAmistadFacade paf;
     
    
+    
     public NotificacionesBean() {
     }
     
@@ -55,52 +62,55 @@ public class NotificacionesBean {
     @PostConstruct
     public void init (){
         this.u = sesionBean.obtenerUsuario();
-        if (listaMensajes == null) {
             
-            List <Mensaje> mAux = new ArrayList<>();
-            
-            for (Mensaje m : u.getMensajeCollection1()) {
-                
-                if (!m.getLeido()) {
-                    mAux.add(m);
-                    //quizás da error porque es null y no puedo hacerle add?
-                }
-                
+        List <Mensaje> mAux = new ArrayList<>();
+
+        for (Mensaje m : u.getMensajeCollection1()) {
+
+            if (!m.getLeido()) {
+                mAux.add(m);
+                //quizás da error porque es null y no puedo hacerle add?
             }
-            
-            listaMensajes = mAux;
-            
-            if (listaMensajes.size()>0) {
-                hayMensajesSinLeer = true;
-            } else{
-                hayMensajesSinLeer = false;
-            }
-            
+
         }
-        
-         if (listaPeticiones == null) {
-            
-            List <PeticionAmistad> pAux = new ArrayList<>();
-            
-            for (PeticionAmistad p: u.getPeticionAmistadCollection1()) {
-                
-                pAux.add(p);
-                    //quizás da error porque es null y no puedo hacerle add?
-                
-                
-            }
-            
-            listaPeticiones = pAux;
-            
-            if (listaPeticiones.size()>0) {
-                this.hayPeticionesDeAmistad = true;
-            } else{
-                this.hayPeticionesDeAmistad = false;
-            }
-            
+
+        listaMensajes = mAux;
+
+        if (listaMensajes.size()>0) {
+            hayMensajesSinLeer = true;
+        } else{
+            hayMensajesSinLeer = false;
+        }
+
+        List <PeticionAmistad> pAux = new ArrayList<>();
+
+        //quizás da error porque es null y no puedo hacerle add?
+        pAux.addAll(u.getPeticionAmistadCollection1());
+
+        listaPeticiones = pAux;
+
+        if (listaPeticiones.size()>0) {
+            this.hayPeticionesDeAmistad = true;
+        } else{
+            this.hayPeticionesDeAmistad = false;
         }
         
         
+    }
+    
+    
+    public String fotoPerfil (int id) {
+        Usuario u = uf.obtenerUsuarioPorId(id);
+        
+        return u.getFoto() == null ? imagenPorDefecto(u) : u.getFoto();
+    }
+    
+     private String imagenPorDefecto(Usuario usuario) {
+        /*if (usuario == null) {
+            usuario = this.uf
+        }*/
+
+        return gb.imagenPorDefecto(usuario);
     }
 
     public List<PeticionAmistad> getListaPeticiones() {
@@ -138,20 +148,23 @@ public class NotificacionesBean {
             }
         }
         uf.edit(u);
-        this.redirectN();
+        init();
     }
     
     public String aceptar(PeticionAmistad peticion){
-        uf.aceptarPeticionAmistad(peticion.getUsuario().getId(), peticion.getUsuario1().getId());
-        u.getPeticionAmistadCollection1().remove(peticion);
-        uf.edit(u);
-        return "perfil";
+        uf.aceptarPeticionAmistad(peticion);
+        paf.eliminarPeticion(peticion);
+        
+        return "perfil?faces-redirect=true&id="+peticion.getUsuario().getId();
     }
     
     public void rechazar(PeticionAmistad peticion) throws IOException{
         u.getPeticionAmistadCollection1().remove(peticion);
+        peticion.getUsuario().getPeticionAmistadCollection().remove(peticion);
         uf.edit(u);
-        this.redirectN();
+        uf.edit(peticion.getUsuario());
+        paf.remove(peticion);
+        init();
     }
     
     public List<Mensaje> getListaMensajes() {

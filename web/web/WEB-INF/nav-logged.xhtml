@@ -27,9 +27,11 @@
                     <li class="#{request.requestURI.contains('notificaciones') ? 'active' : ''} notificaciones">
                         <a href="notificaciones.jsf">
                             <i class="fa fa-bell-o" />
-                            <ui:fragment rendered="#{sesionBean.obtenerCantidadNotificaciones()>0}">
-                                <span class="badge">#{sesionBean.obtenerCantidadNotificaciones()}</span>
-                            </ui:fragment>
+                            <h:form id="notificaciones" p:class="badge">
+                                <ui:fragment rendered="#{sesionBean.obtenerCantidadNotificaciones()>0}">
+                                    <span class="badge">#{sesionBean.obtenerCantidadNotificaciones()}</span>
+                                </ui:fragment>
+                            </h:form>
                             <span class="hidden-xs">Notificaciones</span>
                         </a>
                     </li>
@@ -46,7 +48,7 @@
 
                 <h:form styleClass="navbar-form navbar-right">
                     <div class="input-group">
-                        <h:inputText p:placeholder="Buscar a..." p:class="form-control" value="#{buscarBean.busqueda}" />
+                        <h:inputText id="busqueda" p:placeholder="Buscar a..." p:class="form-control" value="#{buscarBean.busqueda}" />
                         <span class="input-group-btn">
                             <!-- Uso la biblioteca Passthrough para que el botón sea un button en lugar de un input[type="submit"] -->
                             <!-- En nuestra web, todos los botones van a tener que ser así, en lugar de <h:commandButton> -->
@@ -54,6 +56,7 @@
                                 <i class="fa fa-search" />
                             </button>
                         </span>
+                        
                     </div>
                 </h:form>
             </div>
