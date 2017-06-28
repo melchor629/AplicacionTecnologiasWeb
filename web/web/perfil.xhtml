@@ -358,6 +358,13 @@
                                 </div>
                             </ui:fragment>
                         </ui:repeat>
+                        <ui:fragment rendered="#{perfilBean.usuario.mensajeCollection1.stream().filter(m -> m.getLeido()).count() == 0}">
+                            <div class="text-center">
+                                <p class="lead">
+                                    #{intMsg['noReceivedMessagesLabel']}
+                                </p>
+                            </div>
+                        </ui:fragment>
                     </div>
                 </ui:fragment>
                 <!-- Fin de mostrar mensajes, solo para el usuario del que se esta viendo el perfil -->
