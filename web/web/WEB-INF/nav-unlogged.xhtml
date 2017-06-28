@@ -20,12 +20,12 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <h:form styleClass="navbar-form navbar-right">
                     <div class="form-group">
-                        <h:inputText p:placeholder="Usuario" styleClass="form-control" value="#{sesionBean.usuario}" />
+                        <h:inputText p:placeholder="#{intMsg['loginPlaceholderUser']}" styleClass="form-control" value="#{sesionBean.usuario}" />
                     </div>
                     <div class="form-group">
-                        <h:inputSecret p:placeholder="Contraseña" styleClass="form-control" value="#{sesionBean.password}" />
+                        <h:inputSecret p:placeholder="#{intMsg['loginPlaceholderPass']}" styleClass="form-control" value="#{sesionBean.password}" />
                     </div>
-                    <h:commandButton action="#{sesionBean.iniciarSesion()}" styleClass="btn btn-flat btn-dark" value="ENTRAR" />
+                    <h:commandButton action="#{sesionBean.iniciarSesion()}" styleClass="btn btn-flat btn-dark" value="#{intMsg['loginButton']}" />
                 </h:form>
             </div>
         </div>

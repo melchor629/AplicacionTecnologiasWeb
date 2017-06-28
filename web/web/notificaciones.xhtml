@@ -9,7 +9,7 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:jsf="http://xmlns.jcp.org/jsf">
 <h:head>
-    <title>Notificaciones - LinkedOut</title>
+    <title>#{intMsg['notificationPanelTitle']} - LinkedOut</title>
     <meta name="description" content="Panel de notificaciones del usuario" />
     <ui:include src="/WEB-INF/head.xhtml" />
 </h:head>
@@ -37,14 +37,14 @@
                             <div class="clearfix">
                                 <div id="rechazar-#{peticion.usuario.id}" class="pull-right form-horizontal notif-button" role="form">
                                     <a type="submit" class="btn btn-default btn-raised" jsf:action="#{notificacionesBean.rechazar(peticion)}">
-                                        RECHAZAR
+                                        #{intMsg['notificationPanelDenyFriendRequest']}
                                         <f:ajax execute="@form" render="@form :notificaciones" />
                                     </a>
                                 </div>
 
                                 <div id="aceptar-#{peticion.usuario.id}" class="pull-right form-horizontal notif-button" role="form">
                                     <a type="submit" class="btn btn-primary btn-raised" jsf:action="#{notificacionesBean.aceptar(peticion)}">
-                                        ACEPTAR
+                                        #{intMsg['notificationPanelAcceptFriendRequest']}
                                     </a>
                                 </div>
                             </div>
@@ -76,12 +76,12 @@
                             <div class="clearfix">
                                 <div class="pull-right form-horizontal notif-button">
                                     <a class="btn btn-default btn-raised" jsf:action="#{notificacionesBean.descartar(mensaje)}">
-                                        DESCARTAR
+                                        #{intMsg['notificationPanelDiscardMessage']}
                                         <f:ajax execute="@form" render="@form :notificaciones" />
                                     </a>
                                 </div>
                                 <div class="pull-right form-horizontal notif-button">
-                                    <a class="btn btn-primary btn-raised" jsf:action="#{notificacionesBean.responder(mensaje)}">RESPONDER</a>
+                                    <a class="btn btn-primary btn-raised" jsf:action="#{notificacionesBean.responder(mensaje)}">#{intMsg['notificationPanelReplyMessage']}</a>
                                 </div>
                             </div>
                         </div>

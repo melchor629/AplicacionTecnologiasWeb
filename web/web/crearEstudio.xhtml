@@ -9,7 +9,7 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:jsf="http://xmlns.jcp.org/jsf">
 <head>
-    <title>Creando Estudios - LinkedOut</title>
+    <title>#{intMsg['addEduPageTitle']} - LinkedOut</title>
     <meta name="description" content="Descripcion de la pagina" />
     <ui:include src="/WEB-INF/head.xhtml" />
 </head>
@@ -31,24 +31,24 @@
         <h:form>
           
        <div class="form-group #{!fechaComienzo.valid and fechaComienzo.size != 0 ? 'has-error' : ''}">
-         <label for="fechaComienzo">Fecha de comienzo</label>
-         <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" binding="#{fechaComienzo}" p:placeholder="Fecha de comienzo" value="#{crearEstudioBean.fechaComienzo}" required="true" requiredMessage="La fecha de comienzo no puede estar vacía" validatorMessage="La fecha de comienzo no puede estar vacía">
+         <label for="fechaComienzo">#{intMsg['addEduStartDate']}</label>
+         <h:inputText p:type="date" p:class="form-control" id="fechaComienzo" binding="#{fechaComienzo}" p:placeholder="#{intMsg['addEduStartDate']}" value="#{crearEstudioBean.fechaComienzo}" required="true" requiredMessage="La fecha de comienzo no puede estar vacía" validatorMessage="La fecha de comienzo no puede estar vacía">
              <f:convertDateTime pattern="yyyy-MM-dd"/>
          </h:inputText>
          <h:message id="mensajeValidatorErrorUno" for="fechaComienzo" p:class="help-block" />
         </div>
        
            <div class="form-group">
-         <label for="fechaFinalizacion">Fecha de finalización</label>
-         <h:inputText p:type="date" p:class="form-control" id="fechaFinalizacion" binding="#{fechaFinalizacion}" p:placeholder="Fecha de finalización" value="#{crearEstudioBean.fechaFinalizacion}">
+         <label for="fechaFinalizacion">#{intMsg['addEduEndDate']}</label>
+         <h:inputText p:type="date" p:class="form-control" id="fechaFinalizacion" binding="#{fechaFinalizacion}" p:placeholder="#{intMsg['addEduEndDate']}" value="#{crearEstudioBean.fechaFinalizacion}">
               <f:convertDateTime pattern="yyyy-MM-dd"/>
          </h:inputText>
           </div>
            
 
           <div class="form-group #{!descripcion.valid and descripcion.size != 0 ? 'has-error' : ''}">
-         <label for="descripcion">Descripción</label>
-         <h:inputText p:type="text" p:class="form-control" id="descripcion" binding="#{descripcion}" p:placeholder="Descripción" value="#{crearEstudioBean.descripcion}" validatorMessage="La lontigud de la descripción no puede superar los 255 caracteres">
+         <label for="descripcion">#{intMsg['addEduDescription']}</label>
+         <h:inputText p:type="text" p:class="form-control" id="descripcion" binding="#{descripcion}" p:placeholder="#{intMsg['addEduDescription']}" value="#{crearEstudioBean.descripcion}" validatorMessage="La lontigud de la descripción no puede superar los 255 caracteres">
              <f:validateLength minimum="0" maximum="255" />
          </h:inputText>
          <h:message id="mensajeValidatorErrorDos" for="descripcion" p:class="help-block" />
@@ -56,8 +56,8 @@
       
 
            <div class="form-group #{!ubicacion.valid and ubicacion.size != 0 ? 'has-error' : ''}">
-         <label for="ubicacion">Ubicación</label>
-         <h:inputText p:type="text" p:class="form-control" id="ubicacion" binding="#{ubicacion}" p:placeholder="Ubicación" value="#{crearEstudioBean.ubicacion}" validatorMessage="La longitud de la ubicación no puede superar los 455 caracteres.">
+         <label for="ubicacion">#{intMsg['addEduPlace']}</label>
+         <h:inputText p:type="text" p:class="form-control" id="ubicacion" binding="#{ubicacion}" p:placeholder="#{intMsg['addEduPlace']}" value="#{crearEstudioBean.ubicacion}" validatorMessage="La longitud de la ubicación no puede superar los 455 caracteres.">
             <f:validateLength minimum="0" maximum="455" />
          </h:inputText>
          <h:message id="mensajeValidatorErrorTres" for="ubicacion" p:class="help-block" />
@@ -68,8 +68,8 @@
        
        <div class="form-group edit-profile-form-group">
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-raised" jsf:action="#{crearEstudioBean.crear()}">GUARDAR</button>
-                    <a href="perfil.jsf" class="btn btn-default btn-raised">CANCELAR</a>
+                    <button type="submit" class="btn btn-primary btn-raised" jsf:action="#{crearEstudioBean.crear()}">#{intMsg['addEduSaveButton']}</button>
+                    <a href="perfil.jsf" class="btn btn-default btn-raised">#{intMsg['addEduCancelButton']}</a>
                 </div>
             </div>
       </h:form>    

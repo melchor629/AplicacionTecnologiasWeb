@@ -18,7 +18,7 @@
     </f:metadata>
 
     <h:head>
-        <title>Perfil de #{perfilBean.usuario.nombre} #{perfilBean.usuario.apellidos} - LinkedOut</title>
+        <title>#{intMsg['profilePageTitle']} #{perfilBean.usuario.nombre} #{perfilBean.usuario.apellidos} - LinkedOut</title>
         <meta name="description" content="Descripcion de la pagina"/>
         <ui:include src="/WEB-INF/head.xhtml"/>
     </h:head>
@@ -111,34 +111,34 @@
 
                     <ui:fragment rendered="#{perfilBean.miPerfil}">
                         <a href="editarPerfil.jsf" class="btn btn-primary btn-raised">
-                            <i class="fa fa-pencil" /> Editar perfil
+                            <i class="fa fa-pencil" /> #{intMsg['editProfileButton']}
                         </a>
                     </ui:fragment>
 
                     <ui:fragment rendered="#{!perfilBean.miPerfil and perfilBean.amigos}">
                         <a jsf:action="#{perfilBean.eliminarAmistad()}" class="btn btn-primary btn-raised" jsf:id="botonEliminarAmistad">
-                            <i class="fa fa-user-times" /> Eliminar amistad
+                            <i class="fa fa-user-times" /> #{intMsg['unfriendButton']}
                             <f:ajax execute="botonEliminarAmistad" render="contenedorPerfilUsuario"/>
                         </a>
                     </ui:fragment>
 
                     <ui:fragment rendered="#{!perfilBean.miPerfil and !perfilBean.amigos and !perfilBean.peticionRecibida and !perfilBean.peticionMandada}">
                         <a jsf:action="#{perfilBean.mandarPeticion()}" class="btn btn-primary btn-raised" jsf:id="botonMandarSolicitud">
-                            <i class="fa fa-user-plus" /> Enviar solicitud de amistad
+                            <i class="fa fa-user-plus" /> #{intMsg['addFriendButton']}
                             <f:ajax execute="botonMandarSolicitud" render="contenedorPerfilUsuario"/>
                         </a>
                     </ui:fragment>
 
                     <ui:fragment rendered="#{perfilBean.peticionMandada}">
                         <div class="alert alert-info">
-                            Ya has mandado una peticion de amistad a este usuario, espera a que te acepte o rechace
+                            #{intMsg['friendRequestSentMessage']}
                         </div>
                     </ui:fragment>
 
                     <ui:fragment rendered="#{perfilBean.peticionRecibida}">
                         <div class="alert alert-info">
-                            Has recibido una peticion de amistad de este usuario, puedes aceptarla desde el
-                            <h:link value="panel de notificaciones" outcome="notificaciones" />
+                            #{intMsg['friendRequestReceivedMessage']} 
+                            <h:link value="#{intMsg['friendRequestReceivedNotificationsLink']}" outcome="notificaciones" />
                         </div>
                     </ui:fragment>
 
@@ -154,7 +154,7 @@
                 <!-- En esta seccion se muestran la mayoria de datos de un perfil -->
                 <div class="col-lg-8">
                     <ui:fragment rendered="#{perfilBean.amigos or perfilBean.miPerfil}">
-                        <h3>Experiencia laboral</h3>
+                        <h3>#{intMsg['workExperienceLabel']}</h3>
                     </ui:fragment>
                     <ui:fragment rendered="#{perfilBean.miPerfil}">
                         <a href="crearExperienciaLaboral.jsf" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus" /></a>
@@ -188,11 +188,11 @@
                                         <ui:fragment rendered="#{perfilBean.miPerfil}">
                                             <button jsf:action="#{editarTrabajoBean.editarTrabajo(experiencia)}"
                                                     class="btn btn-default btn-flat">
-                                                <i class="fa fa-pencil" /> EDITAR
+                                                <i class="fa fa-pencil" /> #{intMsg['editWorkExperience']}
                                             </button>
 
                                             <a jsf:action="#{perfilBean.borrarItem(experiencia)}" class="btn btn-primary btn-flat" jsf:id="botonEliminarExperiencia">
-                                                <i class="fa fa-trash-o" /> BORRAR
+                                                <i class="fa fa-trash-o" /> #{intMsg['removeWorkExperience']}
                                                 <f:ajax execute="botonEliminarExperiencia" render="contenedorPerfilUsuario"/>
                                             </a>
                                         </ui:fragment>
@@ -207,13 +207,13 @@
                         <ui:fragment
                             rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getExperienciaLaboralCollection().size() == 0}">
                             <li class="list-group-item">
-                                Sin experiencia laboral
+                                #{intMsg['noWorkExperienceLabel']}
                             </li>
                         </ui:fragment>
 
                     </ul>
                     <ui:fragment rendered="#{perfilBean.amigos or perfilBean.miPerfil}">
-                        <h3>Formación</h3>
+                        <h3>#{intMsg['educationLabel']}</h3>
                     </ui:fragment>
 
                     <!-- <a href="crearEstudio.jsp" class="btn btn-default btn-flat btn-sm profile-add"><i class="fa fa-plus"></i></a> -->
@@ -242,10 +242,10 @@
 
                                         <ui:fragment rendered="#{perfilBean.miPerfil}">
                                             <button jsf:action="#{editarEstudioBean.goEditEstudio(estudio)}" class="btn btn-default btn-flat">
-                                                <i class="fa fa-pencil" /> EDITAR
+                                                <i class="fa fa-pencil" /> #{intMsg['editWorkStudies']}
                                             </button>
                                             <a jsf:action="#{perfilBean.borrarItem(estudio)}" class="btn btn-primary btn-flat" jsf:id="botonEliminarEstudio">
-                                                <i class="fa fa-trash-o" /> BORRAR
+                                                <i class="fa fa-trash-o" /> #{intMsg['removeStudies']}
                                                 <f:ajax execute="botonEliminarEstudio" render="contenedorPerfilUsuario"/>
                                             </a>
                                         </ui:fragment>
@@ -258,7 +258,7 @@
                         <ui:fragment
                             rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getEstudiosCollection().size() == 0}">
                             <li class="list-group-item">
-                                Sin estudios
+                                #{intMsg['noEducationLabel']}
                             </li>
                         </ui:fragment>
                         <!-- Vaya -->
@@ -267,7 +267,7 @@
 
                     <div class="clearfix">
                         <ui:fragment rendered="#{perfilBean.amigos or perfilBean.miPerfil}">
-                            <h3 class="pull-left">Aficiones</h3>
+                            <h3 class="pull-left">#{intMsg['hobbiesLabel']}</h3>
                         </ui:fragment>
 
                         <ui:fragment rendered="#{perfilBean.miPerfil}">
@@ -301,7 +301,7 @@
                         <ui:fragment
                             rendered="#{(perfilBean.amigos or perfilBean.miPerfil) and perfilBean.usuario.getAficionesCollection().size() == 0}">
                             <li class="list-group-item">
-                                Sin aficiones
+                                #{intMsg['noHobbiesLabel']}
                             </li>
                         </ui:fragment>
                         <!-- Cuando no tienes Aficiones-->
@@ -312,7 +312,7 @@
                 <!-- Mostrar contactos del perfil -->
                 <div class="col-lg-4 profile-contacts">
                     <ui:fragment rendered="#{perfilBean.amigos or perfilBean.miPerfil}">
-                        <h3>Contactos</h3>
+                        <h3>#{intMsg['profileFriendsLabel']}</h3>
                     </ui:fragment>
                     <ui:fragment rendered="#{perfilBean.amigos or perfilBean.miPerfil}">
                         <ui:repeat value="#{perfilBean.contactos}" var="contacto">
@@ -334,7 +334,7 @@
                 <!-- Fin lista de contactos, a la hora de usar la foto se emplea el mismo procedimiento-->
                 <ui:fragment rendered="#{perfilBean.miPerfil}">
                     <div class="col-xs-12 missatges-rebuts">
-                        <h3>Mensajes recibidos</h3>
+                        <h3>#{intMsg['receivedMessagesLabel']}</h3>
                         <ui:repeat value="#{perfilBean.usuario.getMensajeCollection1()}" var="mensaje">
                             <ui:fragment rendered="#{mensaje.getLeido()}">
                                 <div class="mensaje row">
@@ -346,7 +346,7 @@
                                     <div class="col-xs-9 col-sm-11">
                                         <div>
                                             <h4>#{mensaje.getTitulo()}</h4>
-                                            <small>de <a
+                                            <small>#{intMsg['receivedMessagesFromLabel']} <a
                                                     href="perfil.jsf?id=#{mensaje.getIdEmisor().getId()}">@#{mensaje.getIdEmisor().getNombreUsuario()}</a>
                                             </small>
                                         </div>
@@ -370,11 +370,11 @@
                 <div class="casual">
                     <div class="col-sm-offset-4 col-md-offset-3">
 
-                        <h3>Mandar mensaje a #{perfilBean.usuario.nombre}</h3>
+                        <h3>#{intMsg['sendMessageLabel']} #{perfilBean.usuario.nombre}</h3>
                         <div class="form-group">
                             <div class="input-group #{!campoTituloMensaje.valid and campoTituloMensaje.size != 0 ? 'has-error' : ''}">
                                 <div class="input-group-addon"><i class="fa fa-envelope-o" /></div>
-                                <h:inputText binding="#{campoTituloMensaje}" value="#{perfilBean.tituloMensaje}" id="campoTituloMensaje" p:placeholder="Título del mensaje" p:maxlength="100" styleClass="form-control" p:required="required" required="true" requiredMessage="El mensaje debe tener un titulo" validatorMessage="El título no puede superar los 100 caracteres">
+                                <h:inputText binding="#{campoTituloMensaje}" value="#{perfilBean.tituloMensaje}" id="campoTituloMensaje" p:placeholder="#{intMsg['sendMessageTitlePlaceholder']}" p:maxlength="100" styleClass="form-control" p:required="required" required="true" requiredMessage="El mensaje debe tener un titulo" validatorMessage="El título no puede superar los 100 caracteres">
                                     <f:validateLength minimum="1" maximum="100" />
                                 </h:inputText>
                                 <h:message id="tituloValidatorError" for="campoTituloMensaje" p:class="help-block" />
@@ -384,14 +384,14 @@
                         <div class="form-group">
                             <div class="input-group  #{!campoCuerpoMensaje.valid and campoCuerpoMensaje.value.length != 0 ? 'has-error' : ''}">
                                 <div class="input-group-addon"><i class="fa fa-comment-o" /></div>
-                                <h:inputTextarea binding="#{campoCuerpoMensaje}" value="#{perfilBean.cuerpoMensaje}" id="campoCuerpoMensaje" styleClass="form-control" p:placeholder="Mensaje..." p:maxlength="999" p:required="required" required="true" requiredMessage="El mensaje no puede estar vacío" validatorMessage="El mensaje no puede superar los 999 caracteres">
+                                <h:inputTextarea binding="#{campoCuerpoMensaje}" value="#{perfilBean.cuerpoMensaje}" id="campoCuerpoMensaje" styleClass="form-control" p:placeholder="#{intMsg['sendMessageContentPlaceholder']}" p:maxlength="999" p:required="required" required="true" requiredMessage="El mensaje no puede estar vacío" validatorMessage="El mensaje no puede superar los 999 caracteres">
                                     <f:validateLength minimum="1" maximum="999" />
                                 </h:inputTextarea>
                                 <h:message id="mensajeValidatorError" for="campoCuerpoMensaje" p:class="help-block" />
                             </div>
                         </div>
                         <div class="text-right">
-                            <button jsf:action="#{perfilBean.mandarMensaje(perfilBean.usuario.id)}" class="btn btn-primary btn-raised">ENVIAR
+                            <button jsf:action="#{perfilBean.mandarMensaje(perfilBean.usuario.id)}" class="btn btn-primary btn-raised">#{intMsg['sendMessageButton']}
                                 <f:ajax execute="campoTituloMensaje campoCuerpoMensaje" render="contenedorPerfilUsuario"/>
                             </button>
                         </div>

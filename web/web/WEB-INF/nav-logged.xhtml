@@ -22,7 +22,7 @@
 
                 <ul class="nav navbar-nav">
                     <li class="#{request.requestURI.contains('perfil') and perfilBean.miPerfil ? 'active' : ''}">
-                        <a href="perfil.jsf"><i class="fa fa-user" /> <span class="hidden-xs">Mi perfil</span></a>
+                        <a href="perfil.jsf"><i class="fa fa-user" /> <span class="hidden-xs">#{intMsg['menuProfileButton']}</span></a>
                     </li>
                     <li class="#{request.requestURI.contains('notificaciones') ? 'active' : ''} notificaciones">
                         <a href="notificaciones.jsf">
@@ -32,7 +32,7 @@
                                     <span class="badge">#{sesionBean.obtenerCantidadNotificaciones()}</span>
                                 </ui:fragment>
                             </h:form>
-                            <span class="hidden-xs">Notificaciones</span>
+                            <span class="hidden-xs">#{intMsg['menuNotificationsButton']}</span>
                         </a>
                     </li>
                 </ul>
@@ -41,14 +41,14 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <h:form>
-                            <h:commandLink action="#{sesionBean.cerrarSesion}"><i class="glyphicon glyphicon-log-out" /> Cerrar sesión</h:commandLink>
+                            <h:commandLink action="#{sesionBean.cerrarSesion}"><i class="glyphicon glyphicon-log-out" /> #{intMsg['logoutButton']}</h:commandLink>
                         </h:form>
                     </li>
                 </ul>
 
                 <h:form styleClass="navbar-form navbar-right">
                     <div class="input-group">
-                        <h:inputText id="busqueda" p:placeholder="Buscar a..." p:class="form-control" value="#{buscarBean.busqueda}" />
+                        <h:inputText id="busqueda" p:placeholder="#{intMsg['searchInputPlaceholder']}" p:class="form-control" value="#{buscarBean.busqueda}" />
                         <span class="input-group-btn">
                             <!-- Uso la biblioteca Passthrough para que el botón sea un button en lugar de un input[type="submit"] -->
                             <!-- En nuestra web, todos los botones van a tener que ser así, en lugar de <h:commandButton> -->

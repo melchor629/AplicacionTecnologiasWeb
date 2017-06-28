@@ -9,7 +9,7 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <head>
-        <title>Resultados Búsqueda - LinkedOut</title>
+        <title>#{intMsg['searchResultPageTitle']} - LinkedOut</title>
         <meta name="description" content="Descripcion de la pagina" />
         <ui:include src="/WEB-INF/head.xhtml" />
     </head>
@@ -69,8 +69,8 @@
                     <div class="col-xs-12">
                         <div class="text-center search-perrete">
                             <div class="fotete perrete"></div>
-                            <h1>¡Lo sentimos!</h1>
-                            <h2 class="text-muted">No hemos encontrado ningún resultado :(</h2>
+                            <h1>#{intMsg['searchResultPageNoResultsTitle']}</h1>
+                            <h2 class="text-muted">#{intMsg['searchResultPageNoResultsMessage']}</h2>
                         </div>
                     </div>
                 </ui:fragment>

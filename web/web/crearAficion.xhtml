@@ -9,7 +9,7 @@
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:jsf="http://xmlns.jcp.org/jsf">
 <head>
-    <title>Creando Afición - LinkedOut</title>
+    <title>#{intMsg['addHobbyPageTitle']} - LinkedOut</title>
     <meta name="description" content="Descripcion de la pagina" />
     <ui:include src="/WEB-INF/head.xhtml" />
 </head>
@@ -32,8 +32,8 @@
         <h:form>
 
             <div class="form-group #{!descrip.valid and descrip.value.length() != 0 ? 'has-error' : ''}">
-                <h:outputLabel for="descrip" value="Descripción: "/>
-                <h:inputTextarea id="descrip" binding="#{descrip}" class="form-control" rows="3" p:placeholder="Aficion" value="#{crearAficionBean.nombre}" required="true" requiredMessage="La descripción no puede estar vacía"  validatorMessage="La descripción no puede superar los 255 caracteres" >
+                <h:outputLabel for="descrip" value="#{intMsg['addHobbyDescription']} "/>
+                <h:inputTextarea id="descrip" binding="#{descrip}" class="form-control" rows="3" p:placeholder="#{intMsg['addHobbyDescription']}" value="#{crearAficionBean.nombre}" required="true" requiredMessage="La descripción no puede estar vacía"  validatorMessage="La descripción no puede superar los 255 caracteres" >
                     <f:validateLength minimum="1" maximum="255" />
                 </h:inputTextarea>
                 <h:message id="mensajeValidatorError" for="descrip" p:class="help-block" />
@@ -42,8 +42,8 @@
             
              <div class="form-group edit-hobby-form-group">
                 <div class="text-center">
-                    <button jsf:action="#{crearAficionBean.doGuardar()}" class="btn btn-primary btn-raised">GUARDAR</button>
-                    <a href="perfil.jsf" class="btn btn-default btn-raised">CANCELAR</a>
+                    <button jsf:action="#{crearAficionBean.doGuardar()}" class="btn btn-primary btn-raised">#{intMsg['addHobbySaveButton']}</button>
+                    <a href="perfil.jsf" class="btn btn-default btn-raised">#{intMsg['addHobbyCancelButton']}</a>
                 </div>
             </div>
             
